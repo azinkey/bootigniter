@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright           Copyright (c) 2014, AZinkey.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Contents Controller
+ *
+ * @package		Admin
+ * @subpackage          Controllers
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -8,19 +29,27 @@ class Settings extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-
+        // Check User Priviligies and Permissions
         user::redirectUnauthorizedAccess();
-
+        // Load Form Helper
         AZ::helper('form');
     }
 
+    /**
+     * Index Page for this controller or List Settings.
+     *
+     * Primary View is views/admin/blocks/settings/index
+     * 
+     * @param	integer $q Section ID
+     * @return	Layout
+     */
     public function index($q = 1) {
 
         $section = $this->setting->getSectionById($q);
-        
+
         $section_A = $this->setting->getSection_A();
         $group_A = $this->setting->getGroup_A();
-        
+
         AZ::layout('left-content', array(
             'block' => 'settings/index',
             'active_section' => $section,
@@ -32,6 +61,11 @@ class Settings extends CI_Controller {
         ));
     }
 
+    /**
+     * Update Settings
+     *
+     * @return	Redirect
+     */
     public function save() {
 
         $post = $this->input->post();
@@ -45,6 +79,14 @@ class Settings extends CI_Controller {
         }
     }
 
+    /**
+     * Add New or Edit Setting Group
+     *
+     * Primary View is views/admin/blocks/settings/group-form
+     * 
+     * @param	integer $group_id
+     * @return	Layout
+     */
     public function edit_group($group_id = -1) {
 
         $section_A = $this->setting->getSection_A();
@@ -57,6 +99,14 @@ class Settings extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit Setting Section (Tab)
+     *
+     * Primary View is views/admin/blocks/settings/section-form
+     * 
+     * @param	integer $section_id
+     * @return	Layout
+     */
     public function edit_section($section_id = -1) {
 
         $section = $this->setting->getSectionById($section_id);
@@ -67,6 +117,11 @@ class Settings extends CI_Controller {
         ));
     }
 
+    /**
+     * Save Section
+     *
+     * @return	Redirect
+     */
     public function save_section() {
 
         $post = $this->input->post();
@@ -91,6 +146,11 @@ class Settings extends CI_Controller {
         }
     }
 
+    /**
+     * Save Group
+     *
+     * @return	Redirect
+     */
     public function save_group() {
 
         $post = $this->input->post();
@@ -115,6 +175,12 @@ class Settings extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Section
+     *
+     * @param	integer $section_id
+     * @return	redirect
+     */
     public function remove_section($section_id) {
 
         if ($this->db->delete('setting_sections', array('id' => (int) $section_id))) {
@@ -125,6 +191,12 @@ class Settings extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Group
+     *
+     * @param	integer $section_id
+     * @return	redirect
+     */
     public function remove_group($group_id) {
 
         if ($this->db->delete('setting_groups', array('id' => (int) $group_id))) {
@@ -135,6 +207,12 @@ class Settings extends CI_Controller {
         }
     }
 
+    /**
+     * Add New or Edit Setting
+     *
+     * @param	integer $setting_id
+     * @return	redirect
+     */
     public function edit_setting($setting_id = -1) {
 
         $group_A = $this->setting->getGroup_A();
@@ -150,6 +228,11 @@ class Settings extends CI_Controller {
         ));
     }
 
+    /**
+     * Save Setting
+     *
+     * @return	redirect
+     */
     public function save_setting() {
 
         $post = $this->input->post();
@@ -178,6 +261,12 @@ class Settings extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Setting
+     *
+     * @param	integer $setting_id
+     * @return	redirect
+     */
     public function remove_setting($setting_id) {
 
         if ($this->db->delete('settings', array('id' => (int) $setting_id))) {
@@ -188,6 +277,14 @@ class Settings extends CI_Controller {
         }
     }
 
+    /**
+     * Render Field option on select field type in Add Setting form
+     *
+     * @param	string $type
+     * @param	integer $field_id
+     * @param	boolen $setting
+     * @return	string
+     */
     public function field_type_options($type = 'text', $field_id = "", $setting = true) {
         echo field_options($type, $field_id, $setting);
     }

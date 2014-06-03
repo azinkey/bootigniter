@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright           Copyright (c) 2014, AZinkey.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Contents Controller
+ *
+ * @package		Administrator
+ * @subpackage          Controllers
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -10,6 +31,13 @@ class Administrator extends CI_Controller {
         parent::__construct();
     }
 
+    /**
+     * Index Page for this controller or Showing Login Box to enter Admin Area
+     *
+     * Primary View is views/admin/blocks/login
+     * 
+     * @return	Layout
+     */
     public function index() {
 
         if (user::id()) {
@@ -20,6 +48,11 @@ class Administrator extends CI_Controller {
         AZ::layout('login', array('block' => 'login'));
     }
 
+    /**
+     * Match User details and Logged in Application
+     * 
+     * @return	Redirect
+     */
     public function login() {
 
         if (user::id()) {
@@ -33,7 +66,7 @@ class Administrator extends CI_Controller {
             return false;
         }
         $user_id = $this->user->authenicate($post['username'], $post['password']);
-        
+
         if ($user_id) {
             if (have_permission('dashboard/index')) {
                 AZ::redirect('admin/dashboard');
@@ -46,6 +79,11 @@ class Administrator extends CI_Controller {
         }
     }
 
+    /**
+     * Flush user session & logged out from application
+     * 
+     * @return	Redirect
+     */
     public function logout() {
 
         user::flush();
@@ -53,6 +91,11 @@ class Administrator extends CI_Controller {
         AZ::redirectSuccess('administrator');
     }
 
+    /**
+     * Verify User Credential
+     * 
+     * @return	boolen
+     */
     private function _validate() {
 
         $this->load->library('form_validation');

@@ -17,7 +17,7 @@
 /**
  * Contents Controller
  *
- * @package		Bootigniter
+ * @package		Admin
  * @subpackage          Controllers
  * @author		AZinkey
  */

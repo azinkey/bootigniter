@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright           Copyright (c) 2014, AZinkey.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Contents Controller
+ *
+ * @package		Admin
+ * @subpackage          Controllers
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -8,12 +29,20 @@ class Users extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-
+        // Check User Priviligies and Permissions
         user::redirectUnauthorizedAccess();
-
+        // Load Form Helper
         AZ::helper('form');
     }
 
+    /**
+     * Index Page for this controller or List all Users.
+     *
+     * Primary View is views/admin/blocks/users/index
+     * @param	integer $q User Group ID
+     * @param	integer $offset
+     * @return	Layout
+     */
     public function index($q = 4, $offset = 0) {
 
         $limit = AZ::setting('record_per_page');
@@ -33,6 +62,13 @@ class Users extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit User page for this controller
+     *
+     * Primary View is views/admin/blocks/users/form
+     * @param	integer $edit
+     * @return	Layout
+     */
     public function edit($id = -1) {
 
         $user = $this->user->getUserById($id);
@@ -43,6 +79,11 @@ class Users extends CI_Controller {
         ));
     }
 
+    /**
+     * Save User and his profile
+     *
+     * @return	Redirect
+     */
     public function save() {
 
         $post = $this->input->post();
@@ -98,6 +139,13 @@ class Users extends CI_Controller {
         }
     }
 
+    /**
+     * Remove User and Redirect Back to Users
+     *
+     * @param	integer $id
+     * @param	integer $gid
+     * @return	redirect
+     */
     public function remove($id, $gid) {
         if ($this->db->delete('users', array('id' => (int) $id))) {
             AZ::redirectSuccess('admin/users/index/' . $gid, lang('Removed'));
@@ -106,6 +154,11 @@ class Users extends CI_Controller {
         }
     }
 
+    /**
+     * Accesses Page for this controller.
+     *
+     * Primary View is views/admin/blocks/users/accesses
+     */
     public function accesses() {
 
         $accesses = $this->user->getAccesses();
@@ -116,6 +169,13 @@ class Users extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit Access page for this controller
+     *
+     * Primary View is views/admin/blocks/users/accesses-form
+     * @param	integer $edit
+     * @return	Layout
+     */
     public function edit_access($edit = -1) {
 
         $access = $this->user->getAccessById($edit);
@@ -126,6 +186,11 @@ class Users extends CI_Controller {
         ));
     }
 
+    /**
+     * Save Access
+     *
+     * @return	Redirect
+     */
     public function save_access() {
 
         $post = $this->input->post();
@@ -147,6 +212,12 @@ class Users extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Access and Redirect Back to Accesses
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove_access($id) {
 
         if ($this->db->delete('user_access', array('id' => (int) $id))) {
@@ -156,6 +227,11 @@ class Users extends CI_Controller {
         }
     }
 
+    /**
+     * User Groups Page for this controller.
+     *
+     * Primary View is views/admin/blocks/users/groups
+     */
     public function groups() {
 
         $groups = $this->user->getUserGroups('user_access.name as role,user_groups.*', array('user_groups.id >' => 0));
@@ -166,6 +242,13 @@ class Users extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit User Group page for this controller
+     *
+     * Primary View is views/admin/blocks/users/group-form
+     * @param	integer $edit
+     * @return	Layout
+     */
     public function edit_group($edit = -1) {
 
         $group = $this->user->getUserGroupById($edit);
@@ -176,6 +259,11 @@ class Users extends CI_Controller {
         ));
     }
 
+    /**
+     * Save User Group
+     *
+     * @return	Redirect
+     */
     public function save_group() {
 
         $post = $this->input->post();
@@ -195,6 +283,12 @@ class Users extends CI_Controller {
         }
     }
 
+    /**
+     * Remove User Group and Redirect Back to Groups
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove_group($id) {
 
         if ($this->db->delete('user_groups', array('id' => (int) $id))) {
@@ -204,6 +298,11 @@ class Users extends CI_Controller {
         }
     }
 
+    /**
+     * Show All Private methods for Access Role Permissions
+     *
+     * @return	Layout
+     */
     public function permissions() {
 
         if (user::access_id() != 1) {
@@ -227,6 +326,11 @@ class Users extends CI_Controller {
         ));
     }
 
+    /**
+     * Update Permissions
+     *
+     * @return	Redirect
+     */
     public function permissions_reset() {
 
         if (user::access_id() != 1) {
