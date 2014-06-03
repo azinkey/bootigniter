@@ -3,7 +3,7 @@
     RewriteEngine On
     
     ### Application folder
-    #RewriteBase /bootigniter/
+    #RewriteBase /bootigniter/ // Uncomment and change directory name where your bootigniter package
  
     ### Canonicalize codeigniter URLs
  
