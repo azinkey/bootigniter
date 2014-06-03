@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright           Copyright (c) 2014, AZinkey.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Contents Controller
+ *
+ * @package		Bootigniter
+ * @subpackage          Controllers
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -8,14 +29,25 @@ class Contents extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-
+        // Check User Priviligies and Permissions
         user::redirectUnauthorizedAccess();
 
-        AZ::helper('form');
-        AZ::helper('content');
+        // Load Content Model
         AZ::model('content');
+        // Load Form Helper
+        AZ::helper('form');
+        // Load Content Helper
+        AZ::helper('content');
     }
 
+    /**
+     * Index Page for this controller or List page for all types contents.
+     *
+     * Primary View is views/admin/blocks/contents/index
+     * @param	string $type
+     * @param	integer $offset
+     * @return	Layout
+     */
     public function index($type = 'pages', $offset = 0) {
 
         $limit = AZ::setting('record_per_page');
@@ -35,6 +67,14 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit content page for this controller
+     *
+     * Primary View is views/admin/blocks/contents/form
+     * @param	string $type
+     * @param	integer $content_id
+     * @return	Layout
+     */
     public function edit($type, $content_id = -1) {
 
         AZ::helper('content');
@@ -58,20 +98,24 @@ class Contents extends CI_Controller {
             'groups' => $groups,
             'scripts' => array(
                 'scripts/ckeditor/ckeditor.js',
-                //'scripts/ckeditor/adapters/jquery.js', // jQuery interface for cKeditor. if Required
             )
         ));
     }
 
+    /**
+     * Save Page or any other content
+     *
+     * @return	Redirect
+     */
     public function save() {
         $post = $this->input->post();
 
         if (!$post || !count($post) || !isset($post['type'])) {
             return false;
         }
-       
+
         $verify = $this->_validation($post['type_id']);
-      
+
         if (!$verify) {
             AZ::redirectError('admin/contents/edit/' . $post['type'] . '/' . $post['id'], validation_errors());
             return false;
@@ -84,6 +128,13 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Content and Redirect Back to Contents
+     *
+     * @param	integer $type
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove($type, $id) {
 
         if ($this->db->delete('contents', array('id' => (int) $id))) {
@@ -94,6 +145,11 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Languages Page for this controller.
+     *
+     * Primary View is views/admin/blocks/contents/languages
+     */
     public function languages() {
         $languages = $this->content->getLanguages();
 
@@ -103,6 +159,13 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit Language page for this controller
+     *
+     * Primary View is views/admin/blocks/contents/language-form
+     * @param	integer $edit
+     * @return	Layout
+     */
     public function edit_language($edit = -1) {
 
         $language = $this->content->getLanguageById($edit);
@@ -113,6 +176,11 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Save Language
+     *
+     * @return	Redirect
+     */
     public function save_language() {
 
         $post = $this->input->post();
@@ -135,6 +203,12 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Language and Redirect Back to Languages
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove_language($id) {
 
         if ($this->db->delete('languages', array('id' => (int) $id))) {
@@ -144,6 +218,13 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Content Types Page for this controller or List all content types.
+     *
+     * Primary View is views/admin/blocks/contents/types
+     * @param	integer $offset
+     * @return	Layout
+     */
     public function types($offset = 0) {
 
         $limit = AZ::setting('record_per_page');
@@ -159,6 +240,13 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit Content Type page for this controller
+     *
+     * Primary View is views/admin/blocks/contents/type-form
+     * @param	integer $edit
+     * @return	Layout
+     */
     public function edit_type($edit = -1) {
 
         $type = $this->content->getTypeById($edit);
@@ -171,6 +259,11 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Save Content Type
+     *
+     * @return	Redirect
+     */
     public function save_type() {
 
         $post = $this->input->post();
@@ -193,6 +286,12 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Type and Redirect Back to Content Types
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove_type($id) {
 
         if ($this->db->delete('content_types', array('id' => (int) $id))) {
@@ -202,6 +301,14 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Content Groups (Categories) Page for this controller.
+     *
+     * Primary View is views/admin/blocks/contents/types
+     * @param	integer $q Content Type ID
+     * @param	integer $offset
+     * @return	Layout
+     */
     public function groups($q = 1, $offset = 0) {
 
         $types_A = $this->content->types_A(true);
@@ -220,11 +327,19 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit Content Group page for this controller
+     *
+     * Primary View is views/admin/blocks/contents/group-form
+     * @param	integer $edit
+     * @param	integer $type
+     * @return	Layout
+     */
     public function edit_group($edit = -1, $type = 1) {
 
         $group = $this->content->getGroupById($edit);
 
-        $parentsOption = $this->content->getGroupsOptionTree($type, 0,(isset($group->parent)) ? $group->parent : 0);
+        $parentsOption = $this->content->getGroupsOptionTree($type, 0, (isset($group->parent)) ? $group->parent : 0);
 
         AZ::layout('block-only', array(
             'block' => 'contents/group-form',
@@ -234,6 +349,11 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Save Content Group
+     *
+     * @return	Redirect
+     */
     public function save_group() {
 
         $post = $this->input->post();
@@ -254,6 +374,13 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Group and Redirect Back to Content Groups
+     *
+     * @param	integer $id
+     * @param	integer $type
+     * @return	redirect
+     */
     public function remove_group($id, $type = 1) {
 
         if ($this->db->delete('content_groups', array('id' => (int) $id))) {
@@ -263,6 +390,12 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Content Fields Group (Fieldset) Page for this controller.
+     *
+     * Primary View is views/admin/blocks/contents/fieldset
+     * @return	Layout
+     */
     public function fieldsets() {
         $fieldsets = $this->content->getFieldSets();
         AZ::layout('left-content', array(
@@ -271,6 +404,13 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit Content Field Group (Fieldset) page for this controller
+     *
+     * Primary View is views/admin/blocks/contents/fieldset-form
+     * @param	integer $edit
+     * @return	Layout
+     */
     public function edit_fieldset($edit = -1) {
 
         $fieldset = $this->content->getFieldsetById($edit);
@@ -281,6 +421,11 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Save Content Field Groups (Fieldset)
+     *
+     * @return	Redirect
+     */
     public function save_fieldset() {
 
         $post = $this->input->post();
@@ -300,6 +445,12 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Content Field Group (Fieldset) and Redirect Back to Fieldset
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove_fieldset($id) {
 
         if ($this->db->delete('content_field_groups', array('id' => (int) $id))) {
@@ -309,6 +460,14 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Content Fields Page for this controller.
+     *
+     * Primary View is views/admin/blocks/contents/fields
+     * @param	integer $q Content Field Group (Fieldset)
+     * @param	integer $offset
+     * @return	Layout
+     */
     public function fields($q = 1, $offset = 0) {
 
         $fieldset_A = $this->content->fieldset_A();
@@ -327,6 +486,14 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Add New or Edit Content Field page for this controller
+     *
+     * Primary View is views/admin/blocks/contents/field-form
+     * @param	integer $edit
+     * @param	integer $fieldset
+     * @return	Layout
+     */
     public function edit_field($edit = -1, $fieldset = 1) {
 
         $field = $this->content->getFieldById($edit);
@@ -340,6 +507,11 @@ class Contents extends CI_Controller {
         ));
     }
 
+    /**
+     * Save Content Field 
+     *
+     * @return	Redirect
+     */
     public function save_field() {
 
         $post = $this->input->post();
@@ -372,6 +544,13 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Field and Redirect Back to Fields
+     *
+     * @param	integer $id
+     * @param	integer $fieldset
+     * @return	redirect
+     */
     public function remove_field($id, $fieldset = 1) {
 
         if ($this->db->delete('content_fields', array('id' => (int) $id))) {
@@ -381,10 +560,23 @@ class Contents extends CI_Controller {
         }
     }
 
+    /**
+     * Render Field option on select field type in Add Field form
+     *
+     * @param	string $type
+     * @param	integer $field_id
+     * @return	string
+     */
     public function field_type_options($type = 'text', $field_id = "") {
         echo field_options($type, $field_id);
     }
 
+    /**
+     * Load All Fields Rules by Content Type and Check Field Validations
+     *
+     * @param	integer $type_id
+     * @return	boolen
+     */
     private function _validation($type_id) {
 
         $this->load->library('form_validation');
@@ -406,5 +598,5 @@ class Contents extends CI_Controller {
 
 }
 
-/* End of file dashboard.php */
-    /* Location: ./application/controllers/dashboard.php */    
+/* End of file contents.php */
+    /* Location: ./application/controllers/contents.php */    

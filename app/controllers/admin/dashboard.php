@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright           Copyright (c) 2014, AZinkey.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Dashboard Controller
+ *
+ * @package		Bootigniter
+ * @subpackage          Controllers
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -8,17 +29,27 @@ class Dashboard extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
+
+        // Check User Priviligies and Permissions
         user::redirectUnauthorizedAccess('administrator/login', lang('Unauthorized access'), true);
 
+        // Load Message Model
         AZ::model('message');
+        // Load Content Model
         AZ::model('content');
+        // Load Form Helper
         AZ::helper('form');
+        // Load Text Helper
         AZ::helper('text');
-        
     }
 
+    /**
+     * Index Page for this controller.
+     *
+     * Primary View is views/admin/blocks/dashboard/index
+     */
     public function index() {
-        
+
         $total_users = $this->user->getTotalUsers();
         $total_messages = $this->message->getTotalMessages();
         $total_notification = $this->message->getTotalNotifications();
@@ -43,6 +74,14 @@ class Dashboard extends CI_Controller {
         ));
     }
 
+    /**
+     * Notifications Page for this controller.
+     *
+     * Primary View is views/admin/blocks/messages/notifications
+     * 
+     * @param	integer $offset
+     * @return	Layout
+     */
     public function notifications($offset = 0) {
 
         $limit = AZ::setting('record_per_page');
@@ -62,6 +101,12 @@ class Dashboard extends CI_Controller {
         $this->message->read_all_notifications();
     }
 
+    /**
+     * Removed Notification and Redirect Back to Notifications
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove_notification($id) {
 
         $this->db->where('id', (int) $id);
@@ -72,6 +117,11 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Mark as read to all notifications
+     *
+     * @return	redirect
+     */
     public function clear_notice() {
 
         if ($this->message->read_all_notifications()) {
@@ -81,6 +131,16 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Messages Page for this controller.
+     *
+     * Primary View is views/admin/blocks/messages/index
+     * 
+     * @param	string $mode
+     * @param	integer $message_id
+     * @param	integer $offset
+     * @return	Layout
+     */
     public function messages($mode = 'inbox', $message_id = 0, $offset = 0) {
 
         $messagesData = $this->message->getMessagesData($mode, $message_id, $offset);
@@ -104,7 +164,17 @@ class Dashboard extends CI_Controller {
         $this->db->update('messages', array('is_read' => 1), array('id' => $selected_message->id));
     }
 
-    public function label_messages($label = '1', $message_id = 0, $offset = 0) {
+    /**
+     * Show Messages By Label 
+     *
+     * Primary View is views/admin/blocks/messages/label
+     * 
+     * @param	integer $label
+     * @param	integer $message_id
+     * @param	integer $offset
+     * @return	Layout
+     */
+    public function label_messages($label = 1, $message_id = 0, $offset = 0) {
 
         $limit = AZ::setting('record_per_page');
         $total_message = $this->message->getMessagesByLabel($label, $offset, $limit, true);
@@ -131,6 +201,16 @@ class Dashboard extends CI_Controller {
         $this->db->update('messages', array('is_read' => 1), array('id' => $selected_message->id));
     }
 
+    /**
+     * Search Messages By Keywords
+     *
+     * Primary View is views/admin/blocks/messages/search
+     * 
+     * @param	string $keyword
+     * @param	integer $message_id
+     * @param	integer $offset
+     * @return	Layout
+     */
     public function search_messages($keyword = '', $message_id = 0, $offset = 0) {
 
         $post = $this->input->post();
@@ -159,6 +239,14 @@ class Dashboard extends CI_Controller {
         ));
     }
 
+    /**
+     * Compose Messages
+     *
+     * Primary View is views/admin/blocks/messages/form
+     * 
+     * @param	integer $message_id
+     * @return	Layout
+     */
     public function write_message($message_id = 0) {
 
         if ($message_id) {
@@ -184,6 +272,14 @@ class Dashboard extends CI_Controller {
         ));
     }
 
+    /**
+     * Forward Message
+     *
+     * Primary View is views/admin/blocks/messages/forward-form
+     * 
+     * @param	integer $message_id
+     * @return	Layout
+     */
     public function forward_message($message_id) {
 
         $user_options = $this->user->getUserOptions();
@@ -202,6 +298,11 @@ class Dashboard extends CI_Controller {
         ));
     }
 
+    /**
+     * Send Composed Message
+     *
+     * @return	redirect
+     */
     public function send_message() {
 
         $post = $this->input->post();
@@ -228,6 +329,11 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Save Message Label
+     *
+     * @return	redirect
+     */
     public function save_label() {
 
         $post = $this->input->post();
@@ -251,6 +357,12 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Removed Label and Redirect Back to Messages
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove_label($id) {
 
         if ($this->db->delete('labels', array('id' => (int) $id, 'user_id' => user::id()))) {
@@ -260,6 +372,12 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Recycle Message to trash and Redirect Back to Messages
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function trash_message($id) {
 
         $this->db->where('id', (int) $id);
@@ -270,6 +388,12 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Remove Message and Redirect Back to Messages
+     *
+     * @param	integer $id
+     * @return	redirect
+     */
     public function remove_message($id) {
 
         if ($this->db->delete('messages', array('id' => (int) $id))) {
@@ -279,6 +403,13 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Set Star Flag for Message (its make important or normal)
+     *
+     * @param	integer $id
+     * @param	integer $flag
+     * @return	redirect
+     */
     public function message_star_flag($id, $flag) {
 
         $this->db->where('id', (int) $id);
@@ -289,6 +420,13 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Update Message Label
+     *
+     * @param	integer $id
+     * @param	integer $label
+     * @return	redirect
+     */
     public function message_label($id, $label) {
 
         $this->db->where('id', (int) $id);
@@ -299,6 +437,11 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    /**
+     * Load Activities for Dashboard
+     *
+     * @return	Object (JSON )
+     */
     public function load_activity_json() {
         AZ::helper('date');
         $offset = $this->input->post('offset');
