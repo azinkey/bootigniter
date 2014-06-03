@@ -8,11 +8,14 @@ class Page extends CI_Controller {
     public function __construct() {
         parent::__construct();
         AZ::model('content');
-        $this->content->track();
+        //$this->content->track(); // uncomment for enabled self tracking
     }
 
     public function index() {
-        AZ::layout('content', array('block' => 'index', 'page_title' => __('Bootigniter - Another Open Source CMS, A Pack of Codeigniter + Bootstrap', true)));
+        AZ::layout('content', array(
+            'block' => 'index',
+            'page_title' => __('Bootigniter - Another Open Source CMS, A Pack of Codeigniter + Bootstrap', true)
+        ));
     }
 
     public function content($alias) {

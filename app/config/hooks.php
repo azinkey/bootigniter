@@ -20,5 +20,11 @@ $hook['post_controller_constructor'] = array(
     'filepath' => 'hooks'
 );
 
+$hook['post_controller_constructor'] = array(
+    'class' => 'BootLoader',
+    'function' => 'initialize',
+    'filename' => 'BootigniterLoader.php',
+    'filepath' => 'hooks'
+);
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */

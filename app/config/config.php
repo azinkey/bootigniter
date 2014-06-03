@@ -18,6 +18,21 @@ $config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------
+| Class Extension Prefix
+|--------------------------------------------------------------------------
+|
+| This item allows you to set the filename/classname prefix when extending
+| native libraries.  For more information please see the user guide:
+|
+| http://codeigniter.com/user_guide/general/core_classes.html
+| http://codeigniter.com/user_guide/general/creating_libraries.html
+|
+*/
+
+$config['subclass_prefix'] = 'AZ_';
+
+/*
+|--------------------------------------------------------------------------
 | Index File
 |--------------------------------------------------------------------------
 |
@@ -93,20 +108,6 @@ $config['charset'] = 'UTF-8';
 */
 $config['enable_hooks'] = TRUE;
 
-
-/*
-|--------------------------------------------------------------------------
-| Class Extension Prefix
-|--------------------------------------------------------------------------
-|
-| This item allows you to set the filename/classname prefix when extending
-| native libraries.  For more information please see the user guide:
-|
-| http://codeigniter.com/user_guide/general/core_classes.html
-| http://codeigniter.com/user_guide/general/creating_libraries.html
-|
-*/
-$config['subclass_prefix'] = 'AZ_';
 
 
 /*
@@ -224,7 +225,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'AZinkey'; // You Can and you should Change this key string
+$config['encryption_key'] = 'Fxj<k+A(Ud*HR)Q[X4<E_mNjU|]DuyS$[1i0,nCSH3i<dF5-Y+cVI>!^uM2@FKl'; // You Can and you should Change this key string
 
 /*
 |--------------------------------------------------------------------------

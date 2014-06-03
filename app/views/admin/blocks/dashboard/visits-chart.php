@@ -33,13 +33,16 @@
                 </div>
             </div>
         </div>
+        <small class="muted">
+            <?php __('Configure above chart with real data from "visitors", have a look at <strong>admin/blocks/dashboard/visits-chart.php</strong>'); ?>
+        </small>
     </div>
 </div>
 
 <script type="text/javascript">
     (function($) {
         (function() {
-           
+
             // You can represent data from "Visitors" Table through its controller
             $.plot("#visitChart", [{
                     label: "Visit (All)",
@@ -93,5 +96,5 @@
             });
         })();
     })(jQuery);
-    
+
 </script>
