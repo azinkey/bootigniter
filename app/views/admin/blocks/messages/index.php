@@ -60,14 +60,14 @@
 
                                 </ul>
                                 <h5> 
-                                    <span class="glyphicon glyphicon-tags"></span> <?php __('Labels')?>
+                                    <span class="glyphicon glyphicon-tags"></span> <?php __('Labels') ?>
                                     <a href="javascript:void(0)" class="pull-right" id="createLabel" data-toggle="modal" data-target="#labelFormModel">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </a>
                                 </h5>
                                 <ul class="labels-list list-group list-unstyled">
                                     <?php
-                                    if ($labels && count($labels)) {
+                                    if ($labels && isset($selected_message->id) && count($labels)) {
                                         foreach ($labels as $label) {
                                             ?>
                                             <li class="list-group-item">
@@ -91,7 +91,7 @@
                                 <?php echo form_open('admin/dashboard/search_messages'); ?>
                                 <div class="input-group">
                                     <div class="has-icon">
-                                        <input type="text" placeholder="<?php __('Filter message...');?>" class="form-control" name="keyword">
+                                        <input type="text" placeholder="<?php __('Filter message...'); ?>" class="form-control" name="keyword">
                                     </div>
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
@@ -162,90 +162,92 @@
                                 <?php endif; ?>
                             </div>
                             <div class="col-md-6 text-right">
+                                <?php if (isset($selected_message->id)): ?>
+                                    <div class="btn-group">
 
-                                <div class="btn-group">
+                                        <a class="btn btn-default" href="<?php _u('admin/dashboard/message_star_flag/' . $selected_message->id . '/' . $selected_message->is_star); ?>" title="<?php echo ($selected_message->is_star) ? lang('Remove Star Mark') : lang('Mark as Star'); ?>">
+                                            <i class="glyphicon <?php echo ($selected_message->is_star) ? 'glyphicon-star' : 'glyphicon-star-empty'; ?>"></i>
+                                        </a>
+                                        <a class="btn btn-default" title="<?php __('Forward'); ?>" href="<?php _u('admin/dashboard/forward_message/' . $selected_message->id); ?>">
+                                            <i class="glyphicon glyphicon-share-alt"></i>
+                                        </a>
+                                        <a class="btn btn-default" title="<?php __('Reply'); ?>" href="<?php _u('admin/dashboard/write_message/' . $selected_message->id); ?>">
+                                            <i class="glyphicon glyphicon-retweet"></i>
+                                        </a>
 
-                                    <a class="btn btn-default" href="<?php _u('admin/dashboard/message_star_flag/' . $selected_message->id . '/' . $selected_message->is_star); ?>" title="<?php echo ($selected_message->is_star) ? lang('Remove Star Mark') : lang('Mark as Star'); ?>">
-                                        <i class="glyphicon <?php echo ($selected_message->is_star) ? 'glyphicon-star' : 'glyphicon-star-empty'; ?>"></i>
-                                    </a>
-                                    <a class="btn btn-default" title="<?php __('Forward'); ?>" href="<?php _u('admin/dashboard/forward_message/' . $selected_message->id); ?>">
-                                        <i class="glyphicon glyphicon-share-alt"></i>
-                                    </a>
-                                    <a class="btn btn-default" title="<?php __('Reply'); ?>" href="<?php _u('admin/dashboard/write_message/' . $selected_message->id); ?>">
-                                        <i class="glyphicon glyphicon-retweet"></i>
-                                    </a>
-
-                                    <a class="btn btn-default" title="<?php __('Add Label'); ?>">
-                                        <i class="glyphicon glyphicon-tags"></i>
-                                    </a>
-                                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu text-left" role="menu">
-                                        <li><a><?php __('Choose Label');?></a></li>
-                                        <li class="divider"></li>
-                                        <?php
-                                        if ($labels && count($labels)) {
-                                            foreach ($labels as $label) {
-                                                ?>
-                                                <li>
-                                                    <a href="<?php _u('admin/dashboard/message_label/' . $selected_message->id . '/' . $label->id); ?>">
-                                                        <span class="glyphicon glyphicon-tag" style="color: <?php echo $label->color; ?>"></span>
-                                                        <?php echo $label->label; ?>
-                                                    </a>
-                                                </li>
-                                                <?php
+                                        <a class="btn btn-default" title="<?php __('Add Label'); ?>">
+                                            <i class="glyphicon glyphicon-tags"></i>
+                                        </a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu text-left" role="menu">
+                                            <li><a><?php __('Choose Label'); ?></a></li>
+                                            <li class="divider"></li>
+                                            <?php
+                                            if ($labels && count($labels)) {
+                                                foreach ($labels as $label) {
+                                                    ?>
+                                                    <li>
+                                                        <a href="<?php _u('admin/dashboard/message_label/' . $selected_message->id . '/' . $label->id); ?>">
+                                                            <span class="glyphicon glyphicon-tag" style="color: <?php echo $label->color; ?>"></span>
+                                                            <?php echo $label->label; ?>
+                                                        </a>
+                                                    </li>
+                                                    <?php
+                                                }
                                             }
-                                        }
+                                            ?>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <?php
+                                        $removeUrl = ($mode == 'trash') ? 'admin/dashboard/remove_message/' . $selected_message->id : 'admin/dashboard/trash_message/' . $selected_message->id;
                                         ?>
+                                        <a class="btn btn-danger remove-box" href="<?php _u($removeUrl); ?>">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    </div>
+
+
+                                    <hr />
+
+
+                                    <ul class="list-table">
+                                        <li style="width:70px;">
+                                            <img width="65px" height="65px" alt="" src="<?php echo user::avatar($selected_message->author) ?>" class="img-circle">
+                                        </li>
+                                        <li class="text-left">
+                                            <h4 class="semibold ellipsis nm">
+                                                <?php echo $selected_message->name; ?> <br />
+                                                <small class="text-muted">
+                                                    <?php echo ($mode == 'outbox') ? lang('Sent') : $selected_message->email; ?>
+                                                    <?php __('to'); ?> <strong>
+                                                        <?php echo ($mode == 'outbox') ? user::email($selected_message->receiver) : lang('Me'); ?>
+
+                                                    </strong>
+                                                </small>
+                                            </h4>
+                                        </li>
+                                        <li class="text-right">
+                                            <?php if (!empty($selected_message->label_name)) : ?>
+                                                <span class="glyphicon glyphicon-tag" style="color: <?php echo $selected_message->color; ?>"></span>
+                                                <?php echo $selected_message->label_name; ?>
+                                            <?php endif; ?>
+                                            <h5 class="semibold text-muted"><?php echo date_when(human_to_unix($selected_message->created)) ?></h5>
+                                        </li>
                                     </ul>
-                                </div>
-                                <div class="btn-group">
-                                    <?php
-                                    $removeUrl = ($mode == 'trash') ? 'admin/dashboard/remove_message/' . $selected_message->id : 'admin/dashboard/trash_message/' . $selected_message->id;
-                                    ?>
-                                    <a class="btn btn-danger remove-box" href="<?php _u($removeUrl); ?>">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                    </a>
-                                </div>
-
-                                <hr />
-
-
-                                <ul class="list-table">
-                                    <li style="width:70px;">
-                                        <img width="65px" height="65px" alt="" src="<?php echo user::avatar($selected_message->author) ?>" class="img-circle">
-                                    </li>
-                                    <li class="text-left">
-                                        <h4 class="semibold ellipsis nm">
-                                            <?php echo $selected_message->name; ?> <br />
-                                            <small class="text-muted">
-                                                <?php echo ($mode == 'outbox') ? lang('Sent') : $selected_message->email; ?>
-                                                <?php __('to');?> <strong>
-                                                    <?php echo ($mode == 'outbox') ? user::email($selected_message->receiver) : lang('Me'); ?>
-
-                                                </strong>
-                                            </small>
+                                    <br />
+                                    <a>
+                                        <h4 class="text-left">
+                                            <?php echo $selected_message->subject; ?>
                                         </h4>
-                                    </li>
-                                    <li class="text-right">
-                                        <?php if (!empty($selected_message->label_name)) : ?>
-                                            <span class="glyphicon glyphicon-tag" style="color: <?php echo $selected_message->color; ?>"></span>
-                                            <?php echo $selected_message->label_name; ?>
-                                        <?php endif; ?>
-                                        <h5 class="semibold text-muted"><?php echo date_when(human_to_unix($selected_message->created)) ?></h5>
-                                    </li>
-                                </ul>
-                                <br />
-                                <a>
-                                    <h4 class="text-left">
-                                        <?php echo $selected_message->subject; ?>
-                                    </h4>
-                                </a>
-                                <br />
-                                <div class="panel-body text-left">
-                                    <?php echo $selected_message->body; ?>
-                                </div>
+                                    </a>
+                                    <br />
+                                    <div class="panel-body text-left">
+                                        <?php echo $selected_message->body; ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

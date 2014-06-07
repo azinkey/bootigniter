@@ -1,42 +1,29 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright           Copyright (c) 2014, AZinkey.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-// ------------------------------------------------------------------------
 
 /**
- * CodeIgniter Form Helpers
+ * Key To Label
  *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		ExpressionEngine Dev Team
- * @link		http://codeigniter.com/user_guide/helpers/form_helper.html
- */
-// ------------------------------------------------------------------------
-
-/**
- * Form Declaration
- *
- * Creates the opening portion of the form.
+ * Creates Machine code (key) to human readable 
  *
  * @access	public
- * @param	string	the URI segments of the form destination
- * @param	array	a key/value pair of attributes
- * @param	array	a key/value pair hidden data
+ * @param	string
  * @return	string
  */
 if (!function_exists('key_label')) {
@@ -50,6 +37,15 @@ if (!function_exists('key_label')) {
 
 }
 
+/**
+ * Label To Key
+ *
+ * Creates Words (label) into Machine code (key)
+ *
+ * @access	public
+ * @param	string
+ * @return	string
+ */
 if (!function_exists('label_key')) {
 
     function label_key($label) {
@@ -61,6 +57,15 @@ if (!function_exists('label_key')) {
 
 }
 
+/**
+ * Find and Set $_POST value
+ *
+ *
+ * @access	public
+ * @param	string
+ * @param	string
+ * @return	string
+ */
 if (!function_exists('form_value')) {
 
     function form_value($label, $obj) {
@@ -79,6 +84,14 @@ if (!function_exists('form_value')) {
 
 }
 
+/**
+ * Return Field Type Options
+ *
+ *
+ * @access	public
+ * @param	boolen
+ * @return	array
+ */
 if (!function_exists('field_types')) {
 
     function field_types($base_field_opnly = false) {
@@ -108,6 +121,16 @@ if (!function_exists('field_types')) {
 
 }
 
+/**
+ * Return Field Options on Field Type Select
+ *
+ *
+ * @access	public
+ * @param	string
+ * @param	integer
+ * @param	boolen
+ * @return	Callback
+ */
 if (!function_exists('field_options')) {
 
     function field_options($type, $field_id = '', $setting = false) {
@@ -993,4 +1016,4 @@ if (!function_exists('field_file_option')) {
 }
 
 /* End of file form_helper.php */
-/* Location: ./system/helpers/form_helper.php */
+/* Location: ./app/helpers/az_form_helper.php */

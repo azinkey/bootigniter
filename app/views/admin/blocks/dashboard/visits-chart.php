@@ -38,7 +38,9 @@
         </small>
     </div>
 </div>
+<?php
 
+?>
 <script type="text/javascript">
     (function($) {
         (function() {
@@ -48,17 +50,17 @@
                     label: "Visit (All)",
                     color: "#93A7CB",
                     data: [
-                        ["Jan", 47],
+                        ["Jan", 0],
                         ["Feb", 84],
                         ["Mar", 60],
-                        ["Apr", 143],
+                        ["Apr", 110],
                         ["May", 39],
                     ]
                 }, {
                     label: "Visit (Mobile)",
                     color: "#94A8CC",
                     data: [
-                        ["Jan", 40],
+                        ["Jan", 0],
                         ["Feb", 32],
                         ["Mar", 16],
                         ["Apr", 47],

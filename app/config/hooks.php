@@ -13,14 +13,14 @@ if (!defined('BASEPATH'))
   |
  */
 
-$hook['post_controller_constructor'] = array(
+$hook['post_controller_constructor'][] = array(
     'class' => 'LanguageLoader',
     'function' => 'initialize',
     'filename' => 'LanguageLoader.php',
     'filepath' => 'hooks'
 );
 
-$hook['post_controller_constructor'] = array(
+$hook['post_controller_constructor'][] = array(
     'class' => 'BootLoader',
     'function' => 'initialize',
     'filename' => 'BootigniterLoader.php',

@@ -10,5 +10,9 @@ $lang['Register Thanks'] = "Thank you for registering with us.";
 $lang['My Account'] = "My Account";
 $lang['My Dashboard'] = "My Dashboard";
 $lang['Unauthorized Access'] = "Unauthorized Access!";
+$lang['About'] = "About";
+$lang['Features'] = "Features";
+$lang['Demo'] = "Demo";
+$lang['Community'] = "Community";
 /* End of file site_lang.php */
 /* Location: ./system/language/english/site_lang.php */

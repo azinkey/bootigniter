@@ -43,6 +43,16 @@ if (!function_exists('language_code')) {
 
 }
 
+if (!function_exists('language_name')) {
+
+    function language_name() {
+        $CI = & get_instance();
+        $CI->load->model('content');
+        return $CI->content->getActiveLanguageName();
+    }
+
+}
+
 if (!function_exists('language_flags')) {
 
     function language_flags() {

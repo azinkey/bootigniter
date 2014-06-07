@@ -325,7 +325,7 @@ if (!function_exists('menu')) {
         AZ::helper('html');
         $CI = & get_instance();
         $items = $CI->menu->getItemsByName($name,$wrapper_class);
-        echo $items;
+        return $items;
     }
 
 }

@@ -13,7 +13,7 @@
                     <div role="navigation" class="navbar navbar-default">
 
                         <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-                            <span class="sr-only">Toggle navigation</span>
+                            <span class="sr-only">Toggle</span>
                             
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -21,7 +21,7 @@
                         </button>
 
                         <div class="navbar-collapse collapse">
-                            <?php menu(); ?>
+                            <?php echo menu(); ?>
                         </div>
                     </div>
 
@@ -31,22 +31,17 @@
                 </div>
                 <div class="col-xs-2 pull-right">
                         <ul class="language-switcher navbar-right">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle text-center" data-toggle="dropdown">
                                 <i class="fa fa-language"></i>
                                 <span class="glyphicon glyphicon-globe"></span>
-                                <small><?php echo language_code(); ?></small>
+                                <small class="hidden-xs"><?php __(language_name()); ?></small>
                                 <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-right ">
                                 <?php echo language_flags(); ?>
                             </ul>
                         </ul>
                 </div>
                 
-                
-                
-                
-
-
             </div>
         </div>
     </div>

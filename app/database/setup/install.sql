@@ -196,7 +196,8 @@ INSERT INTO `%PREFIX%content_field_values` (`id`, `language_id`, `content_id`, `
 (17, 1, 2, 6, NULL, ''),
 (18, 1, 2, 7, NULL, ''),
 (19, 2, 2, 1, NULL, 'हमारे बारे में'),
-(20, 2, 2, 2, NULL, 'जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!'),
+(20, 2, 2, 2, NULL, 'जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!'),
+(21, 2, 2, 3, NULL, 'जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले! जय बम भोले!'),
 (21, 2, 2, 5, NULL, ''),
 (22, 2, 2, 6, NULL, ''),
 (23, 2, 2, 7, NULL, '');
@@ -343,10 +344,12 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%messages` (
   KEY `parent_id` (`parent_id`,`type`),
   KEY `subject` (`subject`),
   FULLTEXT KEY `body` (`body`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Store All Type Messages & Notifications' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Store All Type Messages & Notifications' AUTO_INCREMENT=4 ;
 
 INSERT INTO `%PREFIX%messages` (`id`, `parent_id`, `type`, `receiver`, `author`, `is_read`, `is_star`, `have_attachment`, `trash`, `label`, `subject`, `body`, `attachments`, `created`) VALUES
-(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Bootigniter Installed', 'Your Bootigniter Packae Installed Successfully', '', '2014-06-02 04:25:41');
+(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Bootigniter Installed', 'Your Bootigniter Packae Installed Successfully', '', '2014-06-02 04:25:41'),
+(1, 0, 1, 1111, 0, 0, 0, 0, 0, 0, 'Update Admin User information', 'You should updat your admin user details & Password', '', '2014-06-02 04:25:41'),
+(1, 0, 2, 1111, 0, 0, 0, 0, 0, 0, 'Welcome, Bootigniter" An Open Source CMS Boilerplate ', 'Now Deploy, scale and monitor your app with our Intuitive and Powerful Content Management System (CMS). A very Sleek API pattern for developers to extend the power of Codeigniter.<br /><p>Cum sociis natoque penatibus et magnis <a href="http://bootigniter.org">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p><blockquote><p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p></blockquote><p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p><p>Heading</p><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p><p>Sub-heading</p><p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p><p>Example code block</p><p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p><p>Sub-heading</p><p>Cum sociis natoque p</p>', '', '2014-06-02 04:25:41');
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

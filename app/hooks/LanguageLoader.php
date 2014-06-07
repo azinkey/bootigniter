@@ -3,6 +3,7 @@
 class LanguageLoader {
 
     function initialize() {
+        
         $ci = & get_instance();
         $uri = & load_class('URI', 'core');
         $admin = $uri->segment(1);
@@ -10,12 +11,12 @@ class LanguageLoader {
         $language = ($is_admin) ? admin_language() : site_language();
         $side = ($is_admin) ? 'app' : 'site';
         $user_lang_request = trim($ci->input->get('lang'));
+        $user_lang = $ci->session->userdata('user_lang');
         if (!empty($user_lang_request)) {
             $ci->session->set_userdata('user_lang', $user_lang_request);
             AZ::redirect(current_url());
         }
-        $user_lang = $ci->session->userdata('user_lang');
-
+        
         if (isset($user_lang) && !empty($user_lang) && !$is_admin ) {
             $ci->lang->load($side, $user_lang);
         } else {

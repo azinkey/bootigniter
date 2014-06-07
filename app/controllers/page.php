@@ -31,7 +31,6 @@ class Page extends CI_Controller {
 
         // Load Content Model
         AZ::model('content');
-        //$this->content->track(); // uncomment for enabled self tracking
     }
 
     /**
@@ -42,10 +41,13 @@ class Page extends CI_Controller {
      * @return	Layout
      */
     public function index() {
+
         AZ::layout('content', array(
             'block' => 'index',
             'page_title' => __('Bootigniter - Another Open Source CMS, A Pack of Codeigniter + Bootstrap', true)
         ));
+
+        //$this->content->track(); // uncomment for enabled self tracking into Visitors
     }
 
     /**
@@ -72,6 +74,8 @@ class Page extends CI_Controller {
         }
 
         AZ::layout('content-right', $varriables);
+
+        //$this->content->track(); // uncomment for enabled self tracking into Visitors
     }
 
     /**
@@ -104,6 +108,7 @@ class Page extends CI_Controller {
 
                 break;
             case 1:
+                // can remap Page
                 if ($this->content->checkAlias($alias)) {
                     $this->content($alias);
                 } else {
@@ -112,11 +117,11 @@ class Page extends CI_Controller {
 
                 break;
             case 2:
-
+                // can remap Category => Page
                 $this->page_not_found();
                 break;
             case 3:
-
+                // can remap Category => Category => Page
                 $this->page_not_found();
                 break;
 

@@ -11,7 +11,7 @@
         <meta name="site_url" content="<?php _u(''); ?>">
 
 
-        <link rel="stylesheet"  href="<?= skin_url(); ?>css/bootstrap.css"  />
+        <link rel="stylesheet"  href="<?= skin_url(); ?>css/bootstrap.min.css"  />
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/style.css"  />
         
         <?php
@@ -21,7 +21,7 @@
         ?>
 
         <script src="<?= skin_url(); ?>scripts/jquery-1.11.0.min.js" type="text/javascript"></script>
-        <script src="<?= skin_url(); ?>scripts/bootstrap.js" type="text/javascript"></script>
+        <script src="<?= skin_url(); ?>scripts/bootstrap.min.js" type="text/javascript"></script>
         <?php
         
         if (isset($scripts)) {

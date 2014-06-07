@@ -118,11 +118,11 @@ class Menu extends CI_Model {
 
     public function getItemsByName($name, $wrapper_class = '', $level = 0, $menu_id = NULL, $html = NULL) {
 
-        
+
         if (!$menu_id) {
-            
+
             $this->db->where("FIND_IN_SET('" . user::access_id() . "', access)");
-            
+
             $menu_id = $this->db->get_where('menus', array('name' => $name))->row('id');
         }
 
@@ -162,7 +162,7 @@ class Menu extends CI_Model {
                 $attribute = ($have_child) ? ' class="' . $active . ' dropdown-toggle" data-toggle="dropdown" ' : 'class="' . $active . '"';
 
                 $html .= '<li class="' . $active . '">';
-                $html .= anchor($link, $title, $attribute);
+                $html .= anchor($link, __($title, true), $attribute);
                 $html .= $this->getItemsByName($name, $wrapper_class, $row->id, $menu_id);
                 $html .= '</li>';
             }

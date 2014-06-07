@@ -161,7 +161,7 @@ class Dashboard extends CI_Controller {
             'count_unread_message' => $count_unread_message,
         ));
 
-        $this->db->update('messages', array('is_read' => 1), array('id' => $selected_message->id));
+        $this->db->update('messages', array('is_read' => 1), array('id' => (isset($selected_message->id)) ? $selected_message->id : 0));
     }
 
     /**

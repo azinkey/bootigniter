@@ -133,7 +133,6 @@ ul.bottom-nav {
 }
 body {
     background: #F3F6FF;
-    font-family: monospace;
 }
 hr {
     border-color: #95A6C7; 
@@ -156,23 +155,21 @@ hr {
 .top-container {
     position: relative;    
     min-height: 40px;
-    background-color: #8FA1C3;
-    border-bottom: 1px solid #70819E;
+    background-color: #70819E;
+    border-bottom: 1px solid #5A6B85;
+}
+.top-container a {
+    color: #fff;
 }
 .top-container .navbar-nav > li > a {
     padding: 5px;
 }
-.top-container {
 
-}
 .language-switcher,.profile-menu {
     position: relative;
     padding-top:10px; 
     padding-left:0px; 
     margin-bottom: 0px;
-}
-.language-switcher a {
-    color: #F8FAFF;
 }
 .logo-brand {
     color: #fff;
@@ -231,7 +228,6 @@ hr {
 
 .carousel {
     height: 450px;
-    margin-bottom: 60px;
 }
 
 .carousel-caption {
@@ -251,8 +247,7 @@ hr {
 }
 
 .marketing {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 45px 15px 10px 15px;
 }
 
 .marketing .col-lg-4 {
@@ -337,9 +332,7 @@ hr {
     }
 }
 @media (max-width: 768px) {
-    .navbar-collapse {
-        margin-top: 40px;
-    }
+    
     .brand {
         text-align: center;
     }

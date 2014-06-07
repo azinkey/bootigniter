@@ -179,7 +179,7 @@ class Content extends CI_Model {
                 $contents[$i]->alias = $contentRow->alias;
 
                 $valueRows = $this->getContentFieldsValue($contentRow->id, $fields, $default_language_id);
-                
+
                 if (count($valueRows)) {
                     foreach ($valueRows as $valueRow) {
                         $contents[$i]->{$valueRow->name} = $valueRow->value;
@@ -188,7 +188,7 @@ class Content extends CI_Model {
                 $i++;
             }
         }
-        
+
         return $contents;
     }
 
@@ -285,7 +285,7 @@ class Content extends CI_Model {
                     $uploadData = $this->upload->data();
 
 
-                    $data['fields'][$field_id] = 'media/contents/files/'.$uploadData['file_name'];
+                    $data['fields'][$field_id] = 'media/contents/files/' . $uploadData['file_name'];
                 }
             }
 
@@ -395,6 +395,22 @@ class Content extends CI_Model {
         }
 
         return empty($code) ? 'en' : $code;
+    }
+
+    public function getActiveLanguageName() {
+
+        $user_lang = $this->session->userdata('user_lang');
+        if (isset($user_lang) && !empty($user_lang)) {
+            $name = $this->db->get_where('languages', array('directory' => $user_lang))->row('name');
+        } else {
+            $uri = & load_class('URI', 'core');
+            $admin = $uri->segment(1);
+            $is_admin = ($admin == 'administrator' || $admin == 'admin') ? true : false;
+            $state = ($is_admin) ? 'is_admin' : 'is_default';
+            $name = $this->db->get_where('languages', array($state => 1))->row('name');
+        }
+
+        return empty($name) ? 'English' : $name;
     }
 
     public function getActiveLanguageId() {
@@ -853,7 +869,7 @@ class Content extends CI_Model {
         $this->db->insert_batch('content_field_options', $field_options);
         return TRUE;
     }
-    
+
     public function track() {
         AZ::helper('date');
         $this->load->library('user_agent');
@@ -869,8 +885,12 @@ class Content extends CI_Model {
             'page' => $this->uri->uri_string(),
             'logged' => user::id()
         );
-        
-        return $this->db->insert('visitors',$visitData);
+
+        if (0) {
+            return $this->db->insert('visitors', $visitData);
+        } else {
+            return true;
+        }
     }
-    
+
 }

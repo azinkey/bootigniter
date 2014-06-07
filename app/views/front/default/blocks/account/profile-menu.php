@@ -6,8 +6,9 @@
     <ul class="nav navbar-nav navbar-right profile-menu">
 
         <li class="dropdown text-right">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown">
                 <i class="account-icon glyphicon glyphicon-off"></i> 
+                <b class="caret"></b>
             </a>
             <ul class="dropdown-menu dropdown-menu-right text-left">
                 <li>
@@ -33,8 +34,9 @@
     <ul class="nav navbar-nav navbar-right profile-menu">
 
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown">
                 <i class="glyphicon glyphicon-user"></i> 
+                <b class="caret"></b>
             </a>
             <ul class="dropdown-menu dropdown-menu-right text-left">
                 <li><?php _a('account/login_box', __('Log in Account', true), ' class="ajax-box" ') ?></li>
