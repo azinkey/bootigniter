@@ -532,10 +532,13 @@ class Content extends CI_Model {
             unset($data['fieldset']);
             return $this->db->update('content_types', $data, array('id' => $data['id']));
         } else {
+            $fieldsetA = $data['fieldset'];
+            unset($data['fieldset']);
+
             $this->db->insert('content_types', $data);
             $type_id = $this->db->insert_id();
-            if (isset($data['fieldset']) && count($data['fieldset'])) {
-                foreach ($data['fieldset'] as $fieldset) {
+            if (isset($fieldsetA) && count($fieldsetA)) {
+                foreach ($fieldsetA as $fieldset) {
                     $fieldsData[] = array(
                         'type_id' => $type_id,
                         'group_id' => $fieldset,

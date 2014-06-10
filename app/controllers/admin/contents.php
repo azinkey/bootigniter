@@ -250,7 +250,7 @@ class Contents extends CI_Controller {
     public function edit_type($edit = -1) {
 
         $type = $this->content->getTypeById($edit);
-        if (isset($type->fieldsets)) {
+        if (!isset($type->fieldsets)) {
             $type->fieldsets = $this->content->getFieldsetsByTypeId($edit);
         }
         AZ::layout('block-only', array(
