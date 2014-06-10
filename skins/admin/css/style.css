@@ -677,6 +677,7 @@ hr.dark {
 }
 .icon-box a {
     color: #fff;
+    display: block;
 }
 .icon-box-detail {
     border-left: 0px none;

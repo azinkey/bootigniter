@@ -37,7 +37,7 @@
         <div class="card-layout">
             <div class="col-xs-4 panel warning icon-box">
                 <div class="text-center">
-                    <a href="<?php _u('admin/contents/index/pages'); ?>">
+                    <a href="<?php _u('admin/dashboard/notifications'); ?>">
                         <span class="glyphicon glyphicon-bell"></span>
                     </a>
                 </div>
