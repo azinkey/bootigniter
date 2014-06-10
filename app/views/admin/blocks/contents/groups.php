@@ -31,15 +31,6 @@
                                 <a href="<?php echo _u('admin/contents/groups/' . $id); ?>" title="<?php echo $name; ?>" >
                                     <i class="fa fa-sliders"></i>
                                     <span class="hidden-xs"> <?php __($name); ?></span>
-                                    <span>
-                                        <small>
-                                            <?php
-                                            if (($id == $q)) {
-                                                echo '(' . $total_groups . ')';
-                                            }
-                                            ?>
-                                        </small>
-                                    </span>
                                 </a>
                             </li>
                             <?php
@@ -63,7 +54,9 @@
                                         <div class="panel-body">
 
                                             <div class="table">
-                                                <?php if (count($groups)) { ?>
+                                                <?php 
+                                                
+                                                if (count($groups)) { ?>
                                                     <table class="table table-condensed">
                                                         <thead>
                                                             <tr>
@@ -72,17 +65,16 @@
                                                             </tr>
                                                         </thead>
                                                         <?php
-                                                        foreach ($groups as $group) {
-                                                            ?>
-                                                            <tr class="<?php echo ($group->system) ? 'active' : ''; ?>">
-                                                                <td><?php echo $group->name; ?></td>
+                                                        foreach ($groups as $group) { ?>
+                                                            <tr class="<?php echo ($group['system']) ? 'active' : ''; ?>">
+                                                                <td><?php echo $group['name']; ?></td>
                                                                 <td class="small">
-                                                                    <?php if (!$group->system): ?>                                                    
+                                                                    <?php if (!$group['system']): ?>                                                    
 
-                                                                        <a href="<?php _u('admin/contents/remove_group/' . $group->id . '/' . $id) ?>" class="remove-box action-icon pull-right">
+                                                                        <a href="<?php _u('admin/contents/remove_group/' . $group['id'] . '/' . $id) ?>" class="remove-box action-icon pull-right">
                                                                             <span class="glyphicon glyphicon-trash"></span>
                                                                         </a>
-                                                                        <a href="<?php _u('admin/contents/edit_group/' . $group->id . '/' . $id); ?>" data-target="#contentGroupFormModel" class="edit-box action-icon pull-right">
+                                                                        <a href="<?php _u('admin/contents/edit_group/' . $group['id'] . '/' . $id); ?>" data-target="#contentGroupFormModel" class="edit-box action-icon pull-right">
                                                                             <span class="glyphicon glyphicon-edit"></span>
                                                                         </a>
 
@@ -105,15 +97,7 @@
 
 
                                         </div>
-                                        <?php if (!empty($pagination)): ?>
-                                            <div class="panel-footer">
-                                                <div class="col-md-12">
-                                                    <?php echo $pagination; ?>
-                                                </div>
-
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        <?php endif; ?>
+                                        
                                     </div>
                                 </div>
                             </div>

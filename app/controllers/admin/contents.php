@@ -250,9 +250,11 @@ class Contents extends CI_Controller {
     public function edit_type($edit = -1) {
 
         $type = $this->content->getTypeById($edit);
-        if (!isset($type->fieldsets)) {
+
+        if (count($type) && !isset($type->fieldsets)) {
             $type->fieldsets = $this->content->getFieldsetsByTypeId($edit);
         }
+
         AZ::layout('block-only', array(
             'block' => 'contents/type-form',
             'type' => $type
@@ -309,18 +311,13 @@ class Contents extends CI_Controller {
      * @param	integer $offset
      * @return	Layout
      */
-    public function groups($q = 1, $offset = 0) {
+    public function groups($q = 1) {
 
         $types_A = $this->content->types_A(true);
-        $limit = AZ::setting('record_per_page');
-        $total_groups = $this->content->getGroups('*', array('type' => $q), 0, 0, true);
-        $pagination = AZ::pagination('admin/contents/groups/', 4, $limit, $total_groups);
-        $groups = $this->content->getGroups('id,name,description,enabled,system', array('type' => $q), $offset, $limit);
+        $groups = $this->content->getGroupsTree($q);
 
         AZ::layout('left-content', array(
             'block' => 'contents/groups',
-            'total_groups' => $total_groups,
-            'pagination' => $pagination,
             'groups' => $groups,
             'types_A' => $types_A,
             'q' => $q,

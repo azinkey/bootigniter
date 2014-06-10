@@ -57,6 +57,7 @@
     </div>
     <div class="field-row">
         <?php
+                
         echo form_label(lang('Fieldset'), 'fieldset[]');
         echo form_multiselect('fieldset[]', fieldset_A(), (isset($type->fieldsets)) ? $type->fieldsets : '', 'class="form-control"');
         ?>

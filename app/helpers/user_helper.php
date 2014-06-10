@@ -70,13 +70,10 @@ if (!function_exists('access_A')) {
         krsort($accessObj);
         if (count($accessObj)) {
             foreach ($accessObj as $access) {
-                if (!$show_guest) {
-                    if ($access->id > 0) {
-                        $array[$access->id] = $access->name;
-                    }
-                } else {
-                    $array[$access->id] = $access->name;
+                if ($show_guest) {
+                    $array[0] = "Public";
                 }
+                $array[$access->id] = $access->name;
             }
         }
         if ($show_guest) {
@@ -154,7 +151,7 @@ if (!function_exists('check_permission')) {
 
 if (!function_exists('have_permission')) {
 
-    function have_permission($controllerMethod,$access_id = NULL) {
+    function have_permission($controllerMethod, $access_id = NULL) {
 
         if (!user::id()) {
             return false;
@@ -163,15 +160,15 @@ if (!function_exists('have_permission')) {
         if (is_null($access_id) || empty($access_id)) {
             $access_id = user::access_id();
         }
-        
+
         $chunk = explode("/", $controllerMethod);
         $controller = $chunk[0];
         $method = $chunk[1];
-        
-        if(empty($controller) || empty($method)) {
+
+        if (empty($controller) || empty($method)) {
             return FALSE;
         }
-        
+
         $CI = & get_instance();
 
         $check = $CI->db

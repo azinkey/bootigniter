@@ -161,7 +161,7 @@ class Menus extends CI_Controller {
         if (!$this->menu->saveMenuItem($post)) {
             AZ::redirectError('admin/menus', lang('Error occured'));
         } else {
-            AZ::redirectSuccess('admin/menus', lang('Saved'));
+            AZ::redirectSuccess('admin/menus/index/'.$post['menu_id'], lang('Saved'));
         }
     }
 
@@ -190,6 +190,18 @@ class Menus extends CI_Controller {
      */
     public function get_contents($type_id = 1, $selected = 0) {
         echo form_dropdown('content_id', url_key_A($type_id), $selected, 'class="form-control"');
+    }
+    
+    /**
+     * Update Groups Options on Change Menu/Content Group Type
+     *
+     * @param	integer $type_id
+     * @param	boolen $selected
+     * @return	string
+     */
+    public function get_groups($type_id = 1, $selected = 0) {
+        
+        echo form_dropdown('content_id', group_alias_A($type_id), $selected, 'class="form-control"');
     }
 
 }

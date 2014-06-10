@@ -52,7 +52,7 @@
     <div class="field-row">
         <?php
         echo form_label(lang('Access'), 'access[]');
-        echo form_multiselect('access[]', access_A(true), (isset($group->access)) ? explode(',', $group->access) : array(0), 'class="form-control"');
+        echo form_multiselect('access[]', access_A(true), (isset($group->access)) ? explode(',', $group->access) : array(0,1,2,3,4,5), 'class="form-control"');
         ?>
     </div>
 </div>

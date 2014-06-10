@@ -101,8 +101,11 @@ if (!function_exists('fieldset_A')) {
 
 if (!function_exists('contents_A')) {
 
-    function contents_A() {
+    function contents_A($have_groups = false) {
         $ci = & get_instance();
+        if($have_groups){
+            $ci->db->where('have_groups',1);
+        }
         $types = $ci->db->get_where('content_types', array('enabled' => 1))->result();
         
         $array = array(__('Select..',true));

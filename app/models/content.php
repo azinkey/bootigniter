@@ -130,6 +130,33 @@ class Content extends CI_Model {
         return $contents;
     }
 
+    public function getGroupsKey($type = 1,$level = 0, $prefix = '') {
+        $rows = $this->db
+                ->select('id,parent,name,alias,enabled,system')
+                ->where('type', $type)
+                ->where('parent', $level)
+                ->where('enabled', 1)
+                ->order_by('id', 'asc')
+                ->get('content_groups')
+                ->result();
+
+        $array = array();
+        if (count($rows)) {
+            foreach ($rows as $row) {
+                $array[] = array(
+                    'id' => $row->id,
+                    'parent' => $row->parent,
+                    'alias' => $row->alias,
+                    'name' => $prefix . $row->name,
+                    'enabled' => 1,
+                    'system' => $row->system,
+                );
+                $array = array_merge($array, $this->getGroupsKey($type, $row->id, $prefix . '-'));
+            }
+        }
+        return $array;
+    }
+
     public function getContents($type = 'pages', $offset = 0, $limit = 25, $count = FALSE) {
 
         $contentType = $this->db->get_where('content_types', array('alias' => $type, 'enabled' => 1))->row();
@@ -587,6 +614,32 @@ class Content extends CI_Model {
         $return = $this->db->get('content_groups')->{$c}();
 
         return $return;
+    }
+
+    public function getGroupsTree($type, $level = 0, $prefix = '') {
+
+        $rows = $this->db
+                ->select('id,parent,name,enabled,system')
+                ->where('type', $type)
+                ->where('parent', $level)
+                ->order_by('id', 'asc')
+                ->get('content_groups')
+                ->result();
+
+        $array = array();
+        if (count($rows)) {
+            foreach ($rows as $row) {
+                $array[] = array(
+                    'id' => $row->id,
+                    'parent' => $row->parent,
+                    'name' => $prefix . $row->name,
+                    'enabled' => $row->enabled,
+                    'system' => $row->system,
+                );
+                $array = array_merge($array, $this->getGroupsTree($type, $row->id, $prefix . '&nbsp;&nbsp;&nbsp;'));
+            }
+        }
+        return $array;
     }
 
     public function getGroupById($group_id) {

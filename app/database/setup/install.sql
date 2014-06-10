@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%menu_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent` tinyint(4) NOT NULL DEFAULT '0',
   `menu_id` int(11) NOT NULL COMMENT 'Menus',
-  `menu_type` int(11) NOT NULL DEFAULT '0' COMMENT 'Menu Types ( 0 = Link, 1 = Path, 2 =  Contents)',
+  `menu_type` int(11) NOT NULL DEFAULT '0' COMMENT 'Menu Types ( 0 = Link, 1 = Path, 2 =  Contents, 3 = Groups)',
   `title` varchar(255) NOT NULL,
   `enabled` tinyint(4) NOT NULL DEFAULT '1',
   `access` varchar(11) NOT NULL DEFAULT '0',
@@ -363,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%settings` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `key` (`key`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Save Setting Configurations' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Save Setting Configurations' AUTO_INCREMENT=9;
 
 INSERT INTO `%PREFIX%settings` (`id`, `group_id`, `type`, `system`, `key`, `value`, `options`, `default_value`) VALUES
 (1, 1, 'text', 1, 'administrator', 'Admin', NULL, NULL),
@@ -429,11 +429,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%user_access` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Access Level' AUTO_INCREMENT=5 ;
 
 INSERT INTO `%PREFIX%user_access` (`id`, `name`, `system`) VALUES
-(0, 'Public', 1),
-(1, 'Admin', 1),
-(2, 'Manager', 1),
-(3, 'Author', 1),
-(4, 'Registered', 1);
+('1', 'Admin', 1),
+('2', 'Manager', 1),
+('3', 'Author', 1),
+('4', 'Registered', 1);
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%user_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -444,7 +443,6 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%user_groups` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Save User Groups' AUTO_INCREMENT=6 ;
 
 INSERT INTO `%PREFIX%user_groups` (`id`, `name`, `access`, `system`) VALUES
-(0, 'Guest', 0, 1),
 (1, 'Administrators', 1, 1),
 (2, 'Managers', 2, 1),
 (3, 'Authors', 3, 1),

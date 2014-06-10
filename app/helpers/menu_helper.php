@@ -68,3 +68,21 @@ if (!function_exists('url_key_A')) {
     }
 
 }
+
+if (!function_exists('group_alias_A')) {
+
+    function group_alias_A($type_id = 1) {
+        $options = array();
+        $ci = & get_instance();
+        $ci->load->model('content');
+        $groups = $ci->content->getGroupsKey($type_id);
+        
+        if ($groups && count($groups)) {
+            foreach ($groups as $group) {
+                $options[$group['alias']] = $group['name'];
+            }
+        }
+        return $options;
+    }
+
+}

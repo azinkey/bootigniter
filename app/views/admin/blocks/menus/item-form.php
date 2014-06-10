@@ -31,7 +31,7 @@
     <div class="field-row">
         <?php
         echo form_label(__('Menu Type', true), 'menu_type');
-        echo form_dropdown('menu_type', array('Link', 'Path', 'Content'), isset($item->menu_type) ? $item->menu_type : 0, ' id="menuType" class="form-control"');
+        echo form_dropdown('menu_type', array('Link', 'Path', 'Content','Groups'), isset($item->menu_type) ? $item->menu_type : 0, ' id="menuType" class="form-control"');
         ?>
     </div>
     <div class="field-row menu_type_field hidden-row" id="menu_type_0">
@@ -60,6 +60,12 @@
         <?php
         echo form_label(__('Content Types', true), 'contents');
         echo form_dropdown('contents', contents_A(), 0, 'class="form-control" id="contentType"');
+        ?>
+    </div>
+    <div class="field-row menu_type_field hidden-row" id="menu_type_3">
+        <?php
+        echo form_label(__('Content Types', true), 'contents');
+        echo form_dropdown('contents', contents_A(true), 0, 'class="form-control" id="contentTypeGroup"');
         ?>
     </div>
     <div class="field-row" id="contentsBox">
@@ -102,6 +108,7 @@
             
             var menuType = $("#menuType");
             var contentType = $("#contentType");
+            var contentTypeGroup = $("#contentTypeGroup");
             var type = menuType.val();
             var site_url = $('meta[name="site_url"]').attr('content');
             
@@ -127,7 +134,14 @@
                     $("#contentsBox").text('');
                 }
             });
-            
+            contentTypeGroup.change(function() {
+                var type_id = contentTypeGroup.val();
+                if (type_id > 0) {
+                    $("#contentsBox").load(site_url + 'admin/menus/get_groups/' + type_id);
+                } else {
+                    $("#contentsBox").text('');
+                }
+            });
         });
     })(jQuery);
 </script>
