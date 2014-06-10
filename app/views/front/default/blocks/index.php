@@ -19,7 +19,7 @@
             <span class="glyphicon glyphicon-gift zoom-4x"></span>
             <h2>Congested</h2>
             <p>BootIgniter, itself a Package of Open Source Distributions and its core is 100% open, transparent, and extensible. 
-                BootIgniter is hosted on <a href="https://github.com/azinkey/cms" target="_blank">GitHub</a> and is totally free to download and use.
+                BootIgniter is hosted on <a href="https://github.com/azinkey/bootigniter" target="_blank">GitHub</a> and is totally free to download and use.
                 Also you can help us to help other via Fork, merge, push, pull and report it until your heart's content.</p>
             <p><a role="button" href="#" class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download »</a></p>
         </div>
