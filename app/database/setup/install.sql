@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%contents` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `ordering` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `modified` timestamp NOT NULL,
   `access` varchar(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `Alias` (`alias`),
@@ -342,8 +342,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%messages` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`,`type`),
-  KEY `subject` (`subject`),
-  FULLTEXT KEY `body` (`body`)
+  KEY `subject` (`subject`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Store All Type Messages & Notifications' AUTO_INCREMENT=4 ;
 
 INSERT INTO `%PREFIX%messages` (`id`, `parent_id`, `type`, `receiver`, `author`, `is_read`, `is_star`, `have_attachment`, `trash`, `label`, `subject`, `body`, `attachments`, `created`) VALUES
