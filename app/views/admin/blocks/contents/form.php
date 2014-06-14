@@ -15,7 +15,7 @@
                         <a href="<?php _u('admin/contents/index/' . $contentType->alias); ?>" class="btn btn-default btn-sm">
                             <i class="fa fa-arrow-circle-left"></i>
                         </a>
-                        <button type="button" class="btn btn-primary btn-sm click-submit" data-form="#saveContentForm">
+                        <button type="button" class="btn btn-primary btn-sm click-submit" data-form="#saveContentForm1">
                             <i class="fa fa-save"></i>
                         </button>
                     </div>
@@ -56,7 +56,7 @@
                             $class = ($language->is_default) ? 'active' : '';
                             ?>   
                             <div class="tab-pane <?php echo $class; ?>" id="section-<?php echo $language->id; ?>">
-                                <?php echo form_open_multipart('admin/contents/save', array('id' => 'saveContentForm')); ?>
+                                <?php echo form_open_multipart('admin/contents/save', array('id' => 'saveContentForm'.$language->id)); ?>
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <div class="row-fluid">
