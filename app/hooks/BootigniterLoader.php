@@ -3,15 +3,18 @@
 class BootLoader {
 
     public function initialize() {
-        
+
         $ci = & get_instance();
-        
+
         if (empty($ci->db->hostname) || empty($ci->db->database) || empty($ci->db->username)) {
 
             show_error('Missing Database Configurations, it seems you not configured your <strong>config/database.php</strong> yet, Please Set your database details and come back here & Refresh for Instant Boot Setup.', 500, "Database Connection Error");
         }
 
-        if (!$ci->db->table_exists('access') || !$ci->db->table_exists('users')) {
+        if (!$ci->db->table_exists('access') ||
+                !$ci->db->table_exists('users') ||
+                !$ci->db->table_exists('languages') ||
+                !$ci->db->table_exists('contents')) {
             if ($this->_install_dump()) {
                 AZ::flashMSG('Your First Credential for login is <strong>admin/123456</strong>');
                 AZ::redirectSuccess('administrator', 'BootIgniter Setup Successfully');
@@ -20,7 +23,7 @@ class BootLoader {
             return true;
         }
     }
-    
+
     private function _setAdminUser() {
 
         $ci = & get_instance();
@@ -52,7 +55,7 @@ class BootLoader {
         );
         return $ci->db->insert('user_profiles', $adminProfile);
     }
-    
+
     private function _install_dump() {
 
         $file = APPPATH . 'database/setup/install.sql';
@@ -64,7 +67,8 @@ class BootLoader {
         $queries = file_get_contents($file);
         $lines = explode(";", $queries);
         foreach ($lines as $query) {
-            if (!empty(trim($query))) {
+            $query = trim($query);
+            if (!empty($query)) {
                 $ci->db->query("SET FOREIGN_KEY_CHECKS = 0");
                 $query = str_replace("%PREFIX%", $ci->db->dbprefix, $query);
                 if (!$ci->db->query($query)) {
