@@ -17,7 +17,7 @@
                         'class' => 'form-control',
                         'maxlength' => '16',
                         'autofocus' => 'true',
-                        'placeholder' => 'Username',
+                        'placeholder' => __('Username',true),
                     );
                     echo form_input($username);
                     ?>
@@ -34,7 +34,7 @@
                         'id' => 'password',
                         'class' => 'form-control',
                         'maxlength' => '20',
-                        'placeholder' => 'Password',
+                        'placeholder' => __('Password',true),
                     );
                     echo form_password($password);
                     ?>

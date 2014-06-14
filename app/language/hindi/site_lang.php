@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 $lang['Hindi'] = "हिंदी";
 $lang['Bootigniter'] = "बूटिग्निटर";
@@ -17,5 +17,13 @@ $lang['About'] = "हमारे बारे में";
 $lang['Features'] = "विशेषताएँ";
 $lang['Demo'] = "प्रदर्शन";
 $lang['Community'] = "समुदाय";
+$lang['Log in Account'] = "खाते में प्रवेश करें";
+$lang['Create an Account'] = "एक खाता बनाएँ";
+$lang['Login'] = "प्रवेश";
+$lang['Create'] = "बनाएँ";
+$lang['Username'] = "प्रयोक्ता नाम";
+$lang['Email'] = "ईमेल";
+$lang['Password'] = "पासवर्ड";
+$lang['Confirm Password'] = "पासवर्ड की पुष्टि";
 /* End of file site_lang.php */
 /* Location: ./system/language/english/site_lang.php */

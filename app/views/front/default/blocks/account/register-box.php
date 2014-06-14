@@ -17,7 +17,7 @@
                         'class' => 'form-control',
                         'maxlength' => '16',
                         'autofocus' => 'true',
-                        'placeholder' => 'Username',
+                        'placeholder' => __('Username',true),
                     );
                     echo form_input($username);
                     ?>
@@ -33,7 +33,7 @@
                         'id' => 'email',
                         'class' => 'form-control',
                         'maxlength' => '32',
-                        'placeholder' => 'Email',
+                        'placeholder' => __('Email',true),
                     );
                     echo form_input($email);
                     ?>
@@ -49,7 +49,7 @@
                         'id' => 'password',
                         'class' => 'form-control',
                         'maxlength' => '20',
-                        'placeholder' => 'Password',
+                        'placeholder' => __('Password',true),
                         'autocomplete' => 'off'
                     );
                     echo form_password($password);
@@ -66,7 +66,7 @@
                         'id' => 'confirm_password',
                         'class' => 'form-control',
                         'maxlength' => '20',
-                        'placeholder' => 'Confirm Password',
+                        'placeholder' => __('Confirm Password',true),
                         'autocomplete' => 'off'
                     );
                     echo form_password($confirm);
@@ -76,7 +76,7 @@
                 <hr />
                 <div class="form-stack has-icon">
                     <button class="btn btn-lg btn-danger btn-block" type="submit">
-                        <?php __('Create ') ?>
+                        <?php __('Create') ?> 
                          <span class="glyphicon glyphicon-saved"></span>
                     </button>
 
