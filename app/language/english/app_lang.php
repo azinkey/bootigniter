@@ -95,6 +95,7 @@ $lang['in List'] = "in List";
 $lang['in View'] = "in View";
 $lang['Field'] = "Field";
 $lang['Options'] = "Options";
+$lang['Ordering'] = "Ordering";
 $lang['Required'] = "Required";
 $lang['Notifications'] = "Notifications";
 $lang['Messages'] = "Messages";

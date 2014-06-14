@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $lang['AZinkey'] = "सूरज मिश्रा";
 $lang['Suraj Mishra'] = "सूरज मिश्रा";
 $lang['no_option'] = "संचित करने क लिए कोई विकल्प नहीं हैं";
@@ -98,6 +98,7 @@ $lang['in List'] = "सूची में";
 $lang['in View'] = "पूर्ण विवरण में";
 $lang['Field'] = "विषयवस्तु";
 $lang['Options'] = "विकल्प";
+$lang['Ordering'] = "क्रमण";
 $lang['Required'] = "आवश्यक";
 $lang['Notifications'] = "सूचनाएं";
 $lang['Messages'] = "संदेश";
