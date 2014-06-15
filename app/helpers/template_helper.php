@@ -187,18 +187,15 @@ if (!function_exists('page_title')) {
 if (!function_exists('load_styles')) {
 
     function load_styles($styles, $theme = 'default') {
-        $uri = & load_class('URI', 'core');
-        $admin = $uri->segment(1);
-        $is_admin = ($admin == 'administrator' || $admin == 'admin') ? true : false;
         if (is_string($styles)) {
             $link = '<link rel = "stylesheet" type = "text/css" href = "';
-            $link .= skin_url($is_admin, $theme) . $styles;
+            $link .= skin_url($theme) . $styles;
             $link .= '" media = "screen" />';
         } else if (count($styles) == count($styles, COUNT_RECURSIVE)) {
             $link = NULL;
             foreach ($styles as $style) {
                 $link .= '<link rel = "stylesheet" type = "text/css" href = "';
-                $link .= skin_url($is_admin, $theme) . $style;
+                $link .= skin_url($theme) . $style;
                 $link .= '" media = "screen" />
 ';
             }
@@ -210,7 +207,7 @@ if (!function_exists('load_styles')) {
 
                     $link .= '<link rel = "stylesheet" type = "text/css" href = "';
 
-                    $link .= skin_url($is_admin, $theme) . $style['src'];
+                    $link .= skin_url($theme) . $style['src'];
 
                     $media = (isset($style['media'])) ? $style['media'] : 'screen';
 
@@ -227,18 +224,15 @@ if (!function_exists('load_styles')) {
 if (!function_exists('load_scripts')) {
 
     function load_scripts($scripts, $theme = 'default') {
-        $uri = & load_class('URI', 'core');
-        $admin = $uri->segment(1);
-        $is_admin = ($admin == 'administrator' || $admin == 'admin') ? true : false;
         if (is_string($scripts)) {
             $link = '<script type = "text/javascript" src = "';
-            $link .= skin_url($is_admin, $theme) . $scripts;
+            $link .= skin_url($theme) . $scripts;
             $link .= '"></script>';
         } else if (count($scripts) == count($scripts, COUNT_RECURSIVE)) {
             $link = NULL;
             foreach ($scripts as $script) {
                 $link .= '<script type="text/javascript" src="';
-                $link .= skin_url($is_admin, $theme) . $script;
+                $link .= skin_url($theme) . $script;
                 $link .= '"></script>
 ';
             }
@@ -249,7 +243,7 @@ if (!function_exists('load_scripts')) {
 
                     $link .= '<script type="text/javascript" src="';
 
-                    $link .= skin_url($is_admin, $theme) . $style['src'];
+                    $link .= skin_url($theme) . $style['src'];
 
                     $link .= '"></script>
 ';
