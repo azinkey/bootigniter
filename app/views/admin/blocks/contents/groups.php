@@ -11,7 +11,7 @@
                     </h4>
                 </div>
                 <div class="col-xs-2">
-                    <a href="<?php _u('admin/contents/edit_group/-1/' . $q); ?>" class="btn btn-primary btn-sm pull-right edit-box" id="createGroups" data-target="#contentGroupFormModel">
+                    <a href="<?php _u('admin/contents/edit_group/-1/' . $q); ?>" class="btn btn-primary btn-sm pull-right" id="createGroups">
                         <i class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -27,7 +27,7 @@
                         <?php
                         foreach ($types_A as $id => $name) {
                             ?>
-                            <li class="<?php echo ($id == $q || count($types_A) == 1) ? 'active' : '' ?>">
+                            <li class="<?php echo ($id == $q) ? 'active' : '' ?>">
                                 <a href="<?php echo _u('admin/contents/groups/' . $id); ?>" title="<?php echo $name; ?>" >
                                     <i class="fa fa-sliders"></i>
                                     <span class="hidden-xs"> <?php __($name); ?></span>
@@ -42,7 +42,7 @@
                         <?php
                         foreach ($types_A as $id => $name) {
                             ?>
-                            <div class="tab-pane <?php echo ($id == $q || count($types_A) == 1) ? 'active' : '' ?>" id="section-<?php echo $id; ?>">
+                            <div class="tab-pane <?php echo ($id == $q) ? 'active' : '' ?>" id="section-<?php echo $id; ?>">
 
                                 <div class="row-fluid">
                                     <div class="panel panel-default">
@@ -54,9 +54,7 @@
                                         <div class="panel-body">
 
                                             <div class="table">
-                                                <?php 
-                                                
-                                                if (count($groups)) { ?>
+                                                <?php if (count($groups)) { ?>
                                                     <table class="table table-condensed">
                                                         <thead>
                                                             <tr>
@@ -64,23 +62,41 @@
                                                                 <th class="text-right"><span class="glyphicon glyphicon-edit"></span></th>
                                                             </tr>
                                                         </thead>
-                                                        <?php
-                                                        foreach ($groups as $group) { ?>
+                                                        <?php foreach ($groups as $group) { ?>
                                                             <tr class="<?php echo ($group['system']) ? 'active' : ''; ?>">
                                                                 <td><?php echo $group['name']; ?></td>
                                                                 <td class="small">
-                                                                    <?php if (!$group['system']): ?>                                                    
+                                                                    <?php if ((have_permission('contents/edit_group') || have_permission('contents/remove_group')) && !$group['system']) : ?>
 
-                                                                        <a href="<?php _u('admin/contents/remove_group/' . $group['id'] . '/' . $id) ?>" class="remove-box action-icon pull-right">
-                                                                            <span class="glyphicon glyphicon-trash"></span>
-                                                                        </a>
-                                                                        <a href="<?php _u('admin/contents/edit_group/' . $group['id'] . '/' . $id); ?>" data-target="#contentGroupFormModel" class="edit-box action-icon pull-right">
-                                                                            <span class="glyphicon glyphicon-edit"></span>
-                                                                        </a>
+                                                                        <div class="dropdown pull-right text-left">
+                                                                            <a data-toggle="dropdown" class="dropdown-toggle cp">
+                                                                                <span class="glyphicon glyphicon-pencil"></span>
+                                                                            </a>
+                                                                            <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                                                <?php if (have_permission('contents/edit_group')) : ?>
+                                                                                    <li>
 
-                                                                    <?php endif; ?>
+                                                                                        <a href="<?php _u('admin/contents/edit_group/' . $group['id'] . '/' . $id); ?>">
+                                                                                            <span class="glyphicon glyphicon-edit"></span>
+                                                                                            <?php __('Edit'); ?>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                <?php endif; ?>
+                                                                                <?php if (have_permission('contents/remove_group')) : ?>
+                                                                                    <li>
 
+                                                                                        <a href="<?php _u('admin/contents/remove_group/' . $group['id'] . '/' . $id); ?>" class="remove-box">
+                                                                                            <span class="glyphicon glyphicon-trash"></span>
+                                                                                            <?php __('Remove'); ?>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                <?php endif; ?>
+                                                                            </ul>
 
+                                                                        </div>
+                                                                        <?php
+                                                                    endif;
+                                                                    ?>
                                                                 </td>
                                                             </tr>
                                                             <?php
@@ -97,7 +113,7 @@
 
 
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +126,7 @@
 
             </div>
         <?php else: ?>
-        <?php __('no_record');?>
+            <?php __('no_record'); ?>
         <?php endif; ?>
     </div>        
 

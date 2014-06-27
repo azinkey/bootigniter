@@ -1,46 +1,73 @@
 
-<?php echo form_open('admin/contents/save_fieldset', array('id' => 'saveFieldset')); ?>
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="fieldSetModalLabel">
-        <?php echo isset($fieldset->title) ? $fieldset->title : lang('New Field Group'); ?>
-    </h4>
-</div>
-<div class="modal-body">
+<section id="main">
+    <div class="container-fluid">
+        <div class="page-header page-header-block">
+            <div class="row-fluid">
+                <div class="col-xs-7">
+                    <h4 class="title">
+                        <i class="fa fa-folder-open"></i>
+                        <?php echo isset($fieldset->title) ? $fieldset->title : lang('New Field Group'); ?>
+                    </h4>
+                </div>
+                <div class="col-xs-5">
+                    <div class="btn-group pull-right">
+                        <a href="<?php _u('admin/contents/fieldsets/'); ?>" class="btn btn-default btn-sm">
+                            <i class="fa fa-arrow-circle-left"></i>
+                        </a>
+                        <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveFieldset">
+                            <i class="fa fa-save"></i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
 
-    <div class="field-row">
-        <?php
-        echo form_label(lang('Name'), 'name');
-        echo form_input(array(
-            'class' => 'form-control',
-            'name' => 'name',
-            'value' => isset($fieldset->name) ? $fieldset->name : '',
-        ));
-        ?>
+            </div><div class="clearfix"></div>
+
+        </div>
+        <?php AZ::block('system-message'); ?>
+        <div class="row-fluid">
+
+            <?php echo form_open('admin/contents/save_fieldset', array('id' => 'saveFieldset')); ?>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="field-row">
+                        <?php
+                        echo form_label(lang('Name'), 'name');
+                        echo form_input(array(
+                            'class' => 'form-control',
+                            'name' => 'name',
+                            'value' => isset($fieldset->name) ? $fieldset->name : '',
+                        ));
+                        ?>
+                    </div>
+                    <div class="field-row">
+                        <?php
+                        echo form_label(lang('Enabled'), 'enabled');
+                        echo form_dropdown('enabled', array(0 => lang('No'), 1 => lang('Yes')), isset($fieldset->enabled) ? $fieldset->enabled : 1, 'class="form-control"');
+                        ?>  
+                    </div>
+                    <div class="field-row">
+                        <?php
+                        echo form_label(lang('Access'), 'access[]');
+                        echo form_multiselect('access[]', access_A(true), isset($fieldset->access) ? explode(',', $fieldset->access) : array(0), 'class="form-control"');
+                        ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <?php echo (isset($fieldset->id)) ? form_hidden('id', $fieldset->id) : ''; ?>
+                    <a href="<?php _u('admin/contents/fieldsets/'); ?>" class="btn btn-default">
+                        <i class="fa fa-arrow-circle-left"></i>
+                        <?php __('Cancel'); ?>
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                        <?php __('Save'); ?>
+                    </button>
+                </div>
+            </div>
+            <?php echo form_close(); ?>
+        </div>
     </div>
-    <div class="field-row">
-        <?php
-        echo form_label(lang('Enabled'), 'enabled');
-        echo form_dropdown('enabled', array(0 => lang('No'), 1 => lang('Yes')), isset($fieldset->enabled) ? $fieldset->enabled : 1, 'class="form-control"');
-        ?>  
-    </div>
-    <div class="field-row">
-        <?php
-        echo form_label(lang('Access'), 'access[]');
-        echo form_multiselect('access[]', access_A(true), isset($fieldset->access) ? explode(',', $fieldset->access) : array(0), 'class="form-control"');
-        ?>
-    </div>
-</div>
-<div class="modal-footer">
-    <?php echo (isset($fieldset->id)) ? form_hidden('id', $fieldset->id) : ''; ?>
-    <button type="button" class="btn btn-default" data-dismiss="modal">
-        <i class="fa fa-arrow-circle-left"></i>
-        <?php __('Cancel'); ?>
-    </button>
-    <button type="submit" class="btn btn-primary">
-        <i class="fa fa-save"></i>
-        <?php __('Save'); ?>
-    </button>
-</div>
-<?php echo form_close(); ?>
-        
+</section>

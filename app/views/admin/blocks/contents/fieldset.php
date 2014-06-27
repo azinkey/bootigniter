@@ -11,7 +11,7 @@
                     </h4>
                 </div>
                 <div class="col-xs-2">
-                    <a href="<?php _u('admin/contents/edit_fieldset/-1'); ?>" class="btn btn-primary btn-sm pull-right edit-box" id="createFieldSet" data-target="#fieldsetFormModel">
+                    <a href="<?php _u('admin/contents/edit_fieldset/-1'); ?>" class="btn btn-primary btn-sm pull-right" id="createFieldSet" data-target="#fieldsetFormModel">
                         <i class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -44,17 +44,38 @@
                                         <td class="hidden-xs"><?php echo $fieldset->id; ?></td>
                                         <td><?php echo $fieldset->name; ?></td>
                                         <td class="small">
-                                            <?php if (!$fieldset->system): ?>                                                    
-                                                <a href="<?php _u('admin/contents/remove_fieldset/' . $fieldset->id) ?>" class="remove-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </a>
+                                            <?php if ((have_permission('contents/edit_fieldset') || have_permission('contents/remove_fieldset')) && !$fieldset->system) : ?>
 
-                                                <a href="<?php _u('admin/contents/edit_fieldset/' . $fieldset->id) ?>" data-target="#fieldsetFormModel" class="edit-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-edit"></span>
-                                                </a>
-                                            <?php endif; ?>
+                                                <div class="dropdown pull-right text-left">
+                                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                        <?php if (have_permission('contents/edit_fieldset')) : ?>
+                                                            <li>
 
+                                                                <a href="<?php _u('admin/contents/edit_fieldset/' . $fieldset->id); ?>">
+                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <?php __('Edit'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                        <?php if (have_permission('contents/remove_fieldset')) : ?>
+                                                            <li>
 
+                                                                <a href="<?php _u('admin/contents/remove_fieldset/' . $fieldset->id); ?>" class="remove-box">
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <?php __('Remove'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    </ul>
+
+                                                </div>
+                                                <?php
+                                            endif;
+                                            ?>
+                                            
                                         </td>
                                     </tr>
                                     <?php

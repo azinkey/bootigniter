@@ -71,7 +71,7 @@
                                             if ($admin_list_fields && count($admin_list_fields)) {
                                                 foreach ($admin_list_fields as $key => $label) {
                                                     ?>
-                                                    <td><?php echo (isset($content->{$key})) ? $content->{$key} : '';  ?></td>
+                                                    <td><?php echo (isset($content->{$key})) ? $content->{$key} : ''; ?></td>
                                                     <?php
                                                 }
                                             }
@@ -85,13 +85,35 @@
                                             <td class="text-right hidden-xs hidden-sm"><?php echo date_when(human_to_unix($content->modified)); ?></td>
                                             <td class="text-right hidden-xs hidden-sm"><?php echo $content->timestamp; ?></td>
                                             <td class="small">
-                                                <a href="<?php _u('admin/contents/remove/' . $contentType->alias . '/' . $content->id) ?>" class=" action-icon remove-box pull-right">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </a>
-                                                <a href="<?php _u('admin/contents/edit/' . $contentType->alias . '/' . $content->id) ?>" class="action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-edit"></span>
-                                                </a>
+                                                <?php if (have_permission('contents/edit') || have_permission('contents/remove')) : ?>
 
+                                                    <div class="dropdown pull-right text-left">
+                                                        <a data-toggle="dropdown" class="dropdown-toggle cp">
+                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                        </a>
+                                                        <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                            <?php if (have_permission('contents/edit')) : ?>
+                                                                <li>
+                                                                    <a href="<?php _u('admin/contents/edit/' . $contentType->alias . '/' . $content->id); ?>">
+                                                                        <span class="glyphicon glyphicon-edit"></span>
+                                                                        <?php __('Edit'); ?>
+                                                                    </a>
+                                                                </li>
+                                                            <?php endif; ?>
+                                                            <?php if (have_permission('contents/remove')) : ?>
+                                                                <li>
+                                                                    <a href="<?php _u('admin/contents/remove/' . $contentType->alias . '/' . $content->id); ?>" class="remove-box">
+                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                        <?php __('Remove'); ?>
+                                                                    </a>
+                                                                </li>
+                                                            <?php endif; ?>
+                                                        </ul>
+
+                                                    </div>
+                                                    <?php
+                                                endif;
+                                                ?>
                                             </td>
                                         </tr>
                                         <?php

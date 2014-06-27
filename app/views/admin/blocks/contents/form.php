@@ -15,8 +15,8 @@
                         <a href="<?php _u('admin/contents/index/' . $contentType->alias); ?>" class="btn btn-default btn-sm">
                             <i class="fa fa-arrow-circle-left"></i>
                         </a>
-                        <button type="button" class="btn btn-primary btn-sm click-submit" data-form="#saveContentForm1">
-                            <i class="fa fa-save"></i>
+                        <button type="button" class="btn btn-primary btn-sm click-submit" data-form="#saveContentForm" data-return="<?php _u('admin/contents/edit/' . $contentType->alias . '/-1'); ?>">
+                            <i class="glyphicon glyphicon-saved"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -56,7 +56,7 @@
                             $class = ($language->is_default) ? 'active' : '';
                             ?>   
                             <div class="tab-pane <?php echo $class; ?>" id="section-<?php echo $language->id; ?>">
-                                <?php echo form_open_multipart('admin/contents/save', array('id' => 'saveContentForm'.$language->id)); ?>
+                                <?php echo form_open_multipart('admin/contents/save', array('id' => 'saveContentForm')); ?>
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <div class="row-fluid">
@@ -159,7 +159,6 @@
                                                                         </div>
                                                                         <div class="col-xs-7">
                                                                             <?php
-                                                                                                                                                        
                                                                             echo form_multiselect('access[]', access_A(true), (isset($content->access)) ? explode(',', $content->access) : array(0), 'class="form-control"');
                                                                             ?>    
                                                                         </div>
@@ -172,70 +171,70 @@
                                                             <br />
                                                         </div>
                                                     </div>
-                                                    <?php if($contentType->have_groups):?>
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#publish-content" href="#fieldset_publish">
-                                                                    <span class="glyphicon pull-left hidden-xs"></span>
-                                                                    <?php __('Groups Categories'); ?>
-                                                                </a>
+                                                    <?php if ($contentType->have_groups): ?>
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-parent="#publish-content" href="#fieldset_publish">
+                                                                        <span class="glyphicon pull-left hidden-xs"></span>
+                                                                        <?php __('Groups Categories'); ?>
+                                                                    </a>
 
-                                                            </h4>
-                                                        </div>
-                                                        <div id="fieldset_publish" class="panel-collapse collapse in">
-                                                            <br />
-                                                            <div class="row-fluid">
-                                                                <div class="col-md-12">
-                                                                    <div class="field-row">
-                                                                        <div class="col-xs-5">
-                                                                            <i class="fa fa-folder-open-o"></i>
-                                                                            <?php echo form_label(lang('Group'), 'group_id'); ?>
-                                                                        </div>
-                                                                        <div class="col-xs-7">
-                                                                            <?php
-                                                                            echo form_dropdown('group_id', $groups, isset($content->group_id) ? $content->group_id : 0, 'class="form-control input-sm"');
-                                                                            ?>    
+                                                                </h4>
+                                                            </div>
+                                                            <div id="fieldset_publish" class="panel-collapse collapse in">
+                                                                <br />
+                                                                <div class="row-fluid">
+                                                                    <div class="col-md-12">
+                                                                        <div class="field-row">
+                                                                            <div class="col-xs-5">
+                                                                                <i class="fa fa-folder-open-o"></i>
+                                                                                <?php echo form_label(lang('Group'), 'group_id'); ?>
+                                                                            </div>
+                                                                            <div class="col-xs-7">
+                                                                                <?php
+                                                                                echo form_dropdown('group_id', $groups, isset($content->group_id) ? $content->group_id : 0, 'class="form-control input-sm"');
+                                                                                ?>    
+                                                                            </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="clearfix"></div>
                                                                 </div>
                                                                 <div class="clearfix"></div>
+                                                                <br />
                                                             </div>
-                                                            <div class="clearfix"></div>
-                                                            <br />
                                                         </div>
-                                                    </div>
-                                                    <?php endif; ?>
+        <?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="panel-footer">
                                         <div class="col-md-12 text-right">
-                                            <?php echo form_hidden('id', $content_id); ?>
+        <?php echo form_hidden('id', $content_id); ?>
                                             <?php echo form_hidden('language_id', $language->id); ?>
                                             <?php echo (isset($contentType->id)) ? form_hidden('type_id', $contentType->id) : ''; ?>
                                             <?php echo (isset($contentType->alias)) ? form_hidden('type', $contentType->alias) : ''; ?>
 
                                             <a href="<?php _u('admin/contents/index/' . $contentType->alias); ?>" class="btn btn-default">
                                                 <i class="fa fa-arrow-circle-left"></i>
-                                                <?php __('Cancel'); ?>
+        <?php __('Cancel'); ?>
                                             </a>
                                             <button type="submit" class="btn btn-primary">
                                                 <i class="fa fa-save"></i>
-                                                <?php __('Save'); ?>
+        <?php __('Save'); ?>
                                             </button>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
-                                <?php echo form_close(); ?>
+        <?php echo form_close(); ?>
                             </div>
-                            <?php
-                            $i++;
+                                <?php
+                                $i++;
+                            }
                         }
-                    }
-                    ?>
+                        ?>
                 </div>
             </div>
             <div class="clearfix"></div>

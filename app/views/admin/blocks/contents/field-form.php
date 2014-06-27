@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-xs-5">
                     <div class="btn-group pull-right">
-                        <a href="<?php _u('admin/contents/fields/' . form_value('group_id', $field)); ?>" class="btn btn-default btn-sm">
+                        <a href="<?php _u('admin/contents/fields/' . $fieldset); ?>" class="btn btn-default btn-sm">
                             <i class="fa fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveContentFieldForm">

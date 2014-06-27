@@ -81,18 +81,37 @@
                                                             </td>
                                                             <td class="hidden-xs"><span class="glyphicon <?php echo ($field->in_view) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span></td>
                                                             <td class="small">
-                                                                <?php if (!$field->system): ?>                                                    
+                                                                <?php if ((have_permission('contents/edit_field') || have_permission('contents/remove_field')) && !$field->system) : ?>
 
-                                                                    <a href="<?php _u('admin/contents/remove_field/' . $field->id . '/' . $id) ?>" class="remove-box action-icon pull-right">
-                                                                        <span class="glyphicon glyphicon-trash"></span>
-                                                                    </a>
-                                                                    <a href="<?php _u('admin/contents/edit_field/' . $field->id . '/' . $id); ?>" class="action-icon pull-right">
-                                                                        <span class="glyphicon glyphicon-edit"></span>
-                                                                    </a>
+                                                                    <div class="dropdown pull-right text-left">
+                                                                        <a data-toggle="dropdown" class="dropdown-toggle cp">
+                                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                                        </a>
+                                                                        <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                                            <?php if (have_permission('contents/edit_field')) : ?>
+                                                                                <li>
 
-                                                                <?php endif; ?>
+                                                                                    <a href="<?php _u('admin/contents/edit_field/' . $field->id . '/' . $id); ?>">
+                                                                                        <span class="glyphicon glyphicon-edit"></span>
+                                                                                        <?php __('Edit'); ?>
+                                                                                    </a>
+                                                                                </li>
+                                                                            <?php endif; ?>
+                                                                            <?php if (have_permission('contents/remove_field')) : ?>
+                                                                                <li>
 
+                                                                                    <a href="<?php _u('admin/contents/remove_field/' . $field->id . '/' . $id) ?>" class="remove-box">
+                                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                                        <?php __('Remove'); ?>
+                                                                                    </a>
+                                                                                </li>
+                                                                            <?php endif; ?>
+                                                                        </ul>
 
+                                                                    </div>
+                                                                    <?php
+                                                                endif;
+                                                                ?>
                                                             </td>
                                                         </tr>
                                                         <?php
