@@ -170,7 +170,7 @@ class Contents extends CI_Controller {
 
         $language = $this->content->getLanguageById($edit);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'contents/language-form',
             'language' => $language
         ));

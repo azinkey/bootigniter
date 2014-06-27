@@ -11,7 +11,7 @@
                     </h4>
                 </div>
                 <div class="col-xs-2">
-                    <a href="<?php _u('admin/contents/edit_language/-1'); ?>" class="btn btn-primary btn-sm pull-right edit-box" id="createLanguage" data-target="#languageFormModel" title="<?php __('Add New'); ?>" >
+                    <a href="<?php _u('admin/contents/edit_language/-1'); ?>" class="btn btn-primary btn-sm pull-right" id="createLanguage" data-target="#languageFormModel" title="<?php __('Add New'); ?>" >
                         <i class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -56,15 +56,39 @@
                                         <td>
                                             <span class="glyphicon <?php echo ($language->is_default) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span>
                                         </td>
+
                                         <td class="small">
-                                            <?php if (!$language->system): ?>                                                    
-                                                <a href="<?php _u('admin/contents/remove_language/' . $language->id) ?>" class="remove-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </a>
-                                            <?php endif; ?>
-                                            <a href="<?php _u('admin/contents/edit_language/' . $language->id) ?>" data-target="#languageFormModel" class="edit-box action-icon pull-right">
-                                                <span class="glyphicon glyphicon-edit"></span>
-                                            </a>
+                                            <?php if ((have_permission('contents/edit_language') || have_permission('contents/remove_language')) && !$language->system) : ?>
+
+                                                <div class="dropdown pull-right text-left">
+                                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                        <?php if (have_permission('contents/edit_language')) : ?>
+                                                            <li>
+
+                                                                <a href="<?php _u('admin/contents/edit_language/' . $language->id); ?>">
+                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <?php __('Edit'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                        <?php if (have_permission('contents/remove_language')) : ?>
+                                                            <li>
+
+                                                                <a href="<?php _u('admin/contents/remove_language/' . $language->id) ?>" class="remove-box">
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <?php __('Remove'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    </ul>
+
+                                                </div>
+                                                <?php
+                                            endif;
+                                            ?>
 
                                         </td>
                                     </tr>
