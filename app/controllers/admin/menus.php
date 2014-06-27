@@ -75,7 +75,7 @@ class Menus extends CI_Controller {
 
         $menu = $this->menu->getMenuById($menu_id);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'menus/menu-form',
             'menu' => $menu,
         ));
@@ -134,7 +134,7 @@ class Menus extends CI_Controller {
         AZ::helper('content');
         $item = $this->menu->getMenuItemById($item_id);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'menus/item-form',
             'item' => $item,
             'menu_id' => $menu_id,
@@ -158,10 +158,14 @@ class Menus extends CI_Controller {
             AZ::redirectError('admin/menus', validation_errors());
         }
 
+        if (isset($post['content_type_' . $post['menu_type']])) {
+            $post['content_type'] = $post['content_type_' . $post['menu_type']];
+        }
+
         if (!$this->menu->saveMenuItem($post)) {
             AZ::redirectError('admin/menus', lang('Error occured'));
         } else {
-            AZ::redirectSuccess('admin/menus/index/'.$post['menu_id'], lang('Saved'));
+            AZ::redirectSuccess('admin/menus/index/' . $post['menu_id'], lang('Saved'));
         }
     }
 
@@ -191,7 +195,7 @@ class Menus extends CI_Controller {
     public function get_contents($type_id = 1, $selected = 0) {
         echo form_dropdown('content_id', url_key_A($type_id), $selected, 'class="form-control"');
     }
-    
+
     /**
      * Update Groups Options on Change Menu/Content Group Type
      *
@@ -200,7 +204,7 @@ class Menus extends CI_Controller {
      * @return	string
      */
     public function get_groups($type_id = 1, $selected = 0) {
-        
+
         echo form_dropdown('content_id', group_alias_A($type_id), $selected, 'class="form-control"');
     }
 
