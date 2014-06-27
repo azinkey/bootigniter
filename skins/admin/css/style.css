@@ -56,7 +56,8 @@ hr {
 .sidebar.sidebar-left.sidebar-menu {
     bottom: auto;
     left: 0;
-    min-height: 100%;
+    min-height: 500px;
+    height: 100%;
     padding-top: 60px;
     position: absolute;
 }
@@ -68,7 +69,9 @@ hr {
     position: absolute;
     width: 60px;
 }
+#main {
 
+}
 #header.navbar.navbar-fixed-top ~ #main, .sidebar-minimized #header.navbar.navbar-fixed-top ~ #main {
     padding-top: 75px;
 }
@@ -147,7 +150,7 @@ hr {
     width: 300px;
 }
 #siteHome {
-    
+
 }
 .navbar-toolbar  .navbar-left .glyphicon,.navbar-toolbar  .navbar-left .fa {
     font-size: 26px;
@@ -304,6 +307,9 @@ a.media:hover {
 .pr0 {
     padding-right: 0px !important;
 }
+.m5 {
+    margin: 5px;
+}
 .profile-dropdown {
     width: 200px;
 }
@@ -433,7 +439,7 @@ hr.dark {
 .tabs-left > .nav-tabs > li .glyphicon,.tabs-left > .nav-tabs > li .fa {
     margin-right: 5px;
 }
-.nav-tabs > li.active,.nav-tabs > li.active a {
+.nav-tabs > li.active,.nav-tabs > li.active a.tab-title  {
     background: #fff;
     border: 0px none;
     position: relative;
@@ -788,8 +794,8 @@ hr.dark {
     padding: 5px 0px;
     border-bottom: 1px dotted #eee;
 }
-.permission-table .permission-row:hover {
-    background-color: #FCFCFC;
+.permission-table .permission-row:hover , .table tr:hover {
+    background-color: #F5F5F5 !important;
 }
 .break-word {
     word-break: break-all;
@@ -823,6 +829,29 @@ hr.dark {
 .hidden-row {
     display: none;
 }
+.section-tab .tab-title {
+    display: inline-block;
+    padding-right: 1px;
+}
+
+.section-tab .btn-group .dropdown-menu {
+    min-width: 120px;
+}
+.section-tab .btn-group .dropdown-menu a {
+    color: #111;
+}
+.nav-tabs .section-tab  {
+    border-top: 1px solid #7987A1 !important;
+}
+.nav-tabs .section-tab:first-child  {
+    border-top: 0px none !important;
+}
+.hidden-xxs {
+    word-break: break-all;
+}
+.tab-pane h4 {
+    margin-top: 0px;
+}
 /* End Genral Styles ********************************************************/
 
 @media (max-width: 767px) {
@@ -831,7 +860,9 @@ hr.dark {
         top: 3px;
         left: 0px;
     }
-
+    hr.dark {
+        margin: 25px 0px;
+    }
     #header.navbar.navbar-fixed-top ~ #main, .sidebar-minimized #header.navbar.navbar-fixed-top ~ #main {
         padding-top: 130px;
     }
@@ -848,9 +879,11 @@ hr.dark {
         top: 3px;
         left: 0px;
     }
-
     .sidebar {
         width: 65px;
+    }
+    hr.dark {
+        margin: 25px 0px;
     }
     #sidebarMenu li .menu-text {
         display: none;
@@ -883,7 +916,14 @@ hr.dark {
     .action-iconset {
         text-align: left !important;
     }
+    .hidden-xxs {
+        display: none !important;
+    }
 }
 @media (max-width: 360px) {
-
+    .section-tab .tab-title {
+        display: inline-block;
+        padding-right: 1px;
+        padding-left: 5px;
+    }
 }

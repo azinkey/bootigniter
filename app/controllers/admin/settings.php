@@ -92,7 +92,7 @@ class Settings extends CI_Controller {
         $section_A = $this->setting->getSection_A();
         $group = $this->setting->getGroupById($group_id);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'settings/group-form',
             'section_A' => $section_A,
             'group' => $group,
@@ -111,7 +111,7 @@ class Settings extends CI_Controller {
 
         $section = $this->setting->getSectionById($section_id);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'settings/section-form',
             'section' => $section
         ));
@@ -219,7 +219,7 @@ class Settings extends CI_Controller {
 
         $setting = $this->setting->getSettingById($setting_id);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'settings/field-form',
             'group_A' => $group_A,
             'setting' => $setting,

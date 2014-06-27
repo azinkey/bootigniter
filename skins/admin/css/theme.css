@@ -42,16 +42,19 @@
     border-color: #dbdbdb;
     text-shadow: 0 1px 0 #fff;
     border-color: #ccc;
+    border-radius: 3px;
 }
 .btn-default:hover,
 .btn-default:focus {
     background-color: #e0e0e0;
     background-position: 0 -15px;
+    border-radius: 3px;
 }
 .btn-default:active,
 .btn-default.active {
     background-color: #e0e0e0;
     border-color: #dbdbdb;
+    border-radius: 3px;
 }
 .btn-primary {
     background-image: -webkit-linear-gradient(top, #8FA0C3 0%, #8797B4 100%);
@@ -60,16 +63,24 @@
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
     background-repeat: repeat-x;
     border-color: #7889A8;
+    border-radius: 3px;
 }
 .btn-primary:hover,
 .btn-primary:focus {
     background-color: #8FA0C3;
     border-color: #7889A8;
+    border-radius: 3px;
 }
 .btn-primary:active,
 .btn-primary.active {
     background-color: #8FA0C3;
     border-color: #7889A8;
+    border-radius: 3px;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    background-color: #8FA0C3;
+    border-color: #7889A8;
+    border-radius: 3px;
 }
 .btn-success {
     background-image: -webkit-linear-gradient(top, #5cb85c 0%, #419641 100%);
@@ -408,13 +419,13 @@ body {
     border-bottom: 1px solid #DDDDDD;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-    background-color: #00B1E1;
-    border-color: #75D8EC;
+    background-color: #8797B4;
+    border-color: #7889a8;
 }
 .table-condensed tbody tr:hover {
     background-color: #FCFCFC;
 }
 /* End Override Bootstrap ********************************************************/
 .user-card {
-    border-color: #CFD9DB #CFD9DB #B093E8 !important;
+    border-color: #CFD9DB #CFD9DB #8797B4 !important;
 }
