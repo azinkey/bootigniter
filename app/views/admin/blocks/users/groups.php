@@ -6,12 +6,12 @@
             <div class="row-fluid">
                 <div class="col-xs-10">
                     <h4 class="title">
-                        <i class="fa fa-user-md"></i>
+                        <i class="fa fa-users"></i>
                         <?php __('User Groups'); ?>
                     </h4>
                 </div>
                 <div class="col-xs-2">
-                    <a href="<?php _u('admin/users/edit_group/-1'); ?>" class="btn btn-primary btn-sm pull-right edit-box" id="createGroup" data-target="#groupFormModel">
+                    <a href="<?php _u('admin/users/edit_group/-1'); ?>" class="btn btn-primary btn-sm pull-right" id="createGroup" data-target="#groupFormModel">
                         <i class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -54,17 +54,37 @@
                                         <td><?php echo $group->name; ?></td>
                                         <td><?php echo $group->role; ?></td>
                                         <td class="small">
-                                            <?php if (!$group->system): ?>                                                    
+                                            <?php if ((have_permission('users/edit_group') || have_permission('users/remove_group')) && !$group->system) : ?>
 
-                                                <a href="<?php _u('admin/users/remove_group/' . $group->id) ?>" class="remove-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </a>
-                                                <a href="<?php _u('admin/users/edit_group/' . $group->id) ?>" data-target="#groupFormModel" class="edit-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-edit"></span>
-                                                </a>
+                                                <div class="dropdown pull-right text-left">
+                                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                        <?php if (have_permission('users/edit_group')) : ?>
+                                                            <li>
 
-                                            <?php endif; ?>
+                                                                <a href="<?php _u('admin/users/edit_group/' . $group->id); ?>">
+                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <?php __('Edit'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                        <?php if (have_permission('users/remove_group')) : ?>
+                                                            <li>
 
+                                                                <a href="<?php _u('admin/users/remove_group/' . $group->id); ?>" class="remove-box">
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <?php __('Remove'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    </ul>
+
+                                                </div>
+                                                <?php
+                                            endif;
+                                            ?>
 
                                         </td>
                                     </tr>

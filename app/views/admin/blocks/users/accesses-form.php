@@ -9,26 +9,25 @@
 </div>
 <div class="modal-body">
     <div class="field-row">
-        <?php
-        echo form_label(lang('Name'), 'name');
-        echo form_input(array(
-            'class' => 'form-control',
-            'name' => 'name',
-            'value' => isset($access->name) ? $access->name : '',
-        ));
-        ?>
+        <div class="input-group">
+            <?php
+            echo form_input(array(
+                'class' => 'form-control',
+                'name' => 'name',
+                'placeholder' => 'Name',
+                'value' => isset($access->name) ? $access->name : '',
+            ));
+            ?>
+            <span class="input-group-btn">
+                <?php echo (isset($access->id)) ? form_hidden('id', $access->id) : ''; ?>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    <?php __('Save'); ?>
+                </button>
+            </span>
+        </div>
     </div>
 </div>
-<div class="modal-footer">
-    <?php echo (isset($access->id)) ? form_hidden('id', $access->id) : ''; ?>
-    <button type="button" class="btn btn-default" data-dismiss="modal">
-        <i class="fa fa-arrow-circle-left"></i>
-        <?php __('Cancel'); ?>
-    </button>
-    <button type="submit" class="btn btn-primary">
-        <i class="fa fa-save"></i>
-        <?php __('Save'); ?>
-    </button>
-</div>
+
 <?php echo form_close(); ?>
        

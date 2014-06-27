@@ -29,7 +29,7 @@
                         ?>
                         <li class="<?php echo ($id == $q) ? 'active' : '' ?>">
                             <a href="<?php echo _u('admin/users/index/' . $id); ?>" title="<?php echo $name; ?>" >
-                                <i class="fa fa-user-md"></i>
+                                <i class="fa fa-users"></i>
                                 <span class="hidden-xs"> <?php echo $name; ?></span>
                             </a>
                         </li>

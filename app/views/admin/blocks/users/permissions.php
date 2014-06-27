@@ -28,63 +28,65 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body permission-table">
-                    <div class="row-fluid">
-                        <div class="col-xs-5">
-                            <i class="fa fa-list-ul"></i>
-                        </div>
-                        <?php
-                        foreach ($roles as $role) {
-                            ?>   
-                            <div class="col-xs-2 break-word  text-center">
-                                <strong>
+                    <table class="table">
+                        <tr>
+                            <th width="40%">
+                                <i class="fa fa-list-ul"></i>
+                            </th>
+                            <?php foreach ($roles as $role) { ?>   
+                                <th class="text-center">
                                     <?php echo $role->name; ?>
-                                </strong>
-                            </div>
-                            <?php
+                                </th>
+                            <?php } ?>
+                        </tr>
+
+                        <?php
+                        if ($tasks && count($tasks)) {
+                            $i = 0;
+                            foreach ($tasks as $controller => $task) {
+                                ?>
+
+                                <tr>
+                                    <th>
+                                        <?php echo ucfirst($controller); ?>
+                                    </th>
+                                    <?php foreach ($roles as $role) { ?>   
+                                        <th class="text-center"></th>
+                                    <?php } ?>
+                                </tr>
+                                <?php
+                                foreach ($task as $method) {
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo key_label($method); ?>
+                                        </td>
+                                        <?php
+                                        foreach ($roles as $role) {
+                                            ?>   
+
+                                            <td class="text-center">
+                                                <strong>
+                                                    <?php
+                                                    echo form_checkbox($controller . '[' . $method . '][' . $role->id . ']', true, check_permission($controller, $method, $role->id));
+                                                    ?>
+                                                </strong>
+                                            </td>
+                                            <?php
+                                        }
+                                        ?>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+
+                                <?php
+                                $i++;
+                            }
                         }
                         ?>
-                        <div class="clearfix"></div>
-                    </div>
-                    <hr />
 
-                    <?php
-                    if ($tasks && count($tasks)) {
-                        $i = 0;
-                        foreach ($tasks as $controller => $task) {
-                            echo ($i) ? '<hr />' : '';
-                            ?>
-                            <strong><?php echo ucfirst($controller); ?></strong>
-                            <?php
-                            foreach ($task as $method) {
-                                ?>
-                                <div class="row-fluid permission-row">
-                                    <div class="col-xs-5">
-                                        <?php echo key_label($method); ?>
-                                    </div>
-                                    <?php
-                                    foreach ($roles as $role) {
-                                        ?>   
-
-                                        <div class="col-xs-2 text-center">
-                                            <strong>
-                                                <?php
-                                                echo form_checkbox($controller . '[' . $method . '][' . $role->id . ']', true, check_permission($controller, $method, $role->id));
-                                                ?>
-                                            </strong>
-                                        </div>
-                                        <?php
-                                    }
-                                    ?>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <?php
-                            }
-                            ?>
-                            <?php
-                            $i++;
-                        }
-                    }
-                    ?>
+                    </table>
                 </div>
                 <div class="panel-footer text-right">
                     <?php __('Checked All Before'); ?>

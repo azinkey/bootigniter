@@ -253,7 +253,7 @@ class Users extends CI_Controller {
 
         $group = $this->user->getUserGroupById($edit);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'users/group-form',
             'group' => $group
         ));
@@ -332,13 +332,15 @@ class Users extends CI_Controller {
      * @return	Redirect
      */
     public function permissions_reset() {
-
+        
         if (user::access_id() != 1) {
             AZ::redirectError('admin/dashboard', lang('Unauthorized Access'));
         }
 
         $post = $this->input->post();
+        
         if (empty($post)) {
+            AZ::redirectError('admin/users/permissions', lang('no_option'));
             return FALSE;
         }
         if (!$this->user->resetPermissions($post)) {

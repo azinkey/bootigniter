@@ -10,7 +10,7 @@
                     </h4>
                 </div>
                 <div class="col-xs-2">
-                    <a href="<?php _u('admin/users/edit_access/-1'); ?>" class="btn btn-primary btn-sm pull-right edit-box" id="createAccess" data-target="#accessFormModel">
+                    <a href="<?php _u('admin/users/edit_access/-1'); ?>" class="btn btn-primary btn-sm pull-right edit-box" id="createAccess">
                         <i class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -47,18 +47,37 @@
                                         <td class="hidden-xs"><?php echo $access->id; ?></td>
                                         <td><?php echo $access->name; ?></td>
                                         <td class="small">
-                                            <?php if (!$access->system): ?>                                                    
+                                            <?php if ((have_permission('users/edit_access') || have_permission('users/remove_access')) && !$access->system) : ?>
 
-                                                <a href="<?php _u('admin/users/remove_access/' . $access->id) ?>" class="remove-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </a>
-                                                <a href="<?php _u('admin/users/edit_access/' . $access->id) ?>" data-target="#accessFormModel" class="edit-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-edit"></span>
-                                                </a>
+                                                <div class="dropdown pull-right text-left">
+                                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                        <?php if (have_permission('users/edit_access')) : ?>
+                                                            <li>
 
-                                            <?php endif; ?>
+                                                                <a href="<?php _u('admin/users/edit_access/' . $access->id); ?>" class="edit-box">
+                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <?php __('Edit'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                        <?php if (have_permission('users/remove_access')) : ?>
+                                                            <li>
 
+                                                                <a href="<?php _u('admin/users/remove_access/' . $access->id); ?>" class="remove-box">
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <?php __('Remove'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    </ul>
 
+                                                </div>
+                                                <?php
+                                            endif;
+                                            ?>
                                         </td>
                                     </tr>
                                     <?php
@@ -72,8 +91,3 @@
         </div>        
     </div>
 </section>
-
-
-<div class="modal fade" id="accessFormModel" tabindex="-1" role="dialog" aria-labelledby="accessFormModel" aria-hidden="true">
-    <div class="modal-dialog modal-sm"><div class="modal-content"></div></div>
-</div>
