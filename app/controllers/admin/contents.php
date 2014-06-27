@@ -83,7 +83,14 @@ class Contents extends CI_Controller {
 
         $contentType = $this->content->getTypeByAlias($type);
         $fieldsets = $this->content->getFieldGroups($contentType->id);
-        $groups = $this->content->groups_A($contentType->id);
+        $groupRows = $this->content->getGroupsTree($contentType->id);
+
+        $groups = array();
+        if ($groupRows && count($groupRows)) {
+            foreach ($groupRows as $group) {
+                $groups[$group['id']] = $group['name'];
+            }
+        }
 
         $languages = $this->content->getLanguages('id,name,code,is_default,is_admin', array('status' => 1));
 
@@ -124,7 +131,8 @@ class Contents extends CI_Controller {
         if (!$this->content->saveContent($post)) {
             AZ::redirectError('admin/contents/index/' . $post['type'], lang('Error occured'));
         } else {
-            AZ::redirectSuccess('admin/contents/index/' . $post['type'], lang('Saved'));
+            $return = (isset($post['return'])) ? $post['return'] : 'admin/contents/index/' . $post['type'];
+            AZ::redirectSuccess($return, lang('Saved'));
         }
     }
 
@@ -255,9 +263,10 @@ class Contents extends CI_Controller {
             $type->fieldsets = $this->content->getFieldsetsByTypeId($edit);
         }
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'contents/type-form',
-            'type' => $type
+            'type' => $type,
+            'edit' => $edit
         ));
     }
 
@@ -273,17 +282,20 @@ class Contents extends CI_Controller {
         $this->load->library('form_validation');
         if (isset($post['id']) && $post['id'] > 0) {
             $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
+            $this->form_validation->set_rules('fieldset[]', lang('Fieldset'), 'trim|required');
         } else {
+            $this->form_validation->set_rules('fieldset[]', lang('Fieldset'), 'trim|required');
             $this->form_validation->set_rules('name', lang('Name'), 'trim|required|is_unique[content_types.name]');
         }
 
 
         if (!$this->form_validation->run()) {
-            AZ::redirectError('admin/contents/types', validation_errors());
+            AZ::redirectError('admin/contents/edit_type/' . $post['id'], validation_errors());
         }
         if (!$this->content->saveType($post)) {
             AZ::redirectError('admin/contents/types', lang('Error occured'));
         } else {
+
             AZ::redirectSuccess('admin/contents/types', lang('Saved'));
         }
     }
@@ -314,6 +326,11 @@ class Contents extends CI_Controller {
     public function groups($q = 1) {
 
         $types_A = $this->content->types_A(true);
+        if (count($types_A) == 1) {
+            $key = array_keys($types_A);
+            $q = $key[0];
+        }
+
         $groups = $this->content->getGroupsTree($q);
 
         AZ::layout('left-content', array(
@@ -338,7 +355,7 @@ class Contents extends CI_Controller {
 
         $parentsOption = $this->content->getGroupsOptionTree($type, 0, (isset($group->parent)) ? $group->parent : 0);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'contents/group-form',
             'parentsOption' => $parentsOption,
             'group' => $group,
@@ -362,12 +379,14 @@ class Contents extends CI_Controller {
         $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
 
         if (!$this->form_validation->run()) {
-            AZ::redirectError('admin/contents/groups/' . $post['type'], validation_errors());
+
+            AZ::redirectError('admin/contents/edit_group/' . $post['id'] . '/' . $post['type'], validation_errors());
         }
         if (!$this->content->saveGroup($post)) {
             AZ::redirectError('admin/contents/groups/' . $post['type'], lang('Error occured'));
         } else {
-            AZ::redirectSuccess('admin/contents/groups/' . $post['type'], lang('Saved'));
+            $return = (isset($post['return'])) ? $post['return'] : 'admin/contents/groups/' . $post['type'];
+            AZ::redirectSuccess($return, lang('Saved'));
         }
     }
 
@@ -412,7 +431,7 @@ class Contents extends CI_Controller {
 
         $fieldset = $this->content->getFieldsetById($edit);
 
-        AZ::layout('block-only', array(
+        AZ::layout('left-content', array(
             'block' => 'contents/fieldset-form',
             'fieldset' => $fieldset
         ));

@@ -11,7 +11,7 @@
                     </h4>
                 </div>
                 <div class="col-xs-2">
-                    <a href="<?php _u('admin/contents/edit_type/-1'); ?>" class="btn btn-primary btn-sm pull-right edit-box" id="createContentType" data-target="#contentTypeFormModel">
+                    <a href="<?php _u('admin/contents/edit_type/-1'); ?>" class="btn btn-primary btn-sm pull-right" id="createContentType" data-target="#contentTypeFormModel">
                         <i class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -52,17 +52,37 @@
                                             <span class="glyphicon <?php echo ($type->enabled) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span>
                                         </td>
                                         <td class="small">
-                                            <?php if (!$type->system): ?>                                                    
+                                            <?php if ((have_permission('contents/edit_type') || have_permission('contents/remove_type')) && !$type->system) : ?>
 
-                                                <a href="<?php _u('admin/contents/remove_type/' . $type->id) ?>" class="remove-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </a>
-                                                <a href="<?php _u('admin/contents/edit_type/' . $type->id) ?>" data-target="#contentTypeFormModel" class="edit-box action-icon pull-right">
-                                                    <span class="glyphicon glyphicon-edit"></span>
-                                                </a>
+                                                <div class="dropdown pull-right text-left">
+                                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                        <?php if (have_permission('contents/edit_type')) : ?>
+                                                            <li>
 
-                                            <?php endif; ?>
+                                                                <a href="<?php _u('admin/contents/edit_type/' . $type->id); ?>">
+                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <?php __('Edit'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                        <?php if (have_permission('contents/remove_type')) : ?>
+                                                            <li>
 
+                                                                <a href="<?php _u('admin/contents/remove_type/' . $type->id) ?>" class="remove-box">
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <?php __('Remove'); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    </ul>
+
+                                                </div>
+                                                <?php
+                                            endif;
+                                            ?>
 
                                         </td>
                                     </tr>
