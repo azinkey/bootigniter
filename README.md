@@ -30,9 +30,12 @@ Demo
 ===
 
 [Fron-end](http://bootigniter.org/demo)
+
 [Back-end](http://bootigniter.org/demo/administrator)
 
+
 username: admin
+
 password: 123456
 
 Copyleft
