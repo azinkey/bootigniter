@@ -29,7 +29,7 @@
                         <li class="<?php echo ($id == $q) ? 'active' : '' ?>">
                             <a href="<?php echo _u('admin/contents/fields/' . $id); ?>" title="<?php echo $name; ?>" >
                                 <i class="fa fa-folder-open"></i>
-                                <span class="hidden-xs"> <?php echo $name; ?></span>
+                                <span class=""> <?php echo $name; ?></span>
                                 <span>
                                     <small>
                                         <?php

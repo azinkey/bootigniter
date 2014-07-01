@@ -1,4 +1,10 @@
 
+
+
+
+</div>
+</div>
+
 <!-- No Element, Can be --->
 
 <script src="<?= skin_url(); ?>scripts/jquery.cookie.js" type="text/javascript"></script>

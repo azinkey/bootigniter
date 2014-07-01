@@ -4,7 +4,6 @@
 <header id="header" class="navbar navbar-fixed-top">
     <nav class="navbar navbar-default" role="navigation">
 
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header primary">
             <a class="navbar-brand" href="<?php _u('admin/dashboard'); ?>">
                 <span class="logo-figure"></span>
@@ -15,20 +14,20 @@
 
             <ul class="nav navbar-nav navbar-left">
                 <li class="dropdown" id="sideMenuIcon">
-                    <a id="sideNavigation" title="<?php __('Navigation'); ?>">
+                    <a id="sideNavigation" class="toggle-nav" title="<?php __('Navigation'); ?>">
                         <i class="fa fa-bars"></i>
                     </a>
                 </li>
 
                 <?php AZ::block('header/notify-navigation'); ?>
                 <?php AZ::block('header/message-navigation'); ?>
-                
+
                 <li>
                     <a href="<?php __(AZ::setting('site_url')); ?>" title="<?php __(AZ::setting('site_name')); ?>" id="siteHome" target="_blank">
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
-                
+
             </ul>
 
             <?php AZ::block('header/user-navigation'); ?>
@@ -38,5 +37,9 @@
 </header>
 
 
-<?php AZ::block('navigations'); ?>
+<div id="wrapper">
+    <div id="canvas">
+        <?php AZ::block('navigations'); ?>
+        
+
 

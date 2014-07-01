@@ -4,41 +4,17 @@
     $(document).ready(function() {
         var site_url = $('meta[name="site_url"]').attr('content');
 
-        var pl = $("#main").css('padding-left');
-        var window_width = $(window).width();
-        var sidebar_width = (window_width > 360) ? '180px' : '65px';
-        var padding = (pl === '0px') ? sidebar_width : '0px';
-        var sidebar_display = $.cookie('sidebar_display');
-        $(".sidebar").css('display', ($.cookie('sidebar_display')) ? $.cookie('sidebar_display') : 'none');
-
-        if (sidebar_display === 'block') {
-            $("#main").animate({'padding-left': padding}, 300, "linear");
-        }
-
-        $(window).resize(function() {
-            if (!$("body").hasClass('admin-dashboard')) {
-                var pl = $("#main").css('padding-left');
-                var window_width = $(window).width();
-                var sidebar_width = (window_width > 360) ? '180px' : '65px';
-                var padding = (pl == '0px') ? sidebar_width : '0px';
-                $(".sidebar").css('display', ($.cookie('sidebar_display')) ? $.cookie('sidebar_display') : 'none');
-                if (sidebar_display === 'block' && padding !== '0px') {
-                    $("#main").animate({'padding-left': padding}, 200, "linear");
+        $('.toggle-nav').click(function() {
+            // Calling a function in case you want to expand upon this.
+            toggleNav();
+        });
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) {
+                if ($('#wrapper').hasClass('show-nav')) {
+                    // Assuming you used the function I made from the demo
+                    toggleNav();
                 }
             }
-        });
-
-        $("#sideNavigation").click(function(e) {
-            e.preventDefault();
-            $(".sidebar").toggle(200, function() {
-                var pl = $("#main").css('padding-left');
-                var window_width = $(window).width();
-                var sidebar_width = (window_width > 360) ? '180px' : '65px';
-                var padding = (pl == '0px') ? sidebar_width : '0px';
-                $("#main").animate({'padding-left': padding}, 200, "linear");
-                $.cookie('sidebar_display', $(this).css('display'));
-
-            });
         });
         $("#sidebarMenu li.parent").click(function() {
             $(this).find(".submenu").toggle();
@@ -56,19 +32,8 @@
                 $(this).removeClass('active');
             }
         });
-        var s = $(".sticker");
-        var pos = s.position();
-        $(window).scroll(function() {
-            var windowpos = $(window).scrollTop();
-            var height = $(window).height();
-            if (windowpos >= pos.top && height > 400) {
-                s.addClass("stick");
-            } else {
-                s.removeClass("stick");
-            }
-        });
-        s.removeClass("stick");
-
+            
+        
         var modelObj = $('<div class="modal fade" tabindex="-1" role="dialog"><div class="modal-dialog modal-sm"><div class="modal-content"></div></div></div>');
         $("a.edit-box").click(function(e) {
             e.preventDefault();
@@ -182,6 +147,17 @@
 
     });
 
+    function toggleNav() {
+        if ($('#wrapper').hasClass('show-nav')) {
+            // Do things on Nav Close
+            $('#wrapper').removeClass('show-nav');
+        } else {
+            // Do things on Nav Open
+            $('#wrapper').addClass('show-nav');
+        }
+
+        //$('#site-wrapper').toggleClass('show-nav');
+    }
 
     function addSelectOptionRow(option_wrap) {
         //var index = option_wrap.children().length;
