@@ -128,7 +128,7 @@ class Menu extends CI_Model {
                         ->num_rows();
     }
 
-    public function getItemsByName($name, $wrapper_class = '', $level = 0, $menu_id = NULL, $html = NULL) {
+    public function getItemsByName($name, $wrapper_class = '', $level = 0, $menu_id = NULL, $type_class = NULL, $html = NULL) {
 
 
         if (!$menu_id) {
@@ -137,7 +137,9 @@ class Menu extends CI_Model {
 
             $menu_id = $this->db->get_where('menus', array('name' => $name))->row('id');
         }
-
+        if(!$menu_id){
+            return FALSE;
+        }
 
         $this->db->where("FIND_IN_SET('" . user::access_id() . "', access)");
         $rows = $this->db
@@ -152,7 +154,7 @@ class Menu extends CI_Model {
 
         if ($rows && count($rows)) {
 
-            $class = ($level) ? ' dropdown-menu ' : $wrapper_class;
+            $class = ($level) ? ' dropdown-menu menu_type_' . $type_class : $wrapper_class;
             $html .= '<ul class="' . $class . '">';
             foreach ($rows as $row) {
 
@@ -176,8 +178,8 @@ class Menu extends CI_Model {
                 $active = ($link == current_url()) ? ' active ' : '';
                 $attribute = ($have_child) ? ' class="' . $active . ' dropdown-toggle" data-toggle="dropdown" ' : 'class="' . $active . '"';
 
-                
-                
+
+
                 // HTML Block
                 if ($row->menu_type == 4) {
                     $html .= '<li class="' . $active . ' menu-item-content">';
@@ -188,7 +190,7 @@ class Menu extends CI_Model {
                 }
 
 
-                $html .= $this->getItemsByName($name, $wrapper_class, $row->id, $menu_id);
+                $html .= $this->getItemsByName($name, $wrapper_class, $row->id, $menu_id, $row->menu_type);
                 $html .= '</li>';
             }
             $html .= '</ul>';

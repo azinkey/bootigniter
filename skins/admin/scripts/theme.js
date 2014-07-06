@@ -67,7 +67,7 @@
             return true;
         });
 
-        $(".nav-tabs li.active a").click(function(e) {
+        $(".nav-tabs li.active a.tab-title").click(function(e) {
             e.preventDefault();
         });
 
