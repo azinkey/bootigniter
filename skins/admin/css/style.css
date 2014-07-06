@@ -6,9 +6,6 @@
     font-size: 1em;
     outline: 0px none !important;
 }
-html,body {
-    height: 100%;
-}
 .has-icon {
     position: relative;
 }
