@@ -217,7 +217,6 @@ hr {
     left: 0;
     z-index: 20;
 }
-
 .navbar-wrapper .container {
     padding-right: 0;
     padding-left: 0;
@@ -226,7 +225,12 @@ hr {
     padding-right: 15px;
     padding-left: 15px;
 }
-
+ul.dropdown-menu.menu_type_0 {
+    min-width: 400px;
+}
+ul.dropdown-menu.menu_type_0 li.menu-item-content {
+    display: table-cell;
+}
 .carousel {
     height: 450px;
 }
@@ -333,10 +337,10 @@ hr {
     }
 }
 @media (max-width: 768px) {
-    
+
     .brand {
         text-align: center;
     }
-    
+
 }
 
