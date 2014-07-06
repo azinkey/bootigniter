@@ -114,7 +114,7 @@ class Menu extends CI_Model {
             'enabled' => $data['enabled'],
             'access' => implode(',', $data['access'])
         );
-        
+
         if (isset($data['id']) && $data['id'] > 0) {
             return $this->db->update('menu_items', $item, array('id' => $data['id']));
         } else {
@@ -176,8 +176,18 @@ class Menu extends CI_Model {
                 $active = ($link == current_url()) ? ' active ' : '';
                 $attribute = ($have_child) ? ' class="' . $active . ' dropdown-toggle" data-toggle="dropdown" ' : 'class="' . $active . '"';
 
-                $html .= '<li class="' . $active . '">';
-                $html .= anchor($link, __($title, true), $attribute);
+                
+                
+                // HTML Block
+                if ($row->menu_type == 4) {
+                    $html .= '<li class="' . $active . ' menu-item-content">';
+                    $html .= $row->content;
+                } else {
+                    $html .= '<li class="' . $active . '">';
+                    $html .= anchor($link, __($title, true), $attribute);
+                }
+
+
                 $html .= $this->getItemsByName($name, $wrapper_class, $row->id, $menu_id);
                 $html .= '</li>';
             }
