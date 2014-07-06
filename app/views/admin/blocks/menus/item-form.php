@@ -54,7 +54,7 @@
                         <div class="field-row">
                             <?php
                             echo form_label(__('Menu Type', true), 'menu_type');
-                            echo form_dropdown('menu_type', array('Link', 'Path', 'Content', 'Groups'), isset($item->menu_type) ? $item->menu_type : 0, ' id="menuType" class="form-control"');
+                            echo form_dropdown('menu_type', array('Link', 'Path', 'Content', 'Groups', 'HTML'), isset($item->menu_type) ? $item->menu_type : 0, ' id="menuType" class="form-control"');
                             ?>
                         </div>
                         <div class="field-row menu_type_field hidden-row" id="menu_type_0">
@@ -89,6 +89,16 @@
                             <?php
                             echo form_label(__('Content Types', true), 'contents');
                             echo form_dropdown('content_type_3', contents_A(true), (isset($item->content_type)) ? $item->content_type : 0, 'class="form-control" id="contentTypeGroup"');
+                            ?>
+                        </div>
+                        <div class="field-row menu_type_field hidden-row" id="menu_type_4">
+                            <?php
+                            echo form_label(__('Content Block', true), 'content');
+                            echo form_textarea(array(
+                                'class' => 'form-control ckeditor',
+                                'name' => 'content',
+                                'value' => isset($item->content) ? $item->content : '',
+                            ));
                             ?>
                         </div>
                         <div class="field-row" id="contentsBox" data-content="<?php echo (isset($item->content_id)) ? $item->content_id : 0; ?>">
@@ -137,12 +147,12 @@
 
             var menuType = $("#menuType");
             var type = menuType.val();
-            
+
             var contentType = $("#contentType");
             var contentTypeGroup = $("#contentTypeGroup");
-            
+
             var contentId = $("#contentsBox").data('content');
-            
+
             var type_id = contentTypeGroup.val();
             console.log('type_id ', type_id);
             var site_url = $('meta[name="site_url"]').attr('content');
@@ -170,7 +180,7 @@
                 }
             });
             contentTypeGroup.change(function() {
-                console.log('asdf',contentTypeGroup.val());
+                console.log('asdf', contentTypeGroup.val());
                 if (type_id > 0) {
                     $("#contentsBox").load(site_url + 'admin/menus/get_groups/' + type_id + '/' + contentId);
                 } else {

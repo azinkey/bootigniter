@@ -32,7 +32,6 @@
                 <div class="col-xs-2 pull-right">
                         <ul class="language-switcher navbar-right">
                             <a href="javascript:void(0);" class="dropdown-toggle text-center" data-toggle="dropdown">
-                                <i class="fa fa-language"></i>
                                 <span class="glyphicon glyphicon-globe"></span>
                                 <small class="hidden-xs"><?php __(language_name()); ?></small>
                                 <b class="caret"></b></a>

@@ -138,6 +138,9 @@ class Menus extends CI_Controller {
             'block' => 'menus/item-form',
             'item' => $item,
             'menu_id' => $menu_id,
+            'scripts' => array(
+                'scripts/ckeditor/ckeditor.js',
+            )
         ));
     }
 

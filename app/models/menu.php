@@ -100,13 +100,25 @@ class Menu extends CI_Model {
             return false;
         }
 
-        $data['access'] = implode(',', $data['access']);
-        unset($data['contents']);
-
+        $item = array(
+            'id' => $data['id'],
+            'menu_id' => $data['menu_id'],
+            'parent' => $data['parent'],
+            'menu_type' => $data['menu_type'],
+            'title' => $data['title'],
+            'link' => $data['link'],
+            'path' => $data['path'],
+            'content_type' => $data['content_type'],
+            'content_id' => $data['content_id'],
+            'content' => $data['content'],
+            'enabled' => $data['enabled'],
+            'access' => implode(',', $data['access'])
+        );
+        
         if (isset($data['id']) && $data['id'] > 0) {
-            return $this->db->update('menu_items', $data, array('id' => $data['id']));
+            return $this->db->update('menu_items', $item, array('id' => $data['id']));
         } else {
-            return $this->db->insert('menu_items', $data);
+            return $this->db->insert('menu_items', $item);
         }
     }
 
@@ -149,6 +161,9 @@ class Menu extends CI_Model {
                         $link = site_url($row->path);
                         break;
                     case 2:
+                        $link = site_url($row->content_id);
+                        break;
+                    case 3:
                         $link = site_url($row->content_id);
                         break;
                     default:
