@@ -82,10 +82,10 @@
                                 <div class="panel-footer text-right">
                                     <input type="hidden" name="author" value="<?php echo user::id(); ?>" />
                                     <input type="hidden" name="return" value="<?php _u('admin/dashboard/forward_message/' . $message->id); ?>" />
-                                    <button type="button" class="btn btn-default">
+                                    <a class="btn btn-default" href="<?php _u('admin/dashboard/messages'); ?>">
                                         <i class="fa fa-arrow-circle-left"></i>
                                         <?php __('Cancel'); ?>
-                                    </button>
+                                    </a>
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-send"></i>
                                         <?php __('Send'); ?>

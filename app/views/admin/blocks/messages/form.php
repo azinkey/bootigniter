@@ -80,13 +80,13 @@
                                 <div class="panel-footer text-right">
                                     <input type="hidden" name="author" value="<?php echo user::id(); ?>" />
                                     <input type="hidden" name="message_id" value="<?php echo $message_id; ?>" />
-                                    <button type="button" class="btn btn-default">
+                                    <a class="btn btn-default" href="<?php _u('admin/dashboard/messages'); ?>">
                                         <i class="fa fa-arrow-circle-left"></i>
-                                        <?php __('Cancel');?>
-                                    </button>
+                                        <?php __('Cancel'); ?>
+                                    </a>
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-send"></i>
-                                        <?php __('Send');?>
+                                        <?php __('Send'); ?>
                                     </button>
                                     <?php echo form_close(); ?>
                                 </div>
