@@ -23,7 +23,7 @@
                 <?php AZ::block('header/message-navigation'); ?>
 
                 <li>
-                    <a href="<?php __(AZ::setting('site_url')); ?>" title="<?php __(AZ::setting('site_name')); ?>" id="siteHome" target="_blank">
+                    <a href="<?php echo site_url(); ?>" title="<?php __(AZ::setting('site_name')); ?>" id="siteHome" target="_blank">
                         <i class="fa fa-home"></i>
                     </a>
                 </li>

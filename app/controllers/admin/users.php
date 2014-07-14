@@ -310,7 +310,7 @@ class Users extends CI_Controller {
         }
         $roles = $this->user->getAccesses('id,name', array('id >' => 1));
         $rows = $this->user->getPermissions('*', array('access_id' => 1));
-
+        
         $tasks = array();
 
         if ($rows && count($rows)) {

@@ -159,6 +159,8 @@ class Dashboard extends CI_Controller {
             'total_message' => $messagesData['total_message'],
             'pagination' => $messagesData['pagination'],
             'count_unread_message' => $count_unread_message,
+            'scripts' => 'scripts/bootstrap-colorpicker.min.js',
+            'styles' => 'css/bootstrap-colorpicker.min.css'
         ));
 
         $this->db->update('messages', array('is_read' => 1), array('id' => (isset($selected_message->id)) ? $selected_message->id : 0));
@@ -197,8 +199,9 @@ class Dashboard extends CI_Controller {
             'pagination' => $pagination,
             'count_unread_message' => $count_unread_message,
         ));
-
-        $this->db->update('messages', array('is_read' => 1), array('id' => $selected_message->id));
+        if (isset($selected_message->id)) {
+            $this->db->update('messages', array('is_read' => 1), array('id' => $selected_message->id));
+        }
     }
 
     /**
@@ -327,6 +330,23 @@ class Dashboard extends CI_Controller {
         } else {
             AZ::redirectSuccess($return_url, lang('Error occured'));
         }
+    }
+
+    /**
+     * Add New or Edit Message Label
+     *
+     * @param	integer $edit
+     * @return	Layout
+     */
+    public function edit_label($edit = -1, $mode = 'inbox') {
+
+        $label = $this->message->getLabelById($edit);
+
+        AZ::layout('block-only', array(
+            'block' => 'messages/label-form',
+            'label' => $label,
+            'mode' => $mode,
+        ));
     }
 
     /**

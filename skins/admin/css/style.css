@@ -6,6 +6,12 @@
     font-size: 1em;
     outline: 0px none !important;
 }
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+}
 .has-icon {
     position: relative;
 }
@@ -142,9 +148,6 @@ hr {
     top: 55px;
     position: absolute;
     width: 300px;
-}
-#siteHome {
-
 }
 .navbar-toolbar  .navbar-left .glyphicon,.navbar-toolbar  .navbar-left .fa {
     font-size: 26px;
@@ -820,15 +823,17 @@ hr.dark {
 .tab-pane h4 {
     margin-top: 0px;
 }
+
 #wrapper {
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
     width: 100%;
     height: 100%;
 }
 #canvas {
     width: 100%;
-    height: 100%;
+    min-height: 475px;
+    min-height: 100%;
     padding-top: 75px;
     position: relative;
     -webkit-transform: translateX(0);
@@ -840,15 +845,22 @@ hr.dark {
 }
 #menu {
     width: 180px;
-    height: 100%;
     position: absolute;
     top: 0;
     left: -180px;
     padding-top: 75px;
 }
+
 #wrapper.show-nav #canvas {
     -webkit-transform: translateX(180px);
     transform: translateX(180px);
+}
+.label-form .col-xs-3,.label-form .col-xs-8 {
+    padding:0px;
+    margin:1px;
+}
+.label-form .form-control {
+    padding:2px;
 }
 /* End Genral Styles ********************************************************/
 

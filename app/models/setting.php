@@ -32,7 +32,7 @@ class Setting extends CI_Model {
                     'group_id' => $group_id
                 ))
                 ->result();
-
+        
         return (!count($rows)) ? array() : $rows;
     }
 
@@ -41,7 +41,7 @@ class Setting extends CI_Model {
         if (!is_array($data) || !count($data)) {
             return false;
         }
-        
+
         foreach ($data as $key => $value) {
             if (!$this->db->update('settings', array('value' => $value), array('key' => $key))) {
                 return false;
@@ -55,6 +55,32 @@ class Setting extends CI_Model {
             return $this->db->get_where('settings', array('key' => $key))->row('value');
         }
         return NULL;
+    }
+
+    public function setSetting($key, $value = NULL, $type = 'text', $group_id = 1, $default_value = NULL, $options = NULL) {
+        if (!empty($key)) {
+
+            $exit = $this->db->get_where('settings', array('key' => $key))->num_rows();
+            if ($exit) {
+                return $this->db->update('settings', array(
+                            'value' => $value,
+                            'type' => $type,
+                            'group_id' => $group_id,
+                            'default_value' => $default_value,
+                            'options' => $options,
+                                ), array('key' => $key));
+            } else {
+                return $this->db->insert('settings', array(
+                            'key' => $key,
+                            'value' => $value,
+                            'type' => $type,
+                            'group_id' => $group_id,
+                            'default_value' => $default_value,
+                            'options' => $options,
+                ));
+            }
+        }
+        return false;
     }
 
     public function saveSection($data) {
@@ -100,8 +126,12 @@ class Setting extends CI_Model {
         }
     }
 
-    public function getGroup_A() {
-
+    public function getGroup_A($section = NULL) {
+        
+        if((int) $section){
+            $this->db->where('sid',$section);
+        }
+        
         $rows = $this->db
                 ->select('setting_groups.id,setting_groups.title,setting_sections.title AS section', FALSE)
                 ->join('setting_sections', 'setting_sections.id = setting_groups.sid')

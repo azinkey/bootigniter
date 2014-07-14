@@ -48,8 +48,8 @@ class Settings extends CI_Controller {
         $section = $this->setting->getSectionById($q);
 
         $section_A = $this->setting->getSection_A();
-        $group_A = $this->setting->getGroup_A();
-
+        $group_A = $this->setting->getGroup_A($q);
+        
         AZ::layout('left-content', array(
             'block' => 'settings/index',
             'active_section' => $section,

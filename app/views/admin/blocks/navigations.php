@@ -1,5 +1,8 @@
 
-    <aside id="menu" class="sidebar sidebar-left sidebar-menu">        
+<aside id="menu" class="sidebar sidebar-left sidebar-menu">
+
+    <div class="menu-wrapper">
+
         <ul class="nav menu" id="sidebarMenu">
             <li>
                 <a href="<?php _u('admin/dashboard'); ?>">
@@ -25,44 +28,7 @@
 
                 </a>
             </li>
-            <li class="parent">
-                <a href="javascript:void(0);" title="<?php __('Users'); ?>">
-                    <i class="fa fa-2x fa-fw fa-users"></i>
-                    <span class="menu-text"><?php __('Users'); ?></span>
-                    <span class="pull-right arrow">></span>
-                </a>
-                <ul class="submenu">
-                    <li>
-                        <a href="<?php echo site_url('admin/users/index/4'); ?>" title="<?php __('Users'); ?>">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span><?php __('Users'); ?></span> 
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo site_url('admin/users/groups'); ?>" title="<?php __('Groups'); ?>">
-                            <i class="fa fa-fw fa-user-md"></i>
-                            <span><?php __('Groups'); ?></span> 
 
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo site_url('admin/users/accesses'); ?>" title="<?php __('Accesses'); ?>">
-                            <i class="fa fa-fw fa-eye-slash"></i>
-                            <span><?php __('Accesses'); ?></span> 
-
-                        </a>
-                    </li>
-                    <?php if (user::access_id() == 1) { ?>
-                        <li>
-                            <a href="<?php echo site_url('admin/users/permissions'); ?>" title="<?php __('Permissions'); ?>">
-                                <i class="fa fa-fw fa-unlock-alt"></i>
-                                <span><?php __('Permissions'); ?></span> 
-
-                            </a>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </li>
             <li class="parent">
                 <a href="javascript:void(0);" title="<?php __('Contents'); ?>">
                     <i class="fa fa-2x fa-fw fa-life-saver"></i>
@@ -102,7 +68,44 @@
                     </li>
                 </ul>
             </li>
+            <li class="parent">
+                <a href="javascript:void(0);" title="<?php __('Accounts'); ?>">
+                    <i class="fa fa-2x fa-fw fa-users"></i>
+                    <span class="menu-text"><?php __('Accounts'); ?></span>
+                    <span class="pull-right arrow">></span>
+                </a>
+                <ul class="submenu">
+                    <li>
+                        <a href="<?php echo site_url('admin/users/index/4'); ?>" title="<?php __('Users'); ?>">
+                            <i class="fa fa-fw fa-user"></i>
+                            <span><?php __('Users'); ?></span> 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url('admin/users/groups'); ?>" title="<?php __('Groups'); ?>">
+                            <i class="fa fa-fw fa-user-md"></i>
+                            <span><?php __('Groups'); ?></span> 
 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url('admin/users/accesses'); ?>" title="<?php __('Accesses'); ?>">
+                            <i class="fa fa-fw fa-eye-slash"></i>
+                            <span><?php __('Accesses'); ?></span> 
+
+                        </a>
+                    </li>
+                    <?php if (user::access_id() == 1) { ?>
+                        <li>
+                            <a href="<?php echo site_url('admin/users/permissions'); ?>" title="<?php __('Permissions'); ?>">
+                                <i class="fa fa-fw fa-unlock-alt"></i>
+                                <span><?php __('Permissions'); ?></span> 
+
+                            </a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </li>
             <li>
                 <a href="<?php echo site_url('admin/settings'); ?>" title="<?php __('Settings'); ?>">
 
@@ -112,5 +115,5 @@
                 </a>
             </li>
         </ul>
-
-    </aside>
+    </div>
+</aside>

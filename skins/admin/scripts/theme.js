@@ -11,7 +11,6 @@
         $(document).keyup(function(e) {
             if (e.keyCode == 27) {
                 if ($('#wrapper').hasClass('show-nav')) {
-                    // Assuming you used the function I made from the demo
                     toggleNav();
                 }
             }
@@ -105,7 +104,7 @@
         $(document).on('click', '.remove-option', function() {
             $(this).parent().parent().remove();
         });
-
+        
         $(".slimScroll").slimScroll({
             height: '150px',
             size: '3px',
@@ -154,6 +153,11 @@
         } else {
             // Do things on Nav Open
             $('#wrapper').addClass('show-nav');
+            
+            console.log('$(window).height() ',$(window).height());
+            console.log('$(document).height() ',$(document).height());
+            
+            //$("#menu").height($(window).height());
         }
 
         //$('#site-wrapper').toggleClass('show-nav');

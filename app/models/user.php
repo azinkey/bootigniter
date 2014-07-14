@@ -429,11 +429,11 @@ class user extends CI_Model {
             'country' => $data['country'],
             'phone' => $data['phone'],
         );
-        
+
         if (isset($data['avatar']) && !empty($data['avatar'])) {
             $profile['avatar'] = $data['avatar'];
         }
-        
+
         return $this->saveUserProfile($data['id'], $profile);
     }
 
@@ -495,6 +495,39 @@ class user extends CI_Model {
         } else {
             return array('error' => 0, 'new_image' => $config['new_image']);
         }
+    }
+
+    public function getAdminMethods() {
+        $controllers = array();
+
+        $dir = APPPATH . 'controllers/admin/';
+        $files = scandir($dir);
+
+        $controller_files = array_filter($files, function($filename) {
+            return (substr(strrchr($filename, '.'), 1) == 'php') ? true : false;
+        });
+
+        foreach ($controller_files as $filename) {
+
+            $file = str_replace("models", "controllers" . DIRECTORY_SEPARATOR . "admin", dirname(__FILE__));
+            require_once $file . DIRECTORY_SEPARATOR . $filename;
+
+            $classname = ucfirst(substr($filename, 0, strrpos($filename, '.')));
+            $methods = get_class_methods($classname);
+            $tasks = array();
+            foreach ($methods as $method) {
+                if ($method[0] !== '_') {
+                    if ($method !== 'get_instance') {
+                        $tasks[$classname][] = $method;
+                        
+                    }
+                }
+            }
+            return $tasks;
+            
+        }
+
+        
     }
 
     public function getPermissions($select = '*', $where = array(), $order_by = 'id', $order = "ASC", $offset = 0, $limit = 0, $count = FALSE) {

@@ -8,14 +8,15 @@ class BootLoader {
 
         if (empty($ci->db->hostname) || empty($ci->db->database) || empty($ci->db->username)) {
 
-            show_error('Missing Database Configurations, it seems you not configured your <strong>config/database.php</strong> yet, Please Set your database details and come back here & Refresh for Instant Boot Setup.', 500, "Database Connection Error");
+            show_error('Missing Database Configurations, Configured your <strong>config/database.php</strong>, <br />Please Set your database details and come back here & Refresh for Instant Boot Setup.', 500, "Setup Database Configuration");
         }
-
+        
         if (!$ci->db->table_exists('access') ||
                 !$ci->db->table_exists('users') ||
                 !$ci->db->table_exists('languages') ||
                 !$ci->db->table_exists('contents')) {
             if ($this->_install_dump()) {
+                $ci->setting->setSetting('site_url', site_url());
                 AZ::flashMSG('Your First Credential for login is <strong>admin/123456</strong>');
                 AZ::redirectSuccess('administrator', 'BootIgniter Setup Successfully');
             }

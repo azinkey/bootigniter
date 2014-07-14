@@ -240,7 +240,7 @@
                                         <div class="panel-body">
                                             <?php
                                             $configurations = get_settings($group->id);
-
+                                            
                                             foreach ($configurations as $configuration) {
                                                 ?>
                                                 <div class="field-row row-fluid">

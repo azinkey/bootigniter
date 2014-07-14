@@ -139,8 +139,13 @@ class Message extends CI_Model {
     }
 
     public function getLabels($type = 1) {
-        $rows = $this->db->select('id,label,color')->get_where('labels', array('groups' => $type))->result();
+        $rows = $this->db->select('id,label,color,system')->get_where('labels', array('groups' => $type))->result();
         return $rows;
+    }
+    
+    public function getLabelById($label) {
+        $row = $this->db->get_where('labels', array('id' => $label))->row();
+        return $row;
     }
 
     public function saveLabel($data) {

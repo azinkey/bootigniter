@@ -26,7 +26,6 @@
                                         <a href="<?php _u('admin/dashboard/messages/inbox') ?>">
                                             <span class="glyphicon glyphicon-envelope"></span>
                                             <?php __('Inbox'); ?>
-                                            <span class="badge pull-right">14</span>
                                         </a>
                                     </li>
                                     <li class="list-group-item">

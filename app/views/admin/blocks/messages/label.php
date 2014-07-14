@@ -109,7 +109,9 @@
                                 <hr class="" />
                                 <div class="media-list message-list">
                                     <?php
+                                    
                                     if ($messages && count($messages)) {
+                                        
                                         foreach ($messages as $message) {
                                             ?>
                                             <div class="media">
@@ -148,6 +150,8 @@
                                             <br />
                                             <?php
                                         }
+                                    } else {
+                                        __('no_record');
                                     }
                                     ?>
 
@@ -166,6 +170,7 @@
                                     <br />
                                 <?php endif; ?>
                             </div>
+                            <?php if(isset($selected_message->id)): ?>
                             <div class="col-md-6 text-right">
 
                                 <div class="btn-group">
@@ -245,9 +250,8 @@
                                 <div class="panel-body text-left">
                                     <?php echo $selected_message->body; ?>
                                 </div>
-
-
                             </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
