@@ -44,7 +44,7 @@
                     <div class="field-row">
                         <?php
                         echo form_label(lang('Access'), 'access');
-                        echo form_dropdown('access', access_A(true), isset($group->access) ? $group->access : 1, 'class="form-control"');
+                        echo form_dropdown('access', access_A(), isset($group->access) ? $group->access : 2, 'class="form-control"');
                         ?>
                     </div>
 

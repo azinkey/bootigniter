@@ -132,9 +132,7 @@ class Menu extends CI_Model {
 
 
         if (!$menu_id) {
-
             $this->db->where("FIND_IN_SET('" . user::access_id() . "', access)");
-
             $menu_id = $this->db->get_where('menus', array('name' => $name))->row('id');
         }
         if(!$menu_id){

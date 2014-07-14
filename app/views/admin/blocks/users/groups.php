@@ -24,7 +24,6 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-asterisk"></span>
                     <?php __('User Groups'); ?>
                     <div class="clearfix"></div>
                 </div>

@@ -101,8 +101,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%contents` (
 
 INSERT INTO `%PREFIX%contents` (`id`, `alias`, `type_id`, `group_id`, `user_id`, `status`, `ordering`, `timestamp`, `modified`, `access`) VALUES
 (1, 'home', 1, 0, 1111, 1, 0, '2014-05-30 09:17:57', '2014-05-31 21:35:24', '0'),
-(2, 'about', 1, 0, 1111, 1, 0, '2014-05-30 09:27:38', '2014-05-30 09:27:38', '0'),
-(3, 'contact', 1, 0, 1111, 1, 0, '2014-05-30 13:22:56', '2014-05-30 13:22:56', '0');
+(2, 'about', 1, 0, 1111, 1, 0, '2014-05-30 09:27:38', '2014-05-30 09:27:38', '0');
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%content_fields` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -118,22 +117,24 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%content_fields` (
   `in_admin_list` tinyint(1) NOT NULL DEFAULT '0',
   `in_list` tinyint(4) NOT NULL DEFAULT '0',
   `in_view` tinyint(1) NOT NULL DEFAULT '1',
+  `in_search` int(11) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `validations` text,
   `options` varchar(255) DEFAULT NULL,
   `default_value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
-  KEY `group_id` (`group_id`)
+  KEY `group_id` (`group_id`),
+  KEY `Field Visibility` (`in_admin_list`,`in_list`,`in_view`,`in_search`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contents Fields' AUTO_INCREMENT=7 ;
 
-INSERT INTO `%PREFIX%content_fields` (`id`, `group_id`, `name`, `label`, `type`, `system`, `access`, `required`, `enabled`, `trash`, `in_admin_list`, `in_list`, `in_view`, `ordering`, `validations`, `options`, `default_value`) VALUES
-(1, 1, 'page_title', 'Title', 'text', 1, '0', 1, 1, 0, 1, 1, 1, 0, NULL, NULL, ''),
-(2, 1, 'page_excerpt', 'Excerpt', 'textarea', 1, '0', 0, 1, 0, 0, 1, 0, 1, NULL, NULL, ''),
-(3, 1, 'page_content', 'Content', 'editor', 1, '0', 1, 1, 0, 0, 0, 1, 2, NULL, NULL, ''),
-(4, 2, 'meta_title', 'Meta Title', 'text', 1, '0,1', 0, 1, 0, 0, 0, 0, 0, NULL, NULL, ''),
-(5, 2, 'meta_description', 'Meta Description', 'textarea', 1, '0,1', 0, 1, 0, 0, 0, 0, 0, NULL, NULL, ''),
-(6, 2, 'meta_keywords', 'Meta Keywords', 'text', 1, '1', 0, 1, 0, 0, 1, 0, 0, NULL, NULL, '');
+INSERT INTO `%PREFIX%content_fields` (`id`, `group_id`, `name`, `label`, `type`, `system`, `access`, `required`, `enabled`, `trash`, `in_admin_list`, `in_list`, `in_view`, `in_search`, `ordering`, `validations`, `options`, `default_value`) VALUES
+(1, 1, 'title', 'Title', 'text', 1, '0', 1, 1, 0, 1, 1, 1, 1, 0, NULL, NULL, ''),
+(2, 1, 'excerpt', 'Excerpt', 'textarea', 1, '0', 0, 1, 0, 0, 1, 0, 1, 1, NULL, NULL, ''),
+(3, 1, 'content', 'Content', 'editor', 1, '0', 1, 1, 0, 0, 0, 1, 1, 2, NULL, NULL, ''),
+(4, 2, 'meta_title', 'Meta Title', 'text', 1, '0,1', 0, 1, 0, 0, 0, 0, 1, 0, NULL, NULL, ''),
+(5, 2, 'meta_description', 'Meta Description', 'textarea', 1, '0,1', 0, 1, 0, 0, 0, 0, 1, 0, NULL, NULL, ''),
+(6, 2, 'meta_keywords', 'Meta Keywords', 'text', 1, '1', 0, 1, 0, 0, 1, 0, 1, 0, NULL, NULL, '');
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%content_field_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -31,8 +31,8 @@
                 $(this).removeClass('active');
             }
         });
-            
-        
+
+
         var modelObj = $('<div class="modal fade" tabindex="-1" role="dialog"><div class="modal-dialog modal-sm"><div class="modal-content"></div></div></div>');
         $("a.edit-box").click(function(e) {
             e.preventDefault();
@@ -60,6 +60,12 @@
         $(".click-submit").click(function(e) {
             e.preventDefault();
             var form = $(this).data('form');
+            var returnUrl = $(this).data('return');
+            
+            if (returnUrl) {
+                var hiddenReturn = $('<input/>', {type: 'hidden', id: 'return', name: 'return', value: returnUrl});
+                hiddenReturn.appendTo(form);
+            }
             if (form) {
                 $(form).submit();
             }
@@ -104,7 +110,7 @@
         $(document).on('click', '.remove-option', function() {
             $(this).parent().parent().remove();
         });
-        
+
         $(".slimScroll").slimScroll({
             height: '150px',
             size: '3px',
@@ -119,7 +125,7 @@
             allowPageScroll: false,
             disableFadeOut: false
         });
-      
+
         $("#loadActivity").click(function(e) {
             e.preventDefault();
             var count_post = $("#activities").children().length;
@@ -153,11 +159,6 @@
         } else {
             // Do things on Nav Open
             $('#wrapper').addClass('show-nav');
-            
-            console.log('$(window).height() ',$(window).height());
-            console.log('$(document).height() ',$(document).height());
-            
-            //$("#menu").height($(window).height());
         }
 
         //$('#site-wrapper').toggleClass('show-nav');

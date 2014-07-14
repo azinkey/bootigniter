@@ -67,7 +67,7 @@
                         echo form_dropdown('have_groups', array('0' => lang('No'), '1' => lang('Yes')), isset($type->have_groups) ? $type->have_groups : 0, 'class="form-control"');
                         ?>    
                     </div>
-                    <div class="field-row">
+                    <div class="field-row hidden">
                         <?php
                         echo form_label(lang('Category Depth'), 'group_depth');
                         echo form_dropdown('group_depth', array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), isset($type->group_depth) ? $type->group_depth : 0, 'class="form-control"');

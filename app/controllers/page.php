@@ -65,12 +65,88 @@ class Page extends CI_Controller {
         $content = $this->content->getContentByAlias($alias, $activeLanguageId);
 
         $varriables = array(
-            'block' => 'content/page',
+            'block' => 'content/page_' . $content->type_id,
             'content' => $content,
         );
 
         if (isset($content->page_title)) {
             $varriables['page_title'] = $content->page_title;
+        }
+        if (isset($content->news_headline)) {
+            $varriables['page_title'] = $content->news_headline;
+        }
+
+        AZ::layout('content-right', $varriables);
+
+        //$this->content->track(); // uncomment for enabled self tracking into Visitors
+    }
+
+    /**
+     * Group Category Page By Alias 
+     *
+     * Primary View is views/front/blocks/content/page
+     * 
+     * @param	string $alias
+     * @return	Layout
+     */
+    public function group($alias, $offset = 0) {
+
+        $group = $this->content->getGroupByAlias($alias);
+
+        if (!$group || !isset($group->id)) {
+            $this->page_not_found();
+            return false;
+        }
+
+
+        $total_contents = $this->content->getContentsByGroup($group->id, $group->type, 0, 0, true);
+   
+
+        $pagination = AZ::pagination($alias, 2, 5, $total_contents, true);
+
+        $contents = $this->content->getContentsByGroup($group->id, $group->type, $offset, 5);
+        
+        $varriables = array(
+            'block' => 'content/group-contents_' . $group->type,
+            'contents' => $contents,
+            'total_contents' => $total_contents,
+            'pagination' => $pagination,
+        );
+
+        if (isset($group->name)) {
+            $varriables['page_title'] = $group->name;
+        }
+
+        AZ::layout('content-right', $varriables);
+
+        //$this->content->track(); // uncomment for enabled self tracking into Visitors
+    }
+
+    /**
+     * Group Category Page By Alias 
+     *
+     * Primary View is views/front/blocks/content/page
+     * 
+     * @param	string $alias
+     * @return	Layout
+     */
+    public function search($keyword, $offset = 0) {
+
+        $total_contents = $this->content->getContentsByWords($keyword, 0, 0, true);
+
+        $pagination = AZ::pagination('search?words=' . $keyword, 2, 5, $total_contents, true,true);
+
+        $contents = $this->content->getContentsByWords($keyword, $offset, 5);
+
+        $varriables = array(
+            'block' => 'content/search',
+            'contents' => $contents,
+            'total_contents' => $total_contents,
+            'pagination' => $pagination,
+        );
+
+        if (isset($group->name)) {
+            $varriables['page_title'] = 'Search Result for ' . $keyword;
         }
 
         AZ::layout('content-right', $varriables);
@@ -100,6 +176,7 @@ class Page extends CI_Controller {
         $count_segments = $this->uri->total_segments();
         $segments = $this->uri->segment_array();
         $alias = $this->uri->uri_string();
+        $query = $this->input->get();
 
         switch ($count_segments) {
             case 0:
@@ -108,6 +185,17 @@ class Page extends CI_Controller {
 
                 break;
             case 1:
+
+                if ($segments[1] == 'search' && isset($query['words'])) {
+                    $this->search($query['words'], (isset($query['per_page'])) ? $query['per_page'] : 0 );
+                    return;
+                }
+                // check Group first
+                if ($this->content->checkGroupAlias($alias)) {
+                    $this->group($alias);
+                    return true;
+                }
+
                 // can remap Page
                 if ($this->content->checkAlias($alias)) {
                     $this->content($alias);
@@ -117,14 +205,42 @@ class Page extends CI_Controller {
 
                 break;
             case 2:
-                // can remap Category => Page
-                $this->page_not_found();
+
+                if ($segments[1] == 'search') {
+                    $searchURI = explode("/", $query['words']);
+                    $this->search($searchURI[0], $segments[2]);
+                    return;
+                }
+
+                if (is_numeric($segments[2]) && $this->content->checkGroupAlias($segments[1])) {
+                    $this->group($segments[1], $segments[2]);
+                    return true;
+                }
+
+                if ($this->content->checkGroupAlias($alias)) {
+                    $this->group($alias);
+                    return true;
+                } else {
+                    $this->page_not_found();
+                }
+
                 break;
             case 3:
-                // can remap Category => Category => Page
-                $this->page_not_found();
-                break;
+                echo '<pre>';
+                print_r($segments);
+                echo '</pre>';
+                if (is_numeric($segments[4]) && $this->content->checkGroupAlias($segments[1])) {
+                    $this->group($segments[1], $segments[2]);
+                    return true;
+                }
 
+                if ($this->content->checkGroupAlias($alias)) {
+                    $this->group($alias);
+                    return true;
+                } else {
+                    $this->page_not_found();
+                }
+                break;
             default:
                 $this->page_not_found();
                 break;

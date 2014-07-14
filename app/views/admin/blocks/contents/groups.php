@@ -55,16 +55,24 @@
 
                                             <div class="table">
                                                 <?php if (count($groups)) { ?>
-                                                    <table class="table table-condensed">
+                                                    <table class="table table-condensed" id="groupsTable">
                                                         <thead>
                                                             <tr>
+                                                                <th width="30"><?php __('ID'); ?></th>
+                                                                <th width="70"><?php __('Active'); ?></th>
                                                                 <th><?php __('Name'); ?></th>
+                                                                
                                                                 <th class="text-right"><span class="glyphicon glyphicon-edit"></span></th>
                                                             </tr>
                                                         </thead>
                                                         <?php foreach ($groups as $group) { ?>
                                                             <tr class="<?php echo ($group['system']) ? 'active' : ''; ?>">
+                                                                <td><?php echo $group['id']; ?></td>
+                                                                <td>
+                                                                    <span class="glyphicon <?php echo ($group['enabled']) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span>
+                                                                </td>
                                                                 <td><?php echo $group['name']; ?></td>
+                                                                
                                                                 <td class="small">
                                                                     <?php if ((have_permission('contents/edit_group') || have_permission('contents/remove_group')) && !$group['system']) : ?>
 
@@ -132,8 +140,13 @@
 
 </div>
 </section>
-
-
-<div class="modal fade" id="contentGroupFormModel" tabindex="-1" role="dialog" aria-labelledby="groupFormModel" aria-hidden="true">
-    <div class="modal-dialog modal-sm"><div class="modal-content"></div></div>
-</div>
+<?php if(count($groups) >  AZ::setting('record_per_page')) : ?>
+<script>
+    (function($)
+{        $(document).ready(function(){
+            $("#groupsTable").DataTable();
+            
+        });
+    })(jQuery);
+    </script>
+    <?php endif; ?>

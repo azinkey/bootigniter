@@ -338,6 +338,8 @@ class Contents extends CI_Controller {
             'groups' => $groups,
             'types_A' => $types_A,
             'q' => $q,
+            'styles' => 'css/jquery.dataTables.css',
+            'scripts' => 'scripts/jquery.dataTables.js',
         ));
     }
 
@@ -382,6 +384,7 @@ class Contents extends CI_Controller {
 
             AZ::redirectError('admin/contents/edit_group/' . $post['id'] . '/' . $post['type'], validation_errors());
         }
+
         if (!$this->content->saveGroup($post)) {
             AZ::redirectError('admin/contents/groups/' . $post['type'], lang('Error occured'));
         } else {
@@ -513,11 +516,13 @@ class Contents extends CI_Controller {
     public function edit_field($edit = -1, $fieldset = 1) {
 
         $field = $this->content->getFieldById($edit);
+        $fieldset_name = $this->content->getFieldsetNameById($fieldset);
         AZ::layout('left-content', array(
             'block' => 'contents/field-form',
             'field' => $field,
             'edit_id' => $edit,
             'fieldset' => $fieldset,
+            'fieldset_name' => $fieldset_name,
             'styles' => 'css/jquery-ui.min.css',
             'scripts' => 'scripts/jquery-ui-1.10.4.custom.min.js',
         ));
@@ -556,7 +561,7 @@ class Contents extends CI_Controller {
         if (!$field) {
             AZ::redirectError('admin/contents/edit_field/' . $field . '/' . $post['group_id'], lang('Error occured'));
         } else {
-            AZ::redirectSuccess('admin/contents/edit_field/' . $field . '/' . $post['group_id'], lang('Saved'));
+            AZ::redirectSuccess('admin/contents/fields/' . $post['group_id'], lang('Saved'));
         }
     }
 

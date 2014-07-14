@@ -38,7 +38,7 @@
         }
         ?>
     </ul>
-    <?php if ($activities && count($activities)) { ?>
+    <?php if ($activities && count($activities) > 5) { ?>
         <ul class="media-list media-list-feed" >
             <li class="media" id="nextFeed">
                 <div class="media-object pull-left">

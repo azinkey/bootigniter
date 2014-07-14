@@ -57,7 +57,7 @@ class Setting extends CI_Model {
         return NULL;
     }
 
-    public function setSetting($key, $value = NULL, $type = 'text', $group_id = 1, $default_value = NULL, $options = NULL) {
+    public function setSetting($key, $value = NULL, $group_id = 3, $type = 'text', $default_value = NULL, $options = NULL) {
         if (!empty($key)) {
 
             $exit = $this->db->get_where('settings', array('key' => $key))->num_rows();

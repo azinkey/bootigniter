@@ -687,6 +687,9 @@ hr.dark {
     width: 1px;
     z-index: -1;
 }
+.media-list-feed > .media:last-child:after {
+    background-color: transparent;
+}
 #nextFeed:after {
     bottom: 50%;
 }
@@ -829,6 +832,7 @@ hr.dark {
     overflow-x: hidden;
     width: 100%;
     height: 100%;
+    padding-bottom: 50px;
 }
 #canvas {
     width: 100%;
@@ -861,6 +865,10 @@ hr.dark {
 }
 .label-form .form-control {
     padding:2px;
+}
+.dataTables_filter input,.dataTables_length select {
+    border:1px solid #ccc;
+    padding: 3px;
 }
 /* End Genral Styles ********************************************************/
 

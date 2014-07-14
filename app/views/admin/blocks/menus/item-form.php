@@ -154,7 +154,7 @@
             var contentId = $("#contentsBox").data('content');
 
             var type_id = contentTypeGroup.val();
-            console.log('type_id ', type_id);
+            
             var site_url = $('meta[name="site_url"]').attr('content');
 
             $("#menu_type_" + type).removeClass('hidden-row');
@@ -169,6 +169,8 @@
                     $("#contentsBox").text('');
                     contentType.val(0);
                 }
+                contentTypeGroup.val(0);
+                
 
             });
             contentType.change(function() {
@@ -180,7 +182,7 @@
                 }
             });
             contentTypeGroup.change(function() {
-                console.log('asdf', contentTypeGroup.val());
+                
                 if (type_id > 0) {
                     $("#contentsBox").load(site_url + 'admin/menus/get_groups/' + type_id + '/' + contentId);
                 } else {

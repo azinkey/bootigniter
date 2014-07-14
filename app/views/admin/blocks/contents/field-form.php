@@ -7,6 +7,7 @@
                     <h4 class="title">
                         <i class="fa fa-ellipsis-h"></i>
                         <?php echo isset($field->label) ? $field->label : lang('New Field'); ?>
+                        <small class="muted">(<?php echo $fieldset_name; ?>)</small>
                     </h4>
                 </div>
                 <div class="col-xs-5">
@@ -53,6 +54,7 @@
                                             <?php
                                             echo form_input(array(
                                                 'class' => 'form-control',
+                                                'id' => 'fieldLabel',
                                                 'name' => 'label',
                                                 'value' => set_value('label', isset($field->label) ? $field->label : ''),
                                             ));
@@ -70,6 +72,7 @@
                                             <?php
                                             echo form_input(array(
                                                 'class' => 'form-control',
+                                                'id' => 'fieldName',
                                                 'name' => 'name',
                                                 'value' => set_value('name', isset($field->name) ? $field->name : ''),
                                             ));
@@ -89,7 +92,7 @@
                                         <div class="col-md-8">
                                             <?php
                                             $disabled = (isset($field->id) && $field->id > 0) ? ' disabled="disabled" ' : '';
-                                            echo form_dropdown('type', field_types(), isset($field->type) ? $field->type : 'text', 'class="form-control" id="contentFieldType" '.$disabled);
+                                            echo form_dropdown('type', field_types(), isset($field->type) ? $field->type : 'text', 'class="form-control" id="contentFieldType" ' . $disabled);
                                             ?>
                                         </div>
                                         <div class="clearfix"></div>
@@ -242,3 +245,16 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    (function($){
+        $(document).ready(function(){
+            $("#fieldLabel").on('keyup',function(){
+                var name = $(this).val();
+                name = name.toLowerCase();
+                name = name.replace(/\s/g,'_');
+                $("#fieldName").val(name);
+            });
+        });
+    })(jQuery);
+</script>

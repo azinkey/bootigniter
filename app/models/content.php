@@ -6,6 +6,10 @@ class Content extends CI_Model {
         return $this->db->get_where('contents', array('alias' => $alias))->num_rows();
     }
 
+    public function checkGroupAlias($alias) {
+        return $this->db->get_where('content_groups', array('alias' => $alias))->num_rows();
+    }
+
     public function getTotalContents($type_id = 1) {
         return $this->db->get_where('contents', array('status' => 1, 'type_id' => $type_id))->num_rows();
     }
@@ -23,7 +27,7 @@ class Content extends CI_Model {
         return $rows;
     }
 
-    public function getFieldsByTypeId($type_id, $in_admin_list = 0, $in_list = 0, $in_view = 0) {
+    public function getFieldsByTypeId($type_id, $in_admin_list = 0, $in_list = 0, $in_view = 0, $in_search = 0) {
 
         $this->db->where('content_type_x_fields.type_id', $type_id);
         if ($in_admin_list) {
@@ -34,6 +38,9 @@ class Content extends CI_Model {
         }
         if ($in_view) {
             $this->db->where('content_fields.in_view', (int) $in_view);
+        }
+        if ($in_search) {
+            $this->db->where('content_fields.in_search', (int) $in_search);
         }
         $this->db->where('content_fields.enabled', 1);
         $this->db->where('content_fields.trash', 0);
@@ -130,7 +137,7 @@ class Content extends CI_Model {
         return $contents;
     }
 
-    public function getGroupsKey($type = 1,$level = 0, $prefix = '') {
+    public function getGroupsKey($type = 1, $level = 0, $prefix = '') {
         $rows = $this->db
                 ->select('id,parent,name,alias,enabled,system')
                 ->where('type', $type)
@@ -172,6 +179,8 @@ class Content extends CI_Model {
 
         $this->db
                 ->offset($offset);
+        
+        $this->db->order_by('id', 'DESC');
 
         if (!$count) {
             $this->db->limit($limit);
@@ -254,6 +263,219 @@ class Content extends CI_Model {
         return $content;
     }
 
+    public function getContentsByGroup($group, $contentType = 1, $offset = 0, $limit = 25, $count = FALSE) {
+
+        $fields = $this->getFieldsByTypeId($contentType, 0, 1, 0);
+        
+        if (!$fields) {
+            return FALSE;
+        }
+
+        $this->db->order_by('id', 'DESC');
+
+
+        if (user::access_id() !== '1') {
+            $this->db->where("FIND_IN_SET('" . user::access_id() . "', access)");
+        }
+
+        $childGroups = $this->getGroupChilds($contentType, $group);
+        
+        if (!empty($childGroups)) {
+            $this->db->where_in('group_id', $group);
+            $this->db->or_where_in('group_id', $childGroups);
+        } else {
+            $this->db->where_in('group_id', $group);
+        }
+
+        $contents = array();
+
+        if ($count) {
+            return $this->db->get_where('contents', array(
+                        'type_id' => $contentType,
+                        'status' => 1
+                    ))->num_rows();
+            
+        } else {
+            $this->db->select('contents.*,content_groups.name AS groups');
+            $this->db->join('content_groups', 'content_groups.id = contents.group_id', 'LEFT');
+            $this->db->offset($offset);
+            $this->db->limit($limit);
+
+            $contentRows = $this->db->get_where('contents', array(
+                        'contents.type_id' => $contentType,
+                        'contents.status' => 1
+                    ))->result();
+        }
+
+        $default_language_id = $this->db->get_where('languages', array('is_admin' => 1))->row('id');
+        $default_language_id = (empty($default_language_id)) ? 1 : $default_language_id;
+
+        if (isset($contentRows) && count($contentRows)) {
+            $i = 0;
+            foreach ($contentRows as $contentRow) {
+                $contents[$i] = new stdClass();
+
+                $contents[$i]->id = $contentRow->id;
+                $contents[$i]->group_id = $contentRow->group_id;
+                $contents[$i]->groups = $contentRow->groups;
+                $contents[$i]->user_id = $contentRow->user_id;
+                $contents[$i]->status = $contentRow->status;
+                $contents[$i]->modified = $contentRow->modified;
+                $contents[$i]->timestamp = $contentRow->timestamp;
+                $contents[$i]->access = $contentRow->access;
+                $contents[$i]->alias = $contentRow->alias;
+
+                $valueRows = $this->getContentFieldsValue($contentRow->id, $fields, $default_language_id);
+
+                if (count($valueRows)) {
+                    foreach ($valueRows as $valueRow) {
+                        $contents[$i]->{$valueRow->name} = $valueRow->value;
+                    }
+                }
+                $i++;
+            }
+        }
+        return $contents;
+    }
+
+    public function getContentsByWords($words, $offset = 0, $limit = 25, $count = FALSE) {
+        $activeLanguage = $this->getActiveLanguageId();
+        $access_id = user::access_id();
+        $rows = $this->db->select('id')->get_where('content_fields', array('enabled' => 1, 'in_search' => 1))->result();
+        $searchableFieldIds = array();
+
+        if ($rows && count($rows)) {
+            foreach ($rows as $row) {
+                $searchableFieldIds[] = $row->id;
+            }
+            $this->db->where_in('field_id', $searchableFieldIds);
+        }
+
+
+        $this->db->distinct('content_id')->select('content_id');
+        $this->db->like('value', $this->db->escape_str($words));
+        $this->db->where('language_id', $activeLanguage);
+
+        $rows = $this->db->get('content_field_values')->result();
+        $foundContents = array();
+        if ($rows && count($rows)) {
+            foreach ($rows as $row) {
+                $foundContents[] = $row->content_id;
+            }
+            $this->db->where_in('id', $foundContents);
+        }
+
+
+        $this->db->where('status', 1);
+
+        $this->db->order_by('id', 'DESC');
+
+        $contents = array();
+
+        if ($count) {
+            if ($access_id != '1') {
+                $this->db->where("FIND_IN_SET('" . user::access_id() . "', access)");
+            }
+            return $this->db->get('contents')->num_rows();
+        } else {
+
+            if ($access_id != '1') {
+                $this->db->where("FIND_IN_SET('" . user::access_id() . "', {$this->db->dbprefix}contents.access)");
+            }
+
+            $this->db->offset($offset);
+            $this->db->limit($limit);
+
+            $contentRows = $this->db->get('contents')->result();
+        }
+
+        if (isset($contentRows) && count($contentRows)) {
+            $i = 0;
+            foreach ($contentRows as $contentRow) {
+                $contents[$i] = new stdClass();
+
+                $contents[$i]->id = $contentRow->id;
+                $contents[$i]->group_id = $contentRow->group_id;
+                $contents[$i]->user_id = $contentRow->user_id;
+                $contents[$i]->status = $contentRow->status;
+                $contents[$i]->modified = $contentRow->modified;
+                $contents[$i]->timestamp = $contentRow->timestamp;
+                $contents[$i]->access = $contentRow->access;
+                $contents[$i]->alias = $contentRow->alias;
+
+                $fields = $this->getFieldsByTypeId($contentRow->type_id, 0, 1, 0, 1);
+
+                if (!$fields) {
+                    return FALSE;
+                }
+
+                $valueRows = $this->getContentFieldsValue($contentRow->id, $fields, $activeLanguage);
+
+                if (count($valueRows)) {
+                    foreach ($valueRows as $valueRow) {
+                        $contents[$i]->{$valueRow->name} = $valueRow->value;
+                    }
+                }
+                $i++;
+            }
+        }
+
+        return $contents;
+    }
+
+    public function getLatestContents($type = 'pages', $limit = 25) {
+
+        $contentType = $this->db->get_where('content_types', array('alias' => $type, 'enabled' => 1))->row();
+        if (!$contentType) {
+            return FALSE;
+        }
+        $fields = $this->getFieldsByTypeId($contentType->id, 0, 1);
+
+        if (!$fields) {
+            return FALSE;
+        }
+
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($limit);
+
+        $contents = array();
+
+        $this->db->select('contents.*,content_groups.name AS groups');
+        $this->db->join('content_groups', 'content_groups.id = contents.group_id', 'LEFT');
+        $contentRows = $this->db->get_where('contents', array('contents.type_id' => $contentType->id))->result();
+
+        $default_language_id = $this->db->get_where('languages', array('is_admin' => 1))->row('id');
+        $default_language_id = (empty($default_language_id)) ? 1 : $default_language_id;
+
+        if (isset($contentRows) && count($contentRows)) {
+            $i = 0;
+            foreach ($contentRows as $contentRow) {
+                $contents[$i] = new stdClass();
+
+                $contents[$i]->id = $contentRow->id;
+                $contents[$i]->group_id = $contentRow->group_id;
+                $contents[$i]->groups = $contentRow->groups;
+                $contents[$i]->user_id = $contentRow->user_id;
+                $contents[$i]->status = $contentRow->status;
+                $contents[$i]->modified = $contentRow->modified;
+                $contents[$i]->timestamp = $contentRow->timestamp;
+                $contents[$i]->access = $contentRow->access;
+                $contents[$i]->alias = $contentRow->alias;
+
+                $valueRows = $this->getContentFieldsValue($contentRow->id, $fields, $default_language_id);
+
+                if (count($valueRows)) {
+                    foreach ($valueRows as $valueRow) {
+                        $contents[$i]->{$valueRow->name} = $valueRow->value;
+                    }
+                }
+                $i++;
+            }
+        }
+
+        return $contents;
+    }
+
     public function saveContent($data) {
 
         if (!is_array($data) || !count($data)) {
@@ -271,7 +493,8 @@ class Content extends CI_Model {
                     'alias' => $data['alias'],
                     'status' => $data['status'],
                     'group_id' => $data['group_id'],
-                    'access' => $data['access']
+                    'access' => $data['access'],
+                    'modified' => date('Y-m-d H:i:s')
                 ));
 
 
@@ -305,7 +528,7 @@ class Content extends CI_Model {
                 foreach ($_FILES as $key => $file) {
                     $breakKey = explode("_", $key);
                     $field_id = $breakKey[1];
-                    $this->upload->initialize($this->set_upload_options());
+                    $this->upload->initialize($this->_set_upload_options());
                     if (!$this->upload->do_upload($key)) {
                         $files[$field_id]['error'] = $this->upload->display_errors();
                     }
@@ -325,7 +548,8 @@ class Content extends CI_Model {
                     'alias' => (empty($data['alias'])) ? rtrim($data['type'], 's') . "-" . $nextId : $data['alias'],
                     'status' => 1,
                     'user_id' => user::id(),
-                    'access' => $data['access']
+                    'access' => $data['access'],
+                    'modified' => date('Y-m-d H:i:s')
                 );
                 $this->db->insert('contents', $content);
                 $content_id = $this->db->insert_id();
@@ -348,7 +572,7 @@ class Content extends CI_Model {
         }
     }
 
-    private function set_upload_options() {
+    private function _set_upload_options() {
 
         $config = array();
         $config['upload_path'] = './media/contents/files';
@@ -560,6 +784,7 @@ class Content extends CI_Model {
             return $this->db->update('content_types', $data, array('id' => $data['id']));
         } else {
             $fieldsetA = $data['fieldset'];
+            unset($data['id']);
             unset($data['fieldset']);
 
             $this->db->insert('content_types', $data);
@@ -642,6 +867,59 @@ class Content extends CI_Model {
         return $array;
     }
 
+    public function getGroupsMenu($type, $level = 0, $recursive = 0, $html = '') {
+
+        $rows = $this->db
+                ->select('id,parent,name,alias')
+                ->where('type', $type)
+                ->where('parent', $level)
+                ->where('enabled', 1)
+                ->order_by('id', 'asc')
+                ->get('content_groups')
+                ->result();
+
+
+        if (count($rows)) {
+            $html .= ($recursive) ? '<ul class="sub-menu list-unstyled">' : '<ul class="list-group list-unstyled">';
+            foreach ($rows as $row) {
+
+                $html .= '<li>';
+                $html .= anchor($row->alias, $row->name);
+                $recursive++;
+                $html .= $this->getGroupsMenu($type, $row->id, $recursive);
+                $html .= '</li>';
+            }
+            $html .= '</ul>';
+        }
+        return $html;
+    }
+
+    public function getGroupChilds($type, $level = 0) {
+
+        $rows = $this->db
+                ->select('id')
+                ->where('type', $type)
+                ->where('parent', $level)
+                ->where('enabled', 1)
+                ->order_by('id', 'asc')
+                ->get('content_groups')
+                ->result();
+
+        $array = array();
+        if (count($rows)) {
+            foreach ($rows as $row) {
+
+                $array[] = $row->id;
+                $array = array_merge($array, $this->getGroupChilds($type, $row->id));
+            }
+        }
+        return $array;
+    }
+
+    public function getGroupByAlias($alias) {
+        return $this->db->get_where('content_groups', array('alias' => $alias))->row();
+    }
+
     public function getGroupById($group_id) {
         return $this->db->get_where('content_groups', array('id' => $group_id))->row();
     }
@@ -656,13 +934,15 @@ class Content extends CI_Model {
         } else {
             $data['alias'] = label_key($data['alias']);
         }
-
+        
         $data['access'] = implode(',', $data['access']);
 
+        unset($data['return']);
 
         if (isset($data['id']) && $data['id'] > 0) {
             return $this->db->update('content_groups', $data, array('id' => $data['id']));
         } else {
+            unset($data['id']);
             return $this->db->insert('content_groups', $data);
         }
     }
@@ -713,6 +993,10 @@ class Content extends CI_Model {
         return $this->db->get_where('content_field_groups', array('id' => $fieldset_id))->row();
     }
 
+    public function getFieldsetNameById($fieldset_id) {
+        return $this->db->get_where('content_field_groups', array('id' => $fieldset_id))->row('name');
+    }
+
     public function saveFieldset($data) {
 
         if (!is_array($data) || !count($data)) {
@@ -752,6 +1036,7 @@ class Content extends CI_Model {
     }
 
     public function fieldset_A($type = 1) {
+        $this->db->order_by('id', 'DESC');
         $rows = $this->db->get_where('content_field_groups', array('enabled' => 1))->result();
         $array = array();
         if (count($rows)) {

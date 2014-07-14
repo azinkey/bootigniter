@@ -17,6 +17,7 @@
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveContentGroupForm" data-return="<?php _u('admin/contents/edit_group/-1/' . $type); ?>">
                             <i class="glyphicon glyphicon-saved"></i>
+                            <i class="glyphicon glyphicon-plus"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
