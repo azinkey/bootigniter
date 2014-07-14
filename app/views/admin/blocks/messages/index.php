@@ -267,11 +267,11 @@
                                         </li>
                                     </ul>
                                     <br />
-                                    <a>
+                                    
                                         <h4 class="text-left">
                                             <?php echo $selected_message->subject; ?>
                                         </h4>
-                                    </a>
+                                    
                                     <br />
                                     <div class="panel-body text-left">
                                         <?php echo $selected_message->body; ?>

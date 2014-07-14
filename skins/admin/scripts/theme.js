@@ -119,7 +119,7 @@
             allowPageScroll: false,
             disableFadeOut: false
         });
-
+      
         $("#loadActivity").click(function(e) {
             e.preventDefault();
             var count_post = $("#activities").children().length;

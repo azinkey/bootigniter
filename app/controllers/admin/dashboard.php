@@ -198,6 +198,8 @@ class Dashboard extends CI_Controller {
             'total_message' => $total_message,
             'pagination' => $pagination,
             'count_unread_message' => $count_unread_message,
+            'scripts' => 'scripts/bootstrap-colorpicker.min.js',
+            'styles' => 'css/bootstrap-colorpicker.min.css'
         ));
         if (isset($selected_message->id)) {
             $this->db->update('messages', array('is_read' => 1), array('id' => $selected_message->id));
@@ -216,7 +218,7 @@ class Dashboard extends CI_Controller {
      */
     public function search_messages($keyword = '', $message_id = 0, $offset = 0) {
 
-     
+
         $post = $this->input->post();
         if (!isset($post['keyword'])) {
             return false;
@@ -224,7 +226,7 @@ class Dashboard extends CI_Controller {
         if (empty($keyword)) {
             $keyword = trim($post['keyword']);
         }
-        
+
         $limit = AZ::setting('record_per_page');
         $total_message = $this->message->getMessagesByKeyword($keyword, $offset, $limit, true);
         $pagination = AZ::pagination('admin/dashboard/search_messages/', 5, $limit, $total_message);
