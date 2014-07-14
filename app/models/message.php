@@ -282,18 +282,18 @@ class Message extends CI_Model {
         if (!user::id() || empty($keyword)) {
             return FALSE;
         }
-
+        
         $c = ($count == FALSE) ? 'result' : 'num_rows';
 
         $this->db->join('users', 'users.id = messages.author');
-        $this->db->join('labels', 'labels.id = messages.label');
+        $this->db->join('labels', 'labels.id = messages.label','LEFT');
 
         $this->db->where('messages.receiver', user::id());
         $this->db->where('messages.trash', 0);
         $this->db->where('messages.type', 2);
 
         $words = explode(" ", $keyword);
-
+        
         if (count($words)) {
             foreach ($words as $word) {
                 $this->db->like('messages.subject', $word);
@@ -304,7 +304,6 @@ class Message extends CI_Model {
         $this->db->select('labels.label AS label_name,labels.color');
         $this->db->select('users.name,users.email,messages.*');
 
-
         $this->db->order_by('messages.id', 'DESC');
 
         $this->db
@@ -314,7 +313,7 @@ class Message extends CI_Model {
             $this->db->limit($limit);
         }
         $return = $this->db->get('messages')->{$c}();
-
+        
         return $return;
     }
 

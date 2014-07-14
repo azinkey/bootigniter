@@ -216,6 +216,7 @@ class Dashboard extends CI_Controller {
      */
     public function search_messages($keyword = '', $message_id = 0, $offset = 0) {
 
+     
         $post = $this->input->post();
         if (!isset($post['keyword'])) {
             return false;
@@ -223,6 +224,7 @@ class Dashboard extends CI_Controller {
         if (empty($keyword)) {
             $keyword = trim($post['keyword']);
         }
+        
         $limit = AZ::setting('record_per_page');
         $total_message = $this->message->getMessagesByKeyword($keyword, $offset, $limit, true);
         $pagination = AZ::pagination('admin/dashboard/search_messages/', 5, $limit, $total_message);
