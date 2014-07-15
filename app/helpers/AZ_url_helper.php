@@ -25,7 +25,35 @@ if (!function_exists('media_url')) {
 
 }
 
+if (!function_exists('segment_1')) {
 
+    function segment_1() {
+        $uri = & load_class('URI', 'core');
+        return $uri->segment(1);
+    }
+
+}
+if (!function_exists('segment_2')) {
+
+    function segment_2() {
+        $uri = & load_class('URI', 'core');
+        return $uri->segment(2);
+    }
+
+}
+
+if (!function_exists('is_front')) {
+
+    function is_front() {
+        $uri = & load_class('URI', 'core');
+        if(count($uri->segments)){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+}
 
 /* End of file url_helper.php */
 /* Location: ./application/helpers/az_url_helper.php */
