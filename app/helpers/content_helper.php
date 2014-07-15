@@ -119,3 +119,58 @@ if (!function_exists('contents_A')) {
     }
 
 }
+
+if (!function_exists('is_group')) {
+
+    function is_group($alias) {
+        $ci = & get_instance();
+        $ci->load->model('content');
+        return ($ci->content->checkGroupAlias($alias)) ? true : false;
+    }
+
+}
+
+if (!function_exists('child_group_links')) {
+
+    function child_group_links($alias) {
+        $ci = & get_instance();
+        $ci->load->model('content');
+        
+        $group = $ci->content->getGroupByAlias($alias);
+        
+        $groups = $ci->content->getGroupsMenu($group->type,$group->id);
+        echo $groups;
+        
+    }
+
+}
+
+if (!function_exists('get_latest_content')) {
+
+    function get_latest_content($type,$limit = 5) {
+        $ci = & get_instance();
+        $ci->load->model('content');
+        
+        return $ci->content->getLatestContents($type,$limit);
+        
+        
+    }
+
+}
+
+if (!function_exists('get_latest_by_group')) {
+
+    function get_latest_by_group($group, $contentType, $limit = 4) {
+        $ci = & get_instance();
+        $ci->load->model('content');
+        $contents = $ci->content->getContentsByGroup($group, $contentType, 0, $limit);
+        $latest = array();
+        if (count($contents)) {
+            foreach ($contents as $content) {
+                $latest[] = anchor($content->alias, $content->title);
+            }
+        }
+        return $latest;
+    }
+
+}
