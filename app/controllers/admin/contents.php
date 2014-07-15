@@ -403,6 +403,7 @@ class Contents extends CI_Controller {
     public function remove_group($id, $type = 1) {
 
         if ($this->db->delete('content_groups', array('id' => (int) $id))) {
+            $this->db->update('content_groups', array('parent' => 0),array('parent' => (int) $id));
             AZ::redirectSuccess('admin/contents/groups/' . $type, lang('Removed'));
         } else {
             AZ::redirectError('admin/contents/groups/' . $type, lang('Error occured'));
