@@ -29,7 +29,7 @@ Features highlights
 Installation
 ===
 
-##Step 1.) UPDATE DATABASE CONNECTIVITY SETTINGS
+##Step 1.) UPDATE DATABASE SETTINGS
 
 ```bash
 /app/config/database.php
