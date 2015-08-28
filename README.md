@@ -26,17 +26,24 @@ Features highlights
 
 * Menus and Pages Managers
 
-Demo
+Installation
 ===
 
-[Fron-end](http://bootigniter.org/demo)
+##Step 1.) UPDATE DATABASE CONNECTIVITY SETTINGS
 
-[Back-end](http://bootigniter.org/demo/administrator)
+```bash
+/app/config/database.php
+```
 
+##Step 2.) UPDATE .htaccess RewriteBase
+change directory name where your bootigniter package installed on server root
 
-username: admin
+##Step 3.) Configure Your BootIgniter Package
+configurations like "Base Site URL", "language" etc..
 
-password: 123456
+```bash
+/app/config/database.php
+```
 
 Copyleft
 ===
