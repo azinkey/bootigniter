@@ -22,7 +22,7 @@
         }
         ?>
 
-        <script src="<?= skin_url(); ?>scripts/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="<?= skin_url(); ?>scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
         <script src="<?= skin_url(); ?>scripts/bootstrap.min.js" type="text/javascript"></script>
         <?php
         if (isset($scripts)) {
