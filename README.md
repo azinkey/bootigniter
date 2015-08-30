@@ -42,7 +42,7 @@ change directory name where your bootigniter package installed on server root
 configurations like "Base Site URL", "language" etc..
 
 ```bash
-/app/config/database.php
+/app/config/config.php
 ```
 
 Copyleft
