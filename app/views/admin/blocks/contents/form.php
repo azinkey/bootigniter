@@ -12,10 +12,10 @@
                 </div>
                 <div class="col-xs-5">
                     <div class="btn-group pull-right">
-                        <a href="<?php _u('admin/contents/index/' . $contentType->alias); ?>" class="btn btn-default btn-sm">
+                        <a title="<?php __("Back to List"); ?>" href="<?php _u('admin/contents/index/' . $contentType->alias); ?>" class="btn btn-default btn-sm">
                             <i class="fa fa-arrow-circle-left"></i>
                         </a>
-                        <button type="button" class="btn btn-primary btn-sm click-submit" data-form="#saveContentForm" data-return="<?php _u('admin/contents/edit/' . $contentType->alias . '/-1'); ?>">
+                        <button title="<?php __("Save & New"); ?>"  type="button" class="btn btn-primary btn-sm click-submit" data-form="#saveContentForm" data-return="<?php _u('admin/contents/edit/' . $contentType->alias . '/-1'); ?>">
                             <i class="glyphicon glyphicon-saved"></i>
                         </button>
                     </div>

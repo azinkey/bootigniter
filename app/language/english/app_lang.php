@@ -159,6 +159,8 @@ $lang['Page'] = "Page";
 $lang['Static Contents Pages'] = "Static Contents Pages";
 $lang['Default Value'] = "Default Value";
 $lang['Navigation'] = "Navigation";
+$lang['Back to List'] = "Back to List";
+$lang['Save & New'] = "Save & New";
 
 /* End of file app_lang.php */
 /* Location: ./system/language/english/app_lang.php */

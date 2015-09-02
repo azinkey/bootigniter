@@ -348,7 +348,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%messages` (
   KEY `parent_id` (`parent_id`,`type`),
   KEY `subject` (`subject`),
 FULLTEXT KEY `body` (`body`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Store All Type Messages & Notifications' AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Store All Type Messages & Notifications' AUTO_INCREMENT=4 ;
 
 INSERT INTO `%PREFIX%messages` (`id`, `parent_id`, `type`, `receiver`, `author`, `is_read`, `is_star`, `have_attachment`, `trash`, `label`, `subject`, `body`, `attachments`, `created`) VALUES
 (1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Bootigniter Installed', 'Your Bootigniter Packae Installed Successfully', '', '2014-06-02 04:25:41'),

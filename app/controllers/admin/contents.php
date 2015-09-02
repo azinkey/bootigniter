@@ -120,9 +120,14 @@ class Contents extends CI_Controller {
         if (!$post || !count($post) || !isset($post['type'])) {
             return false;
         }
-
+    
         $verify = $this->_validation($post['type_id']);
-
+        echo $verify;
+        echo '<pre>';
+        print_r($post);
+        echo '<pre>';
+        echo "Stoped here! " . __LINE__ . " @ " . __FILE__;
+        die();
         if (!$verify) {
             AZ::redirectError('admin/contents/edit/' . $post['type'] . '/' . $post['id'], validation_errors());
             return false;
@@ -330,9 +335,9 @@ class Contents extends CI_Controller {
             $key = array_keys($types_A);
             $q = $key[0];
         }
-
+      
         $groups = $this->content->getGroupsTree($q);
-
+        
         AZ::layout('left-content', array(
             'block' => 'contents/groups',
             'groups' => $groups,

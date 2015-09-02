@@ -15,7 +15,7 @@
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/font-awesome.min.css"  />
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/style.css"  />
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/theme.css"  />
-
+        
         <?php
         if (isset($styles)) {
             load_styles($styles);

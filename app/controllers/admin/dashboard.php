@@ -111,6 +111,7 @@ class Dashboard extends CI_Controller {
 
         $this->db->where('id', (int) $id);
         if ($this->db->update('messages', array('trash' => 1))) {
+            
             AZ::redirectSuccess('admin/dashboard/notifications', lang('Notification removed successfully'));
         } else {
             AZ::redirectError('admin/dashboard/notifications', lang('Error occured'));

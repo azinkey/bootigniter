@@ -236,7 +236,6 @@
                                             echo form_input(array(
                                                 'class' => 'form-control',
                                                 'name' => 'phone',
-                                                'autocomplete' => 'off',
                                                 'value' => form_value('phone', $user),
                                             ));
                                             ?>

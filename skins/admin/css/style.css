@@ -18,7 +18,6 @@ body {
 .form-stack .glyphicon {
     position: absolute;
     right: 10px;
-    top: 8px;
     color: #ccc;
 }
 .form-stack .btn .glyphicon {
@@ -92,7 +91,7 @@ hr {
     text-align: center;
     min-width: 180px;
     width: 100%;
-    color: #f2f2f2;
+    color: #f2f2f2 !important;
     text-shadow: 0px 1px 1px #999;
 }
 .navbar-brand span.logo-text {
@@ -747,7 +746,6 @@ hr.dark {
 .has-icon .glyphicon {
     position: absolute;
     right: 5px;
-    top: 10px;
     z-index: 111;
 }
 .message-list .media-meta {
@@ -870,6 +868,9 @@ hr.dark {
     border:1px solid #ccc;
     padding: 3px;
 }
+.cke_inner {
+    top: 62px !important;
+}
 /* End Genral Styles ********************************************************/
 
 @media (max-width: 767px) {
@@ -892,6 +893,9 @@ hr.dark {
     }
     .muted .glyphicon {
         font-size: 8px;
+    }
+    .cke_inner {
+        top: 115px !important;
     }
 }
 @media (max-width: 320px) {

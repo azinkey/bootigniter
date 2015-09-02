@@ -87,7 +87,7 @@ class Users extends CI_Controller {
     public function save() {
 
         $post = $this->input->post();
-
+        
         if (!$post) {
             AZ::redirectError('admin/users', lang('Restricted'));
             return false;
@@ -99,7 +99,6 @@ class Users extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
         $this->form_validation->set_rules('pincode', lang('Pincode'), 'trim|min_length[4]|integer');
-        $this->form_validation->set_rules('phone', lang('Phone'), 'trim|min_length[10]|integer');
 
         if ($id == -1) {
             $this->form_validation->set_rules('username', lang('Username'), 'trim|required|min_length[5]|max_length[16]|is_unique[users.username]');
@@ -117,9 +116,7 @@ class Users extends CI_Controller {
         }
 
         if (!$this->form_validation->run()) {
-            AZ::flashMSG(validation_errors(), 'flash_error');
-            $this->edit($id);
-            return false;
+            AZ::redirectError('admin/users/edit/' . $id, validation_errors());
         }
 
         if (isset($_FILES['avatar']['error']) && $_FILES['avatar']['error'] == 0) {

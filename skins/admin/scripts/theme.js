@@ -34,6 +34,7 @@
 
 
         var modelObj = $('<div class="modal fade" tabindex="-1" role="dialog"><div class="modal-dialog modal-sm"><div class="modal-content"></div></div></div>');
+        
         $("a.edit-box").click(function(e) {
             e.preventDefault();
             var href = $(this).attr('href');
@@ -159,6 +160,8 @@
         } else {
             // Do things on Nav Open
             $('#wrapper').addClass('show-nav');
+            var maxH = ($("#main").height() > $(window).height()) ? $("#main").height() : $(window).height();
+            $(".sidebar-menu").height(maxH + 50);
         }
 
         //$('#site-wrapper').toggleClass('show-nav');
