@@ -111,7 +111,7 @@ class Content extends CI_Model {
             $options[''] = lang('Select..');
         } else {
             foreach ($rows as $row) {
-                $options[$row->option_id] = $row->title;
+                $options[$row->value] = $row->title;
             }
         }
         return $options;
@@ -125,8 +125,9 @@ class Content extends CI_Model {
         $this->db->where('content_id', $content_id);
         $this->db->where('language_id', $language_id);
         $this->db->where_in('content_field_values.field_id', array_keys($fields));
-        $resutl = $this->db->get()->result();
-        return $resutl;
+        $result = $this->db->get()->result();
+       
+        return $result;
     }
 
     public function getContentsKey($type_id = 1) {
@@ -215,11 +216,7 @@ class Content extends CI_Model {
                 $contents[$i]->alias = $contentRow->alias;
 
                 $valueRows = $this->getContentFieldsValue($contentRow->id, $fields, $default_language_id);
-                echo '<pre>';
-                print_r($valueRows);
-                echo '<pre>';
-                echo "Stoped here! " . __LINE__ . " @ " . __FILE__;
-                die();
+               
                 if (count($valueRows)) {
                     foreach ($valueRows as $valueRow) {
                         $contents[$i]->{$valueRow->name} = $valueRow->value;
