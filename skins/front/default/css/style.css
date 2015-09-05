@@ -67,6 +67,9 @@ a {
     border-top-right-radius: 0px !important;
     width: 100%;
 }
+.navbar-nav {
+    margin-top: 10px;
+}
 .navbar-default .navbar-nav > li > a {
     color: #fff;
 }

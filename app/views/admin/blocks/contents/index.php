@@ -60,6 +60,7 @@
                                 <tbody>
                                     <?php
                                     foreach ($contents as $content) {
+                                        
                                         ?>
                                         <tr>
                                             <td class="hidden-xs"><?php echo $content->id; ?></td>

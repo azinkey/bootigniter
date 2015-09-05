@@ -57,7 +57,7 @@ class Contents extends CI_Controller {
         $contents = $this->content->getContents($type, $offset, $limit);
         $contentType = $this->content->getTypeByAlias($type);
         $admin_list_fields = $this->content->getFieldsArrayByTypeId($contentType->id, 1);
-
+        
         AZ::layout('left-content', array(
             'block' => 'contents/index',
             'contentType' => $contentType,
@@ -120,14 +120,9 @@ class Contents extends CI_Controller {
         if (!$post || !count($post) || !isset($post['type'])) {
             return false;
         }
-    
+        
         $verify = $this->_validation($post['type_id']);
-        echo $verify;
-        echo '<pre>';
-        print_r($post);
-        echo '<pre>';
-        echo "Stoped here! " . __LINE__ . " @ " . __FILE__;
-        die();
+        
         if (!$verify) {
             AZ::redirectError('admin/contents/edit/' . $post['type'] . '/' . $post['id'], validation_errors());
             return false;
@@ -211,7 +206,7 @@ class Contents extends CI_Controller {
         if (!$this->content->saveLanguage($post)) {
             AZ::redirectError('admin/contents/languages', lang('Error occured'));
         } else {
-
+            
             AZ::redirectSuccess('admin/contents/languages', lang('Saved'));
         }
     }
@@ -439,7 +434,7 @@ class Contents extends CI_Controller {
     public function edit_fieldset($edit = -1) {
 
         $fieldset = $this->content->getFieldsetById($edit);
-
+        
         AZ::layout('left-content', array(
             'block' => 'contents/fieldset-form',
             'fieldset' => $fieldset

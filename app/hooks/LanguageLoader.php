@@ -16,7 +16,6 @@ class LanguageLoader {
             $ci->session->set_userdata('user_lang', $user_lang_request);
             AZ::redirect(current_url());
         }
-        
         if (isset($user_lang) && !empty($user_lang) && !$is_admin ) {
             $ci->lang->load($side, $user_lang);
         } else {

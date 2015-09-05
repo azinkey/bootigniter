@@ -6,7 +6,7 @@
                 <div class="col-xs-7">
                     <h4 class="title">
                         <i class="fa fa-folder-open"></i>
-                        <?php echo isset($fieldset->title) ? $fieldset->title : lang('New Field Group'); ?>
+                        <?php echo isset($fieldset->name) ? $fieldset->name : lang('New Field Group'); ?>
                     </h4>
                 </div>
                 <div class="col-xs-5">

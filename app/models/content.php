@@ -203,7 +203,7 @@ class Content extends CI_Model {
             $i = 0;
             foreach ($contentRows as $contentRow) {
                 $contents[$i] = new stdClass();
-
+                
                 $contents[$i]->id = $contentRow->id;
                 $contents[$i]->group_id = $contentRow->group_id;
                 $contents[$i]->groups = $contentRow->groups;
@@ -215,7 +215,11 @@ class Content extends CI_Model {
                 $contents[$i]->alias = $contentRow->alias;
 
                 $valueRows = $this->getContentFieldsValue($contentRow->id, $fields, $default_language_id);
-
+                echo '<pre>';
+                print_r($valueRows);
+                echo '<pre>';
+                echo "Stoped here! " . __LINE__ . " @ " . __FILE__;
+                die();
                 if (count($valueRows)) {
                     foreach ($valueRows as $valueRow) {
                         $contents[$i]->{$valueRow->name} = $valueRow->value;
@@ -547,6 +551,7 @@ class Content extends CI_Model {
                     'type_id' => $data['type_id'],
                     'alias' => (empty($data['alias'])) ? rtrim($data['type'], 's') . "-" . $nextId : $data['alias'],
                     'status' => 1,
+                    'group_id' => $data['group_id'],
                     'user_id' => user::id(),
                     'access' => $data['access'],
                     'modified' => date('Y-m-d H:i:s')
@@ -624,6 +629,7 @@ class Content extends CI_Model {
     }
 
     public function getSiteLanguage() {
+        
         $lang = $this->db->get_where('languages', array('is_default' => 1))->row('directory');
         return empty($lang) ? 'english' : $lang;
     }

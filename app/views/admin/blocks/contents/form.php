@@ -35,7 +35,7 @@
                         foreach ($languages as $language) {
                             $class = ($language->is_admin) ? 'active' : '';
                             ?>   
-                            <li class="<?php echo $class; ?>">
+                            <li class="<?php echo $class; ?>" data-lang="<?php echo $language->id; ?>">
                                 <a href="#section-<?php echo $language->id; ?>" data-toggle="tab">
                                     <span class="glyphicon glyphicon-globe"></span>
                                     <span><?php echo $language->name; ?></span>
@@ -211,7 +211,7 @@
                                     </div>
                                     <div class="panel-footer">
                                         <div class="col-md-12 text-right">
-        <?php echo form_hidden('id', $content_id); ?>
+                                            <?php echo form_hidden('id', $content_id); ?>
                                             <?php echo form_hidden('language_id', $language->id); ?>
                                             <?php echo (isset($contentType->id)) ? form_hidden('type_id', $contentType->id) : ''; ?>
                                             <?php echo (isset($contentType->alias)) ? form_hidden('type', $contentType->alias) : ''; ?>

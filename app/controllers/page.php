@@ -41,7 +41,7 @@ class Page extends CI_Controller {
      * @return	Layout
      */
     public function index() {
-
+        
         AZ::layout('content', array(
             'block' => 'index',
             'page_title' => __('Bootigniter - Another Open Source CMS, A Pack of Codeigniter + Bootstrap', true)
@@ -63,9 +63,11 @@ class Page extends CI_Controller {
         $activeLanguageId = $this->content->getActiveLanguageId();
 
         $content = $this->content->getContentByAlias($alias, $activeLanguageId);
-
+        
+        // Diffrent Page Format for diffrent content type
+        $contentBlock = ($content->type_id == 1) ? 'content/page' : 'content/page_'.$content->type_id;
         $varriables = array(
-            'block' => 'content/page_' . $content->type_id,
+            'block' => $contentBlock,
             'content' => $content,
         );
 

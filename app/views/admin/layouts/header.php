@@ -39,7 +39,7 @@
 
 <div id="wrapper">
     <div id="canvas">
-        <?php AZ::block('navigations'); ?>
+        <?php  AZ::block('navigations'); ?>
         
 
 

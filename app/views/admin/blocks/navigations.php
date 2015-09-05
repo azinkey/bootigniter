@@ -1,5 +1,5 @@
 
-<aside id="menu" class="sidebar sidebar-left sidebar-menu">
+<div id="menu" class="sidebar sidebar-left sidebar-menu">
 
     <div class="menu-wrapper">
 
@@ -116,4 +116,4 @@
             </li>
         </ul>
     </div>
-</aside>
+</div>

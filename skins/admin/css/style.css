@@ -10,7 +10,9 @@ html {
     height: 100%;
 }
 body {
+    position: relative;
     height: 100%;
+    height: auto\0/; /** IE 8 Fix **/
 }
 .has-icon {
     position: relative;
@@ -78,10 +80,12 @@ hr {
     width: 320px;
     margin: 0px auto;
 }
-#header .navbar-header {
+.navbar-header {
     background-color: #00B1E1;
     border-bottom: 1px solid #63D3E9;
-    height: 60px;
+    height: 60px; 
+    height: 70px\0/; /** IE 8 Fix **/
+    float:left;
 }
 #header .navbar-header .navbar-brand {
     height: 60px;
@@ -251,6 +255,9 @@ a.media:hover {
 }
 .media-list .glyphicon {
     font-size: 15px;
+}
+.slimScrollDiv .media-body {
+    display: inline;
 }
 .ellipsis {
     overflow: hidden;
@@ -855,7 +862,15 @@ hr.dark {
 
 #wrapper.show-nav #canvas {
     -webkit-transform: translateX(180px);
+    -ms-transform: translateX(180px);
     transform: translateX(180px);
+}
+.show-nav #menu {
+    left: 0px\0/;
+    width: 205px\0/;
+}
+#canvas {
+    padding-top: 15px\0/;
 }
 .label-form .col-xs-3,.label-form .col-xs-8 {
     padding:0px;
@@ -874,6 +889,9 @@ hr.dark {
 /* End Genral Styles ********************************************************/
 
 @media (max-width: 767px) {
+    .navbar-header {
+        width: 320px;
+    }
     #sideMenuIcon {
         position: absolute;
         top: 3px;
@@ -897,8 +915,14 @@ hr.dark {
     .cke_inner {
         top: 115px !important;
     }
+    .permission-table th {
+        display: inline-block;
+    }
 }
 @media (max-width: 320px) {
+    .navbar-header {
+        width: 320px;
+    }
     #sideMenuIcon {
         position: absolute;
         top: 3px;
@@ -944,11 +968,20 @@ hr.dark {
     .hidden-xxs {
         display: none !important;
     }
+    .permission-table th {
+        display: inline-block;
+    }
 }
 @media (max-width: 360px) {
+    .navbar-header {
+        width: 100%;
+    }
     .section-tab .tab-title {
         display: inline-block;
         padding-right: 1px;
         padding-left: 5px;
+    }
+    .permission-table th {
+        display: inline-block;
     }
 }

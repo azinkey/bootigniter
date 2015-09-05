@@ -63,6 +63,11 @@
             var form = $(this).data('form');
             var returnUrl = $(this).data('return');
             
+            var active_lang = $(".nav-tabs .active").data('lang');
+            if (active_lang) {
+                form = $("#section-" + active_lang).find('form');
+            }
+            
             if (returnUrl) {
                 var hiddenReturn = $('<input/>', {type: 'hidden', id: 'return', name: 'return', value: returnUrl});
                 hiddenReturn.appendTo(form);
@@ -157,7 +162,7 @@
         if ($('#wrapper').hasClass('show-nav')) {
             // Do things on Nav Close
             $('#wrapper').removeClass('show-nav');
-        } else {
+        } else {            
             // Do things on Nav Open
             $('#wrapper').addClass('show-nav');
             var maxH = ($("#main").height() > $(window).height()) ? $("#main").height() : $(window).height();
