@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/bootigniter/';
+$config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------
@@ -247,6 +247,7 @@ $config['encryption_key'] = 'Fxj<k+A(Ud*HR)Q[X4<E_mNjU|]DuyS$[1i0,nCSH3i<dF5-Y+c
 */
 $config['sess_cookie_name']		= 'ci_session';
 $config['sess_expiration']		= 7200;
+<<<<<<< HEAD
 $config['sess_expire_on_close']         = FALSE;
 $config['sess_encrypt_cookie']          = FALSE;
 $config['sess_use_database']            = FALSE;
@@ -254,6 +255,15 @@ $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']         = TRUE;
 $config['sess_time_to_update']          = 300;
+=======
+$config['sess_expire_on_close']	= FALSE;
+$config['sess_encrypt_cookie']	= FALSE;
+$config['sess_use_database']	= FALSE;
+$config['sess_table_name']		= 'ci_sessions';
+$config['sess_match_ip']		= FALSE;
+$config['sess_match_useragent']	= TRUE;
+$config['sess_time_to_update']	= 300;
+>>>>>>> bfae0878f6ed86e675026ea7023a9af80558ee7b
 
 /*
 |--------------------------------------------------------------------------
