@@ -126,7 +126,7 @@ class Content extends CI_Model {
         $this->db->where('language_id', $language_id);
         $this->db->where_in('content_field_values.field_id', array_keys($fields));
         $result = $this->db->get()->result();
-       
+
         return $result;
     }
 
@@ -180,7 +180,7 @@ class Content extends CI_Model {
 
         $this->db
                 ->offset($offset);
-        
+
         $this->db->order_by('id', 'DESC');
 
         if (!$count) {
@@ -204,7 +204,7 @@ class Content extends CI_Model {
             $i = 0;
             foreach ($contentRows as $contentRow) {
                 $contents[$i] = new stdClass();
-                
+
                 $contents[$i]->id = $contentRow->id;
                 $contents[$i]->group_id = $contentRow->group_id;
                 $contents[$i]->groups = $contentRow->groups;
@@ -216,7 +216,7 @@ class Content extends CI_Model {
                 $contents[$i]->alias = $contentRow->alias;
 
                 $valueRows = $this->getContentFieldsValue($contentRow->id, $fields, $default_language_id);
-               
+
                 if (count($valueRows)) {
                     foreach ($valueRows as $valueRow) {
                         $contents[$i]->{$valueRow->name} = $valueRow->value;
@@ -241,11 +241,11 @@ class Content extends CI_Model {
     }
 
     public function getContentByAlias($alias, $language_id = 1) {
-        
+
         $this->db->select('contents.*,content_types.alias AS content_type');
         $this->db->join('content_types', 'content_types.id = contents.type_id', 'LEFT');
         $content = $this->db->get_where('contents', array('contents.alias' => $alias))->row();
-        
+
         if (!$content || !isset($content->type_id)) {
             return FALSE;
         }
@@ -269,7 +269,7 @@ class Content extends CI_Model {
     public function getContentsByGroup($group, $contentType = 1, $offset = 0, $limit = 25, $count = FALSE) {
 
         $fields = $this->getFieldsByTypeId($contentType, 0, 1, 0);
-        
+
         if (!$fields) {
             return FALSE;
         }
@@ -282,7 +282,7 @@ class Content extends CI_Model {
         }
 
         $childGroups = $this->getGroupChilds($contentType, $group);
-        
+
         if (!empty($childGroups)) {
             $this->db->where_in('group_id', $group);
             $this->db->or_where_in('group_id', $childGroups);
@@ -297,7 +297,6 @@ class Content extends CI_Model {
                         'type_id' => $contentType,
                         'status' => 1
                     ))->num_rows();
-            
         } else {
             $this->db->select('contents.*,content_groups.name AS groups');
             $this->db->join('content_groups', 'content_groups.id = contents.group_id', 'LEFT');
@@ -628,7 +627,7 @@ class Content extends CI_Model {
     }
 
     public function getSiteLanguage() {
-        
+
         $lang = $this->db->get_where('languages', array('is_default' => 1))->row('directory');
         return empty($lang) ? 'english' : $lang;
     }
@@ -939,7 +938,7 @@ class Content extends CI_Model {
         } else {
             $data['alias'] = label_key($data['alias']);
         }
-        
+
         $data['access'] = implode(',', $data['access']);
 
         unset($data['return']);
@@ -1217,25 +1216,25 @@ class Content extends CI_Model {
     }
 
     public function track() {
-        AZ::helper('date');
-        $this->load->library('user_agent');
-        $visitData = array(
-            'ip' => $_SERVER['REMOTE_ADDR'],
-            'is_mobile' => $this->agent->is_mobile(),
-            'platform' => $this->agent->platform(),
-            'is_browser' => $this->agent->is_browser(),
-            'browser' => $this->agent->browser(),
-            'browser_version' => $this->agent->version(),
-            'device' => $this->agent->mobile(),
-            'refer' => $this->agent->referrer(),
-            'page' => $this->uri->uri_string(),
-            'logged' => user::id()
-        );
-
-        if (0) {
+        if (!$this->session->userdata('visited') && $_SERVER['REMOTE_ADDR'] != '::1') {
+            AZ::helper('date');
+            
+            $this->load->library('user_agent');
+            $visitData = array(
+                'ip' => $_SERVER['REMOTE_ADDR'],
+                'is_mobile' => $this->agent->is_mobile(),
+                'platform' => $this->agent->platform(),
+                'is_browser' => $this->agent->is_browser(),
+                'browser' => $this->agent->browser(),
+                'browser_version' => $this->agent->version(),
+                'device' => $this->agent->mobile(),
+                'refer' => $this->agent->referrer(),
+                'page' => $this->uri->uri_string(),
+                'logged' => user::id()
+            );
+            
             return $this->db->insert('visitors', $visitData);
-        } else {
-            return true;
+            
         }
     }
 

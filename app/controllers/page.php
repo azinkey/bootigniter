@@ -47,7 +47,7 @@ class Page extends CI_Controller {
             'page_title' => __('Bootigniter - Another Open Source CMS, A Pack of Codeigniter + Bootstrap', true)
         ));
 
-        //$this->content->track(); // uncomment for enabled self tracking into Visitors
+        $this->content->track(); // uncomment for enabled self tracking into Visitors
     }
 
     /**
