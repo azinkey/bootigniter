@@ -4,7 +4,7 @@
     
     ### Application folder ##// Uncomment and change directory name where your bootigniter package \\##
 
-    RewriteBase /bootigniter/ 
+    #RewriteBase /bootigniter/ 
  
     ### Canonicalize codeigniter URLs
  
