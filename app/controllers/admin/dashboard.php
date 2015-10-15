@@ -64,9 +64,9 @@ class Dashboard extends CI_Controller {
         $track_mobile_visitor = $this->content->getTrackData($interval,'is_mobile',1);
         $total_visits = $this->content->getTotalVisits($interval);
         $new_visits = $this->content->getNewVisits($interval);
-        $new_visits_percent = round(($new_visits/$total_visits)*100,2);
+        $new_visits_percent = ($new_visits) ? round(($new_visits/$total_visits)*100,2) : 0;
         $return_visits = $this->content->getReturnVisits($interval);
-        $return_visits_percent = round(($return_visits/$total_visits)*100,2);
+        $return_visits_percent = ($return_visits) ? round(($return_visits/$total_visits)*100,2) : 0;
         
         
         AZ::layout('left-content', array(
