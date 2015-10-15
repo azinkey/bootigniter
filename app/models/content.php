@@ -1232,7 +1232,7 @@ class Content extends CI_Model {
                 'page' => $this->uri->uri_string(),
                 'logged' => user::id()
             );
-
+            $this->session->set_userdata('visited',1);
             return $this->db->insert('visitors', $visitData);
         }
     }
