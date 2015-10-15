@@ -9,62 +9,68 @@
             <div class="panel-footer">
                 <div class="row-fluid">
                     <div class="col-xs-4 text-center">
-                        <h4 class="semibold">28</h4>
+                        <h4 class="semibold text-warning"><?php echo $new_visits; ?></h4>
                         <p class="nm text-muted">
-                            <span class="semibold"><?php __('Bounce Rate'); ?></span>
-                            <span class="text-danger"><i class="ico-arrow-down4"></i> 32%</span>
+                            <span class="semibold text-warning"><?php __('New Visits'); ?></span>
+                            <span class="text-warning"><i class="ico-arrow-down4"></i> <?php echo $new_visits_percent; ?>%</span>
                         </p>
                     </div>
                     <div class="col-xs-4 text-center">
-                        <h4 class="semibold">1098</h4>
+                        <h4 class="semibold text-primary"><?php echo $return_visits; ?></h4>
                         <p class="nm text-muted">
-                            <span class="semibold"><?php __('Page Views'); ?></span>
-                            <span class="text-danger"><i class="ico-arrow-down4"></i> 32%</span>
+                            <span class="semibold text-primary"><?php __('Returning Visits'); ?></span>
+                            <span class="text-primary"><i class="ico-arrow-down4"></i> <?php echo $return_visits_percent; ?>%</span>
                         </p>
                     </div>
                     <div class="col-xs-4 text-center">
-                        <h4 class="semibold">9999</h4>
+                        <h4 class="semibold text-success"><?php echo $total_visits; ?></h4>
                         <p class="nm text-muted">
-                            <span class="semibold"><?php __('Total Visits'); ?></span>
-                            <span class="text-danger"><i class="ico-arrow-down4"></i> 32%</span>
-                        </p>
+                            <span class="semibold text-success"><?php __('Total Visits'); ?></span>                        </p>
                     </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-        <small class="muted">
-            <?php __('Configure above chart with real data from "visitors", have a look at <strong>app/views/admin/blocks/dashboard/visits-chart.php</strong>'); ?>
-        </small>
+       
+        
     </div>
 </div>
 <?php
-
 ?>
 <script type="text/javascript">
-    (function($) {
-        (function() {
+    (function ($) {
 
+        $(document).ready(function () {
+            $("#sessionMatrix").change(function () {
+
+            });
+        });
+
+        (function () {
             // You can represent data from "Visitors" Table through its controller
             $.plot("#visitChart", [{
-                    label: "Visit (All)",
+                    label: "Visit (Desktop)",
                     color: "#93A7CB",
                     data: [
-                        ["Jan", 0],
-                        ["Feb", 84],
-                        ["Mar", 60],
-                        ["Apr", 110],
-                        ["May", 39],
+<?php
+if (count($track_all_visitor)) {
+    foreach ($track_all_visitor as $key => $visit) {
+        echo '["' . $key . '",' . $visit . "],";
+    }
+}
+?>
                     ]
                 }, {
                     label: "Visit (Mobile)",
-                    color: "#94A8CC",
+                    color: "#F8862C",
                     data: [
-                        ["Jan", 0],
-                        ["Feb", 32],
-                        ["Mar", 16],
-                        ["Apr", 47],
-                        ["May", 98],
+<?php
+if (count($track_mobile_visitor)) {
+    foreach ($track_mobile_visitor as $key => $visit) {
+        echo '["' . $key . '",' . $visit . "],";
+    }
+}
+?>
                     ]
                 }], {
                 series: {
@@ -73,7 +79,7 @@
                     },
                     points: {
                         show: true,
-                        radius: 4
+                        radius: 2
                     }
                 },
                 grid: {

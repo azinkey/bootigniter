@@ -1218,7 +1218,7 @@ class Content extends CI_Model {
     public function track() {
         if (!$this->session->userdata('visited') && $_SERVER['REMOTE_ADDR'] != '::1') {
             AZ::helper('date');
-            
+
             $this->load->library('user_agent');
             $visitData = array(
                 'ip' => $_SERVER['REMOTE_ADDR'],
@@ -1232,10 +1232,103 @@ class Content extends CI_Model {
                 'page' => $this->uri->uri_string(),
                 'logged' => user::id()
             );
-            
+
             return $this->db->insert('visitors', $visitData);
-            
         }
+    }
+
+    public function getTrackData($interval, $specific = '', $specific_value = '') {
+
+        if (!empty($specific) && !empty($specific_value)) {
+            $this->db->where($specific, $specific_value);
+        }
+
+        $where = "`timestamp` BETWEEN DATE_SUB( CURDATE( ) ,INTERVAL $interval ) AND CURDATE()";
+
+        $part = explode(" ", $interval);
+        $range = end($part);
+
+        switch ($range) {
+            case 'DAY':
+                $this->db->select("DAY(`timestamp`) AS day, YEAR(`timestamp`) AS year, MONTHNAME(`timestamp`) AS month, COUNT(id) AS visit");
+                $this->db->group_by("DAY(`timestamp`)");
+                break;
+            case 'WEEK':
+                $this->db->select("DAY(`timestamp`) AS day, YEAR(`timestamp`) AS year, MONTH(`timestamp`) AS month, COUNT(id) AS visit");
+                $this->db->group_by("DAY(`timestamp`)");
+                break;
+            case 'MONTH':
+
+                if ($part[0] > 1) {
+                    $this->db->select("YEAR(`timestamp`) AS year, MONTHNAME(`timestamp`) AS month, COUNT(id) AS visit");
+                    $this->db->group_by("YEAR(`timestamp`), MONTHNAME(`timestamp`)");
+                } else {
+                    $this->db->select("DAY(`timestamp`) AS day, YEAR(`timestamp`) AS year, MONTHNAME(`timestamp`) AS month, COUNT(id) AS visit");
+                    $this->db->group_by("DAY(`timestamp`)");
+                }
+
+                break;
+            case 'YEAR':
+                $this->db->select("YEAR(`timestamp`) AS year, MONTHNAME(`timestamp`) AS month, COUNT(id) AS visit");
+                $this->db->group_by("YEAR(`timestamp`), MONTHNAME(`timestamp`)");
+                break;
+            default:
+                $this->db->select("YEAR(`timestamp`) AS year, MONTHNAME(`timestamp`) AS month, COUNT(id) AS visit");
+                $this->db->group_by("YEAR(`timestamp`), MONTHNAME(`timestamp`)");
+                break;
+        }
+        $this->db->order_by("timestamp");
+        $rows = $this->db->get_where('visitors', $where)->result();
+
+        $data = array();
+        if (count($rows)) {
+            foreach ($rows as $key => $row) {
+                $index = (isset($row->day)) ? $row->day . ", " . date("M", strtotime($row->day."-".$row->month."-".$row->year)) : date("M", strtotime($row->day."-".$row->month."-".$row->year)) . ", " . $row->year;
+                $data[$index] = $row->visit;
+            }
+        }
+
+        return $data;
+    }
+
+    public function getNewVisits($interval, $specific = '', $specific_value = '') {
+
+        if (!empty($specific) && !empty($specific_value)) {
+            $this->db->where($specific, $specific_value);
+        }
+        $this->db->group_by("ip");
+        $this->db->having("COUNT(`ip`)", 1);
+
+        $where = "`timestamp` BETWEEN DATE_SUB( CURDATE( ) ,INTERVAL $interval ) AND CURDATE()";
+        $count = $this->db->get_where('visitors', $where)->num_rows();
+
+        return $count;
+    }
+
+    public function getReturnVisits($interval, $specific = '', $specific_value = '') {
+
+        if (!empty($specific) && !empty($specific_value)) {
+            $this->db->where($specific, $specific_value);
+        }
+        $this->db->group_by("ip");
+        $this->db->having("COUNT(`ip`) >", 1);
+
+        $where = "`timestamp` BETWEEN DATE_SUB( CURDATE( ) ,INTERVAL $interval ) AND CURDATE()";
+        $count = $this->db->get_where('visitors', $where)->num_rows();
+
+        return $count;
+    }
+
+    public function getTotalVisits($interval, $specific = '', $specific_value = '') {
+
+        if (!empty($specific) && !empty($specific_value)) {
+            $this->db->where($specific, $specific_value);
+        }
+        $this->db->group_by("ip");
+        $where = "`timestamp` BETWEEN DATE_SUB( CURDATE( ) ,INTERVAL $interval ) AND CURDATE()";
+        $count = $this->db->get_where('visitors', $where)->num_rows();
+
+        return $count;
     }
 
 }

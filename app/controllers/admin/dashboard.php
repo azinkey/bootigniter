@@ -56,7 +56,19 @@ class Dashboard extends CI_Controller {
 
         $activities = $this->message->getActivities();
         $messages = $this->message->getMessages('*', array('messages.trash' => 0, 'messages.receiver' => user::id()), 0, 10);
-
+        
+        $post = $this->input->post();
+        $interval = (isset($post['duration']) && !empty($post['duration'])) 
+                ? $post['duration'] : '1 DAY'; // Default Interval for Visist
+        $track_all_visitor = $this->content->getTrackData($interval,'is_mobile',0);
+        $track_mobile_visitor = $this->content->getTrackData($interval,'is_mobile',1);
+        $total_visits = $this->content->getTotalVisits($interval);
+        $new_visits = $this->content->getNewVisits($interval);
+        $new_visits_percent = round(($new_visits/$total_visits)*100,2);
+        $return_visits = $this->content->getReturnVisits($interval);
+        $return_visits_percent = round(($return_visits/$total_visits)*100,2);
+        
+        
         AZ::layout('left-content', array(
             'block' => 'dashboard/index',
             'total_users' => $total_users,
@@ -64,6 +76,15 @@ class Dashboard extends CI_Controller {
             'total_notification' => $total_notification,
             'activities' => $activities,
             'messages' => $messages,
+            'duration' => (isset($post['duration'])) ? $post['duration'] : 0,
+            'track_all_visitor' => $track_all_visitor,
+            'track_mobile_visitor' => $track_mobile_visitor,
+            'track_mobile_visitor' => $track_mobile_visitor,
+            'new_visits' => $new_visits,
+            'new_visits_percent' => $new_visits_percent,
+            'return_visits' => $return_visits,
+            'return_visits_percent' => $return_visits_percent,
+            'total_visits' => $total_visits,
             'scripts' => array(
                 'scripts/jquery.flot.min.js',
                 'scripts/jquery.flot.categories.min.js',

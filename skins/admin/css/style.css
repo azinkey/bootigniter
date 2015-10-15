@@ -887,10 +887,15 @@ hr.dark {
 .cke_inner {
     top: 62px !important;
 }
+/*.xAxis .tickLabel {
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}*/
 /* End Genral Styles ********************************************************/
 
 @media (max-width: 767px) {
-  
+
     #sideMenuIcon {
         position: absolute;
         top: 3px;
@@ -949,7 +954,7 @@ hr.dark {
     hr.dark {
         margin: 25px 0px;
     }
-    
+
     #sidebarMenu li .notification {
         width: 16px;
         height: 16px;
