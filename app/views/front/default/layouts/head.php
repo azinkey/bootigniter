@@ -9,6 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <meta name="site_url" content="<?php _u(''); ?>">
+        
+        <meta name="description" content="<?php echo (isset($meta_description)) ? $meta_description : AZ::setting('global_meta_description'); ?>">
+        <meta name="keywords" content="<?php echo (isset($meta_keywords)) ? $meta_keywords : AZ::setting('global_meta_keywords'); ?>">
 
 
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/bootstrap.min.css"  />
@@ -30,11 +33,8 @@
         
         ?>
         
-        <title> <?php echo page_title((isset($page_title)) ? $page_title : ''); ?> </title>
-
-
-
+        <title> <?php echo page_title((isset($page_title)) ? $page_title : AZ::setting('global_meta_title')); ?> </title>
+        
     </head>
 
     <body class="<?php echo page_class(); ?>">
-
