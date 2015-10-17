@@ -187,7 +187,8 @@ class user extends CI_Model {
         if (!count($avatar) && is_array($avatar)) {
             $avatar = 'media/users/avatar.png';
         }
-        return site_url($avatar);
+        
+        return base_url($avatar);
     }
 
     static public function email($user_id = NULL) {
