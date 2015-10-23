@@ -1242,13 +1242,23 @@ class Content extends CI_Model {
         if (!empty($specific) && !empty($specific_value)) {
             $this->db->where($specific, $specific_value);
         }
-
-        $where = "`timestamp` BETWEEN DATE_SUB( CURDATE( ) ,INTERVAL $interval ) AND CURDATE()";
+		
+		if($interval == 'TODAY'){
+				$where = "`timestamp` > '". date("Y-m-d 00:00:00")."' ";
+		} else {
+				$where = "`timestamp` BETWEEN DATE_SUB( NOW( ) ,INTERVAL $interval ) AND NOW()";
+		}
 
         $part = explode(" ", $interval);
         $range = end($part);
 
         switch ($range) {
+		
+			case 'TODAY':
+                $this->db->select("DAY(`timestamp`) AS day, YEAR(`timestamp`) AS year, MONTHNAME(`timestamp`) AS month, COUNT(id) AS visit");
+                $this->db->group_by("DAY(`timestamp`)");
+                break;
+		
             case 'DAY':
                 $this->db->select("DAY(`timestamp`) AS day, YEAR(`timestamp`) AS year, MONTHNAME(`timestamp`) AS month, COUNT(id) AS visit");
                 $this->db->group_by("DAY(`timestamp`)");
@@ -1278,12 +1288,13 @@ class Content extends CI_Model {
                 break;
         }
         $this->db->order_by("timestamp");
+		
         $rows = $this->db->get_where('visitors', $where)->result();
-
+		
         $data = array();
         if (count($rows)) {
             foreach ($rows as $key => $row) {
-                $index = (isset($row->day)) ? $row->day . ", " . date("M", strtotime($row->day."-".$row->month."-".$row->year)) : date("M", strtotime($row->day."-".$row->month."-".$row->year)) . ", " . $row->year;
+                $index = (isset($row->day)) ? $row->day . ", " . date("M", strtotime($row->day."-".$row->month."-".$row->year)) : date("M", strtotime($row->month."-".$row->year)) . ", " . $row->year;
                 $data[$index] = $row->visit;
             }
         }
@@ -1299,7 +1310,12 @@ class Content extends CI_Model {
         $this->db->group_by("ip");
         $this->db->having("COUNT(`ip`)", 1);
 
-        $where = "`timestamp` BETWEEN DATE_SUB( CURDATE( ) ,INTERVAL $interval ) AND CURDATE()";
+		if($interval == 'TODAY'){
+				$where = "`timestamp` > '". date("Y-m-d 00:00:00")."' ";
+		} else {
+				$where = "`timestamp` BETWEEN DATE_SUB( NOW( ) ,INTERVAL $interval ) AND NOW()";
+		}
+        
         $count = $this->db->get_where('visitors', $where)->num_rows();
 
         return $count;
@@ -1313,7 +1329,12 @@ class Content extends CI_Model {
         $this->db->group_by("ip");
         $this->db->having("COUNT(`ip`) >", 1);
 
-        $where = "`timestamp` BETWEEN DATE_SUB( CURDATE( ) ,INTERVAL $interval ) AND CURDATE()";
+        if($interval == 'TODAY'){
+				$where = "`timestamp` > '". date("Y-m-d 00:00:00")."' ";
+		} else {
+				$where = "`timestamp` BETWEEN DATE_SUB( NOW( ) ,INTERVAL $interval ) AND NOW()";
+		}
+		
         $count = $this->db->get_where('visitors', $where)->num_rows();
 
         return $count;
@@ -1325,9 +1346,15 @@ class Content extends CI_Model {
             $this->db->where($specific, $specific_value);
         }
         $this->db->group_by("ip");
-        $where = "`timestamp` BETWEEN DATE_SUB( CURDATE( ) ,INTERVAL $interval ) AND CURDATE()";
+        
+		if($interval == 'TODAY'){
+				$where = "`timestamp` > '". date("Y-m-d 00:00:00")."' ";
+		} else {
+				$where = "`timestamp` BETWEEN DATE_SUB( NOW( ) ,INTERVAL $interval ) AND NOW()";
+		}
+		
         $count = $this->db->get_where('visitors', $where)->num_rows();
-
+		
         return $count;
     }
 

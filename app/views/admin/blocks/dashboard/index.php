@@ -12,8 +12,8 @@
                             <?php
                             echo form_dropdown('duration', array(
                                 '' => lang('Select Visits'), 
-                                '1 DAY' => lang('Today'), 
-                                '1 DAY' => lang('Today'), 
+                                'TODAY' => lang('Today'), 
+                                '1 DAY' => lang('Last Day'), 
                                 '1 WEEK' => lang('Last Week'), 
                                 '1 MONTH' => lang('Last Month'), 
                                 '6 MONTH' => lang('Last 6 Month'), 

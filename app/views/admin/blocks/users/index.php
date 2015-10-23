@@ -65,7 +65,7 @@
                                                         <div class="panel-body">
                                                             <div class="col-md-3 stretch text-center hidden-xs hidden-sm">
                                                                 <img src="<?php
-                                                                echo (!empty($user->avatar)) ? _u($user->avatar) : _u('media/users/avatar.png');
+                                                                echo (!empty($user->avatar)) ? base_url($user->avatar) : base_url('media/users/avatar.png');
                                                                 ?>" alt="avatar" class="user-avatar img-polaroid" />
                                                             </div>
                                                             <div class="col-md-7 user-details">

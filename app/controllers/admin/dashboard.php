@@ -62,6 +62,7 @@ class Dashboard extends CI_Controller {
                 ? $post['duration'] : '1 DAY'; // Default Interval for Visist
         $track_all_visitor = $this->content->getTrackData($interval,'is_mobile',0);
         $track_mobile_visitor = $this->content->getTrackData($interval,'is_mobile',1);
+		
         $total_visits = $this->content->getTotalVisits($interval);
         $new_visits = $this->content->getNewVisits($interval);
         $new_visits_percent = ($new_visits) ? round(($new_visits/$total_visits)*100,2) : 0;
