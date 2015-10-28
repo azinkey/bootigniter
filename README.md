@@ -50,13 +50,13 @@ Features highlights
 2 Step - Installation (Boot Setup)
 ===
 
-#Step 1.) UPDATE DATABASE SETTINGS
+###Step 1.) UPDATE DATABASE SETTINGS
 
 ```bash
 /app/config/database.php
 ```
 
-#Step 2.) Configure Your BootIgniter Package
+###Step 2.) Configure Your BootIgniter Package
 configurations like "Base Site URL", "language" etc..
 
 ```bash
