@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 brand">
-                    <?php _a('/', AZ::setting('site_name') , ' class="logo-brand" ') ?>
+                    <?php _a('', AZ::setting('site_name') , ' class="logo-brand" ') ?>
                 </div>
                 <div class="col-xs-6">                    
                     <div role="navigation" class="navbar navbar-default">
