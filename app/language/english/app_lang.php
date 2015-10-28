@@ -163,4 +163,4 @@ $lang['Back to List'] = "Back to List";
 $lang['Save & New'] = "Save & New";
 
 /* End of file app_lang.php */
-/* Location: ./system/language/english/app_lang.php */
+/* Location: ./app/language/english/app_lang.php */

@@ -9,7 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="site_url" content="<?php _u(''); ?>">
-
+		
+		<link rel="shortcut icon" href="<?= skin_url(); ?>images/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="<?= skin_url(); ?>images/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon-precomposed" href="<?= skin_url(); ?>images/apple-touch-icon.png" sizes="144x79">
 
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/bootstrap.min.css"  />
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/font-awesome.min.css"  />

@@ -7,7 +7,7 @@
  *
  * @package		Bootigniter
  * @author		AZinkey
- * @copyright           Copyright (c) 2014, AZinkey.
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
  * @license		http://bootigniter.org/license
  * @link		http://bootigniter.org
  * @Version		Version 1.0
@@ -18,7 +18,7 @@
  * Contents Controller
  *
  * @package		Admin
- * @subpackage          Controllers
+ * @subpackage  Controllers
  * @author		AZinkey
  */
 if (!defined('BASEPATH'))
@@ -46,7 +46,6 @@ class Contents extends CI_Controller {
      * Primary View is views/admin/blocks/contents/index
      * @param	string $type
      * @param	integer $offset
-     * @return	Layout
      */
     public function index($type = 'pages', $offset = 0) {
 
@@ -73,7 +72,6 @@ class Contents extends CI_Controller {
      * Primary View is views/admin/blocks/contents/form
      * @param	string $type
      * @param	integer $content_id
-     * @return	Layout
      */
     public function edit($type, $content_id = -1) {
 
@@ -104,7 +102,7 @@ class Contents extends CI_Controller {
             'languages' => $languages,
             'groups' => $groups,
             'scripts' => array(
-                'scripts/ckeditor/ckeditor.js',
+                '//cdn.ckeditor.com/4.5.4/full/ckeditor.js',
             )
         ));
     }
@@ -172,7 +170,6 @@ class Contents extends CI_Controller {
      *
      * Primary View is views/admin/blocks/contents/language-form
      * @param	integer $edit
-     * @return	Layout
      */
     public function edit_language($edit = -1) {
 
@@ -230,8 +227,7 @@ class Contents extends CI_Controller {
      * Content Types Page for this controller or List all content types.
      *
      * Primary View is views/admin/blocks/contents/types
-     * @param	integer $offset
-     * @return	Layout
+     * @param	integer $offset     
      */
     public function types($offset = 0) {
 
@@ -253,7 +249,6 @@ class Contents extends CI_Controller {
      *
      * Primary View is views/admin/blocks/contents/type-form
      * @param	integer $edit
-     * @return	Layout
      */
     public function edit_type($edit = -1) {
 
@@ -321,7 +316,6 @@ class Contents extends CI_Controller {
      * Primary View is views/admin/blocks/contents/types
      * @param	integer $q Content Type ID
      * @param	integer $offset
-     * @return	Layout
      */
     public function groups($q = 1) {
 
@@ -338,8 +332,8 @@ class Contents extends CI_Controller {
             'groups' => $groups,
             'types_A' => $types_A,
             'q' => $q,
-            'styles' => 'css/jquery.dataTables.css',
-            'scripts' => 'scripts/jquery.dataTables.js',
+            'styles' => 'css/jquery.dataTables.min.css',
+            'scripts' => 'scripts/jquery.dataTables.min.js',
         ));
     }
 
@@ -349,7 +343,6 @@ class Contents extends CI_Controller {
      * Primary View is views/admin/blocks/contents/group-form
      * @param	integer $edit
      * @param	integer $type
-     * @return	Layout
      */
     public function edit_group($edit = -1, $type = 1) {
 
@@ -414,7 +407,6 @@ class Contents extends CI_Controller {
      * Content Fields Group (Fieldset) Page for this controller.
      *
      * Primary View is views/admin/blocks/contents/fieldset
-     * @return	Layout
      */
     public function fieldsets() {
         $fieldsets = $this->content->getFieldSets();
@@ -429,7 +421,6 @@ class Contents extends CI_Controller {
      *
      * Primary View is views/admin/blocks/contents/fieldset-form
      * @param	integer $edit
-     * @return	Layout
      */
     public function edit_fieldset($edit = -1) {
 
@@ -486,7 +477,6 @@ class Contents extends CI_Controller {
      * Primary View is views/admin/blocks/contents/fields
      * @param	integer $q Content Field Group (Fieldset)
      * @param	integer $offset
-     * @return	Layout
      */
     public function fields($q = 1, $offset = 0) {
 
@@ -512,7 +502,6 @@ class Contents extends CI_Controller {
      * Primary View is views/admin/blocks/contents/field-form
      * @param	integer $edit
      * @param	integer $fieldset
-     * @return	Layout
      */
     public function edit_field($edit = -1, $fieldset = 1) {
 
@@ -621,4 +610,4 @@ class Contents extends CI_Controller {
 }
 
 /* End of file contents.php */
-    /* Location: ./application/controllers/contents.php */    
+    /* Location: ./app/controllers/admin/contents.php */    

@@ -7,13 +7,20 @@
  *
  * @package		Bootigniter
  * @author		AZinkey
- * @copyright           Copyright (c) 2014, AZinkey.
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
  * @license		http://bootigniter.org/license
  * @link		http://bootigniter.org
  * @Version		Version 1.0
  */
 // ------------------------------------------------------------------------
 
+/**
+ * Form Helper
+ *
+ * @package		Helper
+ * @subpackage  Form
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -147,6 +154,16 @@ if (!function_exists('field_options')) {
 
 }
 
+/**
+ * Return Text Field
+ *
+ * @access	public
+ * @param	name
+ * @param	values
+ * @param	disabled
+ * @param	attributes
+ * @return	string
+ */
 if (!function_exists('field_text')) {
 
     function field_text($name, $values = NULL, $disabled = 0, $attributes = array()) {
@@ -171,6 +188,16 @@ if (!function_exists('field_text')) {
 
 }
 
+/**
+ * Return Textarea Field
+ *
+ * @access	public
+ * @param	name
+ * @param	values
+ * @param	disabled
+ * @param	attributes
+ * @return	string
+ */
 if (!function_exists('field_textarea')) {
 
     function field_textarea($name, $values = NULL, $disabled = 0, $attributes = array()) {
@@ -196,6 +223,16 @@ if (!function_exists('field_textarea')) {
 
 }
 
+/**
+ * Return Editor Field
+ *
+ * @access	public
+ * @param	name
+ * @param	values
+ * @param	disabled
+ * @param	attributes
+ * @return	string
+ */
 if (!function_exists('field_editor')) {
 
     function field_editor($name, $values = NULL, $disabled = 0, $attributes = array()) {
@@ -224,6 +261,16 @@ if (!function_exists('field_editor')) {
 
 }
 
+/**
+ * Return Date Field
+ *
+ * @access	public
+ * @param	name
+ * @param	values
+ * @param	disabled
+ * @param	attributes
+ * @return	string
+ */
 if (!function_exists('field_date')) {
 
     function field_date($name, $values = NULL, $disabled = 0, $attributes = array()) {
@@ -250,6 +297,17 @@ if (!function_exists('field_date')) {
 
 }
 
+/**
+ * Return Select Field
+ *
+ * @access	public
+ * @param	name
+ * @param	options
+ * @param	selected
+ * @param	attr
+ * @param	disabled
+ * @return	string
+ */
 if (!function_exists('field_select')) {
 
     function field_select($name, $options = array(), $selected = NULL, $attr = 'class="input-block-level"', $disabled = 0) {
@@ -264,6 +322,16 @@ if (!function_exists('field_select')) {
 
 }
 
+/**
+ * Return Yes/No Dropdown Field
+ *
+ * @access	public
+ * @param	name
+ * @param	value
+ * @param	disabled
+ * @param	attr
+ * @return	string
+ */
 if (!function_exists('field_boolen')) {
 
     function field_boolen($name, $value, $disabled = 0, $attr = 'class="form-control input-block-level"') {
@@ -275,6 +343,13 @@ if (!function_exists('field_boolen')) {
 
 }
 
+/**
+ * Return Checkbox Field
+ *
+ * @access	public
+ * @param	field_id
+ * @return	string
+ */
 if (!function_exists('field_checkbox')) {
 
     function field_checkbox($field_id) {
@@ -299,6 +374,13 @@ if (!function_exists('field_checkbox')) {
 
 }
 
+/**
+ * Return Radio Field
+ *
+ * @access	public
+ * @param	field_id
+ * @return	string
+ */
 if (!function_exists('field_radio')) {
 
     function field_radio($field_id) {
@@ -323,6 +405,14 @@ if (!function_exists('field_radio')) {
 
 }
 
+/**
+ * Return File Field
+ *
+ * @access	public
+ * @param	name
+ * @param	values
+ * @return	string
+ */
 if (!function_exists('field_file')) {
 
     function field_file($name, $values = NULL) {
@@ -348,6 +438,14 @@ if (!function_exists('field_file')) {
 
 }
 
+/**
+ * Return Text Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @param	setting
+ * @return	string
+ */
 if (!function_exists('field_text_option')) {
 
     function field_text_option($field_id = "", $setting = false) {
@@ -380,6 +478,14 @@ STR;
 
 }
 
+/**
+ * Return Textarea Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @param	setting
+ * @return	string
+ */
 if (!function_exists('field_textarea_option')) {
 
     function field_textarea_option($field_id = "", $setting = false) {
@@ -411,6 +517,14 @@ STR;
 
 }
 
+/**
+ * Return Editor Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @param	setting
+ * @return	string
+ */
 if (!function_exists('field_editor_option')) {
 
     function field_editor_option($field_id = "", $setting = false) {
@@ -442,6 +556,14 @@ STR;
 
 }
 
+/**
+ * Return Select Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @param	setting
+ * @return	string
+ */
 if (!function_exists('field_select_option')) {
 
     function field_select_option($field_id = "", $setting = false) {
@@ -597,6 +719,14 @@ STR;
 
 }
 
+/**
+ * Return Yes/No Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @param	setting
+ * @return	string
+ */
 if (!function_exists('field_boolen_option')) {
 
     function field_boolen_option($field_id = "", $setting = false) {
@@ -745,6 +875,13 @@ STR;
 
 }
 
+/**
+ * Return Checkbox Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @return	string
+ */
 if (!function_exists('field_checkbox_option')) {
 
     function field_checkbox_option($field_id = "") {
@@ -854,6 +991,13 @@ STR;
 
 }
 
+/**
+ * Return Radio Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @return	string
+ */
 if (!function_exists('field_radio_option')) {
 
     function field_radio_option($field_id = "") {
@@ -961,6 +1105,14 @@ STR;
 
 }
 
+/**
+ * Return Date Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @param	setting
+ * @return	string
+ */
 if (!function_exists('field_date_option')) {
 
     function field_date_option($field_id = "", $setting = false) {
@@ -1004,6 +1156,14 @@ STR;
 
 }
 
+/**
+ * Return File Field Options
+ *
+ * @access	public
+ * @param	field_id
+ * @param	setting
+ * @return	string
+ */
 if (!function_exists('field_file_option')) {
 
     function field_file_option($field_id = "", $setting = false) {

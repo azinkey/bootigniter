@@ -7,7 +7,7 @@
  *
  * @package		Bootigniter
  * @author		AZinkey
- * @copyright           Copyright (c) 2014, AZinkey.
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
  * @license		http://bootigniter.org/license
  * @link		http://bootigniter.org
  * @Version		Version 1.0
@@ -18,7 +18,7 @@
  * Contents Controller
  *
  * @package		Admin
- * @subpackage          Controllers
+ * @subpackage  Controllers
  * @author		AZinkey
  */
 if (!defined('BASEPATH'))
@@ -46,7 +46,6 @@ class Menus extends CI_Controller {
      * 
      * @param	integer $q Menu ID
      * @param	integer $offset
-     * @return	Layout
      */
     public function index($q = 1, $offset = 0) {
 
@@ -69,7 +68,6 @@ class Menus extends CI_Controller {
      * Primary View is views/admin/blocks/menus/menu-form
      * 
      * @param	integer $menu_id
-     * @return	Layout
      */
     public function edit_menu($menu_id = -1) {
 
@@ -128,7 +126,6 @@ class Menus extends CI_Controller {
      * 
      * @param	integer $menu_id
      * @param	integer $item_id
-     * @return	Layout
      */
     public function edit_item($menu_id, $item_id = -1) {
         AZ::helper('content');
@@ -139,7 +136,7 @@ class Menus extends CI_Controller {
             'item' => $item,
             'menu_id' => $menu_id,
             'scripts' => array(
-                'scripts/ckeditor/ckeditor.js',
+                '//cdn.ckeditor.com/4.5.4/full/ckeditor.js',
             )
         ));
     }

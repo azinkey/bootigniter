@@ -1,18 +1,36 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Menu Helper
+ *
+ * @package		Helper
+ * @subpackage  Menu
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-
-
-
 /**
- * Styles
+ * Get Setting Fieldset/group
  *
- * Generates Styles link.
- * @access    public
- * @param    string/array
- * @return    string
+ *
+ * @access	public
+ * @param	setting_section_id
+ * @return	array
  */
 if (!function_exists('get_setting_groups')) {
 
@@ -29,6 +47,14 @@ if (!function_exists('get_setting_groups')) {
 
 }
 
+/**
+ * Get Settings
+ *
+ *
+ * @access	public
+ * @param	group_id
+ * @return	array
+ */
 if (!function_exists('get_settings')) {
 
     function get_settings($group_id) {
@@ -43,6 +69,14 @@ if (!function_exists('get_settings')) {
 
 }
 
+/**
+ * Render Setting Field
+ *
+ *
+ * @access	public
+ * @param	setting_id
+ * @return	string
+ */
 if (!function_exists('setting_field_render')) {
 
     function setting_field_render($setting_id) {
@@ -101,3 +135,6 @@ if (!function_exists('setting_field_render')) {
     }
 
 }
+
+/* End of file setting_helper.php */
+/* Location: ./app/helpers/setting_helper.php */

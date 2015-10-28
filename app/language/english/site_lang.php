@@ -14,5 +14,14 @@ $lang['About'] = "About";
 $lang['Features'] = "Features";
 $lang['Demo'] = "Demo";
 $lang['Community'] = "Community";
+$lang['Log in Account'] = "Log in Account";
+$lang['Create an Account'] = "Create an Account";
+$lang['Login'] = "Login";
+$lang['Create'] = "Create";
+$lang['Username'] = "Username";
+$lang['Email'] = "Email";
+$lang['Password'] = "Password";
+$lang['Confirm Password'] = "Confirm Password";
+
 /* End of file site_lang.php */
-/* Location: ./system/language/english/site_lang.php */
+/* Location: ./app/language/english/site_lang.php */

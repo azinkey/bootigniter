@@ -7,7 +7,7 @@
  *
  * @package		Bootigniter
  * @author		AZinkey
- * @copyright           Copyright (c) 2014, AZinkey.
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
  * @license		http://bootigniter.org/license
  * @link		http://bootigniter.org
  * @Version		Version 1.0
@@ -15,10 +15,10 @@
 // ------------------------------------------------------------------------
 
 /**
- * Dashboard Controller
+ * Contents Controller
  *
  * @package		Admin
- * @subpackage          Controllers
+ * @subpackage  Controllers
  * @author		AZinkey
  */
 if (!defined('BASEPATH'))
@@ -102,7 +102,6 @@ class Dashboard extends CI_Controller {
      * Primary View is views/admin/blocks/messages/notifications
      * 
      * @param	integer $offset
-     * @return	Layout
      */
     public function notifications($offset = 0) {
 
@@ -162,7 +161,6 @@ class Dashboard extends CI_Controller {
      * @param	string $mode
      * @param	integer $message_id
      * @param	integer $offset
-     * @return	Layout
      */
     public function messages($mode = 'inbox', $message_id = 0, $offset = 0) {
 
@@ -197,7 +195,6 @@ class Dashboard extends CI_Controller {
      * @param	integer $label
      * @param	integer $message_id
      * @param	integer $offset
-     * @return	Layout
      */
     public function label_messages($label = 1, $message_id = 0, $offset = 0) {
 
@@ -237,7 +234,6 @@ class Dashboard extends CI_Controller {
      * @param	string $keyword
      * @param	integer $message_id
      * @param	integer $offset
-     * @return	Layout
      */
     public function search_messages($keyword = '', $message_id = 0, $offset = 0) {
 
@@ -275,7 +271,6 @@ class Dashboard extends CI_Controller {
      * Primary View is views/admin/blocks/messages/form
      * 
      * @param	integer $message_id
-     * @return	Layout
      */
     public function write_message($message_id = 0) {
 
@@ -294,10 +289,10 @@ class Dashboard extends CI_Controller {
             'message_id' => $message_id,
             'to_user' => $to_user,
             'scripts' => array(
-                'scripts/chosen.jquery.js',
+                'scripts/chosen.jquery.min.js',
             ),
             'styles' => array(
-                'css/chosen.css',
+                'css/chosen.min.css',
             )
         ));
     }
@@ -308,7 +303,6 @@ class Dashboard extends CI_Controller {
      * Primary View is views/admin/blocks/messages/forward-form
      * 
      * @param	integer $message_id
-     * @return	Layout
      */
     public function forward_message($message_id) {
 
@@ -320,10 +314,10 @@ class Dashboard extends CI_Controller {
             'user_options' => $user_options,
             'message' => $message,
             'scripts' => array(
-                'scripts/chosen.jquery.js',
+                'scripts/chosen.jquery.min.js',
             ),
             'styles' => array(
-                'css/chosen.css',
+                'css/chosen.min.css',
             )
         ));
     }
@@ -363,7 +357,6 @@ class Dashboard extends CI_Controller {
      * Add New or Edit Message Label
      *
      * @param	integer $edit
-     * @return	Layout
      */
     public function edit_label($edit = -1, $mode = 'inbox') {
 

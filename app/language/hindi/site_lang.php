@@ -25,5 +25,6 @@ $lang['Username'] = "प्रयोक्ता नाम";
 $lang['Email'] = "ईमेल";
 $lang['Password'] = "पासवर्ड";
 $lang['Confirm Password'] = "पासवर्ड की पुष्टि";
+
 /* End of file site_lang.php */
-/* Location: ./system/language/english/site_lang.php */
+/* Location: ./app/language/hindi/site_lang.php */

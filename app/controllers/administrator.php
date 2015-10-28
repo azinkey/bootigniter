@@ -7,7 +7,7 @@
  *
  * @package		Bootigniter
  * @author		AZinkey
- * @copyright           Copyright (c) 2014, AZinkey.
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
  * @license		http://bootigniter.org/license
  * @link		http://bootigniter.org
  * @Version		Version 1.0
@@ -18,7 +18,7 @@
  * Contents Controller
  *
  * @package		Administrator
- * @subpackage          Controllers
+ * @subpackage  Controllers
  * @author		AZinkey
  */
 if (!defined('BASEPATH'))
@@ -36,7 +36,6 @@ class Administrator extends CI_Controller {
      *
      * Primary View is views/admin/blocks/login
      * 
-     * @return	Layout
      */
     public function index() {
 
@@ -108,4 +107,4 @@ class Administrator extends CI_Controller {
 }
 
 /* End of file admin.php */
-/* Location: ./application/controllers/admin.php */
+/* Location: ./app/controllers/admin.php */

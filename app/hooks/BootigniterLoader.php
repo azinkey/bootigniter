@@ -8,7 +8,7 @@ class BootLoader {
 
         if (empty($ci->db->hostname) || empty($ci->db->database) || empty($ci->db->username)) {
 
-            show_error('Missing Database Configurations, Configured your <strong>config/database.php</strong>, <br />Please Set your database details and come back here & Refresh for Instant Boot Setup.', 500, "Setup Database Configuration");
+            show_error('Missing Database Configurations, Please configure your <strong>/app/config/database.php</strong>, <br />Set your database details and come back here again & Refresh for Instant Boot Setup.', 500, "Setup Database Configuration");
         }
         
         if (!$ci->db->table_exists('access') ||
@@ -18,7 +18,7 @@ class BootLoader {
             if ($this->_install_dump()) {
                 $ci->setting->setSetting('site_url', site_url());
                 AZ::flashMSG('Your First Credential for login is <strong>admin/123456</strong>');
-                AZ::redirectSuccess('administrator', 'BootIgniter Setup Successfully');
+                AZ::redirectSuccess('administrator', 'Your Bootigniter Package Setup Successfully');
             }
         } else {
             return true;
@@ -34,7 +34,7 @@ class BootLoader {
         $user = array(
             'name' => 'AZinkey',
             'username' => 'admin',
-            'email' => 'azinkey@gmail.com',
+            'email' => 'admin@example.com',
             'password' => $ci->user->hash_password('123456'),
             'status' => 1,
             'gid' => 1
@@ -47,7 +47,7 @@ class BootLoader {
 
         $adminProfile = array(
             'user_id' => $ci->db->insert_id(),
-            'avatar' => 'media/users/zz.jpg',
+            'avatar' => 'media/users/az.jpg',
             'address' => 'Roop Mahal, Prem gali, Kholi no. 420',
             'city' => 'Excuse Me',
             'state' => 'Please',
@@ -62,7 +62,7 @@ class BootLoader {
         $file = APPPATH . 'database/setup/install.sql';
 
         if (!file_exists($file)) {
-            exit('Could not load sql file: ' . $file);
+            exit('Could not load installation ("database/setup/install.sql") file: ' . $file);
         }
         $ci = & get_instance();
         $queries = file_get_contents($file);

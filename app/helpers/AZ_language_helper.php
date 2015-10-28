@@ -1,19 +1,35 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Language Helper
+ *
+ * @package		Helper
+ * @subpackage  Language
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
 /**
- * CodeIgniter
+ * Get Admin Language
  *
- * An open source application development framework for PHP 5.1.6 or newer
  *
- * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
+ * @access	public
+ * @return	string
  */
 if (!function_exists('admin_language')) {
 
@@ -24,6 +40,14 @@ if (!function_exists('admin_language')) {
     }
 
 }
+
+/**
+ * Get Front Language
+ *
+ *
+ * @access	public
+ * @return	string
+ */
 if (!function_exists('site_language')) {
 
     function site_language() {
@@ -33,6 +57,14 @@ if (!function_exists('site_language')) {
     }
 
 }
+
+/**
+ * Get Active Language Code
+ *
+ *
+ * @access	public
+ * @return	string
+ */
 if (!function_exists('language_code')) {
 
     function language_code() {
@@ -43,6 +75,13 @@ if (!function_exists('language_code')) {
 
 }
 
+/**
+ * Get Active Language Name
+ *
+ *
+ * @access	public
+ * @return	string
+ */
 if (!function_exists('language_name')) {
 
     function language_name() {
@@ -53,6 +92,13 @@ if (!function_exists('language_name')) {
 
 }
 
+/**
+ * Get Languages Flags
+ *
+ *
+ * @access	public
+ * @return	string
+ */
 if (!function_exists('language_flags')) {
 
     function language_flags() {
@@ -71,6 +117,13 @@ if (!function_exists('language_flags')) {
 
 }
 
+/**
+ * Get Active Language id
+ *
+ *
+ * @access	public
+ * @return	integer
+ */
 if (!function_exists('active_language_id')) {
 
     function active_language_id() {
@@ -84,4 +137,4 @@ if (!function_exists('active_language_id')) {
 }
 // ------------------------------------------------------------------------
 /* End of file language_helper.php */
-/* Location: ./system/helpers/language_helper.php */
+/* Location: ./app/helpers/language_helper.php */

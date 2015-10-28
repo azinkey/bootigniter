@@ -146,6 +146,8 @@ $lang['Accesses'] = "अधिकारैं";
 $lang['Permissions'] = "अनुमतियां";
 $lang['Dashboard'] = "नियंत्रण-पट्ट";
 $lang['Navigation'] = "सूचि";
+$lang['Back to List'] = "वापस सूची में जाएं";
+$lang['Save & New'] = "सहेजें और नया जोड़ें";
 $lang['Select Visits'] = "आगंतुक सत्र का चयन करें";
 $lang['Today'] = "आज";
 $lang['Last Day'] = "अंतिम दिन";
@@ -192,4 +194,4 @@ $lang['October'] = "अक्टूबर";
 $lang['November'] = "नवंबर";
 $lang['December'] = "दिसंबर";
 /* End of file app_lang.php */
-/* Location: ./system/language/english/app_lang.php */
+/* Location: ./app/language/hindi/app_lang.php */

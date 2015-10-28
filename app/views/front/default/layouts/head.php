@@ -12,7 +12,10 @@
         
         <meta name="description" content="<?php echo (isset($meta_description)) ? $meta_description : AZ::setting('global_meta_description'); ?>">
         <meta name="keywords" content="<?php echo (isset($meta_keywords)) ? $meta_keywords : AZ::setting('global_meta_keywords'); ?>">
-
+		
+		<link rel="shortcut icon" href="<?= skin_url(); ?>images/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="<?= skin_url(); ?>images/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon-precomposed" href="<?= skin_url(); ?>images/apple-touch-icon.png" sizes="144x79">
 
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/bootstrap.min.css"  />
         <link rel="stylesheet"  href="<?= skin_url(); ?>css/style.css"  />

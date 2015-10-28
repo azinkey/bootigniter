@@ -1,18 +1,36 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Template Helper
+ *
+ * @package		Helper
+ * @subpackage  Template
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 
-
-
 /**
- * Styles
+ * Render Content type admin links
  *
- * Generates Styles link.
- * @access    public
- * @param    string/array
- * @return    string
+ *
+ * @access	public
+ * @return	string
  */
 if (!function_exists('get_content_types_admin_navigations')) {
 
@@ -66,6 +84,13 @@ if (!function_exists('get_content_types_admin_navigations')) {
 
 }
 
+/**
+ * Get User Notifications
+ *
+ *
+ * @access	public
+ * @return	string
+ */
 if (!function_exists('get_user_notifications')) {
 
     function get_user_notifications() {
@@ -98,6 +123,14 @@ if (!function_exists('get_user_notifications')) {
     }
 
 }
+
+/**
+ * Count user notification
+ *
+ *
+ * @access	public
+ * @return	integer
+ */
 if (!function_exists('count_user_notifications')) {
 
     function count_user_notifications() {
@@ -112,6 +145,13 @@ if (!function_exists('count_user_notifications')) {
 
 }
 
+/**
+ * Get User Message
+ *
+ *
+ * @access	public
+ * @return	string
+ */
 if (!function_exists('get_user_messages')) {
 
     function get_user_messages() {
@@ -148,6 +188,13 @@ if (!function_exists('get_user_messages')) {
 
 }
 
+/**
+ * Count user message
+ *
+ *
+ * @access	public
+ * @return	integer
+ */
 if (!function_exists('count_user_messages')) {
 
     function count_user_messages() {
@@ -162,6 +209,14 @@ if (!function_exists('count_user_messages')) {
 
 }
 
+/**
+ * Get Page Title
+ *
+ *
+ * @access	public
+ * @param	title
+ * @return	string
+ */
 if (!function_exists('page_title')) {
 
     function page_title($title = NULL) {
@@ -184,18 +239,27 @@ if (!function_exists('page_title')) {
 
 }
 
+/**
+ * Load Stylesheets
+ *
+ *
+ * @access	public
+ * @param	styles
+ * @param	theme
+ * @return	string
+ */
 if (!function_exists('load_styles')) {
 
     function load_styles($styles, $theme = 'default') {
         if (is_string($styles)) {
             $link = '<link rel = "stylesheet" type = "text/css" href = "';
-            $link .= skin_url($theme) . $styles;
+            $link .= ('//' === "" || strrpos($styles, '//', -strlen($styles)) !== FALSE) ? $styles : skin_url($theme) . $styles;
             $link .= '" media = "screen" />';
         } else if (count($styles) == count($styles, COUNT_RECURSIVE)) {
             $link = NULL;
             foreach ($styles as $style) {
                 $link .= '<link rel = "stylesheet" type = "text/css" href = "';
-                $link .= skin_url($theme) . $style;
+                $link .= ('//' === "" || strrpos($style, '//', -strlen($style)) !== FALSE) ? $style : skin_url($theme) . $style;
                 $link .= '" media = "screen" />
 ';
             }
@@ -206,11 +270,8 @@ if (!function_exists('load_styles')) {
                 if (isset($style['src'])) {
 
                     $link .= '<link rel = "stylesheet" type = "text/css" href = "';
-
-                    $link .= skin_url($theme) . $style['src'];
-
+                    $link .= ('//' === "" || strrpos($style['src'], '//', -strlen($style['src'])) !== FALSE) ? $style['src'] : skin_url($theme) . $style['src'];
                     $media = (isset($style['media'])) ? $style['media'] : 'screen';
-
                     $link .= '" media = "' . $media . '" />
 ';
                 }
@@ -221,18 +282,27 @@ if (!function_exists('load_styles')) {
 
 }
 
+/**
+ * Load Javascripts
+ *
+ *
+ * @access	public
+ * @param	scripts
+ * @param	theme
+ * @return	string
+ */
 if (!function_exists('load_scripts')) {
 
     function load_scripts($scripts, $theme = 'default') {
         if (is_string($scripts)) {
             $link = '<script type = "text/javascript" src = "';
-            $link .= skin_url($theme) . $scripts;
+            $link .= ('//' === "" || strrpos($scripts, '//', -strlen($scripts)) !== FALSE) ? $scripts : skin_url($theme) . $scripts;
             $link .= '"></script>';
         } else if (count($scripts) == count($scripts, COUNT_RECURSIVE)) {
             $link = NULL;
             foreach ($scripts as $script) {
                 $link .= '<script type="text/javascript" src="';
-                $link .= skin_url($theme) . $script;
+                $link .= ('//' === "" || strrpos($script, '//', -strlen($script)) !== FALSE) ? $script : skin_url($theme) . $script;
                 $link .= '"></script>
 ';
             }
@@ -242,9 +312,7 @@ if (!function_exists('load_scripts')) {
                 if (isset($script['src'])) {
 
                     $link .= '<script type="text/javascript" src="';
-
-                    $link .= skin_url($theme) . $style['src'];
-
+                    $link .= ('//' === "" || strrpos($style['src'], '//', -strlen($style['src'])) !== FALSE) ? $style['src'] : skin_url($theme) . $style['src'];
                     $link .= '"></script>
 ';
                 }
@@ -255,6 +323,13 @@ if (!function_exists('load_scripts')) {
 
 }
 
+/**
+ * Make Page class for body tag
+ *
+ *
+ * @access	public
+ * @return	string
+ */
 if (!function_exists('page_class')) {
 
     function page_class() {
@@ -266,6 +341,14 @@ if (!function_exists('page_class')) {
 
 }
 
+/**
+ * Wrap lang method
+ *
+ *
+ * @access	public
+ * @param	str
+ * @param	return
+ */
 if (!function_exists('__')) {
 
     function __($str, $return = false) {
@@ -287,6 +370,15 @@ if (!function_exists('__')) {
 
 }
 
+/**
+ * Wrap List
+ *
+ *
+ * @access	public
+ * @param	str
+ * @param	class
+ * @return	string
+ */
 if (!function_exists('li')) {
 
     function li($str = '', $class = '') {
@@ -295,6 +387,15 @@ if (!function_exists('li')) {
 
 }
 
+/**
+ * Wrap anchor method
+ *
+ *
+ * @access	public
+ * @param	uri
+ * @param	title
+ * @param	attributes
+ */
 if (!function_exists('_a')) {
 
     function _a($uri, $title, $attributes = NULL) {
@@ -303,6 +404,13 @@ if (!function_exists('_a')) {
 
 }
 
+/**
+ * Wrap Site url method
+ *
+ *
+ * @access	public
+ * @param	uri
+ */
 if (!function_exists('_u')) {
 
     function _u($uri = '') {
@@ -311,6 +419,15 @@ if (!function_exists('_u')) {
 
 }
 
+/**
+ * Render Menu Navigation html
+ *
+ *
+ * @access	public
+ * @param	name
+ * @param	wrapper_class
+ * @return	array
+ */
 if (!function_exists('menu')) {
 
     function menu($name = 'Primary',$wrapper_class = 'nav navbar-nav navbar-left') {
@@ -323,3 +440,6 @@ if (!function_exists('menu')) {
     }
 
 }
+
+/* End of file template_helper.php */
+/* Location: ./app/helpers/template_helper.php */

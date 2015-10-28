@@ -1,10 +1,37 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Content Helper
+ *
+ * @package		Helper
+ * @subpackage  Content
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-
-
+/**
+ * Get Fields from fieldset
+ *
+ *
+ * @access	public
+ * @param	fieldset_id
+ * @return	array
+ */
 if (!function_exists('fields_from_fieldset')) {
 
     function fields_from_fieldset($fieldset_id) {
@@ -15,6 +42,16 @@ if (!function_exists('fields_from_fieldset')) {
 
 }
 
+/**
+ * Render Field's Html Tags
+ *
+ *
+ * @access	public
+ * @param	fieldObj
+ * @param	content_id
+ * @param	language_id
+ * @return	string
+ */
 if (!function_exists('field_render')) {
 
     function field_render($fieldObj, $content_id, $language_id) {
@@ -82,6 +119,13 @@ if (!function_exists('field_render')) {
 
 }
 
+/**
+ * Get fieldset array
+ *
+ *
+ * @access	public
+ * @return	array
+ */
 if (!function_exists('fieldset_A')) {
 
     function fieldset_A() {
@@ -99,6 +143,14 @@ if (!function_exists('fieldset_A')) {
 
 }
 
+/**
+ * Get contents array
+ *
+ *
+ * @access	public
+ * @param	have_groups
+ * @return	array
+ */
 if (!function_exists('contents_A')) {
 
     function contents_A($have_groups = false) {
@@ -120,6 +172,14 @@ if (!function_exists('contents_A')) {
 
 }
 
+/**
+ * Check alias registered for category
+ *
+ *
+ * @access	public
+ * @param	alias
+ * @return	boolen
+ */
 if (!function_exists('is_group')) {
 
     function is_group($alias) {
@@ -130,6 +190,14 @@ if (!function_exists('is_group')) {
 
 }
 
+/**
+ * Get Group as link 
+ *
+ *
+ * @access	public
+ * @param	alias
+ * @return	boolen
+ */
 if (!function_exists('child_group_links')) {
 
     function child_group_links($alias) {
@@ -145,6 +213,15 @@ if (!function_exists('child_group_links')) {
 
 }
 
+/**
+ * Get Latest Content
+ *
+ *
+ * @access	public
+ * @param	type
+ * @param	limit
+ * @return	array
+ */
 if (!function_exists('get_latest_content')) {
 
     function get_latest_content($type,$limit = 5) {
@@ -158,6 +235,16 @@ if (!function_exists('get_latest_content')) {
 
 }
 
+/**
+ * Get Latest Content by group
+ *
+ *
+ * @access	public
+ * @param	group
+ * @param	contentType
+ * @param	limit
+ * @return	array
+ */
 if (!function_exists('get_latest_by_group')) {
 
     function get_latest_by_group($group, $contentType, $limit = 4) {
@@ -174,3 +261,7 @@ if (!function_exists('get_latest_by_group')) {
     }
 
 }
+
+
+/* End of file content_helper.php */
+/* Location: ./app/helpers/content_helper.php */

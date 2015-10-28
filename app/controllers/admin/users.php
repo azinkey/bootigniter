@@ -7,7 +7,7 @@
  *
  * @package		Bootigniter
  * @author		AZinkey
- * @copyright           Copyright (c) 2014, AZinkey.
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
  * @license		http://bootigniter.org/license
  * @link		http://bootigniter.org
  * @Version		Version 1.0
@@ -18,7 +18,7 @@
  * Contents Controller
  *
  * @package		Admin
- * @subpackage          Controllers
+ * @subpackage  Controllers
  * @author		AZinkey
  */
 if (!defined('BASEPATH'))
@@ -41,7 +41,6 @@ class Users extends CI_Controller {
      * Primary View is views/admin/blocks/users/index
      * @param	integer $q User Group ID
      * @param	integer $offset
-     * @return	Layout
      */
     public function index($q = 4, $offset = 0) {
 
@@ -67,7 +66,6 @@ class Users extends CI_Controller {
      *
      * Primary View is views/admin/blocks/users/form
      * @param	integer $edit
-     * @return	Layout
      */
     public function edit($id = -1) {
 
@@ -171,7 +169,6 @@ class Users extends CI_Controller {
      *
      * Primary View is views/admin/blocks/users/accesses-form
      * @param	integer $edit
-     * @return	Layout
      */
     public function edit_access($edit = -1) {
 
@@ -244,7 +241,6 @@ class Users extends CI_Controller {
      *
      * Primary View is views/admin/blocks/users/group-form
      * @param	integer $edit
-     * @return	Layout
      */
     public function edit_group($edit = -1) {
 
@@ -298,7 +294,6 @@ class Users extends CI_Controller {
     /**
      * Show All Private methods for Access Role Permissions
      *
-     * @return	Layout
      */
     public function permissions() {
 

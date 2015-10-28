@@ -4,15 +4,35 @@ BootIgniter
 
 [Bootigniter](http://bootigniter.org) - An Open Source CMS Boilerplate
 
-An open source project of codeigniter with Bootstrap 3, in form of "Bootigniter"
-it gives scalable development framework for all, Developers & Designers. It is a Lightweight Open codes package for you to build your own Custom CMS, instead of customize & removing unnecessary features
+Bootigniter is a Custom Content Management System (CMS) which encourage you to build your own content management system (CMS) using MVC framework.
+An open source project of codeigniter &reg; with Bootstrap 3.x  &reg;, in form of "Bootigniter".
+it gives scalable development framework for all (Developers & Designers). It is a Lightweight package for you to build your own Custom CMS, instead of customize & removing unnecessary features
 
 Or you can say it is an another CMS like Joomla, Wordpress but its not so much popular or heavy mixed up of unwanted code execution (features/extension)
-Where its just a Custom Scratch CMS Based on [CodeIgniter](http://ellislab.com/codeigniter) + [Bootstrap](http://getbootstrap.com)
+Where its just a Custom CMS from Scratch Based on [CodeIgniter](http://ellislab.com/codeigniter) and [Bootstrap](http://getbootstrap.com) Framework.
 
+
+Why choose Bootigniter as CMS
 ===
 
+* World's Smallest footprint but Powerfull Framework (less then 2MB)
+
+* Exceptional performance, Everything is Lighting Fast
+
+* Do not want to compromise with vulnerabilities
+
+* Never sure about your content?, flexible Content Type
+
+* Mobile Ready Design Framework, Super clean HTML5/CSS3
+
+* +500 Retina ready Iconic Font
+
+* Instant Setup
+
+
+
 Features highlights
+===
 
 * Fully White Label Branding
 
@@ -24,9 +44,10 @@ Features highlights
 
 * Create Custom Content Types with Multi language Support
 
-* Menus and Pages Managers
+* Extendable Pages and Menus Managers
 
-Installation
+
+2 Step - Installation (Boot Setup)
 ===
 
 ##Step 1.) UPDATE DATABASE SETTINGS
@@ -35,17 +56,14 @@ Installation
 /app/config/database.php
 ```
 
-##Step 2.) UPDATE .htaccess RewriteBase
-change directory name where your bootigniter package installed on server root
-
-##Step 3.) Configure Your BootIgniter Package
+##Step 2.) Configure Your BootIgniter Package
 configurations like "Base Site URL", "language" etc..
 
 ```bash
 /app/config/config.php
 ```
 
-Copyleft
+License
 ===
 
-Bootigniter is fully open source and is GPL friendly. You can use it for commercial projects, open source projects, or really after download, its Your.
+Available for use under the [MIT] (https://opensource.org/licenses/MIT) License. It Means Bootigniter is fully open source and is GPL friendly. You can use it for commercial projects, open source projects, or really after download, its Your.

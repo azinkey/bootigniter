@@ -38,16 +38,15 @@ class Page extends CI_Controller {
      *
      * Primary View is views/front/blocks/index
      * 
-     * @return	Layout
      */
     public function index() {
 
         AZ::layout('content', array(
             'block' => 'index',
-            'page_title' => __('Bootigniter - Another Open Source CMS, A Pack of Codeigniter + Bootstrap', true)
+            'page_title' => __('Bootigniter - An Open Source CMS Boilerplate, Scalable Development Framework', true)
         ));
 
-        $this->content->track(); // uncomment for enabled self tracking into Visitors
+        //$this->content->track(); // uncomment for enabled self tracking into Visitors
     }
 
     /**
@@ -56,7 +55,6 @@ class Page extends CI_Controller {
      * Primary View is views/front/blocks/content/page
      * 
      * @param	string $alias
-     * @return	Layout
      */
     public function content($alias) {
 
@@ -89,7 +87,6 @@ class Page extends CI_Controller {
      * Primary View is views/front/blocks/content/page
      * 
      * @param	string $alias
-     * @return	Layout
      */
     public function group($alias, $offset = 0) {
 
@@ -130,7 +127,6 @@ class Page extends CI_Controller {
      * Primary View is views/front/blocks/content/page
      * 
      * @param	string $alias
-     * @return	Layout
      */
     public function search($keyword, $offset = 0) {
 
@@ -161,7 +157,6 @@ class Page extends CI_Controller {
      *
      * Primary View is views/page_not_found
      * 
-     * @return	Layout
      */
     public function page_not_found() {
         $this->load->view('page_not_found');
@@ -192,13 +187,12 @@ class Page extends CI_Controller {
                     $this->search($query['words'], (isset($query['per_page'])) ? $query['per_page'] : 0 );
                     return;
                 }
-                // check Group first
+                
                 if ($this->content->checkGroupAlias($alias)) {
                     $this->group($alias);
                     return true;
                 }
 
-                // can remap Page
                 if ($this->content->checkAlias($alias)) {
                     $this->content($alias);
                 } else {
@@ -250,4 +244,4 @@ class Page extends CI_Controller {
 }
 
 /* End of file page.php */
-/* Location: ./application/controllers/page.php */
+/* Location: ./app/controllers/page.php */

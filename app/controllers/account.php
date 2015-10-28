@@ -7,7 +7,7 @@
  *
  * @package		Bootigniter
  * @author		AZinkey
- * @copyright           Copyright (c) 2014, AZinkey.
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
  * @license		http://bootigniter.org/license
  * @link		http://bootigniter.org
  * @Version		Version 1.0
@@ -18,7 +18,7 @@
  * Contents Controller
  *
  * @package		Front
- * @subpackage          Controllers
+ * @subpackage  Controllers
  * @author		AZinkey
  */
 if (!defined('BASEPATH'))
@@ -38,7 +38,6 @@ class Account extends CI_Controller {
      *
      * Primary View is views/front/blocks/account/index
      * 
-     * @return	Layout
      */
     public function index() {
 
@@ -54,8 +53,7 @@ class Account extends CI_Controller {
      *
      * Primary View is views/front/blocks/account/profile-form
      * 
-     * @param	integer $id
-     * @return	Layout
+     * @param	integer $id     
      */
     public function edit($id) {
 
@@ -72,7 +70,6 @@ class Account extends CI_Controller {
      *
      * Primary View is views/front/blocks/account/login-box
      * 
-     * @return	Layout
      */
     public function login_box() {
         AZ::layout('block-only', array('block' => 'account/login-box'));
@@ -94,7 +91,6 @@ class Account extends CI_Controller {
      *
      * Primary View is views/front/blocks/account/password-box
      * 
-     * @return	Layout
      */
     public function change_password_box() {
         AZ::layout('block-only', array('block' => 'account/password-box'));
@@ -260,4 +256,4 @@ class Account extends CI_Controller {
 }
 
 /* End of file account.php */
-/* Location: ./application/controllers/account.php */
+/* Location: ./app/controllers/account.php */

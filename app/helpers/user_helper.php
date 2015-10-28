@@ -1,18 +1,35 @@
 <?php
 
+/**
+ * Bootigniter
+ *
+ * An Open Source CMS Boilerplate for PHP 5.1.6 or newer
+ *
+ * @package		Bootigniter
+ * @author		AZinkey
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
+ * @license		http://bootigniter.org/license
+ * @link		http://bootigniter.org
+ * @Version		Version 1.0
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * User Helper
+ *
+ * @package		Helper
+ * @subpackage  USer
+ * @author		AZinkey
+ */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-
-
-
 /**
- * Styles
+ * Get Current username
  *
- * Generates Styles link.
- * @access    public
- * @param    string/array
- * @return    string
+ *
+ * @access	public
+ * @return	string
  */
 if (!function_exists('current_username')) {
 
@@ -39,6 +56,13 @@ if (!function_exists('current_username')) {
 
 }
 
+/**
+ * Get Current user name
+ *
+ *
+ * @access	public
+ * @return	string
+ */
 if (!function_exists('current_user_name')) {
 
     function current_user_name() {
@@ -57,6 +81,13 @@ if (!function_exists('current_user_name')) {
 
 }
 
+/**
+ * Get Access Array
+ *
+ *
+ * @access	public
+ * @return	array
+ */
 if (!function_exists('access_A')) {
 
     function access_A($show_guest = false) {
@@ -84,6 +115,14 @@ if (!function_exists('access_A')) {
 
 }
 
+/**
+ * Get User Group Array
+ *
+ *
+ * @access	public
+ * @param	show_guest
+ * @return	array
+ */
 if (!function_exists('user_groups_A')) {
 
     function user_groups_A($show_guest = false) {
@@ -110,6 +149,13 @@ if (!function_exists('user_groups_A')) {
 
 }
 
+/**
+ * Get User Status Array
+ *
+ *
+ * @access	public
+ * @return	array
+ */
 if (!function_exists('user_status_A')) {
 
     function user_status_A() {
@@ -124,6 +170,16 @@ if (!function_exists('user_status_A')) {
 
 }
 
+/**
+ * Check User Access Permission
+ *
+ *
+ * @access	public
+ * @param	controller
+ * @param	method
+ * @param	access_id
+ * @return	integer
+ */
 if (!function_exists('check_permission')) {
 
     function check_permission($controller, $method = 'index', $access_id = NULL) {
@@ -149,6 +205,15 @@ if (!function_exists('check_permission')) {
 
 }
 
+/**
+ * Check User Have Permission
+ *
+ *
+ * @access	public
+ * @param	controllerMethod
+ * @param	access_id
+ * @return	integer
+ */
 if (!function_exists('have_permission')) {
 
     function have_permission($controllerMethod, $access_id = NULL) {
@@ -181,3 +246,6 @@ if (!function_exists('have_permission')) {
     }
 
 }
+
+/* End of file user_helper.php */
+/* Location: ./app/helpers/user_helper.php */

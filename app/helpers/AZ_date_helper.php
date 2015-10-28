@@ -7,7 +7,7 @@
  *
  * @package		Bootigniter
  * @author		AZinkey
- * @copyright           Copyright (c) 2014, AZinkey.
+ * @copyright   Copyright (c) 2015, AZinkey LLC.
  * @license		http://bootigniter.org/license
  * @link		http://bootigniter.org
  * @Version		Version 1.0
@@ -15,10 +15,10 @@
 // ------------------------------------------------------------------------
 
 /**
- * Contents Controller
+ * Date Helper
  *
  * @package		Helper
- * @subpackage          Date
+ * @subpackage  Date
  * @author		AZinkey
  */
 if (!defined('BASEPATH'))

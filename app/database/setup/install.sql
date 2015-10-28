@@ -197,9 +197,9 @@ INSERT INTO `%PREFIX%content_field_values` (`id`, `language_id`, `content_id`, `
 (16, 1, 2, 5, NULL, ''),
 (17, 1, 2, 6, NULL, ''),
 (18, 1, 2, 7, NULL, ''),
-(19, 2, 2, 1, NULL, 'à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚'),
-(20, 2, 2, 2, NULL, 'à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡!'),
-(21, 2, 2, 3, NULL, 'à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡!à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡!à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡!à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡!à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡! à¤œà¤¯ à¤¬à¤® à¤­à¥‹à¤²à¥‡!'),
+(19, 2, 2, 1, NULL, 'हमारे बारे में'),
+(20, 2, 2, 2, NULL, 'यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है '),
+(21, 2, 2, 3, NULL, 'यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है यह एक नमूना पाठ है '),
 (22, 2, 2, 5, NULL, ''),
 (23, 2, 2, 6, NULL, ''),
 (24, 2, 2, 7, NULL, '');
@@ -371,11 +371,11 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%settings` (
 
 INSERT INTO `%PREFIX%settings` (`id`, `group_id`, `type`, `system`, `key`, `value`, `options`, `default_value`) VALUES
 (1, 1, 'text', 1, 'administrator', 'Admin', NULL, NULL),
-(2, 1, 'text', 0, 'administrator_email', 'admin@localhost', NULL, NULL),
+(2, 1, 'text', 0, 'administrator_email', 'admin@example.com', NULL, NULL),
 (3, 1, 'text', 0, 'record_per_page', '10', NULL, NULL),
 (4, 2, 'text', 0, 'global_meta_title', 'Bootigniter - An Open Source CMS Boilerplate', NULL, NULL),
-(5, 2, 'text', 0, 'global_meta_keywords', 'Codeigniter CMS, Custom CMS', NULL, NULL),
-(6, 2, 'textarea', 0, 'global_meta_description', 'An another open source project of codeigniter with Bootstrap. It is a Lightweight Open codes package for you to build your own Custom CMS.', NULL, NULL),
+(5, 2, 'text', 0, 'global_meta_keywords', 'Codeigniter CMS, Custom CMS, Customised Content Management System, Lightweight CMS, Tiny CMS, Flexible CMS, Download CMS, Bootstrap CMS, Mobile CMS, Responsive CMS', NULL, NULL),
+(6, 2, 'textarea', 0, 'global_meta_description', 'An another open source project of Codeigniter with Bootstrap. It is a Lightweight MVC package for you to build your own Custom CMS.', NULL, NULL),
 (7, 3, 'text', 0, 'site_name', 'BootIgniter', NULL, NULL);
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%setting_groups` (
