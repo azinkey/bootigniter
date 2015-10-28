@@ -15,7 +15,7 @@ Where its just a Custom CMS from Scratch Based on [CodeIgniter] &reg;(http://ell
 Why choose Bootigniter as CMS
 ===
 
-* World's Smallest footprint but CMS Framework (less then 2MB)
+* World's Smallest footprint but Powerful CMS Framework (less then 2MB)
 
 * Exceptional performance, Everything is Lighting Fast
 
