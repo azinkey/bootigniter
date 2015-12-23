@@ -8,7 +8,7 @@ class BootLoader {
 
         if (empty($ci->db->hostname) || empty($ci->db->database) || empty($ci->db->username)) {
 
-            show_error('Missing Database Configurations, Please configure your <strong>/app/config/database.php</strong>, <br />Set your database details and come back here again & Refresh for Instant Boot Setup.', 500, "Setup Database Configuration");
+            show_error('Missing Database Configurations, Please configure your <strong>/app/config/database.php</strong>, <br />Set your database, <strong>Base Url</strong> details and then come back here again & Refresh for Instant Boot Setup.', 500, "Setup Database Configuration");
         }
         
         if (!$ci->db->table_exists('access') ||

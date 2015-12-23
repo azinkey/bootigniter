@@ -106,7 +106,7 @@
         $(document).ready(function() {
             var fieldType = $("#settingFieldType").val();
             var wrapper = $("#settingFieldOptionsWrapper");
-            var site_url = $('meta[name="site_url"]').attr('content');
+            var site_url = $('meta[name="site_url"]').attr('content')+'/';
             if (fieldType !== 'text') {
                 var param = (wrapper.data('field') > 0) ? fieldType + '/' + wrapper.data('field') : fieldType;
                 wrapper.load(site_url + 'admin/settings/field_type_options/' + param);

@@ -94,6 +94,7 @@ class Dashboard extends CI_Controller {
                 'scripts/jquery.flot.spline.min.js',
             )
         ));
+        
     }
 
     /**

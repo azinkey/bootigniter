@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
+$db['default']['hostname'] = 'localhost'; 	// update your database host
+$db['default']['username'] = 'root'; 		// update database username
+$db['default']['password'] = ''; 			// put your database password
+$db['default']['database'] = 'bootigniter'; // Change your database namne
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = 'az_';
 $db['default']['pconnect'] = TRUE;

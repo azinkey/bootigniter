@@ -155,7 +155,7 @@
 
             var type_id = contentTypeGroup.val();
             
-            var site_url = $('meta[name="site_url"]').attr('content');
+            var site_url = $('meta[name="site_url"]').attr('content')+'/';
 
             $("#menu_type_" + type).removeClass('hidden-row');
             menuType.change(function() {

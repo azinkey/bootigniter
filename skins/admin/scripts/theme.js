@@ -2,7 +2,7 @@
 (function($) {
 
     $(document).ready(function() {
-        var site_url = $('meta[name="site_url"]').attr('content');
+        var site_url = $('meta[name="site_url"]').attr('content')+'/';
 
         $('.toggle-nav').click(function() {
             // Calling a function in case you want to expand upon this.
