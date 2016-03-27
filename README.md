@@ -12,6 +12,7 @@ Or you can say it is an another CMS like Joomla, Wordpress but its not so much p
 Where its just a Custom CMS from Scratch Based on CodeIgniter &reg; http://ellislab.com/codeigniter and Bootstrap &reg; http://getbootstrap.com Framework.
 
 Remember Guys, Bootigniter (SMART )  Version 2
+
 Don't Send me requests for New Features, i am trying to keep it A Simple & Clean Custom Content Management System CMS Boilerplate not A CMS (Full Features set for specific category like Blog, eCommerce, CRM etc... or like Wordpress, Drupal, Joomla or Magento).
 
 So please help me to make an CMS Boilerplate for World not for Enterprises. also Don't Forget to like us on Facebook http://fb.com/bootigniter or follow me on [Twitter](https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fgithub.com%2Fazinkey%2Fbootigniter%2F&region=follow_link&screen_name=azinkey&tw_p=followbutton)
