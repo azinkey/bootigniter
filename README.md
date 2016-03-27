@@ -1,4 +1,4 @@
-BootIgniter
+BootIgniter - The First CMS Boilerplate
 ==================
 
 
