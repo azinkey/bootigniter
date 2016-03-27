@@ -2,15 +2,19 @@ BootIgniter
 ==================
 
 
-[Bootigniter](http://bootigniter.org) - An Open Source CMS Boilerplate
+[Bootigniter](http://bootigniter.org) - An Open Source CMS Boilerplate (World's First Truly Open Source CMS Boilerplate)
 
 Bootigniter is a Custom Content Management System (CMS) which encourage you to build your own content management system (CMS) using MVC framework.
 An open source project of Codeigniter &reg; with Bootstrap 3.x  &reg;, in form of "Bootigniter".
 it gives scalable development framework for all (Developers & Designers). It is a Lightweight package for you to build your own Custom CMS, instead of customize & removing unnecessary features
 
 Or you can say it is an another CMS like Joomla, Wordpress but its not so much popular or heavy mixed up of unwanted code execution (features/extension)
-Where its just a Custom CMS from Scratch Based on [CodeIgniter] &reg;(http://ellislab.com/codeigniter) and [Bootstrap] &reg; (http://getbootstrap.com) Framework.
+Where its just a Custom CMS from Scratch Based on CodeIgniter &reg; http://ellislab.com/codeigniter and Bootstrap &reg; http://getbootstrap.com Framework.
 
+Remember Guys, Bootigniter (SMART )  Version 2
+Don't Send me requests for New Features, i am trying to keep it A Simple & Clean Custom Content Management System CMS Boilerplate not A CMS (Full Features set for specific category like Blog, eCommerce, CRM etc... or like Wordpress, Drupal, Joomla or Magento).
+
+So please help me to make an CMS Boilerplate for World not for Enterprises. also Don't Forget to like us on Facebook http://fb.com/bootigniter or follow me on [Twitter](https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fgithub.com%2Fazinkey%2Fbootigniter%2F&region=follow_link&screen_name=azinkey&tw_p=followbutton)
 
 Why choose Bootigniter as CMS
 ===
