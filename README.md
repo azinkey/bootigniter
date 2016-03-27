@@ -11,7 +11,9 @@ it gives scalable development framework for all (Developers & Designers). It is 
 Or you can say it is an another CMS like Joomla, Wordpress but its not so much popular or heavy mixed up of unwanted code execution (features/extension)
 Where its just a Custom CMS from Scratch Based on CodeIgniter &reg; http://ellislab.com/codeigniter and Bootstrap &reg; http://getbootstrap.com Framework.
 
-Remember Guys, Bootigniter (SMART )  Version 2
+Remember Guys, 
+
+Bootigniter (SMART CMS Boilerplate),  Version 2 - Coming Soon
 
 Don't Send me requests for New Features, i am trying to keep it A Simple & Clean Custom Content Management System CMS Boilerplate not A CMS (Full Features set for specific category like Blog, eCommerce, CRM etc... or like Wordpress, Drupal, Joomla or Magento).
 
