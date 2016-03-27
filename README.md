@@ -17,7 +17,9 @@ Bootigniter (SMART CMS Boilerplate),  Version 2 - Coming Soon
 
 Don't Send me requests for New Features, i am trying to keep it A Simple & Clean Custom Content Management System CMS Boilerplate not A CMS (Full Features set for specific category like Blog, eCommerce, CRM etc... or like Wordpress, Drupal, Joomla or Magento).
 
-So please help me to make an CMS Boilerplate for World not for Enterprises. also Don't Forget to like us on Facebook http://fb.com/bootigniter or follow me on [Twitter](https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fgithub.com%2Fazinkey%2Fbootigniter%2F&region=follow_link&screen_name=azinkey&tw_p=followbutton)
+So please help me to make an CMS Boilerplate for World not for Enterprises. 
+
+also Friends, Don't Forget to like us on Facebook http://fb.com/bootigniter or follow me on [Twitter](https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fgithub.com%2Fazinkey%2Fbootigniter%2F&region=follow_link&screen_name=azinkey&tw_p=followbutton)
 
 Why choose Bootigniter as CMS
 ===
