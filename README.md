@@ -9,7 +9,7 @@ An open source project of Codeigniter &reg; with Bootstrap 3.x  &reg;, in form o
 it gives scalable development framework for all (Developers & Designers). It is a Lightweight package for you to build your own Custom CMS, instead of customize & removing unnecessary features
 
 Or you can say it is an another CMS like Joomla, Wordpress but its not so much popular or heavy mixed up of unwanted code execution (features/extension)
-Where its just a Custom CMS from Scratch Based on CodeIgniter &reg; http://ellislab.com/codeigniter and Bootstrap &reg; http://getbootstrap.com Framework.
+Where its just a Custom CMS from Scratch Based on CodeIgniter &reg; http://www.codeigniter.com/ and Bootstrap &reg; http://getbootstrap.com Framework.
 
 
 Bootigniter (SMART CMS Boilerplate),  Version 2 - Coming Soon
