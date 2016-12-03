@@ -2,7 +2,7 @@ BootIgniter - The First CMS Boilerplate
 ==================
 
 
-[Bootigniter](http://bootigniter.org) - An Open Source CMS Boilerplate (World's First Truly Open Source CMS Boilerplate)
+Bootigniter - An Open Source CMS Boilerplate (World's First Truly Open Source CMS Boilerplate)
 
 Bootigniter is a Custom Content Management System (CMS) which encourage you to build your own content management system (CMS) using MVC framework.
 An open source project of Codeigniter &reg; with Bootstrap 3.x  &reg;, in form of "Bootigniter".
