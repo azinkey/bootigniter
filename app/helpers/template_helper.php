@@ -45,7 +45,7 @@ if (!function_exists('get_content_types_admin_navigations')) {
                 $html .= ($row->have_groups) ? '<li class="parent">' : '<li>';
                 $manage_url = ($row->have_groups) ? 'javascript:void(0);' : site_url('admin/contents/index/' . $row->alias);
                 $html .= '<a href="' . $manage_url . '"> ';
-                $html .= ' <i class="fa fa-2x fa-fw fa-pencil-square"></i> ';
+                $html .= ' <i class="fa fa-fw fa-pencil-square"></i> ';
                 $html .= '<span class="menu-text">' . __($row->name, true) . '</span>';
                 $html .= ($row->have_groups) ? '<span class="pull-right arrow">&gt;</span>' : '';
                 $html .= '</a>';
@@ -55,19 +55,19 @@ if (!function_exists('get_content_types_admin_navigations')) {
                     $html .= '<li>
                                 <a title="' . lang('Add New') . '" href="' . site_url('admin/contents/edit/' . $row->alias) . '">
                                     <i class="fa fa-fw fa-plus"></i>
-                                    <span>' . lang('Add New') . '</span> 
+                                    <span class="menu-text">' . lang('Add New') . '</span> 
                                 </a>
                              </li>';
                     $html .= '<li>
                                 <a title="' . lang('View All') . '" href="' . site_url('admin/contents/index/' . $row->alias) . '">
                                     <i class="fa fa-fw fa-list"></i>
-                                    <span>' . lang('View All') . '</span> 
+                                    <span class="menu-text">' . lang('View All') . '</span> 
                                 </a>
                              </li>';
                     $html .= '<li>
                                 <a title="View All" href="' . site_url('admin/contents/groups/' . $row->id) . '">
                                     <i class="fa fa-fw fa-folder-open-o"></i>
-                                    <span>' . lang('Groups') . '</span> 
+                                    <span class="menu-text">' . lang('Groups') . '</span> 
                                 </a>
                              </li>';
 

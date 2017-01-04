@@ -1,4 +1,3 @@
-
 .btn-default,
 .btn-primary,
 .btn-success,
@@ -432,7 +431,7 @@ body {
     border-top: 0px none;
 }
 .sidebar .submenu {
-    border-left: 1px solid #8797B4;
+    border-left: 0px solid #8797B4;
     background: #31415A;
 }
 .sidebar .nav > li > a:hover,

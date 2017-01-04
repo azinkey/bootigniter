@@ -113,7 +113,7 @@ hr {
 }
 .navbar-toolbar .navbar-nav {
     float: left;
-    margin: 0px;
+    margin: 0px 0 0 40px;
 }
 .navbar-toolbar .navbar-right {
     float: right;
@@ -125,14 +125,22 @@ hr {
     cursor: pointer;
     line-height: 22px;
     padding-bottom: 13px;
+    padding: 15px;
+}
+.navbar-nav > li.profile > a {
     padding: 10px;
+}
+.notify-icon > li > a {
+    padding: 13px;
+}
+.notify-icon > li.dropdown > a {
+    padding: 15px;
 }
 #notification-panel, #messages-panel {
     background-color: #FFFFFF;
     border: 1px solid #CFD9DB;
     border-radius: 4px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
-    left: 7px;
     position: absolute;
     width: 300px;
     padding-bottom: 0px;
@@ -149,12 +157,12 @@ hr {
     border-radius: 4px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
     right: 5px;
-    top: 55px;
+    top: 50px;
     position: absolute;
     width: 300px;
 }
 .navbar-toolbar  .navbar-left .glyphicon,.navbar-toolbar  .navbar-left .fa {
-    font-size: 32px;
+    font-size: 16px;
 }
 .dropdown-header {
     margin-top: -5px;
@@ -315,7 +323,7 @@ a.media:hover {
 .container-fluid .page-header.page-header-block {
     margin-left: -15px;
     margin-right: -15px;
-    margin-top: -15px;
+    margin-top: 0px;
     background-color: #FBFCFC;
     border-bottom-color: #DAE2E4;
     padding: 14px 15px 16px;
@@ -330,7 +338,7 @@ hr.dark {
 }
 .sidebar-menu ul.nav li a {
     color: #ddd;
-    padding: 10px;
+    padding: 10px 5px;
 }
 .sidebar .menu li a .menu-text {
     font-size: 1em; 
@@ -345,11 +353,10 @@ hr.dark {
     color: #FFFFFF !important;
     display: inline-block;
     font-size: 11px;
-    height: 20px;
-    line-height: 20px;
+    height: 5px;
     padding: 0;
     text-align: center;
-    width: 20px;
+    width: 5px;
 }
 .notification {
     background-color: #D9EDF7;
@@ -361,10 +368,9 @@ hr.dark {
 }
 .sidebar .submenu {
     display: none;
-    position: absolute;
-    top: 0px;
-    left: 180px;
-    width: 150px;
+    position: relative;
+    left: !00% !importnat;
+    width: 1;
     margin-left: 0px;
     padding-left: 0px;
     border-bottom-right-radius: 3px;
@@ -377,6 +383,10 @@ hr.dark {
     transform:rotate(180deg);
     -ms-transform:rotate(180deg);  
     -webkit-transform:rotate(180deg);
+}
+
+ul.submenu li .a1 {
+    
 }
 /*.sidebar .menu li:hover .arrow,.menu li.active .arrow {
     transform:rotate(90deg);
@@ -559,6 +569,7 @@ hr.dark {
 .underline {
     padding-bottom: 5px;
     border-bottom: 1px solid #eee;
+    font-size: 14px;
 }
 .tabs-left .tab-content {
     width: 70%;
@@ -826,6 +837,12 @@ hr.dark {
 .nav-tabs .section-tab:first-child  {
     border-top: 0px none !important;
 }
+.nav-tabs .section-tab  a.btn {
+    color: #4C607F;
+}
+.nav-tabs .active  a.btn {
+    color: #aaa;
+}
 .hidden-xxs {
     word-break: break-all;
 }
@@ -844,7 +861,7 @@ hr.dark {
     width: 100%;
     min-height: 475px;
     min-height: 100%;
-    padding-top: 75px;
+    padding-top: 53px;
     position: relative;
     -webkit-transform: translateX(0);
     transform: translateX(0);
@@ -887,26 +904,55 @@ hr.dark {
 .cke_inner {
     top: 62px !important;
 }
+.notify-icon {
+    height: 52px;
+}
+    #sideMenuIcon {
+        position: absolute;
+        left: 0px;
+    }
 /*.xAxis .tickLabel {
     -webkit-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
+
 }*/
+
+
+#sidebarMenu ul.submenu {
+    left: 1px ssolid transparent important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* End Genral Styles ********************************************************/
 
 @media (max-width: 767px) {
-
-    #sideMenuIcon {
-        position: absolute;
-        top: 3px;
-        left: 0px;
-    }
-    #canvas {
-        padding-top: 130px;
-    }
     #menu {
-        padding-top: 130px;
+        width: 44px;
+        left: -44px;
     }
+    #wrapper.show-nav #canvas {
+        -webkit-transform: translateX(180px);
+        -ms-transform: translateX(180px);
+        transform: translateX(44px);
+    }
+
+    .sidebar .menu li a .menu-text {
+        display: none;
+    }
+
     hr.dark {
         margin: 25px 0px;
     }
@@ -922,44 +968,61 @@ hr.dark {
     .permission-table th {
         display: inline-block;
     }
-}
-@media (max-width: 875px) {
-    #canvas {
-        padding-top: 75px;
+    
+    .bootbox-confirm .modal-dialog {
+        width: 300px;
     }
-    #menu {
-        padding-top: 75px;
+    .section-tab .pull-right > .dropdown-menu {
+        left:1px;
     }
 }
+
 @media (max-width: 557px) {
     #canvas {
-        padding-top: 126px;
+        padding-top: 52px;
     }
     #menu {
-        padding-top: 126px;
+        padding-top: 53px;
+    }
+    .section-tab .hidden-xxs {
+        display: none;
     }
 }
 @media (max-width: 320px) {
     .navbar-header {
         width: 320px;
     }
+    #menu {
+        width: 44px;
+        left: -44px;
+    }
+    #wrapper.show-nav #canvas {
+        -webkit-transform: translateX(180px);
+        -ms-transform: translateX(180px);
+        transform: translateX(44px);
+    }
     #sideMenuIcon {
         position: absolute;
-        top: 3px;
         left: 0px;
+        background-color: #8999B7;
     }
     .sidebar {
         width: 65px;
     }
+    .sidebar .menu li a .menu-text {
+        display: none;
+    }
     hr.dark {
         margin: 25px 0px;
     }
-
     #sidebarMenu li .notification {
-        width: 16px;
-        height: 16px;
-        line-height: 16px;
+        width: 5px;
+        height: 5px;
         position: absolute;
+    }
+    #sidebarMenu li .arrow {
+        font-size: 10px;
+        line-height: 20px;
     }
     .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
         padding-left: 5px;
@@ -989,6 +1052,7 @@ hr.dark {
     .permission-table th {
         display: inline-block;
     }
+
 }
 @media (max-width: 360px) {
     .navbar-header {
@@ -1001,5 +1065,12 @@ hr.dark {
     }
     .permission-table th {
         display: inline-block;
+    }
+    .sidebar .menu li a .menu-text {
+        display: none;
+    }
+    #sidebarMenu li .arrow {
+        font-size: 10px;
+        line-height: 20px;
     }
 }

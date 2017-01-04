@@ -4,12 +4,12 @@
 <header id="header" class="navbar navbar-fixed-top">
     <nav class="navbar navbar-default" role="navigation">
 
-        <div class="navbar-header primary">
+<!--        <div class="navbar-header primary">
             <a class="navbar-brand" href="<?php _u('admin/dashboard'); ?>">
                 <span class="logo-figure"></span>
                 <span class="logo-text"><?php __(AZ::setting('administrator')); ?> </span>
             </a>
-        </div>
+        </div>-->
         <div class="navbar-toolbar clearfix">
 
             <ul class="nav navbar-nav navbar-left">

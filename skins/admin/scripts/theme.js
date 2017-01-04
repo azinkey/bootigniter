@@ -1,28 +1,35 @@
 
-(function($) {
+(function ($) {
 
-    $(document).ready(function() {
-        var site_url = $('meta[name="site_url"]').attr('content')+'/';
+    $(document).ready(function () {
+        var site_url = $('meta[name="site_url"]').attr('content');
 
-        $('.toggle-nav').click(function() {
+        $('.toggle-nav').click(function () {
             // Calling a function in case you want to expand upon this.
             toggleNav();
         });
-        $(document).keyup(function(e) {
+
+        $(window).resize(function () {
+            var maxH = ($("#main").height() > $(window).height()) ? $("#main").height() : $(window).height();
+            $(".sidebar-menu").height(maxH + 50);
+        });
+
+        $(document).keyup(function (e) {
             if (e.keyCode == 27) {
                 if ($('#wrapper').hasClass('show-nav')) {
                     toggleNav();
                 }
             }
         });
-        $("#sidebarMenu li.parent").click(function() {
+
+        $("#sidebarMenu li.parent").click(function () {
             $(this).find(".submenu").toggle();
             if ($(this).find(".submenu").css('display') === 'block') {
                 $("#sidebarMenu li").removeClass('active');
                 $("#sidebarMenu li.parent").find(".submenu").hide();
                 $(this).addClass('active');
                 var window_width = $(window).width();
-                var sidebar_width = (window_width > 360) ? '180px' : '65px';
+                var sidebar_width = (window_width > 360) ? '0px' : '0px';
                 $(".sidebar .submenu").css('left', sidebar_width);
                 $(this).find(".submenu").slideDown(400);
                 $.cookie('open_parent', $(this).attr('id'));
@@ -34,23 +41,23 @@
 
 
         var modelObj = $('<div class="modal fade" tabindex="-1" role="dialog"><div class="modal-dialog modal-sm"><div class="modal-content"></div></div></div>');
-        
-        $("a.edit-box").click(function(e) {
+
+        $("a.edit-box").click(function (e) {
             e.preventDefault();
             var href = $(this).attr('href');
             modelObj.appendTo($("body"));
-            modelObj.find(".modal-content").load(href, function() {
+            modelObj.find(".modal-content").load(href, function () {
                 modelObj.modal("toggle");
             });
         });
-        modelObj.on('hidden.bs.modal', function() {
+        modelObj.on('hidden.bs.modal', function () {
             modelObj.remove();
         })
 
-        $("a.remove-box").click(function(e) {
+        $("a.remove-box").click(function (e) {
             e.preventDefault();
             var target = $(this).attr('href');
-            bootbox.confirm("Are you sure?", function(result) {
+            bootbox.confirm("Are you sure?", function (result) {
                 if (result) {
                     window.location = target;
                 }
@@ -58,16 +65,16 @@
             return false;
         });
 
-        $(".click-submit").click(function(e) {
+        $(".click-submit").click(function (e) {
             e.preventDefault();
             var form = $(this).data('form');
             var returnUrl = $(this).data('return');
-            
+
             var active_lang = $(".nav-tabs .active").data('lang');
             if (active_lang) {
                 form = $("#section-" + active_lang).find('form');
             }
-            
+
             if (returnUrl) {
                 var hiddenReturn = $('<input/>', {type: 'hidden', id: 'return', name: 'return', value: returnUrl});
                 hiddenReturn.appendTo(form);
@@ -78,7 +85,7 @@
             return true;
         });
 
-        $(".nav-tabs li.active a.tab-title").click(function(e) {
+        $(".nav-tabs li.active a.tab-title").click(function (e) {
             e.preventDefault();
         });
 
@@ -88,14 +95,14 @@
             var param = (field > 0) ? fieldType + '/' + field : fieldType;
             $("#fieldOptionsWrapper").load(site_url + 'admin/contents/field_type_options/' + param);
         }
-        $("#contentFieldType").change(function() {
+        $("#contentFieldType").change(function () {
             var param = (field > 0) ? $(this).val() + '/' + field : $(this).val();
             $("#fieldOptionsWrapper").load(site_url + 'admin/contents/field_type_options/' + param);
         });
 
 
 
-        $(document).on('click', '.add-option', function() {
+        $(document).on('click', '.add-option', function () {
 
             var type = $(this).data('type');
             var option_wrap = $(this).parent().parent().parent();
@@ -113,7 +120,7 @@
             }
 
         });
-        $(document).on('click', '.remove-option', function() {
+        $(document).on('click', '.remove-option', function () {
             $(this).parent().parent().remove();
         });
 
@@ -132,7 +139,7 @@
             disableFadeOut: false
         });
 
-        $("#loadActivity").click(function(e) {
+        $("#loadActivity").click(function (e) {
             e.preventDefault();
             var count_post = $("#activities").children().length;
             $.ajax({
@@ -143,7 +150,7 @@
                 },
                 type: 'post',
                 cache: false,
-                success: function(responseJSON) {
+                success: function (responseJSON) {
                     if (responseJSON.length) {
                         postHandler(responseJSON);
                     } else {
@@ -162,15 +169,16 @@
         if ($('#wrapper').hasClass('show-nav')) {
             // Do things on Nav Close
             $('#wrapper').removeClass('show-nav');
-        } else {            
+        } else {
             // Do things on Nav Open
             $('#wrapper').addClass('show-nav');
             var maxH = ($("#main").height() > $(window).height()) ? $("#main").height() : $(window).height();
             $(".sidebar-menu").height(maxH + 50);
         }
-
         //$('#site-wrapper').toggleClass('show-nav');
     }
+
+
 
     function addSelectOptionRow(option_wrap) {
         //var index = option_wrap.children().length;
@@ -188,8 +196,8 @@
         option_wrap.append(rowHtml);
     }
 
-    var postHandler = function(postsJSON) {
-        $.each(postsJSON, function(i, post) {
+    var postHandler = function (postsJSON) {
+        $.each(postsJSON, function (i, post) {
 
             $('<li class="media"></li>')
 
