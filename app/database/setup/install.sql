@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%contents` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `ordering` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` timestamp NOT NULL,
+  `modified` timestamp NULL,
   `access` varchar(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `Alias` (`alias`),
