@@ -105,9 +105,9 @@
                 </ul>
             </li>
             <li>
-                <a href="<?php echo site_url('admin/configurations'); ?>" title="<?php __('Configurations'); ?>">
+                <a href="<?php echo site_url('admin/settings'); ?>" title="<?php __('Configurations'); ?>">
                     <i class="fa fa-fw fa-gears"></i>
-                    <span class="menu-text"><?php __('Configurations'); ?></span>
+                    <span class="menu-text"><?php __('Settings'); ?></span>
                 </a>
             </li>
         </ul>
