@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%contents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `alias` varchar(255) NOT NULL,
   `type_id` int(11) NOT NULL COMMENT 'Contents Types',
-  `group_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Content Groups',
+  `group_id` int(11) NULL DEFAULT '0' COMMENT 'Content Groups',
   `user_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `ordering` int(11) NOT NULL,
