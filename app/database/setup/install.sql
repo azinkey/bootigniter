@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%contents` (
   `group_id` int(11) NULL DEFAULT '0' COMMENT 'Content Groups',
   `user_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `ordering` int(11) NOT NULL,
+  `ordering` int(11) NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL,
   `access` varchar(11) NOT NULL DEFAULT '0',
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%content_fields` (
   `in_list` tinyint(4) NOT NULL DEFAULT '0',
   `in_view` tinyint(1) NOT NULL DEFAULT '1',
   `in_search` int(11) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
+  `ordering` int(11) NULL DEFAULT '0',
   `validations` text,
   `options` varchar(255) DEFAULT NULL,
   `default_value` varchar(255) DEFAULT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%content_field_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL DEFAULT 'default',
-  `ordering` int(11) NOT NULL,
+  `ordering` int(11) NULL,
   `access` varchar(11) NOT NULL DEFAULT '0',
   `enabled` tinyint(4) NOT NULL DEFAULT '1',
   `system` tinyint(4) NOT NULL DEFAULT '0',
@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%languages` (
   `is_default` tinyint(1) NOT NULL DEFAULT '0',
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `ordering` int(11) NOT NULL,
+  `ordering` int(11) NULL,
   `system` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
@@ -384,7 +384,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%setting_groups` (
   `title` varchar(128) NOT NULL,
   `access` varchar(32) NOT NULL DEFAULT '1',
   `system` tinyint(4) NOT NULL DEFAULT '0',
-  `ordering` int(64) NOT NULL,
+  `ordering` int(64) NULL,
   PRIMARY KEY (`id`),
   KEY `sid` (`sid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Save Setting''s Groups' AUTO_INCREMENT=4 ;
@@ -399,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%setting_sections` (
   `title` varchar(128) NOT NULL,
   `access` varchar(32) NOT NULL DEFAULT '1',
   `system` tinyint(4) NOT NULL DEFAULT '0',
-  `ordering` int(64) NOT NULL,
+  `ordering` int(64) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Save Setting''s Sections' AUTO_INCREMENT=5 ;
 
