@@ -31,6 +31,8 @@ class Page extends CI_Controller {
 
         // Load Content Model
         AZ::model('content');
+
+        $this->_remap();
     }
 
     /**
@@ -40,7 +42,7 @@ class Page extends CI_Controller {
      * 
      */
     public function index() {
-
+        
         AZ::layout('content', array(
             'block' => 'index',
             'page_title' => __('Bootigniter - An Open Source CMS Boilerplate, Scalable Development Framework', true)
@@ -57,11 +59,11 @@ class Page extends CI_Controller {
      * @param	string $alias
      */
     public function content($alias) {
-
+        
         $activeLanguageId = $this->content->getActiveLanguageId();
 
         $content = $this->content->getContentByAlias($alias, $activeLanguageId);
-        
+
         // Diffrent Page Format for diffrent content type
         $contentBlock = ($content->type_id == 1) ? 'content/page' : 'content/' . $content->content_type;
         $varriables = array(
@@ -169,12 +171,13 @@ class Page extends CI_Controller {
      * @param	string $method Request Query String
      * @return	Method
      */
-    public function _remap($method) {
+    public function _remap() {
+
         $count_segments = $this->uri->total_segments();
         $segments = $this->uri->segment_array();
         $alias = $this->uri->uri_string();
         $query = $this->input->get();
-
+        
         switch ($count_segments) {
             case 0:
 
@@ -187,12 +190,12 @@ class Page extends CI_Controller {
                     $this->search($query['words'], (isset($query['per_page'])) ? $query['per_page'] : 0 );
                     return;
                 }
-                
+
                 if ($this->content->checkGroupAlias($alias)) {
                     $this->group($alias);
                     return true;
                 }
-
+                
                 if ($this->content->checkAlias($alias)) {
                     $this->content($alias);
                 } else {
@@ -222,6 +225,26 @@ class Page extends CI_Controller {
 
                 break;
             case 3:
+
+                if ($segments[1] == 'search' && isset($query['words'])) {
+                    $this->search($query['words'], (isset($query['per_page'])) ? $query['per_page'] : 0 );
+                    return;
+                }
+
+                if ($this->content->checkGroupAlias($alias)) {
+                    $this->group($alias);
+                    return true;
+                }
+                $extract = explode("/",$alias);
+                $page = end($extract);
+                if ($this->content->checkAlias($page)) {
+                    $this->content($page);
+                } else {
+                    $this->page_not_found();
+                }
+                break;
+           
+            case 4:
 
                 if (is_numeric($segments[4]) && $this->content->checkGroupAlias($segments[1])) {
                     $this->group($segments[1], $segments[2]);
