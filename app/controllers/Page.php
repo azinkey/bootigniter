@@ -32,7 +32,6 @@ class Page extends CI_Controller {
         // Load Content Model
         AZ::model('content');
 
-        $this->_remap();
     }
 
     /**
@@ -47,7 +46,7 @@ class Page extends CI_Controller {
             'block' => 'index',
             'page_title' => __('Bootigniter - An Open Source CMS Boilerplate, Scalable Development Framework', true)
         ));
-
+        
         //$this->content->track(); // uncomment for enabled self tracking into Visitors
     }
 
@@ -172,7 +171,7 @@ class Page extends CI_Controller {
      * @return	Method
      */
     public function _remap() {
-
+        
         $count_segments = $this->uri->total_segments();
         $segments = $this->uri->segment_array();
         $alias = $this->uri->uri_string();
@@ -182,7 +181,7 @@ class Page extends CI_Controller {
             case 0:
 
                 $this->index();
-
+                
                 break;
             case 1:
 
@@ -210,7 +209,12 @@ class Page extends CI_Controller {
                     $this->search($searchURI[0], $segments[2]);
                     return;
                 }
-
+                
+                if ($segments[1] == 'page') {
+                    $this->content($segments[2]);
+                    return;
+                }
+                
                 if (is_numeric($segments[2]) && $this->content->checkGroupAlias($segments[1])) {
                     $this->group($segments[1], $segments[2]);
                     return true;

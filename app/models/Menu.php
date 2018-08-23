@@ -99,7 +99,9 @@ class Menu extends CI_Model {
         if (!is_array($data) || !count($data)) {
             return false;
         }
-
+        if($data['menu_type'] == 2 || $data['menu_type'] == 3){
+            $data['content_id'] = 'page/'.$data['content_id'];
+        }
         $item = array(
             'id' => $data['id'],
             'menu_id' => $data['menu_id'],
