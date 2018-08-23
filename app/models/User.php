@@ -183,8 +183,8 @@ class user extends CI_Model {
             return false;
         }
         $avatar = $CI->db->get_where('user_profiles', array('user_id' => $id))->row('avatar');
-
-        if (!count($avatar) && is_array($avatar)) {
+        
+        if (empty($avatar)) {
             $avatar = 'media/users/avatar.png';
         }
         
