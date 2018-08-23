@@ -63,7 +63,7 @@ if (!function_exists('field_render')) {
         if ($content_id > 0) {
 
             $row = $ci->db->get_where('content_field_values', array('content_id' => $content_id, 'language_id' => $language_id, 'field_id' => $fieldObj->id))->row();
-            if ($row && count($row)) {
+            if (!empty($row)) {
                 if (is_null($row->option_id)) {
                     $default_value = $row->value;
                 }

@@ -213,7 +213,7 @@ class user extends CI_Model {
             return false;
         }
         $username = $CI->db->get_where('users', array('id' => $id))->row('username');
-        if (!count($username) && is_array($username)) {
+        if (empty($username)) {
             $username = '';
         }
         return $username;
@@ -227,7 +227,7 @@ class user extends CI_Model {
             return false;
         }
         $name = $CI->db->get_where('user_groups', array('id' => self::$user_group_id))->row('name');
-        if (!count($name) && is_array($name)) {
+        if (empty($name)) {
             $name = '';
         }
         return $name;
