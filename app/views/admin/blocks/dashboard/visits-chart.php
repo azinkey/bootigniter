@@ -53,7 +53,7 @@
                     color: "#93A7CB",
                     data: [
 <?php
-if (count($track_all_visitor)) {
+if (count($track_all_visitor) && is_array($track_all_visitor)) {
     foreach ($track_all_visitor as $key => $visit) {
         echo '["' . $key . '",' . $visit . "],";
     }
@@ -65,7 +65,7 @@ if (count($track_all_visitor)) {
                     color: "#F8862C",
                     data: [
 <?php
-if (count($track_mobile_visitor)) {
+if (count($track_mobile_visitor) && is_array($track_mobile_visitor)) {
     foreach ($track_mobile_visitor as $key => $visit) {
         echo '["' . $key . '",' . $visit . "],";
     }
