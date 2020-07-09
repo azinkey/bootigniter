@@ -14,7 +14,7 @@ Where its just a Custom CMS from Scratch Based on CodeIgniter &reg; http://www.c
 
 Bootigniter (SMART CMS Boilerplate),  Version 2 - Coming Soon
 
-Don't Forget to like us on Facebook http://fb.com/bootigniter [Twitter](https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fgithub.com%2Fazinkey%2Fbootigniter%2F&region=follow_link&screen_name=azinkey&tw_p=followbutton)
+Working on YouTube Downloader https://www.video-downloaders.com
 
 Why choose Bootigniter as CMS
 ===
