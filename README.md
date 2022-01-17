@@ -14,7 +14,7 @@ Where its just a Custom CMS from Scratch Based on CodeIgniter &reg; http://www.c
 
 Bootigniter (SMART CMS Boilerplate),  Version 2 - Coming Soon
 
-Working on YouTube Downloader https://www.video-downloaders.com
+sponsored by https://www.hygym.co.uk/
 
 Why choose Bootigniter as CMS
 ===
