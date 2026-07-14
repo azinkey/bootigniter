@@ -12,7 +12,7 @@ class Feature extends BaseConfig
     /**
      * Use improved new auto routing instead of the legacy version.
      */
-    public bool $autoRoutesImproved = true;
+    public bool $autoRoutesImproved = false;
 
     /**
      * Use filter execution order in 4.4 or before.

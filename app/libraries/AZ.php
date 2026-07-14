@@ -125,8 +125,15 @@ class AZ
      */
     public static function model(string $model, ?string $alias = null): void
     {
-        helper('model_loader');
-        az_load_model($model, $alias);
+        $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 2);
+        if (isset($trace[1]['object'])) {
+            $caller = $trace[1]['object'];
+            $modelClass = '\\App\\Models\\' . ucfirst($model);
+            $aliasName = $alias ?? strtolower($model);
+            if (class_exists($modelClass)) {
+                $caller->$aliasName = new $modelClass();
+            }
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ class App extends BaseConfig
      * Base Site URL — set this to your site's URL with trailing slash.
      * Auto-detected if empty (development only — set it for production).
      */
-    public string $baseURL = '';
+    public string $baseURL = 'http://localhost/';
 
     /** @var list<string> */
     public array $allowedHostnames = [];

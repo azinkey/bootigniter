@@ -17,6 +17,8 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Models\Setting;
+use App\Models\User;
 
 class BaseController extends \CodeIgniter\Controller
 {

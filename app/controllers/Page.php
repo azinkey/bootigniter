@@ -2,6 +2,7 @@
 
 
 namespace App\Controllers;
+use App\Libraries\AZ;
 /**
  * Bootigniter
  *
@@ -27,8 +28,12 @@ defined('APPPATH') || exit('No direct script access allowed');
 
 class Page extends BaseController {
 
-    public function __construct() {
-        parent::__construct();
+    public function initController(
+        \CodeIgniter\HTTP\RequestInterface $request,
+        \CodeIgniter\HTTP\ResponseInterface $response,
+        \Psr\Log\LoggerInterface $logger
+    ): void {
+        parent::initController($request, $response, $logger);
 
         // Load Content Model
         AZ::model('content');
