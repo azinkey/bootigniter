@@ -2,13 +2,13 @@
 
 namespace Config;
 
-use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Config\AutoloadConfig;
 
 /**
  * BootIgniter Autoload Configuration
  * Minimal — only helpers that BootIgniter needs globally.
  */
-class Autoload extends BaseConfig
+class Autoload extends AutoloadConfig
 {
     /**
      * PSR4 namespace mappings.
@@ -16,7 +16,7 @@ class Autoload extends BaseConfig
      *
      * @var array<string, list<string>|string>
      */
-    public array $psr4 = [
+    public $psr4 = [
         APP_NAMESPACE => APPPATH,
         'Config'      => APPPATH . 'Config',
     ];
@@ -24,8 +24,10 @@ class Autoload extends BaseConfig
     /**
      * Global helpers to load on every request.
      * Same set as the old autoload.php helper array.
+     *
+     * @var list<string>
      */
-    public array $helpers = [
+    public $helpers = [
         'url',
         'setting',
         'user',

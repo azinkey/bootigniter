@@ -1,5 +1,7 @@
 <?php
 
+
+namespace App\Models;
 class Message extends \CodeIgniter\Model {
 
     public function getTotalNotifications($type = 1) {

@@ -1,5 +1,7 @@
 <?php
 
+
+namespace App\Models;
 class Content extends \CodeIgniter\Model {
 
     public function checkAlias($alias) {

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Bootigniter
@@ -21,8 +21,7 @@
  * @subpackage  Url
  * @author		AZinkey
  */
-defined('APPPATH') || exit('No direct script access allowed'); //
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
 /**
  * Get skin / theme url

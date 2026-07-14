@@ -1,5 +1,7 @@
 <?php
 
+
+namespace App\Models;
 class user extends \CodeIgniter\Model {
 
     private static $user_id;

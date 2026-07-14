@@ -1,5 +1,7 @@
 <?php
 
+
+namespace App\Models;
 class Setting extends \CodeIgniter\Model {
 
     public function getSettingSections() {

@@ -4,24 +4,13 @@ namespace Config;
 
 use CodeIgniter\Config\Routing as BaseRouting;
 
-/**
- * BootIgniter Routing Configuration
- * Equivalent of CI3's routes.php
- */
 class Routing extends BaseRouting
 {
-    /**
-     * Default controller — same as old: \\['default_controller'] = 'page'\
-     */
-    public string \ = 'Page';
-
-    public string \ = 'index';
-
-    public bool \ = false;
-
-    /**
-     * Auto-routing (legacy) — keeps CI3-style controller/method URL mapping.
-     * Set to false and define explicit routes for stricter apps.
-     */
-    public bool \ = true;
+    public string $defaultNamespace = 'App\Controllers';
+    public string $defaultController = 'Page';
+    public string $defaultMethod = 'index';
+    public bool $translateURIDashes = false;
+    public bool $autoRoute = true;
+    public bool $prioritize = false;
+    public array $moduleRoutes = [];
 }

@@ -1,5 +1,7 @@
 <?php
 
+
+namespace App\Models;
 class Menu extends \CodeIgniter\Model {
 
     public function getMenus($select = '*', $where = array(), $offset = 0, $limit = 25, $count = FALSE) {

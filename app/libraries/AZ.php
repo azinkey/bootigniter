@@ -1,5 +1,7 @@
 <?php
 
+
+namespace App\Libraries;
 /**
  * BootIgniter
  *
@@ -12,10 +14,10 @@
  */
 
 /**
- * AZ — BootIgniter's core static facade.
+ * AZ â€” BootIgniter's core static facade.
  *
  * Provides layout/block/redirect/flash/pagination API.
- * Same public API as CI3 version — only internals updated for CI4.
+ * Same public API as CI3 version â€” only internals updated for CI4.
  *
  * Usage:
  *   AZ::layout('left-content', $vars)
@@ -64,7 +66,7 @@ class AZ
     public static function block(string $name = 'default', array $vars = [], string $theme = 'default'): void
     {
         if (empty($name)) {
-            throw new \RuntimeException('AZ::block() — block name is required.');
+            throw new \RuntimeException('AZ::block() â€” block name is required.');
         }
 
         $path = self::isAdmin()
@@ -116,7 +118,7 @@ class AZ
 
     /**
      * Load a model and attach it to CI's service container.
-     * Same usage as old AZ::model('user') — model becomes $CI->user
+     * Same usage as old AZ::model('user') â€” model becomes $CI->user
      *
      * @param string $model      Model class name (e.g. 'user', 'content')
      * @param string|null $alias Optional alias for the model property

@@ -1,9 +1,11 @@
 <?php
 
+
+namespace App\Controllers;
 /**
  * BootIgniter BaseController
  *
- * Thin base controller — extends CI4's Controller.
+ * Thin base controller â€” extends CI4's Controller.
  * Wires up $this->db and $this->session for all child controllers.
  * Also preloads the Setting and User models that are always needed.
  *
@@ -40,7 +42,7 @@ class BaseController extends \CodeIgniter\Controller
         $this->db      = db_connect();
         $this->session = service('session');
 
-        // Always-available models — same as old autoload['model'] = ['az', 'user', 'setting']
+        // Always-available models â€” same as old autoload['model'] = ['az', 'user', 'setting']
         $this->setting = new Setting();
         $this->user    = new User();
     }

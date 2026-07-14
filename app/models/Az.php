@@ -1,5 +1,7 @@
 <?php
 
+
+namespace App\Models;
 class AZ extends \CodeIgniter\Model {
 
     static private $CI;
