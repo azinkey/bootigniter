@@ -21,7 +21,7 @@
  * @subpackage  Loader
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
+if (!defined('APPPATH'))
     exit('No direct script access allowed');
 
 class AZ_Loader extends CI_Loader {

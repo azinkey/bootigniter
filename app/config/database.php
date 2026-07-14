@@ -10,7 +10,7 @@ use CodeIgniter\Config\BaseConfig;
  * STEP 1: Set your database credentials here.
  * This is the same 2-step setup as before — just a new file format.
  */
-class Database extends BaseConfig
+class Database extends \CodeIgniter\Database\Config
 {
     /**
      * The default database connection group name.
