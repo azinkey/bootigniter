@@ -21,10 +21,9 @@
  * @subpackage          Controllers
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
-class Page extends CI_Controller {
+class Page extends BaseController {
 
     public function __construct() {
         parent::__construct();
@@ -175,7 +174,7 @@ class Page extends CI_Controller {
         $count_segments = $this->uri->total_segments();
         $segments = $this->uri->segment_array();
         $alias = $this->uri->uri_string();
-        $query = $this->input->get();
+        $query = $this->request->getGet();
         
         switch ($count_segments) {
             case 0:

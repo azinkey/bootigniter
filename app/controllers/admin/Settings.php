@@ -21,10 +21,9 @@
  * @subpackage  Controllers
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
-class Settings extends CI_Controller {
+class Settings extends BaseController {
 
     public function __construct() {
 
@@ -67,7 +66,7 @@ class Settings extends CI_Controller {
      */
     public function save() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
         if (!$this->setting->saveSettings($post)) {
 
@@ -121,14 +120,14 @@ class Settings extends CI_Controller {
      */
     public function save_section() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
 
-        $this->form_validation->set_rules('title', lang('Title'), 'trim|required');
+        $this->validation->setRules(['title', lang('Title'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
 
             AZ::redirectError('admin/settings', validation_errors());
         }
@@ -150,14 +149,14 @@ class Settings extends CI_Controller {
      */
     public function save_group() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
 
-        $this->form_validation->set_rules('title', lang('Title'), 'trim|required');
+        $this->validation->setRules(['title', lang('Title'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
 
             AZ::redirectError('admin/settings', validation_errors());
         }
@@ -232,18 +231,18 @@ class Settings extends CI_Controller {
      */
     public function save_setting() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
         if (isset($post['id']) && !empty($post['id'])) {
-            $this->form_validation->set_rules('key', lang('Key Setting'), 'trim|required');
+            $this->validation->setRules(['key', lang('Key Setting'), 'trim|required');
         } else {
-            $this->form_validation->set_rules('key', lang('Key Setting'), 'trim|required|is_unique[settings.key]');
+            $this->validation->setRules(['key', lang('Key Setting'), 'trim|required|is_unique[settings.key]');
         }
 
-        $this->form_validation->set_rules('value', lang('Value Setting'), 'trim|required');
+        $this->validation->setRules(['value', lang('Value Setting'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
 
             AZ::redirectError('admin/settings', validation_errors());
         }

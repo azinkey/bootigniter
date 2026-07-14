@@ -1,0 +1,124 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Commands\Server;
+
+use CodeIgniter\CLI\BaseCommand;
+use CodeIgniter\CLI\CLI;
+
+/**
+ * Launch the PHP development server.
+ */
+class Serve extends BaseCommand
+{
+    /**
+     * Group
+     *
+     * @var string
+     */
+    protected $group = 'CodeIgniter';
+
+    /**
+     * Name
+     *
+     * @var string
+     */
+    protected $name = 'serve';
+
+    /**
+     * Description
+     *
+     * @var string
+     */
+    protected $description = 'Launches the CodeIgniter PHP-Development Server.';
+
+    /**
+     * Usage
+     *
+     * @var string
+     */
+    protected $usage = 'serve';
+
+    /**
+     * Arguments
+     *
+     * @var array<string, string>
+     */
+    protected $arguments = [];
+
+    /**
+     * The current port offset.
+     *
+     * @var int
+     */
+    protected $portOffset = 0;
+
+    /**
+     * The max number of ports to attempt to serve from
+     *
+     * @var int
+     */
+    protected $tries = 10;
+
+    /**
+     * Options
+     *
+     * @var array<string, string>
+     */
+    protected $options = [
+        '--php'  => 'The PHP Binary [default: "PHP_BINARY"]',
+        '--host' => 'The HTTP Host [default: "localhost"]',
+        '--port' => 'The HTTP Host Port [default: "8080"]',
+    ];
+
+    /**
+     * Run the server.
+     *
+     * @codeCoverageIgnore
+     */
+    public function run(array $params)
+    {
+        $php  = CLI::getOption('php') ?? PHP_BINARY;
+        $host = CLI::getOption('host') ?? 'localhost';
+        $port = (int) (CLI::getOption('port') ?? 8080) + $this->portOffset;
+
+        CLI::write('CodeIgniter development server started on http://' . $host . ':' . $port, 'green');
+        CLI::write('Press Control-C to stop.');
+
+        passthru(
+            $this->buildServeCommand($php, $host, $port, FCPATH, SYSTEMPATH . 'rewrite.php'),
+            $status,
+        );
+
+        if ($status !== EXIT_SUCCESS && $this->portOffset < $this->tries) {
+            $this->portOffset++;
+
+            $this->run($params);
+        }
+    }
+
+    /**
+     * Builds the shell command passed to PHP's built-in webserver, escaping
+     * every user-influenced argument so it cannot be interpreted by /bin/sh.
+     */
+    protected function buildServeCommand(string $php, string $host, int $port, string $docroot, string $rewrite): string
+    {
+        return sprintf(
+            '%s -S %s -t %s %s',
+            escapeshellarg($php),
+            escapeshellarg($host . ':' . $port),
+            escapeshellarg($docroot),
+            escapeshellarg($rewrite),
+        );
+    }
+}

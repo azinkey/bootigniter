@@ -15,7 +15,7 @@
     <div class="col-md-6">
         <h6>
             <strong>Profile</strong>    
-            <small><?php _a('account/edit/'.user::id(), __('Edit', true), ' class="pull-right" ') ?></small>
+            <small><?php _a('account/edit/'.user::id(), __('Edit', true), ' class="float-end" ') ?></small>
         </h6>
 
         <p>

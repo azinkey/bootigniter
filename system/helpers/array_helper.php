@@ -1,115 +1,165 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+declare(strict_types=1);
 
 /**
- * CodeIgniter Array Helpers
+ * This file is part of CodeIgniter 4 framework.
  *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/helpers/array_helper.html
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
 
-// ------------------------------------------------------------------------
+use CodeIgniter\Helpers\Array\ArrayHelper;
 
-if ( ! function_exists('element'))
-{
-	/**
-	 * Element
-	 *
-	 * Lets you determine whether an array index is set and whether it has a value.
-	 * If the element is empty it returns NULL (or whatever you specify as the default value.)
-	 *
-	 * @param	string
-	 * @param	array
-	 * @param	mixed
-	 * @return	mixed	depends on what the array contains
-	 */
-	function element($item, array $array, $default = NULL)
-	{
-		return array_key_exists($item, $array) ? $array[$item] : $default;
-	}
+// CodeIgniter Array Helpers
+
+if (! function_exists('dot_array_search')) {
+    /**
+     * Searches an array through dot syntax. Supports
+     * wildcard searches, like foo.*.bar
+     *
+     * @return array|bool|int|object|string|null
+     */
+    function dot_array_search(string $index, array $array)
+    {
+        return ArrayHelper::dotSearch($index, $array);
+    }
 }
 
-// ------------------------------------------------------------------------
+if (! function_exists('array_deep_search')) {
+    /**
+     * Returns the value of an element at a key in an array of uncertain depth.
+     *
+     * @param int|string $key
+     *
+     * @return array|bool|float|int|object|string|null
+     */
+    function array_deep_search($key, array $array)
+    {
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
 
-if ( ! function_exists('random_element'))
-{
-	/**
-	 * Random Element - Takes an array as input and returns a random element
-	 *
-	 * @param	array
-	 * @return	mixed	depends on what the array contains
-	 */
-	function random_element($array)
-	{
-		return is_array($array) ? $array[array_rand($array)] : $array;
-	}
+        foreach ($array as $value) {
+            if (is_array($value) && ($result = array_deep_search($key, $value))) {
+                return $result;
+            }
+        }
+
+        return null;
+    }
 }
 
-// --------------------------------------------------------------------
+if (! function_exists('array_sort_by_multiple_keys')) {
+    /**
+     * Sorts a multidimensional array by its elements values. The array
+     * columns to be used for sorting are passed as an associative
+     * array of key names and sorting flags.
+     *
+     * Both arrays of objects and arrays of array can be sorted.
+     *
+     * Example:
+     *     array_sort_by_multiple_keys($players, [
+     *         'team.hierarchy' => SORT_ASC,
+     *         'position'       => SORT_ASC,
+     *         'name'           => SORT_STRING,
+     *     ]);
+     *
+     * The '.' dot operator in the column name indicates a deeper array or
+     * object level. In principle, any number of sublevels could be used,
+     * as long as the level and column exist in every array element.
+     *
+     * For information on multi-level array sorting, refer to Example #3 here:
+     * https://www.php.net/manual/de/function.array-multisort.php
+     *
+     * @param array $array       the reference of the array to be sorted
+     * @param array $sortColumns an associative array of columns to sort
+     *                           after and their sorting flags
+     */
+    function array_sort_by_multiple_keys(array &$array, array $sortColumns): bool
+    {
+        // Check if there really are columns to sort after
+        if ($sortColumns === [] || $array === []) {
+            return false;
+        }
 
-if ( ! function_exists('elements'))
-{
-	/**
-	 * Elements
-	 *
-	 * Returns only the array items specified. Will return a default value if
-	 * it is not set.
-	 *
-	 * @param	array
-	 * @param	array
-	 * @param	mixed
-	 * @return	mixed	depends on what the array contains
-	 */
-	function elements($items, array $array, $default = NULL)
-	{
-		$return = array();
+        // Group sorting indexes and data
+        $tempArray = [];
 
-		is_array($items) OR $items = array($items);
+        foreach ($sortColumns as $key => $sortFlag) {
+            // Get sorting values
+            $carry = $array;
 
-		foreach ($items as $item)
-		{
-			$return[$item] = array_key_exists($item, $array) ? $array[$item] : $default;
-		}
+            // The '.' operator separates nested elements
+            foreach (explode('.', $key) as $keySegment) {
+                // Loop elements if they are objects
+                if (is_object(reset($carry))) {
+                    // Extract the object attribute
+                    foreach ($carry as $index => $object) {
+                        $carry[$index] = $object->{$keySegment};
+                    }
 
-		return $return;
-	}
+                    continue;
+                }
+
+                // Extract the target column if elements are arrays
+                $carry = array_column($carry, $keySegment);
+            }
+
+            // Store the collected sorting parameters
+            $tempArray[] = $carry;
+            $tempArray[] = $sortFlag;
+        }
+
+        // Append the array as reference
+        $tempArray[] = &$array;
+
+        // Pass sorting arrays and flags as an argument list.
+        return array_multisort(...$tempArray);
+    }
+}
+
+if (! function_exists('array_flatten_with_dots')) {
+    /**
+     * Flatten a multidimensional array using dots as separators.
+     *
+     * @param iterable $array The multi-dimensional array
+     * @param string   $id    Something to initially prepend to the flattened keys
+     *
+     * @return array The flattened array
+     */
+    function array_flatten_with_dots(iterable $array, string $id = ''): array
+    {
+        $flattened = [];
+
+        foreach ($array as $key => $value) {
+            $newKey = $id . $key;
+
+            if (is_array($value) && $value !== []) {
+                $flattened = array_merge($flattened, array_flatten_with_dots($value, $newKey . '.'));
+            } else {
+                $flattened[$newKey] = $value;
+            }
+        }
+
+        return $flattened;
+    }
+}
+
+if (! function_exists('array_group_by')) {
+    /**
+     * Groups all rows by their index values. Result's depth equals number of indexes
+     *
+     * @param array $array        Data array (i.e. from query result)
+     * @param array $indexes      Indexes to group by. Dot syntax used. Returns $array if empty
+     * @param bool  $includeEmpty If true, null and '' are also added as valid keys to group
+     *
+     * @return array Result array where rows are grouped together by indexes values.
+     */
+    function array_group_by(array $array, array $indexes, bool $includeEmpty = false): array
+    {
+        return ArrayHelper::groupBy($array, $indexes, $includeEmpty);
+    }
 }

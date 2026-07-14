@@ -4,19 +4,19 @@
 
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <span class="fa fa-fw fa-folder-open"></span>
+                        <span class="fa-solid fa-fw fa-folder-open"></span>
                         <?php echo isset($group->title) ? $group->title : lang('New Field Group'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a href="<?php _u('admin/settings'); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveGroup">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -28,8 +28,8 @@
         <div class="row-fluid">
 
             <?php echo form_open('admin/settings/save_group', array('id' => 'saveGroup')); ?>
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card panel-default">
+                <div class="card-body">
 
                     <div class="field-row">
                         <?php
@@ -57,14 +57,14 @@
 
                 </div>
 
-                <div class="panel-footer text-right">
+                <div class="card-footer text-right">
                     <?php echo (isset($group->id)) ? form_hidden('id', $group->id) : ''; ?>
                     <a href="<?php _u('admin/settings'); ?>" class="btn btn-default btn-sm">
-                        <i class="fa fa-arrow-circle-left"></i>
+                        <i class="fa-solid fa-arrow-circle-left"></i>
                         <?php __('Cancel'); ?>
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
+                        <i class="fa-solid fa-save"></i>
                         <?php __('Save'); ?>
                     </button>
                 </div>

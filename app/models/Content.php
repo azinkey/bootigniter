@@ -1,6 +1,6 @@
 <?php
 
-class Content extends CI_Model {
+class Content extends \CodeIgniter\Model {
 
     public function checkAlias($alias) {
         return $this->db->get_where('contents', array('alias' => $alias))->num_rows();

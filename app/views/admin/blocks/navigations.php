@@ -6,13 +6,13 @@
         <ul class="nav menu" id="sidebarMenu">
             <li>
                 <a href="<?php _u('admin/dashboard'); ?>">
-                    <i class="fa fa-fw fa-dashboard"></i>
+                    <i class="fa-solid fa-fw fa-gauge"></i>
                     <span class="menu-text"><?php __('Dashboard'); ?></span>
                     <?php
                     $count_notification = count_user_notifications() + count_user_messages();
                     if ($count_notification) {
                         ?>
-                        <span class="notification pull-right"></span>
+                        <span class="notification float-end"></span>
                         <?php
                     }
                     ?>
@@ -23,7 +23,7 @@
             <li class="menu-manager">
                 <a href="<?php echo site_url('admin/menus'); ?>" title="<?php __('Menus'); ?>">
 
-                    <i class="fa fa-fw fa-tasks"></i>
+                    <i class="fa-solid fa-fw fa-tasks"></i>
                     <span class="menu-text"><?php __('Menus'); ?></span>
 
                 </a>
@@ -31,39 +31,39 @@
 
             <li class="parent contents-manager">
                 <a href="javascript:void(0);" title="<?php __('Contents'); ?>">
-                    <i class="fa fa-fw fa-life-saver"></i>
+                    <i class="fa-solid fa-fw fa-life-ring"></i>
                     <span class="menu-text"><?php __('Contents'); ?></span>
-                    <span class="pull-right arrow">></span>
+                    <span class="float-end arrow">></span>
                 </a>
                 <ul class="submenu">
                     <li class="c1">
                         <a href="<?php echo site_url('admin/contents/fieldsets'); ?>" title="<?php __('Fieldset'); ?>">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa-solid fa-folder-open"></i>
                             <span class="menu-text"><?php __('Fieldset'); ?></span> 
                         </a>
                     </li>
                     <li class="c2">
                         <a href="<?php echo site_url('admin/contents/fields'); ?>" title="<?php __('Fields'); ?>">
-                            <i class="fa fa-ellipsis-h"></i>
+                            <i class="fa-solid fa-ellipsis-h"></i>
                             <span class="menu-text"><?php __('Fields'); ?></span> 
                         </a>
                     </li>
                     <li class="c4">
                         <a href="<?php echo site_url('admin/contents/types'); ?>" title="<?php __('Types'); ?>">
-                            <i class="fa fa-sliders"></i>
+                            <i class="fa-solid fa-sliders"></i>
                             <span class="menu-text"><?php __('Types'); ?></span> 
                         </a>
                     </li>
                     <li class="c5">
                         <a href="<?php echo site_url('admin/contents/groups'); ?>" title="<?php __('Groups'); ?>">
-                            <i class="fa fa-folder-open-o"></i>
+                            <i class="fa-regular fa-folder-open"></i>
                             <span class="menu-text"><?php __('Groups'); ?></span> 
                         </a>
                     </li>
                    
                     <li class="c8">
                         <a href="<?php echo site_url('admin/contents/languages'); ?>" title="<?php __('Languages'); ?>">
-                            <i class="fa fa-language"></i>
+                            <i class="fa-solid fa-language"></i>
                             <span class="menu-text"><?php __('Languages'); ?></span> 
                         </a>
                     </li>
@@ -71,33 +71,33 @@
             </li>
             <li class="parent">
                 <a href="javascript:void(0);" title="<?php __('Accounts'); ?>">
-                    <i class="fa fa-fw fa-users"></i>
+                    <i class="fa-solid fa-fw fa-users"></i>
                     <span class="menu-text"><?php __('Accounts'); ?></span>
-                    <span class="pull-right arrow">></span>
+                    <span class="float-end arrow">></span>
                 </a>
                 <ul class="submenu">
                     <li class="a1">
                         <a href="<?php echo site_url('admin/users/index/1'); ?>" title="<?php __('Users'); ?>">
-                            <i class="fa fa-fw fa-user"></i>
+                            <i class="fa-solid fa-fw fa-user"></i>
                             <span class="menu-text"><?php __('Users'); ?></span> 
                         </a>
                     </li>
                     <li class="a2">
                         <a href="<?php echo site_url('admin/users/groups'); ?>" title="<?php __('Groups'); ?>">
-                            <i class="fa fa-fw fa-user-md"></i>
+                            <i class="fa-solid fa-fw fa-user-md"></i>
                             <span class="menu-text"><?php __('Groups'); ?></span> 
                         </a>
                     </li>
                     <li class="a3">
                         <a href="<?php echo site_url('admin/users/accesses'); ?>" title="<?php __('Accesses'); ?>">
-                            <i class="fa fa-fw fa-eye-slash"></i>
+                            <i class="fa-solid fa-fw fa-eye-slash"></i>
                             <span class="menu-text"><?php __('Accesses'); ?></span> 
                         </a>
                     </li>
                     <?php if (user::access_id() == 1) { ?>
                         <li class="a4">
                             <a href="<?php echo site_url('admin/users/permissions'); ?>" title="<?php __('Permissions'); ?>">
-                                <i class="fa fa-fw fa-unlock-alt"></i>
+                                <i class="fa-solid fa-fw fa-unlock-alt"></i>
                                 <span class="menu-text"><?php __('Permissions'); ?></span> 
                             </a>
                         </li>
@@ -106,7 +106,7 @@
             </li>
             <li>
                 <a href="<?php echo site_url('admin/settings'); ?>" title="<?php __('Configurations'); ?>">
-                    <i class="fa fa-fw fa-gears"></i>
+                    <i class="fa-solid fa-fw fa-gears"></i>
                     <span class="menu-text"><?php __('Settings'); ?></span>
                 </a>
             </li>

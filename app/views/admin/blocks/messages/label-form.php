@@ -1,13 +1,13 @@
 
 
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="myModalLabel"><?php __('Add New Label'); ?></h4>
 </div>
 <div class="modal-body">
     <?php echo form_open('admin/dashboard/save_label', 'class="form-inline label-form" role="form"'); ?>    
     <div class="row">
-        <div class="col-xs-3">
+        <div class="col-3">
             <div class="input-group">
                 <?php
                 echo form_input(array(
@@ -19,7 +19,7 @@
                 ?>
             </div>
         </div>
-        <div class="col-xs-8">
+        <div class="col-8">
 
             <div class="input-group">
                 <?php
@@ -36,7 +36,7 @@
                     <?php echo form_hidden('user_id', user::id() ); ?>
                     <?php echo (isset($label->id)) ? form_hidden('id', $label->id) : ''; ?>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
+                        <i class="fa-solid fa-save"></i>
                         <?php __('Save'); ?>
                     </button>
                 </span>

@@ -4,9 +4,9 @@
     <div>
         <hr />
         <?php
-        echo form_open('administrator/login', array('role' => 'form', 'class' => 'panel'));
+        echo form_open('administrator/login', array('role' => 'form', 'class' => 'card'));
         ?>
-        <div class="panel-body">
+        <div class="card-body">
             <?php
             $this->load->block('system-message', true);
             ?>
@@ -23,7 +23,7 @@
                     );
                     echo form_input($username);
                     ?>
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <span class="fa-solid fa-user form-control-feedback"></span>
                     <?php echo form_error('username', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <br />
@@ -38,7 +38,7 @@
                     );
                     echo form_password($password);
                     ?>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <span class="fa-solid fa-lock form-control-feedback"></span>
                     <?php echo form_error('password', '<small class="text-danger">', '</small>'); ?>
                 </div>                    
 
@@ -46,7 +46,7 @@
                 <div class="form-stack has-icon">
                     <button class="btn btn-lg btn-success btn-block" type="submit">
                         <?php __('Login') ?>
-                        <span class="glyphicon glyphicon-log-in"></span>
+                        <span class="fa-solid fa-log-in"></span>
                     </button>
 
                 </div>

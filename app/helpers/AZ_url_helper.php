@@ -21,7 +21,7 @@
  * @subpackage  Url
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
+defined('APPPATH') || exit('No direct script access allowed'); //
     exit('No direct script access allowed');
 
 /**

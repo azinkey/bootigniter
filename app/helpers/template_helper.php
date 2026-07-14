@@ -21,7 +21,7 @@
  * @subpackage  Template
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
+defined('APPPATH') || exit('No direct script access allowed'); //
     exit('No direct script access allowed');
 
 
@@ -36,9 +36,7 @@ if (!function_exists('get_content_types_admin_navigations')) {
 
     function get_content_types_admin_navigations() {
         AZ::model('content');
-        $CI = & get_instance();
-
-        $rows = $CI->content->getTypes('id,name,alias,have_groups', array('enabled' => 1));
+                $rows = content->getTypes('id,name,alias,have_groups', array('enabled' => 1));
         $html = '';
         if (count($rows)) {
             foreach ($rows as $row) {
@@ -96,9 +94,7 @@ if (!function_exists('get_user_notifications')) {
     function get_user_notifications() {
         AZ::model('message');
         AZ::helper('date');
-        $CI = & get_instance();
-
-        $rows = $CI->message->getUserNotifications('id,label,is_read,is_star,subject,body,created', array('trash' => 0, 'type' => 1, 'is_read' => 0, 'receiver' => user::id()));
+                $rows = message->getUserNotifications('id,label,is_read,is_star,subject,body,created', array('trash' => 0, 'type' => 1, 'is_read' => 0, 'receiver' => user::id()));
 
         $html = '';
         if (count($rows)) {
@@ -136,9 +132,7 @@ if (!function_exists('count_user_notifications')) {
     function count_user_notifications() {
         AZ::model('message');
         AZ::helper('date');
-        $CI = & get_instance();
-
-        $count = $CI->message->getUserNotifications('id, label, is_read, is_star, subject, body, created', array('trash' => 0, 'type' => 1, 'is_read' => 0), 0, 0, true);
+                $count = message->getUserNotifications('id, label, is_read, is_star, subject, body, created', array('trash' => 0, 'type' => 1, 'is_read' => 0), 0, 0, true);
 
         return $count;
     }
@@ -157,9 +151,7 @@ if (!function_exists('get_user_messages')) {
     function get_user_messages() {
         AZ::model('message');
         AZ::helper('date');
-        $CI = & get_instance();
-
-        $rows = $CI->message->getMessages('users.name,messages.*', array('messages.trash' => 0, 'messages.receiver' => user::id()), 0, 10);
+                $rows = message->getMessages('users.name,messages.*', array('messages.trash' => 0, 'messages.receiver' => user::id()), 0, 10);
 
         $html = '';
         if (count($rows)) {
@@ -200,9 +192,7 @@ if (!function_exists('count_user_messages')) {
     function count_user_messages() {
         AZ::model('message');
         AZ::helper('date');
-        $CI = & get_instance();
-
-        $count = $CI->message->getMessages('*', array('messages.trash' => 0, 'messages.is_read' => 0, 'messages.receiver' => user::id()), 0, 0, true);
+                $count = message->getMessages('*', array('messages.trash' => 0, 'messages.is_read' => 0, 'messages.receiver' => user::id()), 0, 0, true);
 
         return $count;
     }
@@ -434,8 +424,7 @@ if (!function_exists('menu')) {
 
         AZ::model('menu');
         AZ::helper('html');
-        $CI = & get_instance();
-        $items = $CI->menu->getItemsByName($name,$wrapper_class);
+                $items = menu->getItemsByName($name,$wrapper_class);
         return $items;
     }
 

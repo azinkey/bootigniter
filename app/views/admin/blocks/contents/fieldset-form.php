@@ -3,19 +3,19 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <i class="fa fa-folder-open"></i>
+                        <i class="fa-solid fa-folder-open"></i>
                         <?php echo isset($fieldset->name) ? $fieldset->name : lang('New Field Group'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a href="<?php _u('admin/contents/fieldsets/'); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveFieldset">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -29,8 +29,8 @@
 
             <?php echo form_open('admin/contents/save_fieldset', array('id' => 'saveFieldset')); ?>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card panel-default">
+                <div class="card-body">
 
                     <div class="field-row">
                         <?php
@@ -58,11 +58,11 @@
                 <div class="modal-footer">
                     <?php echo (isset($fieldset->id)) ? form_hidden('id', $fieldset->id) : ''; ?>
                     <a href="<?php _u('admin/contents/fieldsets/'); ?>" class="btn btn-default">
-                        <i class="fa fa-arrow-circle-left"></i>
+                        <i class="fa-solid fa-arrow-circle-left"></i>
                         <?php __('Cancel'); ?>
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
+                        <i class="fa-solid fa-save"></i>
                         <?php __('Save'); ?>
                     </button>
                 </div>

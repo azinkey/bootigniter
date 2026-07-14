@@ -3,20 +3,20 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <i class="fa fa-ellipsis-h"></i>
+                        <i class="fa-solid fa-ellipsis-h"></i>
                         <?php echo isset($field->label) ? $field->label : lang('New Field'); ?>
                         <small class="muted">(<?php echo $fieldset_name; ?>)</small>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a href="<?php _u('admin/contents/fields/' . $fieldset); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveContentFieldForm">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -30,20 +30,20 @@
 
             <?php echo form_open('admin/contents/save_field', array('id' => 'saveContentFieldForm')); ?>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card panel-default">
+                <div class="card-body">
                     <div class="panel-group" id="accordion">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                        <span class="glyphicon pull-left hidden-xs"></span>
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a data-bs-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        <span class="float-start d-none d-sm-block"></span>
                                         <?php __('Field'); ?>
                                     </a>
                                 </h4>
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="field-row row-fluid">
                                         <div class="col-md-4">
                                             <?php
@@ -205,17 +205,17 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                        <span class="glyphicon pull-left hidden-xs"></span>
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a data-bs-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        <span class="float-start d-none d-sm-block"></span>
                                         <?php __('Options'); ?>
                                     </a>
                                 </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse in">
-                                <div id="fieldOptionsWrapper" class="panel-body" data-field="<?php echo (isset($field->id)) ? $field->id : NULL; ?>">
+                                <div id="fieldOptionsWrapper" class="card-body" data-field="<?php echo (isset($field->id)) ? $field->id : NULL; ?>">
                                     <?php echo field_options((isset($field->type)) ? $field->type : 'text', (isset($field->id)) ? $field->id : NULL); ?>
                                 </div>
                             </div>
@@ -225,18 +225,18 @@
 
 
                 </div>
-                <div class="panel-footer text-right">
+                <div class="card-footer text-right">
                     <?php
                     echo form_hidden('id', $edit_id);
                     echo (isset($fieldset)) ? form_hidden('group_id', $fieldset) : '';
                     ?>
 
                     <a class="btn btn-default" href="<?php _u('admin/contents/fields/' . $fieldset); ?>">
-                        <i class="fa fa-arrow-circle-left"></i>
+                        <i class="fa-solid fa-arrow-circle-left"></i>
                         <?php __('Cancel'); ?>
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
+                        <i class="fa-solid fa-save"></i>
                         <?php __('Save'); ?>
                     </button>
                 </div>

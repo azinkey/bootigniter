@@ -4,15 +4,15 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-10">
+                <div class="col-10">
                     <h4 class="title">
-                        <i class="fa fa-pencil-square"></i>
+                        <i class="fa-solid fa-pencil-square"></i>
                         <?php __($contentType->name); ?>
                     </h4>
                 </div>
-                <div class="col-xs-2">
-                    <a href="<?php _u('admin/contents/edit/' . $contentType->alias . '/' . '-1'); ?>" title="<?php __('Add New') ?>" class="btn btn-primary btn-sm pull-right">
-                        <i class="fa fa-plus"></i>
+                <div class="col-2">
+                    <a href="<?php _u('admin/contents/edit/' . $contentType->alias . '/' . '-1'); ?>" title="<?php __('Add New') ?>" class="btn btn-primary btn-sm float-end">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                 </div>
             </div>
@@ -21,12 +21,12 @@
         <?php AZ::block('system-message'); ?>
 
         <div class="row-fluid">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card panel-default">
+                <div class="card-header">
                     <small class="muted"><?php __($contentType->description); ?></small>
                     <div class="clearfix"></div>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <?php
                     if ($contents && count($contents)) {
                         ?>
@@ -34,10 +34,10 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th  width="5%" class="hidden-xs" >
+                                        <th  width="5%" class="d-none d-sm-block" >
                                             <?php __('ID'); ?>
                                         </th>
-                                        <th  width="10%" class="hidden-xs"><?php __('Alias'); ?></th>
+                                        <th  width="10%" class="d-none d-sm-block"><?php __('Alias'); ?></th>
 
                                         <?php
                                         if ($admin_list_fields && count($admin_list_fields)) {
@@ -52,9 +52,9 @@
                                             <th  width="10%" ><?php __('Group'); ?></th>
                                         <?php endif; ?>
                                         <th  width="5%" class="text-center"><?php __('Status'); ?></th>
-                                        <th  width="18%"  class="text-right hidden-xs hidden-sm"><?php __('Last Modified'); ?></th>
-                                        <th  width="22%"  class="text-right hidden-xs hidden-sm"><?php __('Created'); ?></th>
-                                        <th width="10%" class="text-right"><span class="glyphicon glyphicon-edit"></span></th>
+                                        <th  width="18%"  class="text-right d-none d-sm-block d-sm-none d-md-block"><?php __('Last Modified'); ?></th>
+                                        <th  width="22%"  class="text-right d-none d-sm-block d-sm-none d-md-block"><?php __('Created'); ?></th>
+                                        <th width="10%" class="text-right"><span class="fa-solid fa-edit"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,8 +63,8 @@
                                         
                                         ?>
                                         <tr>
-                                            <td class="hidden-xs"><?php echo $content->id; ?></td>
-                                            <td class="hidden-xs">
+                                            <td class="d-none d-sm-block"><?php echo $content->id; ?></td>
+                                            <td class="d-none d-sm-block">
                                                 <?php echo (isset($content->alias)) ? $content->alias : ''; ?>
                                             </td>
 
@@ -81,22 +81,22 @@
                                                 <td><?php echo $content->groups; ?></td>
                                             <?php endif; ?>
                                             <td class="text-center">
-                                                <span class="glyphicon <?php echo ($content->status) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span>
+                                                <span class="<?php echo ($content->status) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span>
                                             </td>
-                                            <td class="text-right hidden-xs hidden-sm"><?php echo date_when(human_to_unix($content->modified)); ?></td>
-                                            <td class="text-right hidden-xs hidden-sm"><?php echo $content->timestamp; ?></td>
+                                            <td class="text-right d-none d-sm-block d-sm-none d-md-block"><?php echo date_when(human_to_unix($content->modified)); ?></td>
+                                            <td class="text-right d-none d-sm-block d-sm-none d-md-block"><?php echo $content->timestamp; ?></td>
                                             <td class="small">
                                                 <?php if (have_permission('contents/edit') || have_permission('contents/remove')) : ?>
 
-                                                    <div class="dropdown pull-right text-left">
-                                                        <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                    <div class="dropdown float-end text-left">
+                                                        <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                                            <span class="fa-solid fa-pencil"></span>
                                                         </a>
                                                         <ul role="menu" class="dropdown-menu dropdown-menu-right">
                                                             <?php if (have_permission('contents/edit')) : ?>
                                                                 <li>
                                                                     <a href="<?php _u('admin/contents/edit/' . $contentType->alias . '/' . $content->id); ?>">
-                                                                        <span class="glyphicon glyphicon-edit"></span>
+                                                                        <span class="fa-solid fa-edit"></span>
                                                                         <?php __('Edit'); ?>
                                                                     </a>
                                                                 </li>
@@ -104,7 +104,7 @@
                                                             <?php if (have_permission('contents/remove')) : ?>
                                                                 <li>
                                                                     <a href="<?php _u('admin/contents/remove/' . $contentType->alias . '/' . $content->id); ?>" class="remove-box">
-                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                        <span class="fa-solid fa-trash"></span>
                                                                         <?php __('Remove'); ?>
                                                                     </a>
                                                                 </li>
@@ -132,7 +132,7 @@
                 <?php
                 if (!empty($pagination)):
                     ?>
-                    <div class="panel-footer">
+                    <div class="card-footer">
                         <div class="col-md-12">
                             <?php echo $pagination; ?>
                         </div>

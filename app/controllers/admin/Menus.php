@@ -21,10 +21,9 @@
  * @subpackage  Controllers
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
-class Menus extends CI_Controller {
+class Menus extends BaseController {
 
     public function __construct() {
 
@@ -86,13 +85,13 @@ class Menus extends CI_Controller {
      */
     public function save_menu() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
 
-        $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
+        $this->validation->setRules(['name', lang('Name'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
             AZ::redirectError('admin/menus', validation_errors());
         }
 
@@ -148,13 +147,13 @@ class Menus extends CI_Controller {
      */
     public function save_item() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
 
-        $this->form_validation->set_rules('title', lang('Title'), 'trim|required');
+        $this->validation->setRules(['title', lang('Title'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
             AZ::redirectError('admin/menus', validation_errors());
         }
 

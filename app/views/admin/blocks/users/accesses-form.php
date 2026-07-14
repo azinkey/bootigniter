@@ -1,7 +1,7 @@
 
 <?php echo form_open('admin/users/save_access', array('id' => 'saveAccessForm')); ?>
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="fieldModalLabel"><?php
         echo isset($access->name) ? $access->name : lang('New Access Role');
         ?>
@@ -21,7 +21,7 @@
             <span class="input-group-btn">
                 <?php echo (isset($access->id)) ? form_hidden('id', $access->id) : ''; ?>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-save"></i>
+                    <i class="fa-solid fa-save"></i>
                     <?php __('Save'); ?>
                 </button>
             </span>

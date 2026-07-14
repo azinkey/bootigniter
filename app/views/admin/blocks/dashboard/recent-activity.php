@@ -1,7 +1,7 @@
 <div class="panel-minimal">
-    <div class="panel-heading">
-        <h2 class="panel-title">
-            <span class="glyphicon glyphicon-flag"></span> 
+    <div class="card-header">
+        <h2 class="card-title">
+            <span class="fa-solid fa-flag"></span> 
             <?php __('Latest Activities'); ?>
         </h2>
     </div>
@@ -13,8 +13,8 @@
             foreach ($activities as $activity) {
                 ?>
                 <li class="media">
-                    <div class="media-object pull-left">
-                        <i class="glyphicon glyphicon-flash primary"></i>
+                    <div class="media-object float-start">
+                        <i class="fa-solid fa-flash primary"></i>
                     </div>
                     <div class="media-body">
                         <p class="media-heading"><?php echo $activity->subject; ?></p>
@@ -41,8 +41,8 @@
     <?php if ($activities && count($activities) > 5) { ?>
         <ul class="media-list media-list-feed" >
             <li class="media" id="nextFeed">
-                <div class="media-object pull-left">
-                    <i class="glyphicon glyphicon-refresh"></i>
+                <div class="media-object float-start">
+                    <i class="fa-solid fa-refresh"></i>
                 </div>
                 <div class="media-body">
                     <a id="loadActivity" class="media-heading text-primary" href="javascript:void(0);"><?php __('Load more feed'); ?></a>

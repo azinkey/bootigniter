@@ -21,10 +21,9 @@
  * @subpackage  Controllers
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
-class Contents extends CI_Controller {
+class Contents extends BaseController {
 
     public function __construct() {
 
@@ -113,7 +112,7 @@ class Contents extends CI_Controller {
      * @return	Redirect
      */
     public function save() {
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
         if (!$post || !count($post) || !isset($post['type'])) {
             return false;
@@ -188,15 +187,15 @@ class Contents extends CI_Controller {
      */
     public function save_language() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
 
-        $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
-        $this->form_validation->set_rules('code', lang('Code'), 'trim|required');
-        $this->form_validation->set_rules('directory', lang('Directory'), 'trim|required');
+        $this->validation->setRules(['name', lang('Name'), 'trim|required');
+        $this->validation->setRules(['code', lang('Code'), 'trim|required');
+        $this->validation->setRules(['directory', lang('Directory'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
 
             AZ::redirectError('admin/contents/languages', validation_errors());
         }
@@ -272,19 +271,19 @@ class Contents extends CI_Controller {
      */
     public function save_type() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
         if (isset($post['id']) && $post['id'] > 0) {
-            $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
-            $this->form_validation->set_rules('fieldset[]', lang('Fieldset'), 'trim|required');
+            $this->validation->setRules(['name', lang('Name'), 'trim|required');
+            $this->validation->setRules(['fieldset[]', lang('Fieldset'), 'trim|required');
         } else {
-            $this->form_validation->set_rules('fieldset[]', lang('Fieldset'), 'trim|required');
-            $this->form_validation->set_rules('name', lang('Name'), 'trim|required|is_unique[content_types.name]');
+            $this->validation->setRules(['fieldset[]', lang('Fieldset'), 'trim|required');
+            $this->validation->setRules(['name', lang('Name'), 'trim|required|is_unique[content_types.name]');
         }
 
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
             AZ::redirectError('admin/contents/edit_type/' . $post['id'], validation_errors());
         }
         if (!$this->content->saveType($post)) {
@@ -365,15 +364,15 @@ class Contents extends CI_Controller {
      */
     public function save_group() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
         if (!count($post)) {
             return FALSE;
         }
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['name', lang('Name'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
 
             AZ::redirectError('admin/contents/edit_group/' . $post['id'] . '/' . $post['type'], validation_errors());
         }
@@ -439,13 +438,13 @@ class Contents extends CI_Controller {
      */
     public function save_fieldset() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
 
-        $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
+        $this->validation->setRules(['name', lang('Name'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
             AZ::redirectError('admin/contents/fieldsets', validation_errors());
         }
         if (!$this->content->saveFieldset($post)) {
@@ -525,25 +524,25 @@ class Contents extends CI_Controller {
      */
     public function save_field() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
         if (!count($post)) {
             return FALSE;
         }
         if (!isset($post['id'])) {
             AZ::redirect('admin/contents/fields');
         }
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('label', lang('Label'), 'trim|required');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['label', lang('Label'), 'trim|required');
 
         if ($post['id'] > 0) {
-            $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
+            $this->validation->setRules(['name', lang('Name'), 'trim|required');
         } else {
-            $this->form_validation->set_rules('name', lang('Name'), 'trim|required|is_unique[content_fields.name]');
+            $this->validation->setRules(['name', lang('Name'), 'trim|required|is_unique[content_fields.name]');
         }
 
 
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
             AZ::redirectError('admin/contents/edit_field/' . $post['id'] . '/' . $post['group_id'], validation_errors());
             return false;
         }
@@ -590,21 +589,21 @@ class Contents extends CI_Controller {
      */
     private function _validation($type_id) {
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
 
         $fieldsObj = $this->content->getFieldsRowsByType($type_id);
 
         if ($fieldsObj && count($fieldsObj)) {
             foreach ($fieldsObj as $field) {
                 if ($field->required) {
-                    $this->form_validation->set_rules("fields[$field->id]", $field->label, 'trim|required');
+                    $this->validation->setRules(["fields[$field->id]", $field->label, 'trim|required');
                 }
             }
         } else {
             return TRUE;
         }
 
-        return $this->form_validation->run();
+        return $this->validation->run();
     }
 
 }

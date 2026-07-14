@@ -21,10 +21,9 @@
  * @subpackage  Controllers
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
-class Users extends CI_Controller {
+class Users extends BaseController {
 
     public function __construct() {
 
@@ -84,7 +83,7 @@ class Users extends CI_Controller {
      */
     public function save() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
         
         if (!$post) {
             AZ::redirectError('admin/users', lang('Restricted'));
@@ -94,26 +93,26 @@ class Users extends CI_Controller {
         extract($post);
         $id = (isset($id)) ? $id : -1;
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
-        $this->form_validation->set_rules('pincode', lang('Pincode'), 'trim|min_length[4]|integer');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['name', lang('Name'), 'trim|required');
+        $this->validation->setRules(['pincode', lang('Pincode'), 'trim|min_length[4]|integer');
 
         if ($id == -1) {
-            $this->form_validation->set_rules('username', lang('Username'), 'trim|required|min_length[5]|max_length[16]|is_unique[users.username]');
-            $this->form_validation->set_rules('email', lang('Email'), 'trim|valid_email|required|is_unique[users.email]');
-            $this->form_validation->set_rules('password', lang('Password'), 'trim|required|min_length[6]|max_length[16]');
-            $this->form_validation->set_rules('cpassword', lang('Confirm Password'), 'trim|required|min_length[6]|max_length[16]|matches[password]');
+            $this->validation->setRules(['username', lang('Username'), 'trim|required|min_length[5]|max_length[16]|is_unique[users.username]');
+            $this->validation->setRules(['email', lang('Email'), 'trim|valid_email|required|is_unique[users.email]');
+            $this->validation->setRules(['password', lang('Password'), 'trim|required|min_length[6]|max_length[16]');
+            $this->validation->setRules(['cpassword', lang('Confirm Password'), 'trim|required|min_length[6]|max_length[16]|matches[password]');
         } else {
-            $this->form_validation->set_rules('username', lang('Username'), 'trim|required|min_length[5]|max_length[16]');
-            $this->form_validation->set_rules('email', lang('Email'), 'trim|valid_email|required');
+            $this->validation->setRules(['username', lang('Username'), 'trim|required|min_length[5]|max_length[16]');
+            $this->validation->setRules(['email', lang('Email'), 'trim|valid_email|required');
 
             if (!empty($password)) {
-                $this->form_validation->set_rules('password', lang('Password'), 'trim|required|min_length[6]|max_length[16]');
-                $this->form_validation->set_rules('cpassword', lang('Confirm Password'), 'trim|required|min_length[6]|max_length[16]|matches[password]');
+                $this->validation->setRules(['password', lang('Password'), 'trim|required|min_length[6]|max_length[16]');
+                $this->validation->setRules(['cpassword', lang('Confirm Password'), 'trim|required|min_length[6]|max_length[16]|matches[password]');
             }
         }
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
             AZ::redirectError('admin/users/edit/' . $id, validation_errors());
         }
 
@@ -187,13 +186,13 @@ class Users extends CI_Controller {
      */
     public function save_access() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
-        $this->load->library('form_validation');
+        $this->validation = \Config\Services::validation();
 
-        $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
+        $this->validation->setRules(['name', lang('Name'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
 
             AZ::redirectError('admin/users/accesses', validation_errors());
         }
@@ -259,13 +258,13 @@ class Users extends CI_Controller {
      */
     public function save_group() {
 
-        $post = $this->input->post();
-        $this->load->library('form_validation');
+        $post = $this->request->getPost();
+        $this->validation = \Config\Services::validation();
 
-        $this->form_validation->set_rules('name', lang('Name'), 'trim|required');
-        $this->form_validation->set_rules('access', lang('Access Role'), 'trim|required');
+        $this->validation->setRules(['name', lang('Name'), 'trim|required');
+        $this->validation->setRules(['access', lang('Access Role'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
 
             AZ::redirectError('admin/users/groups', validation_errors());
         }
@@ -329,7 +328,7 @@ class Users extends CI_Controller {
             AZ::redirectError('admin/dashboard', lang('Unauthorized Access'));
         }
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
         
         if (empty($post)) {
             AZ::redirectError('admin/users/permissions', lang('no_option'));

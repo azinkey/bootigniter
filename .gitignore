@@ -1,1 +1,7 @@
 .idea
+.env
+writable/logs/
+writable/cache/
+writable/session/
+system_ci3_backup/
+bootigniter.zip

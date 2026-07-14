@@ -1,6 +1,6 @@
 <li class="dropdown">
-    <a claass="dropdown-toggle" data-toggle="dropdown" title="<?php __('Messages'); ?>">
-        <i class="fa fa-envelope-o"></i>
+    <a claass="dropdown-toggle" data-bs-toggle="dropdown" title="<?php __('Messages'); ?>">
+        <i class="fa-solid fa-envelope-o"></i>
         <?php if (count_user_messages()) : ?>
             <span class="hasAlert danger"></span>
         <?php endif; ?>    

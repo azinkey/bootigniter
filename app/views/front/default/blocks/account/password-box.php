@@ -1,17 +1,17 @@
 <div class="row-fluid">
     <div class="panel-default">
         <?php
-        echo form_open('account/update', array('role' => 'form', 'class' => 'panel'));
+        echo form_open('account/update', array('role' => 'form', 'class' => 'card'));
         ?>
-        <div class="panel-heading">
+        <div class="card-header">
             <h4><?php __('Change Password'); ?></h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
 
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-tower"></span>
+                        <span class="fa-solid fa-tower"></span>
                     </span>
                     <?php
                     $password = array(
@@ -29,7 +29,7 @@
                 <br />
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-lock"></span>
+                        <span class="fa-solid fa-lock"></span>
                     </span>
                     <?php
                     $password = array(
@@ -45,7 +45,7 @@
                 <br />
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-repeat"></span>
+                        <span class="fa-solid fa-repeat"></span>
                     </span>
                     <?php
                     $password = array(
@@ -63,7 +63,7 @@
                 <div>
                     <?php echo form_hidden('id', user::id()); ?>
                     <button class="btn btn-lg btn-danger btn-block" type="submit">
-                        <span class="glyphicon glyphicon-refresh"></span>
+                        <span class="fa-solid fa-refresh"></span>
                         <?php __('Update') ?>
                     </button>
 

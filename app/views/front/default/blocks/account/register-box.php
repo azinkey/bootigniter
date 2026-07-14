@@ -1,14 +1,14 @@
 <div class="row-fluid">
     <div>
         <?php
-        echo form_open('account/register', array('role' => 'form', 'class' => 'panel'));
+        echo form_open('account/register', array('role' => 'form', 'class' => 'card'));
         ?>
-        <div class="panel-body">
+        <div class="card-body">
 
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="fa-solid fa-user"></span>
                     </span>
                     <?php
                     $username = array(
@@ -25,7 +25,7 @@
                 <br />
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-envelope"></span>
+                        <span class="fa-solid fa-envelope"></span>
                     </span>
                     <?php
                     $email = array(
@@ -41,7 +41,7 @@
                 <br />
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-lock"></span>
+                        <span class="fa-solid fa-lock"></span>
                     </span>
                     <?php
                     $password = array(
@@ -58,7 +58,7 @@
                 <br />
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon glyphicon-repeat"></span>
+                        <span class="fa-solid fa-repeat"></span>
                     </span>
                     <?php
                     $confirm = array(
@@ -77,7 +77,7 @@
                 <div class="form-stack has-icon">
                     <button class="btn btn-lg btn-danger btn-block" type="submit">
                         <?php __('Create') ?> 
-                         <span class="glyphicon glyphicon-saved"></span>
+                         <span class="fa-solid fa-saved"></span>
                     </button>
 
                 </div>

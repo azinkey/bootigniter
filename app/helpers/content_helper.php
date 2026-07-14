@@ -21,7 +21,7 @@
  * @subpackage  Content
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
+defined('APPPATH') || exit('No direct script access allowed'); //
     exit('No direct script access allowed');
 
 /**
@@ -35,8 +35,7 @@ if (!defined('BASEPATH'))
 if (!function_exists('fields_from_fieldset')) {
 
     function fields_from_fieldset($fieldset_id) {
-        $ci = & get_instance();
-        $fields = $ci->content->getFieldsByGroup($fieldset_id);
+                $fields = content->getFieldsByGroup($fieldset_id);
         return ($fields && count($fields)) ? $fields : array();
     }
 
@@ -58,11 +57,9 @@ if (!function_exists('field_render')) {
 
         $default_value = $fieldObj->default_value;
 
-        $ci = & get_instance();
+                if ($content_id > 0) {
 
-        if ($content_id > 0) {
-
-            $row = $ci->db->get_where('content_field_values', array('content_id' => $content_id, 'language_id' => $language_id, 'field_id' => $fieldObj->id))->row();
+            $row = db_connect()->get_where('content_field_values', array('content_id' => $content_id, 'language_id' => $language_id, 'field_id' => $fieldObj->id))->row();
             if (!empty($row)) {
                 if (is_null($row->option_id)) {
                     $default_value = $row->value;
@@ -91,12 +88,12 @@ if (!function_exists('field_render')) {
                 break;
 
             case 'select':
-                $options = $ci->content->getFieldOptions($fieldObj->id);
+                $options = content->getFieldOptions($fieldObj->id);
                 $html .= field_select('fields[' . $fieldObj->id . ']', $options, $default_value, 'class="input-block-level form-control"');
                 break;
 
             case 'boolen':
-                $options = $ci->content->getFieldOptions($fieldObj->id);
+                $options = content->getFieldOptions($fieldObj->id);
                 $html .= field_select('fields[' . $fieldObj->id . ']', $options, $default_value, 'class="input-block-level form-control"');
                 break;
 
@@ -129,8 +126,7 @@ if (!function_exists('field_render')) {
 if (!function_exists('fieldset_A')) {
 
     function fieldset_A() {
-        $ci = & get_instance();
-        $groups = $ci->db->get_where('content_field_groups', array('enabled' => 1))->result();
+                $groups = db_connect()->get_where('content_field_groups', array('enabled' => 1))->result();
         $fieldsets = array();
 
         if ($groups && count($groups)) {
@@ -154,11 +150,10 @@ if (!function_exists('fieldset_A')) {
 if (!function_exists('contents_A')) {
 
     function contents_A($have_groups = false) {
-        $ci = & get_instance();
-        if($have_groups){
-            $ci->db->where('have_groups',1);
+                if($have_groups){
+            db_connect()->where('have_groups',1);
         }
-        $types = $ci->db->get_where('content_types', array('enabled' => 1))->result();
+        $types = db_connect()->get_where('content_types', array('enabled' => 1))->result();
         
         $array = array(__('Select..',true));
         
@@ -183,9 +178,8 @@ if (!function_exists('contents_A')) {
 if (!function_exists('is_group')) {
 
     function is_group($alias) {
-        $ci = & get_instance();
-        $ci->load->model('content');
-        return ($ci->content->checkGroupAlias($alias)) ? true : false;
+                load->model('content');
+        return (content->checkGroupAlias($alias)) ? true : false;
     }
 
 }
@@ -201,12 +195,11 @@ if (!function_exists('is_group')) {
 if (!function_exists('child_group_links')) {
 
     function child_group_links($alias) {
-        $ci = & get_instance();
-        $ci->load->model('content');
+                load->model('content');
         
-        $group = $ci->content->getGroupByAlias($alias);
+        $group = content->getGroupByAlias($alias);
         
-        $groups = $ci->content->getGroupsMenu($group->type,$group->id);
+        $groups = content->getGroupsMenu($group->type,$group->id);
         echo $groups;
         
     }
@@ -225,10 +218,9 @@ if (!function_exists('child_group_links')) {
 if (!function_exists('get_latest_content')) {
 
     function get_latest_content($type,$limit = 5) {
-        $ci = & get_instance();
-        $ci->load->model('content');
+                load->model('content');
         
-        return $ci->content->getLatestContents($type,$limit);
+        return content->getLatestContents($type,$limit);
         
         
     }
@@ -248,9 +240,8 @@ if (!function_exists('get_latest_content')) {
 if (!function_exists('get_latest_by_group')) {
 
     function get_latest_by_group($group, $contentType, $limit = 4) {
-        $ci = & get_instance();
-        $ci->load->model('content');
-        $contents = $ci->content->getContentsByGroup($group, $contentType, 0, $limit);
+                load->model('content');
+        $contents = content->getContentsByGroup($group, $contentType, 0, $limit);
         $latest = array();
         if (count($contents)) {
             foreach ($contents as $content) {

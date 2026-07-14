@@ -4,19 +4,19 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <i class="fa fa-file-o"></i>
+                        <i class="fa-solid fa-file-o"></i>
                         <?php echo (isset($content_id) && $content_id > 0) ? __('Edit', true) . __(rtrim($contentType->name, 's'), true) . ': ' . $content_id : __('New', true) . __(rtrim($contentType->name, 's'), true); ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a title="<?php __("Back to List"); ?>" href="<?php _u('admin/contents/index/' . $contentType->alias); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button title="<?php __("Save & New"); ?>"  type="button" class="btn btn-primary btn-sm click-submit" data-form="#saveContentForm" data-return="<?php _u('admin/contents/edit/' . $contentType->alias . '/-1'); ?>">
-                            <i class="glyphicon glyphicon-saved"></i>
+                            <i class="fa-solid fa-saved"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -36,8 +36,8 @@
                             $class = ($language->is_admin) ? 'active' : '';
                             ?>   
                             <li class="<?php echo $class; ?>" data-lang="<?php echo $language->id; ?>">
-                                <a href="#section-<?php echo $language->id; ?>" data-toggle="tab">
-                                    <span class="glyphicon glyphicon-globe"></span>
+                                <a href="#section-<?php echo $language->id; ?>" data-bs-toggle="tab">
+                                    <span class="fa-solid fa-globe"></span>
                                     <span><?php echo $language->name; ?></span>
                                 </a>
                             </li>
@@ -57,8 +57,8 @@
                             ?>   
                             <div class="tab-pane <?php echo $class; ?>" id="section-<?php echo $language->id; ?>">
                                 <?php echo form_open_multipart('admin/contents/save', array('id' => 'saveContentForm')); ?>
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
+                                <div class="card panel-default">
+                                    <div class="card-body">
                                         <div class="row-fluid">
                                             <div class="col-md-8 p0">
                                                 <div class="panel-group" id="accordion">
@@ -66,17 +66,17 @@
                                                     if ($fieldsets && count($fieldsets)) {
                                                         foreach ($fieldsets as $fieldset) {
                                                             ?>    
-                                                            <div class="panel panel-default">
-                                                                <div class="panel-heading">
-                                                                    <h4 class="panel-title">
-                                                                        <a data-toggle="collapse" data-parent="#accordion" href="#fieldset-<?php echo $fieldset->id; ?>">
-                                                                            <span class="glyphicon pull-left hidden-xs"></span>
+                                                            <div class="card panel-default">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-title">
+                                                                        <a data-bs-toggle="collapse" data-parent="#accordion" href="#fieldset-<?php echo $fieldset->id; ?>">
+                                                                            <span class="float-start d-none d-sm-block"></span>
                                                                             <?php __($fieldset->name); ?>
                                                                         </a>
                                                                     </h4>
                                                                 </div>
                                                                 <div id="fieldset-<?php echo $fieldset->id; ?>" class="panel-collapse collapse in">
-                                                                    <div class="panel-body">
+                                                                    <div class="card-body">
                                                                         <?php
                                                                         $fields = fields_from_fieldset($fieldset->id);
                                                                         foreach ($fields as $field) {
@@ -111,11 +111,11 @@
                                             </div>
                                             <div class="col-md-4 pr0">
                                                 <div class="panel-group" id="publish-content">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#publish-content" href="#fieldset_publish">
-                                                                    <span class="glyphicon pull-left hidden-xs"></span>
+                                                    <div class="card panel-default">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">
+                                                                <a data-bs-toggle="collapse" data-parent="#publish-content" href="#fieldset_publish">
+                                                                    <span class="float-start d-none d-sm-block"></span>
                                                                     <?php __('Publish'); ?>
                                                                 </a>
                                                             </h4>
@@ -125,8 +125,8 @@
                                                             <div class="row-fluid">
                                                                 <div class="col-md-12">
                                                                     <div class="field-row form-light">
-                                                                        <div class="col-xs-12">
-                                                                            <span class="glyphicon glyphicon-link"></span>
+                                                                        <div class="col-12">
+                                                                            <span class="fa-solid fa-link"></span>
                                                                             <?php
                                                                             echo form_label(AZ::setting('site_url'), 'alias');
                                                                             echo form_input(array(
@@ -141,11 +141,11 @@
                                                                     </div>
 
                                                                     <div class="field-row">
-                                                                        <div class="col-xs-5">
-                                                                            <i class="fa fa-check-square-o"></i>
+                                                                        <div class="col-5">
+                                                                            <i class="fa-solid fa-check-square-o"></i>
                                                                             <?php echo form_label(lang('Status'), 'status'); ?>
                                                                         </div>
-                                                                        <div class="col-xs-7">
+                                                                        <div class="col-7">
                                                                             <?php
                                                                             echo form_dropdown('status', array('0' => lang('No'), '1' => lang('Yes')), isset($content->status) ? $content->status : 1, 'class="form-control input-sm"');
                                                                             ?>    
@@ -153,11 +153,11 @@
                                                                         <div class="clearfix"></div>
                                                                     </div>
                                                                     <div class="field-row">
-                                                                        <div class="col-xs-5">
-                                                                            <i class="fa fa-eye"></i>
+                                                                        <div class="col-5">
+                                                                            <i class="fa-solid fa-eye"></i>
                                                                             <?php echo form_label(lang('Access'), 'access[]'); ?>
                                                                         </div>
-                                                                        <div class="col-xs-7">
+                                                                        <div class="col-7">
                                                                             <?php
                                                                             echo form_multiselect('access[]', access_A(true), (isset($content->access)) ? explode(',', $content->access) : array(0), 'class="form-control"');
                                                                             ?>    
@@ -172,11 +172,11 @@
                                                         </div>
                                                     </div>
                                                     <?php if ($contentType->have_groups): ?>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading">
-                                                                <h4 class="panel-title">
-                                                                    <a data-toggle="collapse" data-parent="#publish-content" href="#fieldset_publish">
-                                                                        <span class="glyphicon pull-left hidden-xs"></span>
+                                                        <div class="card panel-default">
+                                                            <div class="card-header">
+                                                                <h4 class="card-title">
+                                                                    <a data-bs-toggle="collapse" data-parent="#publish-content" href="#fieldset_publish">
+                                                                        <span class="float-start d-none d-sm-block"></span>
                                                                         <?php __('Groups Categories'); ?>
                                                                     </a>
 
@@ -187,11 +187,11 @@
                                                                 <div class="row-fluid">
                                                                     <div class="col-md-12">
                                                                         <div class="field-row">
-                                                                            <div class="col-xs-5">
-                                                                                <i class="fa fa-folder-open-o"></i>
+                                                                            <div class="col-5">
+                                                                                <i class="fa-regular fa-folder-open"></i>
                                                                                 <?php echo form_label(lang('Group'), 'group_id'); ?>
                                                                             </div>
-                                                                            <div class="col-xs-7">
+                                                                            <div class="col-7">
                                                                                 <?php
                                                                                 echo form_dropdown('group_id', $groups, isset($content->group_id) ? $content->group_id : 0, 'class="form-control input-sm"');
                                                                                 ?>    
@@ -209,7 +209,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel-footer">
+                                    <div class="card-footer">
                                         <div class="col-md-12 text-right">
                                             <?php echo form_hidden('id', $content_id); ?>
                                             <?php echo form_hidden('language_id', $language->id); ?>
@@ -217,11 +217,11 @@
                                             <?php echo (isset($contentType->alias)) ? form_hidden('type', $contentType->alias) : ''; ?>
 
                                             <a href="<?php _u('admin/contents/index/' . $contentType->alias); ?>" class="btn btn-default">
-                                                <i class="fa fa-arrow-circle-left"></i>
+                                                <i class="fa-solid fa-arrow-circle-left"></i>
         <?php __('Cancel'); ?>
                                             </a>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="fa fa-save"></i>
+                                                <i class="fa-solid fa-save"></i>
         <?php __('Save'); ?>
                                             </button>
                                         </div>

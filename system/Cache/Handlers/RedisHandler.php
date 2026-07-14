@@ -1,0 +1,257 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Cache\Handlers;
+
+use CodeIgniter\Exceptions\CriticalError;
+use CodeIgniter\I18n\Time;
+use Config\Cache;
+use Redis;
+use RedisException;
+
+/**
+ * Redis cache handler
+ *
+ * @see \CodeIgniter\Cache\Handlers\RedisHandlerTest
+ */
+class RedisHandler extends BaseHandler
+{
+    /**
+     * Default config
+     *
+     * @var array{
+     *   host: string,
+     *   password: string|null,
+     *   port: int,
+     *   timeout: int,
+     *   persistent: bool,
+     *   database: int,
+     * }
+     */
+    protected $config = [
+        'host'       => '127.0.0.1',
+        'password'   => null,
+        'port'       => 6379,
+        'timeout'    => 0,
+        'persistent' => false,
+        'database'   => 0,
+    ];
+
+    /**
+     * Redis connection
+     *
+     * @var Redis|null
+     */
+    protected $redis;
+
+    /**
+     * Note: Use `CacheFactory::getHandler()` to instantiate.
+     */
+    public function __construct(Cache $config)
+    {
+        $this->prefix = $config->prefix;
+
+        $this->config = array_merge($this->config, $config->redis);
+    }
+
+    public function initialize(): void
+    {
+        $config = $this->config;
+
+        $this->redis = new Redis();
+
+        try {
+            $funcConnection = isset($config['persistent']) && $config['persistent'] ? 'pconnect' : 'connect';
+
+            // Note:: If Redis is your primary cache choice, and it is "offline", every page load will end up been delayed by the timeout duration.
+            // I feel like some sort of temporary flag should be set, to indicate that we think Redis is "offline", allowing us to bypass the timeout for a set period of time.
+            if (! $this->redis->{$funcConnection}($config['host'], ($config['host'][0] === '/' ? 0 : $config['port']), $config['timeout'])) {
+                // Note:: I'm unsure if log_message() is necessary, however I'm not 100% comfortable removing it.
+                log_message('error', 'Cache: Redis connection failed. Check your configuration.');
+
+                throw new CriticalError('Cache: Redis connection failed. Check your configuration.');
+            }
+
+            if (isset($config['password']) && ! $this->redis->auth($config['password'])) {
+                log_message('error', 'Cache: Redis authentication failed.');
+
+                throw new CriticalError('Cache: Redis authentication failed.');
+            }
+
+            if (isset($config['database']) && ! $this->redis->select($config['database'])) {
+                log_message('error', 'Cache: Redis select database failed.');
+
+                throw new CriticalError('Cache: Redis select database failed.');
+            }
+        } catch (RedisException $e) {
+            throw new CriticalError('Cache: RedisException occurred with message (' . $e->getMessage() . ').', $e->getCode(), $e);
+        }
+    }
+
+    public function get(string $key): mixed
+    {
+        $key  = static::validateKey($key, $this->prefix);
+        $data = $this->redis->hMget($key, ['__ci_type', '__ci_value']);
+
+        if (! isset($data['__ci_type'], $data['__ci_value']) || $data['__ci_value'] === false) {
+            return null;
+        }
+
+        return match ($data['__ci_type']) {
+            'array', 'object'                                => unserialize($data['__ci_value']),
+            'boolean', 'integer', 'double', 'string', 'NULL' => settype($data['__ci_value'], $data['__ci_type']) ? $data['__ci_value'] : null,
+            default                                          => null,
+        };
+    }
+
+    public function save(string $key, mixed $value, int $ttl = 60): bool
+    {
+        $key = static::validateKey($key, $this->prefix);
+
+        switch ($dataType = gettype($value)) {
+            case 'array':
+            case 'object':
+                $value = serialize($value);
+                break;
+
+            case 'boolean':
+            case 'integer':
+            case 'double':
+            case 'string':
+            case 'NULL':
+                break;
+
+            case 'resource':
+            default:
+                return false;
+        }
+
+        if (! $this->redis->hMset($key, ['__ci_type' => $dataType, '__ci_value' => $value])) {
+            return false;
+        }
+
+        if ($ttl !== 0) {
+            $this->redis->expireAt($key, Time::now()->getTimestamp() + $ttl);
+        }
+
+        return true;
+    }
+
+    public function delete(string $key): bool
+    {
+        $key = static::validateKey($key, $this->prefix);
+
+        return $this->redis->del($key) === 1;
+    }
+
+    public function deleteMatching(string $pattern): int
+    {
+        /** @var list<string> $matchedKeys */
+        $matchedKeys = [];
+        $pattern     = static::validateKey($pattern, $this->prefix);
+        $iterator    = null;
+
+        do {
+            /** @var false|list<string> $keys */
+            $keys = $this->redis->scan($iterator, $pattern);
+
+            if (is_array($keys)) {
+                $matchedKeys = [...$matchedKeys, ...$keys];
+            }
+        } while ($iterator > 0);
+
+        return (int) $this->redis->del($matchedKeys);
+    }
+
+    public function increment(string $key, int $offset = 1): int
+    {
+        $key = static::validateKey($key, $this->prefix);
+
+        return $this->redis->hIncrBy($key, '__ci_value', $offset);
+    }
+
+    public function decrement(string $key, int $offset = 1): int
+    {
+        return $this->increment($key, -$offset);
+    }
+
+    public function clean(): bool
+    {
+        return $this->redis->flushDB();
+    }
+
+    public function getCacheInfo(): array
+    {
+        return $this->redis->info();
+    }
+
+    public function getMetaData(string $key): ?array
+    {
+        $value = $this->get($key);
+
+        if ($value !== null) {
+            $time = Time::now()->getTimestamp();
+            $ttl  = $this->redis->ttl(static::validateKey($key, $this->prefix));
+            assert(is_int($ttl));
+
+            return [
+                'expire' => $ttl > 0 ? $time + $ttl : null,
+                'mtime'  => $time,
+                'data'   => $value,
+            ];
+        }
+
+        return null;
+    }
+
+    public function isSupported(): bool
+    {
+        return extension_loaded('redis');
+    }
+
+    public function ping(): bool
+    {
+        if (! isset($this->redis)) {
+            return false;
+        }
+
+        try {
+            $result = $this->redis->ping();
+
+            return in_array($result, [true, '+PONG'], true);
+        } catch (RedisException) {
+            return false;
+        }
+    }
+
+    public function reconnect(): bool
+    {
+        if (isset($this->redis)) {
+            try {
+                $this->redis->close();
+            } catch (RedisException) {
+                // Connection already dead, that's fine
+            }
+        }
+
+        try {
+            $this->initialize();
+
+            return true;
+        } catch (CriticalError $e) {
+            log_message('error', 'Cache: Redis reconnection failed: ' . $e->getMessage());
+
+            return false;
+        }
+    }
+}

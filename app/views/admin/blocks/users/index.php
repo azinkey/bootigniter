@@ -4,16 +4,16 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-10">
+                <div class="col-10">
                     <h4 class="title">
-                        <i class="fa fa-user"></i>
+                        <i class="fa-solid fa-user"></i>
                         <?php __('Users'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-2">
 
-                    <a href="<?php _u('admin/users/edit/-1'); ?>" title="<?php __('Add New User'); ?>" class="btn btn-primary btn-sm pull-right">
-                        <i class="fa fa-plus"></i>
+                    <a href="<?php _u('admin/users/edit/-1'); ?>" title="<?php __('Add New User'); ?>" class="btn btn-primary btn-sm float-end">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                     <div class="clearfix"></div>
                 </div>
@@ -29,8 +29,8 @@
                         ?>
                         <li class="<?php echo ($id == $q) ? 'active' : '' ?>">
                             <a href="<?php echo _u('admin/users/index/' . $id); ?>" title="<?php echo $name; ?>" >
-                                <i class="fa fa-users"></i>
-                                <span class="hidden-xs"> <?php echo $name; ?></span>
+                                <i class="fa-solid fa-users"></i>
+                                <span class="d-none d-sm-block"> <?php echo $name; ?></span>
                             </a>
                         </li>
                         <?php
@@ -41,8 +41,8 @@
                     <?php foreach ($group_A as $id => $name) { ?>
                         <div class="tab-pane <?php echo ($id == $q) ? 'active' : '' ?>" id="section-<?php echo $id; ?>">
                             <div class="user-grid row-fluid">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <?php echo $name; ?>
                                         <span>
                                             <small>
@@ -53,7 +53,7 @@
                                             </small>
                                         </span>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <?php
                                         if (count($users)) {
                                             $i = 0;
@@ -61,9 +61,9 @@
                                                 $i++;
                                                 ?>
                                                 <div class="col-md-6">
-                                                    <div class="panel user-card">
-                                                        <div class="panel-body">
-                                                            <div class="col-md-3 stretch text-center hidden-xs hidden-sm">
+                                                    <div class="card user-card">
+                                                        <div class="card-body">
+                                                            <div class="col-md-3 stretch text-center d-none d-sm-block d-sm-none d-md-block">
                                                                 <img src="<?php
                                                                 echo (!empty($user->avatar)) ? base_url($user->avatar) : base_url('media/users/avatar.png');
                                                                 ?>" alt="avatar" class="user-avatar img-polaroid" />
@@ -73,22 +73,22 @@
                                                                     <a href="<?php _u('admin/users/edit/' . $user->id) ?>"><?php echo $user->name; ?></a>
                                                                 </h6>
                                                                 <div class="muted">
-                                                                    <i class="fa fa-envelope-o"></i>
+                                                                    <i class="fa-solid fa-envelope-o"></i>
                                                                     <?php echo $user->email; ?>
                                                                 </div>
                                                                 <?php if (!empty($user->country)): ?>
                                                                     <div class="muted">
-                                                                        <i class="fa fa-map-marker"></i>
+                                                                        <i class="fa-solid fa-map-marker"></i>
                                                                         <?php echo $user->country; ?>
                                                                     </div>
                                                                 <?php endif; ?>
                                                             </div>
                                                             <div class="col-md-2 action-iconset text-right">
                                                                 <a href="<?php _u('admin/users/edit/' . $user->id) ?>" class="action-icon">
-                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <span class="fa-solid fa-edit"></span>
                                                                 </a>
                                                                 <a href="<?php _u('admin/users/remove/' . $user->id . '/' . $user->gid) ?>" class="remove-box action-icon">
-                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <span class="fa-solid fa-trash"></span>
                                                                 </a>
                                                                 <div class="clearfix"></div>
                                                             </div>
@@ -110,7 +110,7 @@
                                         <?php } ?>
                                     </div>
                                     <?php if (!empty($pagination)): ?>
-                                        <div class="panel-footer">
+                                        <div class="card-footer">
                                             <div class="col-md-12">
                                                 <?php echo $pagination; ?>
                                             </div>

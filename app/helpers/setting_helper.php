@@ -21,7 +21,7 @@
  * @subpackage  Menu
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
+defined('APPPATH') || exit('No direct script access allowed'); //
     exit('No direct script access allowed');
 
 /**
@@ -37,9 +37,7 @@ if (!function_exists('get_setting_groups')) {
     function get_setting_groups($setting_section_id) {
 
 
-        $CI = & get_instance();
-
-        $rows = $CI->setting->getSettingGroups($setting_section_id);
+                $rows = setting->getSettingGroups($setting_section_id);
 
 
         return $rows;
@@ -59,9 +57,7 @@ if (!function_exists('get_settings')) {
 
     function get_settings($group_id) {
 
-        $CI = & get_instance();
-
-        $rows = $CI->setting->getSettings($group_id);
+                $rows = setting->getSettings($group_id);
 
 
         return $rows;
@@ -80,8 +76,7 @@ if (!function_exists('get_settings')) {
 if (!function_exists('setting_field_render')) {
 
     function setting_field_render($setting_id) {
-        $CI = & get_instance();
-        $row = $CI->db->get_where('settings', array('id' => $setting_id))->row();
+                $row = db_connect()->get_where('settings', array('id' => $setting_id))->row();
 
         if (!$row || empty($row)) {
             return FALSE;

@@ -21,10 +21,9 @@
  * @subpackage  Controllers
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
-class Account extends CI_Controller {
+class Account extends BaseController {
 
     public function __construct() {
         parent::__construct();
@@ -107,7 +106,7 @@ class Account extends CI_Controller {
             AZ::redirect('account');
         }
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
         if ($this->_validateLogin() == FALSE) {
             $this->index();
@@ -127,7 +126,7 @@ class Account extends CI_Controller {
      * @return	Redirect
      */
     public function register() {
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
         if ($this->_validateRegister() == FALSE) {
             AZ::redirectError('account', validation_errors());
@@ -159,7 +158,7 @@ class Account extends CI_Controller {
      * @return	Redirect
      */
     public function update() {
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
         if (!count($post)) {
             AZ::redirectError('account', __('Unauthorized Access', true));
@@ -217,11 +216,11 @@ class Account extends CI_Controller {
      */
     private function _validateLogin() {
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['username', 'Username', 'required');
+        $this->validation->setRules(['password', 'Password', 'required');
 
-        return $this->form_validation->run();
+        return $this->validation->run();
     }
 
     /**
@@ -231,13 +230,13 @@ class Account extends CI_Controller {
      */
     private function _validateRegister() {
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', lang('Username'), 'trim|required|min_length[5]|max_length[16]|is_unique[users.username]');
-        $this->form_validation->set_rules('email', lang('Email'), 'trim|valid_email|required|is_unique[users.email]');
-        $this->form_validation->set_rules('password', lang('Password'), 'trim|required|min_length[6]|max_length[16]');
-        $this->form_validation->set_rules('confirm_password', lang('Confirm Password'), 'trim|required|min_length[6]|max_length[16]|matches[password]');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['username', lang('Username'), 'trim|required|min_length[5]|max_length[16]|is_unique[users.username]');
+        $this->validation->setRules(['email', lang('Email'), 'trim|valid_email|required|is_unique[users.email]');
+        $this->validation->setRules(['password', lang('Password'), 'trim|required|min_length[6]|max_length[16]');
+        $this->validation->setRules(['confirm_password', lang('Confirm Password'), 'trim|required|min_length[6]|max_length[16]|matches[password]');
 
-        return $this->form_validation->run();
+        return $this->validation->run();
     }
 
     /**
@@ -247,11 +246,11 @@ class Account extends CI_Controller {
      */
     private function _validateUpdate() {
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('password', lang('Password'), 'trim|required|min_length[6]|max_length[16]');
-        $this->form_validation->set_rules('confirm_password', lang('Confirm Password'), 'trim|required|min_length[6]|max_length[16]|matches[password]');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['password', lang('Password'), 'trim|required|min_length[6]|max_length[16]');
+        $this->validation->setRules(['confirm_password', lang('Confirm Password'), 'trim|required|min_length[6]|max_length[16]|matches[password]');
 
-        return $this->form_validation->run();
+        return $this->validation->run();
     }
 }
 

@@ -21,7 +21,7 @@
  * @subpackage  Language
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
+defined('APPPATH') || exit('No direct script access allowed'); //
     exit('No direct script access allowed');
 
 /**
@@ -34,9 +34,8 @@ if (!defined('BASEPATH'))
 if (!function_exists('admin_language')) {
 
     function admin_language() {
-        $CI = & get_instance();
-        $CI->load->model('content');
-        return $CI->content->getAdminLanguage();
+                load->model('content');
+        return content->getAdminLanguage();
     }
 
 }
@@ -51,9 +50,8 @@ if (!function_exists('admin_language')) {
 if (!function_exists('site_language')) {
 
     function site_language() {
-        $CI = & get_instance();
-        $CI->load->model('content');
-        return $CI->content->getSiteLanguage();
+                load->model('content');
+        return content->getSiteLanguage();
     }
 
 }
@@ -68,9 +66,8 @@ if (!function_exists('site_language')) {
 if (!function_exists('language_code')) {
 
     function language_code() {
-        $CI = & get_instance();
-        $CI->load->model('content');
-        return $CI->content->getActiveLanguageCode();
+                load->model('content');
+        return content->getActiveLanguageCode();
     }
 
 }
@@ -85,9 +82,8 @@ if (!function_exists('language_code')) {
 if (!function_exists('language_name')) {
 
     function language_name() {
-        $CI = & get_instance();
-        $CI->load->model('content');
-        return $CI->content->getActiveLanguageName();
+                load->model('content');
+        return content->getActiveLanguageName();
     }
 
 }
@@ -102,9 +98,8 @@ if (!function_exists('language_name')) {
 if (!function_exists('language_flags')) {
 
     function language_flags() {
-        $CI = & get_instance();
-        $CI->load->model('content');
-        $rows= $CI->content->getSiteLanguages();
+                load->model('content');
+        $rows= content->getSiteLanguages();
         $list = NULL;
         if($rows && count($rows)){
             foreach($rows as $row){
@@ -127,9 +122,8 @@ if (!function_exists('language_flags')) {
 if (!function_exists('active_language_id')) {
 
     function active_language_id() {
-        $CI = & get_instance();
-        $CI->load->model('content');
-        return $CI->content->getActiveLanguageId();
+                load->model('content');
+        return content->getActiveLanguageId();
         
         
     }

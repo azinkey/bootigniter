@@ -1,6 +1,6 @@
 <?php
 
-class user extends CI_Model {
+class user extends \CodeIgniter\Model {
 
     private static $user_id;
     private static $user_group_id;
@@ -11,40 +11,35 @@ class user extends CI_Model {
     }
 
     public function hash_password($password) {
-        $CI = & get_instance();
-        $CI->load->helper('security');
+        
 
-        return do_hash($password);
+        return sha1($password);
     }
 
     public function match_password($user_id, $password) {
-        $CI = & get_instance();
-
-        $CI->db->where('id', $user_id);
-        $CI->db->where('password', $this->hash_password($password));
-        return $CI->db->get('users')->num_rows();
+        $this->db->where('id', $user_id);
+        $this->db->where('password', $this->hash_password($password));
+        return $this->db->get('users')->num_rows();
     }
 
     public function authenicate($username, $password) {
-        $CI = & get_instance();
-
-        $CI->db->where('username', $username);
-        $CI->db->where('password', $this->hash_password($password));
+        $this->db->where('username', $username);
+        $this->db->where('password', $this->hash_password($password));
 
 
-        $CI->db->join('user_groups', 'users.gid = user_groups.id');
-        $CI->db->join('user_access', 'user_groups.access = user_access.id');
+        $this->db->join('user_groups', 'users.gid = user_groups.id');
+        $this->db->join('user_access', 'user_groups.access = user_access.id');
 
 
-        $user = $CI->db->select('users.id,users.gid,user_groups.access')->get('users')->row();
+        $user = $this->db->select('users.id,users.gid,user_groups.access')->get('users')->row();
 
         if (count($user)) {
-            $CI->db->where('id', $user->id);
-            $CI->db->set('last_login', date("Y-m-d H:i:s"))->update('users');
+            $this->db->where('id', $user->id);
+            $this->db->set('last_login', date("Y-m-d H:i:s"))->update('users');
 
-            $CI->session->set_userdata('user_id', $user->id);
-            $CI->session->set_userdata('user_group_id', $user->gid);
-            $CI->session->set_userdata('user_access', $user->access);
+            service('session')->set('user_id', $user->id);
+            service('session')->set('user_group_id', $user->gid);
+            service('session')->set('user_access', $user->access);
 
             self::$user_id = $user->id;
             self::$user_group_id = $user->gid;
@@ -59,14 +54,11 @@ class user extends CI_Model {
     static public function id() {
         if (!isset(self::$user_id)) {
 
-            $CI = & get_instance();
-
-
-            if (!$user_id = $CI->session->userdata('user_id')) {
+            if (!$user_id = service('session')->get('user_id')) {
                 return FALSE;
             }
 
-            if (!$u = $CI->db->get_where('users', array('id' => $user_id))->row('id')) {
+            if (!$u = $this->db->get_where('users', array('id' => $user_id))->row('id')) {
                 return FALSE;
             }
 
@@ -79,10 +71,7 @@ class user extends CI_Model {
     static public function group() {
         if (!isset(self::$user_group_id)) {
 
-            $CI = & get_instance();
-
-
-            if (!$user_group_id = $CI->session->userdata('user_group_id')) {
+            if (!$user_group_id = service('session')->get('user_group_id')) {
                 return FALSE;
             }
 
@@ -90,7 +79,7 @@ class user extends CI_Model {
                 return FALSE;
             }
 
-            if (!$u = $CI->db->get_where('users', array(
+            if (!$u = $this->db->get_where('users', array(
                         'id' => self::id(),
                         'gid' => $user_group_id,
                     ))->row('gid')) {
@@ -106,22 +95,19 @@ class user extends CI_Model {
     static public function access_id() {
         if (!isset(self::$user_access)) {
 
-            $CI = & get_instance();
-
-
-            if (!$user_access = $CI->session->userdata('user_access')) {
+            if (!$user_access = service('session')->get('user_access')) {
                 return 0;
             }
             if (!self::id()) {
                 return 0;
             }
-            if (!$u = $CI->db->get_where('user_groups', array(
+            if (!$u = $this->db->get_where('user_groups', array(
                         'id' => self::group(),
                         'access' => $user_access
                     ))->row('access')) {
                 return 0;
             }
-            $CI->db->flush_cache();
+            $this->db->resetQuery();
             self::$user_access = $u;
         }
 
@@ -129,32 +115,28 @@ class user extends CI_Model {
     }
 
     static public function flush() {
-        $CI = & get_instance();
-
-        $CI->session->unset_userdata('user_id');
-        $CI->session->unset_userdata('username');
-        $CI->session->unset_userdata('access');
+        service('session')->remove('user_id');
+        service('session')->remove('username');
+        service('session')->remove('access');
     }
 
     static public function access() {
-        $CI = & get_instance();
-
         $where = array(
-            'controller' => $CI->router->class,
-            'method' => $CI->router->method,
+            'controller' => service('router')->controllerName(),
+            'method' => service('router')->methodName(),
         );
 
-        if (!$accessable = $CI->db->get_where('access', $where)->num_rows()) {
+        if (!$accessable = $this->db->get_where('access', $where)->num_rows()) {
             return true;
         }
 
         $where = array(
             'access_id' => (!self::access_id()) ? 0 : self::access_id(),
-            'controller' => $CI->router->class,
-            'method' => $CI->router->method,
+            'controller' => service('router')->controllerName(),
+            'method' => service('router')->methodName(),
         );
 
-        if ($accessable = $CI->db->get_where('access', $where)->num_rows()) {
+        if ($accessable = $this->db->get_where('access', $where)->num_rows()) {
             return true;
         }
 
@@ -175,14 +157,12 @@ class user extends CI_Model {
     }
 
     static public function avatar($user_id = NULL) {
-        $CI = & get_instance();
-
         $id = (empty($user_id)) ? self::id() : $user_id;
 
         if (!(int) $id) {
             return false;
         }
-        $avatar = $CI->db->get_where('user_profiles', array('user_id' => $id))->row('avatar');
+        $avatar = $this->db->get_where('user_profiles', array('user_id' => $id))->row('avatar');
         
         if (empty($avatar)) {
             $avatar = 'media/users/avatar.png';
@@ -192,13 +172,11 @@ class user extends CI_Model {
     }
 
     static public function email($user_id = NULL) {
-        $CI = & get_instance();
-
         $id = (empty($user_id)) ? self::id() : $user_id;
         if (!(int) $id) {
             return false;
         }
-        $email = $CI->db->get_where('users', array('id' => $id))->row('email');
+        $email = $this->db->get_where('users', array('id' => $id))->row('email');
         if (!count($email) && is_array($email)) {
             $email = '';
         }
@@ -206,13 +184,11 @@ class user extends CI_Model {
     }
 
     static public function username($user_id = NULL) {
-        $CI = & get_instance();
-
         $id = (empty($user_id)) ? self::id() : $user_id;
         if (!(int) $id) {
             return false;
         }
-        $username = $CI->db->get_where('users', array('id' => $id))->row('username');
+        $username = $this->db->get_where('users', array('id' => $id))->row('username');
         if (empty($username)) {
             $username = '';
         }
@@ -220,13 +196,10 @@ class user extends CI_Model {
     }
 
     static public function user_group() {
-        $CI = & get_instance();
-
-
         if (!self::$user_group_id) {
             return false;
         }
-        $name = $CI->db->get_where('user_groups', array('id' => self::$user_group_id))->row('name');
+        $name = $this->db->get_where('user_groups', array('id' => self::$user_group_id))->row('name');
         if (empty($name)) {
             $name = '';
         }
@@ -456,7 +429,7 @@ class user extends CI_Model {
         $options['max_size'] = '51200';
         $options['encrypt_name'] = true;
 
-        $this->load->library('upload');
+        
         $this->upload->initialize($options);
 
         if (!$this->upload->do_upload($field)) {
@@ -486,7 +459,7 @@ class user extends CI_Model {
         $config['height'] = $height;
         $config['quality'] = '90%';
 
-        $this->load->library('image_lib');
+        
         $this->image_lib->clear();
 
         $this->image_lib->initialize($config);

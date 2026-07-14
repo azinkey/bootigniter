@@ -3,15 +3,15 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-10">
+                <div class="col-10">
                     <h4 class="title">
-                        <i class="fa fa-eye-slash"></i>
+                        <i class="fa-solid fa-eye-slash"></i>
                         <?php __('Access'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-2">
-                    <a href="<?php _u('admin/users/edit_access/-1'); ?>" class="btn btn-primary btn-sm pull-right edit-box" id="createAccess">
-                        <i class="fa fa-plus"></i>
+                <div class="col-2">
+                    <a href="<?php _u('admin/users/edit_access/-1'); ?>" class="btn btn-primary btn-sm float-end edit-box" id="createAccess">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                 </div>
             </div>
@@ -19,24 +19,24 @@
         </div>
         <?php AZ::block('system-message'); ?>
         <div class="row-fluid">
-            <div class="panel panel-default">
+            <div class="card panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">
+                <div class="card-header">
                     <?php __('User Access Role'); ?>
                     <div class="clearfix"></div>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <div class="table">
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th class="hidden-xs">
+                                    <th class="d-none d-sm-block">
                                         <?php __('ID'); ?>
                                     </th>
                                     <th>
                                         <?php __('Access'); ?>
                                     </th>
-                                    <th class="text-right"><span class="glyphicon glyphicon-edit"></span></th>
+                                    <th class="text-right"><span class="fa-solid fa-edit"></span></th>
                                 </tr>
                             </thead>
                             <?php
@@ -44,21 +44,21 @@
                                 foreach ($accesses as $access) {
                                     ?>
                                     <tr class="<?php echo ($access->system) ? 'active' : ''; ?>">
-                                        <td class="hidden-xs"><?php echo $access->id; ?></td>
+                                        <td class="d-none d-sm-block"><?php echo $access->id; ?></td>
                                         <td><?php echo $access->name; ?></td>
                                         <td class="small">
                                             <?php if ((have_permission('users/edit_access') || have_permission('users/remove_access')) && !$access->system) : ?>
 
-                                                <div class="dropdown pull-right text-left">
-                                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                <div class="dropdown float-end text-left">
+                                                    <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                                        <span class="fa-solid fa-pencil"></span>
                                                     </a>
                                                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
                                                         <?php if (have_permission('users/edit_access')) : ?>
                                                             <li>
 
                                                                 <a href="<?php _u('admin/users/edit_access/' . $access->id); ?>" class="edit-box">
-                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <span class="fa-solid fa-edit"></span>
                                                                     <?php __('Edit'); ?>
                                                                 </a>
                                                             </li>
@@ -67,7 +67,7 @@
                                                             <li>
 
                                                                 <a href="<?php _u('admin/users/remove_access/' . $access->id); ?>" class="remove-box">
-                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <span class="fa-solid fa-trash"></span>
                                                                     <?php __('Remove'); ?>
                                                                 </a>
                                                             </li>

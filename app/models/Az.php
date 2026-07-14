@@ -1,6 +1,6 @@
 <?php
 
-class AZ extends CI_Model {
+class AZ extends \CodeIgniter\Model {
 
     static private $CI;
 

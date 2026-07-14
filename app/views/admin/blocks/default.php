@@ -4,13 +4,13 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <span class="glyphicon glyphicon-cog"></span>
+                        <span class="fa-solid fa-gear"></span>
                         <?php __('Default');?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
+                <div class="col-5">
 
                 </div>
             </div>

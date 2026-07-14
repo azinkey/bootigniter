@@ -4,15 +4,15 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-10">
+                <div class="col-10">
                     <h4 class="title">
-                        <i class="fa fa-users"></i>
+                        <i class="fa-solid fa-users"></i>
                         <?php __('User Groups'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-2">
-                    <a href="<?php _u('admin/users/edit_group/-1'); ?>" class="btn btn-primary btn-sm pull-right" id="createGroup" data-target="#groupFormModel">
-                        <i class="fa fa-plus"></i>
+                <div class="col-2">
+                    <a href="<?php _u('admin/users/edit_group/-1'); ?>" class="btn btn-primary btn-sm float-end" id="createGroup" data-bs-target="#groupFormModel">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                 </div>
             </div>
@@ -21,18 +21,18 @@
         <?php AZ::block('system-message'); ?>
         <div class="row-fluid">
 
-            <div class="panel panel-default">
+            <div class="card panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">
+                <div class="card-header">
                     <?php __('User Groups'); ?>
                     <div class="clearfix"></div>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <div class="table">
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th class="hidden-xs">
+                                    <th class="d-none d-sm-block">
                                         <?php __('ID'); ?>
                                     </th>
                                     <th>
@@ -41,7 +41,7 @@
                                     <th>
                                         <?php __('Access'); ?>
                                     </th>
-                                    <th class="text-right"><span class="glyphicon glyphicon-edit"></span></th>
+                                    <th class="text-right"><span class="fa-solid fa-edit"></span></th>
                                 </tr>
                             </thead>
                             <?php
@@ -49,22 +49,22 @@
                                 foreach ($groups as $group) {
                                     ?>
                                     <tr class="<?php echo ($group->system) ? 'active' : ''; ?>">
-                                        <td class="hidden-xs"><?php echo $group->id; ?></td>
+                                        <td class="d-none d-sm-block"><?php echo $group->id; ?></td>
                                         <td><?php echo $group->name; ?></td>
                                         <td><?php echo $group->role; ?></td>
                                         <td class="small">
                                             <?php if ((have_permission('users/edit_group') || have_permission('users/remove_group')) && !$group->system) : ?>
 
-                                                <div class="dropdown pull-right text-left">
-                                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                <div class="dropdown float-end text-left">
+                                                    <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                                        <span class="fa-solid fa-pencil"></span>
                                                     </a>
                                                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
                                                         <?php if (have_permission('users/edit_group')) : ?>
                                                             <li>
 
                                                                 <a href="<?php _u('admin/users/edit_group/' . $group->id); ?>">
-                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <span class="fa-solid fa-edit"></span>
                                                                     <?php __('Edit'); ?>
                                                                 </a>
                                                             </li>
@@ -73,7 +73,7 @@
                                                             <li>
 
                                                                 <a href="<?php _u('admin/users/remove_group/' . $group->id); ?>" class="remove-box">
-                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <span class="fa-solid fa-trash"></span>
                                                                     <?php __('Remove'); ?>
                                                                 </a>
                                                             </li>

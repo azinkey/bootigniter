@@ -1,28 +1,28 @@
 <div class="row-fluid">
     <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-body">
+        <div class="card">
+            <div class="card-body">
                 <div class="state-container">
                     <div id="visitChart" class="state-placeholder"></div>
                 </div>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
                 <div class="row-fluid">
-                    <div class="col-xs-4 text-center">
+                    <div class="col-4 text-center">
                         <h4 class="semibold text-warning"><?php echo $new_visits; ?></h4>
                         <p class="nm text-muted">
                             <span class="semibold text-warning"><?php __('New Visits'); ?></span>
                             <span class="text-warning"><i class="ico-arrow-down4"></i> <?php echo $new_visits_percent; ?>%</span>
                         </p>
                     </div>
-                    <div class="col-xs-4 text-center">
+                    <div class="col-4 text-center">
                         <h4 class="semibold text-primary"><?php echo $return_visits; ?></h4>
                         <p class="nm text-muted">
                             <span class="semibold text-primary"><?php __('Returning Visits'); ?></span>
                             <span class="text-primary"><i class="ico-arrow-down4"></i> <?php echo $return_visits_percent; ?>%</span>
                         </p>
                     </div>
-                    <div class="col-xs-4 text-center">
+                    <div class="col-4 text-center">
                         <h4 class="semibold text-success"><?php echo $total_visits; ?></h4>
                         <p class="nm text-muted">
                             <span class="semibold text-success"><?php __('Total Visits'); ?></span>                        </p>

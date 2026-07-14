@@ -1,6 +1,6 @@
 <?php
 
-class Setting extends CI_Model {
+class Setting extends \CodeIgniter\Model {
 
     public function getSettingSections() {
         $where = "FIND_IN_SET('" . user::access_id() . "', access)";

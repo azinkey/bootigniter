@@ -1,9 +1,9 @@
 <li class="dropdown">
     <?php
-    $notice_link = (count_user_notifications()) ? 'claass="dropdown-toggle" data-toggle="dropdown"' : 'href="' . site_url('admin/dashboard/notifications') . '"';
+    $notice_link = (count_user_notifications()) ? 'claass="dropdown-toggle" data-bs-toggle="dropdown"' : 'href="' . site_url('admin/dashboard/notifications') . '"';
     ?>
     <a title="<?php __('Notifications'); ?>" <?php echo $notice_link; ?>>
-        <i class="fa fa-bell-o"></i>
+        <i class="fa-solid fa-bell-o"></i>
         <?php if (count_user_notifications()) : ?>
             <span class="hasAlert danger"></span>
         <?php endif; ?>    

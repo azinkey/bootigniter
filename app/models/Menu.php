@@ -1,6 +1,6 @@
 <?php
 
-class Menu extends CI_Model {
+class Menu extends \CodeIgniter\Model {
 
     public function getMenus($select = '*', $where = array(), $offset = 0, $limit = 25, $count = FALSE) {
 

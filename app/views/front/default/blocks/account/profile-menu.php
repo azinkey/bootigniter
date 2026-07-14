@@ -6,8 +6,8 @@
     <ul class="nav navbar-nav navbar-right profile-menu">
 
         <li class="dropdown text-right">
-            <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown">
-                <i class="account-icon glyphicon glyphicon-off"></i> 
+            <a href="#" class="dropdown-toggle text-center" data-bs-toggle="dropdown">
+                <i class="account-icon fa-solid fa-off"></i> 
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu dropdown-menu-right text-left">
@@ -34,8 +34,8 @@
     <ul class="nav navbar-nav navbar-right profile-menu">
 
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i> 
+            <a href="#" class="dropdown-toggle text-center" data-bs-toggle="dropdown">
+                <i class="fa-solid fa-user"></i> 
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu dropdown-menu-right text-left">

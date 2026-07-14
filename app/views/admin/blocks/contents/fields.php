@@ -4,15 +4,15 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-10">
+                <div class="col-10">
                     <h4 class="title">
-                        <i class="fa fa-ellipsis-h"></i>
+                        <i class="fa-solid fa-ellipsis-h"></i>
                         <?php __('Content Fields'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-2">
-                    <a href="<?php _u('admin/contents/edit_field/-1/' . $q); ?>" class="btn btn-primary btn-sm pull-right" id="fieldModel">
-                        <i class="fa fa-plus"></i>
+                <div class="col-2">
+                    <a href="<?php _u('admin/contents/edit_field/-1/' . $q); ?>" class="btn btn-primary btn-sm float-end" id="fieldModel">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         ?>
                         <li class="<?php echo ($id == $q) ? 'active' : '' ?>">
                             <a href="<?php echo _u('admin/contents/fields/' . $id); ?>" title="<?php echo $name; ?>" >
-                                <i class="fa fa-folder-open"></i>
+                                <i class="fa-solid fa-folder-open"></i>
                                 <span class=""> <?php echo $name; ?></span>
                                 <span>
                                     <small>
@@ -52,22 +52,22 @@
                         <div class="tab-pane <?php echo ($id == $q) ? 'active' : '' ?>" id="section-<?php echo $id; ?>">
 
                             <div class="row-fluid">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <?php echo $name; ?>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <div class="table">
                                             <?php if (count($fields)) { ?>
                                                 <table class="table table-condensed">
                                                     <thead>
                                                         <tr>
                                                             <th><?php __('Label'); ?></th>
-                                                            <th class="hidden-xs"><?php __('Type'); ?></th>
-                                                            <th class="hidden-xs"><?php __('in List'); ?></th>
-                                                            <th class="hidden-xs"><?php __('in View'); ?></th>
-                                                            <th class="text-right"><span class="glyphicon glyphicon-edit"></span></th>
+                                                            <th class="d-none d-sm-block"><?php __('Type'); ?></th>
+                                                            <th class="d-none d-sm-block"><?php __('in List'); ?></th>
+                                                            <th class="d-none d-sm-block"><?php __('in View'); ?></th>
+                                                            <th class="text-right"><span class="fa-solid fa-edit"></span></th>
                                                         </tr>
                                                     </thead>
                                                     <?php
@@ -75,24 +75,24 @@
                                                         ?>
                                                         <tr class="<?php echo ($field->system) ? 'active' : ''; ?>">
                                                             <td><?php echo $field->label; ?></td>
-                                                            <td class="hidden-xs"><?php echo $field->type; ?></td>
-                                                            <td class="hidden-xs">
-                                                                <span class="glyphicon <?php echo ($field->in_list) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span>
+                                                            <td class="d-none d-sm-block"><?php echo $field->type; ?></td>
+                                                            <td class="d-none d-sm-block">
+                                                                <span class="<?php echo ($field->in_list) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span>
                                                             </td>
-                                                            <td class="hidden-xs"><span class="glyphicon <?php echo ($field->in_view) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span></td>
+                                                            <td class="d-none d-sm-block"><span class="<?php echo ($field->in_view) ? 'glyphicon-check' : 'glyphicon-unchecked'; ?>"></span></td>
                                                             <td class="small">
                                                                 <?php if ((have_permission('contents/edit_field') || have_permission('contents/remove_field')) && !$field->system) : ?>
 
-                                                                    <div class="dropdown pull-right text-left">
-                                                                        <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                                    <div class="dropdown float-end text-left">
+                                                                        <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                                                            <span class="fa-solid fa-pencil"></span>
                                                                         </a>
                                                                         <ul role="menu" class="dropdown-menu dropdown-menu-right">
                                                                             <?php if (have_permission('contents/edit_field')) : ?>
                                                                                 <li>
 
                                                                                     <a href="<?php _u('admin/contents/edit_field/' . $field->id . '/' . $id); ?>">
-                                                                                        <span class="glyphicon glyphicon-edit"></span>
+                                                                                        <span class="fa-solid fa-edit"></span>
                                                                                         <?php __('Edit'); ?>
                                                                                     </a>
                                                                                 </li>
@@ -101,7 +101,7 @@
                                                                                 <li>
 
                                                                                     <a href="<?php _u('admin/contents/remove_field/' . $field->id . '/' . $id) ?>" class="remove-box">
-                                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                                        <span class="fa-solid fa-trash"></span>
                                                                                         <?php __('Remove'); ?>
                                                                                     </a>
                                                                                 </li>
@@ -128,7 +128,7 @@
                                     <?php
                                     if (!empty($pagination)):
                                         ?>
-                                        <div class="panel-footer">
+                                        <div class="card-footer">
                                             <div class="col-md-12">
                                                 <?php echo $pagination; ?>
                                             </div>

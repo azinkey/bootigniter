@@ -4,20 +4,20 @@
 
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <span class="fa fa-folder-open-o"></span>
+                        <span class="fa-regular fa-folder-open"></span>
                         <?php echo isset($group->name) ? $group->name : lang('New Group'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a href="<?php _u('admin/contents/groups/' . $type); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveContentGroupForm" data-return="<?php _u('admin/contents/edit_group/-1/' . $type); ?>">
-                            <i class="glyphicon glyphicon-saved"></i>
-                            <i class="glyphicon glyphicon-plus"></i>
+                            <i class="fa-solid fa-saved"></i>
+                            <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -30,8 +30,8 @@
 
 
             <?php echo form_open('admin/contents/save_group', array('id' => 'saveContentGroupForm')); ?>
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card panel-default">
+                <div class="card-body">
                     <div class="modal-body">
                         <div class="field-row">
                             <?php
@@ -83,15 +83,15 @@
                             ?>
                         </div>
                     </div>
-                    <div class="panel-footer text-right">
+                    <div class="card-footer text-right">
                         <?php echo form_hidden('id', (isset($group->id)) ? $group->id : -1); ?>
                         <?php echo (isset($type)) ? form_hidden('type', $type) : ''; ?>
                         <a href="<?php _u('admin/contents/groups/' . $type); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                             <?php __('Cancel'); ?>
                         </a>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                             <?php __('Save'); ?>
                         </button>
                     </div>

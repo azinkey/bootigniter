@@ -17,25 +17,25 @@
 
         <div class="row-fluid">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                <div class="card panel-default">
+                    <div class="card-body">
                         <div class="row-fluid">
                             <div class="col-md-2">
                                 <a href="<?php _u('admin/dashboard/write_message'); ?>" class="btn btn-danger btn-block">
-                                    <span class="glyphicon glyphicon-edit"></span>
+                                    <span class="fa-solid fa-edit"></span>
                                     <?php __('Compose Mail'); ?>
                                 </a>
                                 <hr />
-                                <h5> <span class="glyphicon glyphicon-folder-open"></span> Folders</h5>
+                                <h5> <span class="fa-solid fa-folder-open"></span> Folders</h5>
                                 <ul class="inbox-options list-group list-unstyled">
                                     <li class="list-group-item">
                                         <a href="<?php _u('admin/dashboard/messages/inbox') ?>">
-                                            <span class="glyphicon glyphicon-envelope"></span>
+                                            <span class="fa-solid fa-envelope"></span>
                                             <?php __('Inbox'); ?>
                                             <?php
                                             if ($count_unread_message) {
                                                 ?>
-                                                <span class="badge pull-right"><?php echo $count_unread_message; ?></span>
+                                                <span class="badge float-end"><?php echo $count_unread_message; ?></span>
                                                 <?php
                                             }
                                             ?>
@@ -44,28 +44,28 @@
                                     </li>
                                     <li class="list-group-item">
                                         <a href="<?php _u('admin/dashboard/messages/stared') ?>">
-                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="fa-solid fa-star"></span>
                                             <?php __('Stared'); ?>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="<?php _u('admin/dashboard/messages/outbox') ?>">
-                                            <span class="glyphicon glyphicon-send"></span>
+                                            <span class="fa-solid fa-send"></span>
                                             <?php __('Outbox'); ?>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="<?php _u('admin/dashboard/messages/trash') ?>">
-                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <span class="fa-solid fa-trash"></span>
                                             <?php __('Trash'); ?>
                                         </a>
                                     </li>
 
                                 </ul>
                                 <h5> 
-                                    <span class="glyphicon glyphicon-tags"></span> <?php __('Labels') ?>
-                                    <a href="<?php _u('admin/dashboard/edit_label/-1'); ?>" class="btn btn-sm pull-right edit-box" id="createLabel">
-                                        <span class="glyphicon glyphicon-plus"></span>
+                                    <span class="fa-solid fa-tags"></span> <?php __('Labels') ?>
+                                    <a href="<?php _u('admin/dashboard/edit_label/-1'); ?>" class="btn btn-sm float-end edit-box" id="createLabel">
+                                        <span class="fa-solid fa-plus"></span>
                                     </a>
                                 </h5>
                                 <ul class="labels-list list-group list-unstyled">
@@ -76,22 +76,22 @@
                                             <li class="list-group-item">
 
                                                 <a href="<?php _u('admin/dashboard/label_messages/' . $label->id); ?>">
-                                                    <span class="glyphicon glyphicon-tag" style="color: <?php echo $label->color; ?>"></span>
+                                                    <span class="fa-solid fa-tag" style="color: <?php echo $label->color; ?>"></span>
                                                     <?php echo $label->label; ?>
                                                 </a>
 
 
                                                 <?php if (!$label->system): ?>
-                                                    <div class="dropdown pull-right text-left">
-                                                        <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                    <div class="dropdown float-end text-left">
+                                                        <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                                            <span class="fa-solid fa-pencil"></span>
                                                         </a>
                                                         <ul role="menu" class="dropdown-menu dropdown-menu-right">
 
                                                             <li>
 
                                                                 <a href="<?php _u('admin/dashboard/edit_label/' . $label->id); ?>" class="edit-box">
-                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <span class="fa-solid fa-edit"></span>
                                                                     <?php __('Edit'); ?>
                                                                 </a>
                                                             </li>
@@ -99,7 +99,7 @@
                                                             <li>
 
                                                                 <a href="<?php _u('admin/dashboard/remove_label/' . $label->id); ?>" class="remove-box">
-                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <span class="fa-solid fa-trash"></span>
                                                                     <?php __('Remove'); ?>
                                                                 </a>
                                                             </li>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="button">
-                                            <span class="glyphicon glyphicon-search"></span>
+                                            <span class="fa-solid fa-magnifying-glass"></span>
                                             <?php __('Search'); ?>
                                         </button>
                                     </div>
@@ -138,7 +138,7 @@
                                         foreach ($messages as $message) {
                                             ?>
                                             <div class="media">
-                                                <span class="pull-left">
+                                                <span class="float-start">
                                                     <img width="44" height="44" alt="avatar" class="media-object img-circle" src="<?php echo user::avatar($message->author); ?>">
                                                 </span>
                                                 <span class="media-body">
@@ -149,13 +149,13 @@
                                                         </strong>
                                                     </a>
                                                     <?php if ($message->have_attachment): ?>
-                                                        <span class="media-meta  pull-right">
-                                                            <i class="glyphicon glyphicon-paperclip"></i>
+                                                        <span class="media-meta  float-end">
+                                                            <i class="fa-solid fa-paperclip"></i>
                                                         </span>
                                                     <?php endif; ?>
                                                     <?php if ($message->is_star): ?>
-                                                        <span class="media-meta pull-right">
-                                                            <i class="glyphicon glyphicon-star"></i>
+                                                        <span class="media-meta float-end">
+                                                            <i class="fa-solid fa-star"></i>
                                                         </span>
                                                     <?php endif; ?>
                                                     <span class="media-text">
@@ -164,7 +164,7 @@
 
                                                     <!-- meta icon -->
 
-                                                    <span class="media-meta pull-right">
+                                                    <span class="media-meta float-end">
                                                         <?php echo date_when(human_to_unix($message->created)); ?>
                                                     </span>
                                                     <!--/ meta icon -->
@@ -183,7 +183,7 @@
                                 <?php
                                 if (!empty($pagination)):
                                     ?>
-                                    <div class="panel-footer">
+                                    <div class="card-footer">
                                         <div class="col-md-12">
                                             <?php echo $pagination; ?>
                                         </div>
@@ -199,19 +199,19 @@
                                     <div class="btn-group">
 
                                         <a class="btn btn-default" href="<?php _u('admin/dashboard/message_star_flag/' . $selected_message->id . '/' . $selected_message->is_star); ?>" title="<?php echo ($selected_message->is_star) ? lang('Remove Star Mark') : lang('Mark as Star'); ?>">
-                                            <i class="glyphicon <?php echo ($selected_message->is_star) ? 'glyphicon-star' : 'glyphicon-star-empty'; ?>"></i>
+                                            <i class="<?php echo ($selected_message->is_star) ? 'glyphicon-star' : 'glyphicon-star-empty'; ?>"></i>
                                         </a>
                                         <a class="btn btn-default" title="<?php __('Forward'); ?>" href="<?php _u('admin/dashboard/forward_message/' . $selected_message->id); ?>">
-                                            <i class="glyphicon glyphicon-share-alt"></i>
+                                            <i class="fa-solid fa-share-alt"></i>
                                         </a>
                                         <a class="btn btn-default" title="<?php __('Reply'); ?>" href="<?php _u('admin/dashboard/write_message/' . $selected_message->id); ?>">
-                                            <i class="glyphicon glyphicon-retweet"></i>
+                                            <i class="fa-solid fa-retweet"></i>
                                         </a>
 
                                         <a class="btn btn-default" title="<?php __('Add Label'); ?>">
-                                            <i class="glyphicon glyphicon-tags"></i>
+                                            <i class="fa-solid fa-tags"></i>
                                         </a>
-                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <a class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">
                                             <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu text-left" role="menu">
@@ -223,7 +223,7 @@
                                                     ?>
                                                     <li>
                                                         <a href="<?php _u('admin/dashboard/message_label/' . $selected_message->id . '/' . $label->id); ?>">
-                                                            <span class="glyphicon glyphicon-tag" style="color: <?php echo $label->color; ?>"></span>
+                                                            <span class="fa-solid fa-tag" style="color: <?php echo $label->color; ?>"></span>
                                                             <?php echo $label->label; ?>
                                                         </a>
                                                     </li>
@@ -235,7 +235,7 @@
                                     </div>
                                     <div class="btn-group">
                                         <a class="btn btn-danger btn-default remove-box" href="<?php _u('admin/dashboard/trash_message/' . $selected_message->id); ?>">
-                                            <i class="glyphicon glyphicon-trash"></i>
+                                            <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </div>
 
@@ -257,7 +257,7 @@
                                         </li>
                                         <li class="text-right">
                                             <?php if (!empty($selected_message->label_name)) : ?>
-                                                <span class="glyphicon glyphicon-tag" style="color: <?php echo $selected_message->color; ?>"></span>
+                                                <span class="fa-solid fa-tag" style="color: <?php echo $selected_message->color; ?>"></span>
                                                 <?php echo $selected_message->label_name; ?>
                                             <?php endif; ?>
                                             <h5 class="semibold text-muted"><?php echo date_when(human_to_unix($selected_message->created)) ?></h5>
@@ -270,7 +270,7 @@
                                         </h4>
                                     
                                     <br />
-                                    <div class="panel-body text-left">
+                                    <div class="card-body text-left">
                                         <?php echo $selected_message->body; ?>
                                     </div>
                                 </div>

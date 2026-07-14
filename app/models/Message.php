@@ -1,6 +1,6 @@
 <?php
 
-class Message extends CI_Model {
+class Message extends \CodeIgniter\Model {
 
     public function getTotalNotifications($type = 1) {
         return $this->db->get_where('messages', array('type' => $type, 'trash' => 0))->num_rows();

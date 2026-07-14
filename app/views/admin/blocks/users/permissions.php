@@ -4,15 +4,15 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-10">
+                <div class="col-10">
                     <h4 class="title">
-                        <i class="fa fa-briefcase"></i>
+                        <i class="fa-solid fa-briefcase"></i>
                         <?php __('Permissions'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-2 text-right hidden">
+                <div class="col-2 text-right hidden">
                     <button type="button" id="resetPermissionsButton" class="click-submit btn btn-default btn-sm" data-form="#resetPermissionsForm" title="<?php __('Update'); ?>">
-                        <i class="fa fa-refresh"></i>
+                        <i class="fa-solid fa-refresh"></i>
                     </button>
                 </div>
             </div>
@@ -21,17 +21,17 @@
         <?php AZ::block('system-message'); ?>
         <div class="row-fluid">
             <?php echo form_open('admin/users/permissions_reset', array('id' => 'resetPermissionsForm')); ?>
-            <div class="panel panel-default">
+            <div class="card panel-default">
 
-                <div class="panel-heading">
+                <div class="card-header">
                     <?php __('Access Role Permissions'); ?>
                     <div class="clearfix"></div>
                 </div>
-                <div class="panel-body permission-table">
+                <div class="card-body permission-table">
                     <table class="table">
                         <tr>
                             <th width="40%">
-                                <i class="fa fa-list-ul"></i>
+                                <i class="fa-solid fa-list-ul"></i>
                             </th>
                             <?php foreach ($roles as $role) { ?>   
                                 <th class="text-center">
@@ -88,10 +88,10 @@
 
                     </table>
                 </div>
-                <div class="panel-footer text-right">
+                <div class="card-footer text-right">
                     <?php __('Checked All Before'); ?>
                     <button type="submit" class="btn btn-primary" title="<?php __('Update'); ?>">
-                        <i class="fa fa-2x fa-refresh"></i>
+                        <i class="fa-solid fa-2x fa-refresh"></i>
                         <?php __('Update'); ?>
                     </button>
                 </div>

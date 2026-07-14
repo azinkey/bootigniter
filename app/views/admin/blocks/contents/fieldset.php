@@ -4,15 +4,15 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-10">
+                <div class="col-10">
                     <h4 class="title">
-                        <i class="fa fa-folder-open"></i>
+                        <i class="fa-solid fa-folder-open"></i>
                         <?php __('Field Set'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-2">
-                    <a href="<?php _u('admin/contents/edit_fieldset/-1'); ?>" class="btn btn-primary btn-sm pull-right" id="createFieldSet" data-target="#fieldsetFormModel">
-                        <i class="fa fa-plus"></i>
+                <div class="col-2">
+                    <a href="<?php _u('admin/contents/edit_fieldset/-1'); ?>" class="btn btn-primary btn-sm float-end" id="createFieldSet" data-bs-target="#fieldsetFormModel">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                 </div>
             </div>
@@ -20,20 +20,20 @@
         </div>
         <?php AZ::block('system-message'); ?>
         <div class="row-fluid">
-            <div class="panel panel-default">
+            <div class="card panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">
+                <div class="card-header">
                     <?php __('Field Set Group'); ?>
                     <div class="clearfix"></div>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <div class="table">
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th  class="hidden-xs" ><?php __('ID'); ?></th>
+                                    <th  class="d-none d-sm-block" ><?php __('ID'); ?></th>
                                     <th><?php __('Name'); ?></th>
-                                    <th class="text-right"><span class="glyphicon glyphicon-edit"></span></th>
+                                    <th class="text-right"><span class="fa-solid fa-edit"></span></th>
                                 </tr>
                             </thead>
                             <?php
@@ -41,21 +41,21 @@
                                 foreach ($fieldsets as $fieldset) {
                                     ?>
                                     <tr class="<?php echo ($fieldset->system) ? 'active' : ''; ?>">
-                                        <td class="hidden-xs"><?php echo $fieldset->id; ?></td>
+                                        <td class="d-none d-sm-block"><?php echo $fieldset->id; ?></td>
                                         <td><?php echo $fieldset->name; ?></td>
                                         <td class="small">
                                             <?php if ((have_permission('contents/edit_fieldset') || have_permission('contents/remove_fieldset')) && !$fieldset->system) : ?>
 
-                                                <div class="dropdown pull-right text-left">
-                                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                <div class="dropdown float-end text-left">
+                                                    <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                                        <span class="fa-solid fa-pencil"></span>
                                                     </a>
                                                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
                                                         <?php if (have_permission('contents/edit_fieldset')) : ?>
                                                             <li>
 
                                                                 <a href="<?php _u('admin/contents/edit_fieldset/' . $fieldset->id); ?>">
-                                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                                    <span class="fa-solid fa-edit"></span>
                                                                     <?php __('Edit'); ?>
                                                                 </a>
                                                             </li>
@@ -64,7 +64,7 @@
                                                             <li>
 
                                                                 <a href="<?php _u('admin/contents/remove_fieldset/' . $fieldset->id); ?>" class="remove-box">
-                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                    <span class="fa-solid fa-trash"></span>
                                                                     <?php __('Remove'); ?>
                                                                 </a>
                                                             </li>

@@ -4,19 +4,19 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="fa-solid fa-user"></span>
                         <?php echo (isset($user->username)) ? $user->username : lang('New User'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a href="<?php _u('admin/users/index/' . form_value('gid', $user)); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveUserForm">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -28,20 +28,20 @@
         <div class="row-fluid">
             <?php echo form_open_multipart('admin/users/save', array('id' => 'saveUserForm')); ?>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card panel-default">
+                <div class="card-body">
                     <div class="panel-group" id="accordion">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                        <span class="glyphicon pull-left hidden-xs"></span>
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a data-bs-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        <span class="float-start d-none d-sm-block"></span>
                                         <?php __('Account'); ?>
                                     </a>
                                 </h4>
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="field-row row-fluid">
                                         <div class="col-md-4">
                                             <?php
@@ -121,17 +121,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                        <span class="glyphicon pull-left hidden-xs"></span>
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a data-bs-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        <span class="float-start d-none d-sm-block"></span>
                                         <?php __('Profile'); ?>
                                     </a>
                                 </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse in">
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="field-row row-fluid">
                                         <div class="col-md-4">
                                             <?php echo form_label(lang('Avatar'), 'avator'); ?>
@@ -139,7 +139,7 @@
                                         <div class="col-md-8">
                                             <span class="btn btn-file">
                                                 <?php $avatar = isset($user->avatar) ? $user->avatar : 'media/users/avatar.png'; ?>
-                                                <img src="<?php echo media_url($avatar); ?>" width="32" height="32" alt=".." class="pull-left img-circle"/>
+                                                <img src="<?php echo media_url($avatar); ?>" width="32" height="32" alt=".." class="float-start img-circle"/>
                                                 <?php echo form_upload(array('name' => 'avatar', 'id' => 'profileAvatar')); ?>
                                                 <span class="clearfix"></span>
                                             </span>
@@ -245,17 +245,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                        <span class="glyphicon pull-left hidden-xs"></span>
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <a data-bs-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                        <span class="float-start d-none d-sm-block"></span>
                                         <?php __('Password'); ?>
                                     </a>
                                 </h4>
                             </div>
                             <div id="collapseThree" class="panel-collapse collapse in">
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="field-row row-fluid">
                                         <div class="col-md-4">
                                             <?php
@@ -295,15 +295,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
+                <div class="card-footer">
                     <div class="col-md-12 text-right">
                         <?php echo (isset($user->id)) ? form_hidden('id', $user->id) : ''; ?>
                         <a href="<?php _u('admin/users/index/' . form_value('gid', $user)); ?>" class="btn btn-default">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                             <?php __('Cancel'); ?>
                         </a>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                             <?php __('Save'); ?>
                         </button>
                     </div>

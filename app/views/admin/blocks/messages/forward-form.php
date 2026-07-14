@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-12">
+                <div class="col-12">
                     <h4 class="title"><?php __('Compose Mail'); ?></h4>
                 </div>
 
@@ -15,34 +15,34 @@
 
         <div class="row-fluid">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                <div class="card panel-default">
+                    <div class="card-body">
                         <div class="row-fluid">
                             <div class="col-md-3">
 
-                                <h5> <span class="glyphicon glyphicon-folder-open"></span> Folders</h5>
+                                <h5> <span class="fa-solid fa-folder-open"></span> Folders</h5>
                                 <ul class="inbox-options list-group list-unstyled">
                                     <li class="list-group-item">
                                         <a href="<?php _u('admin/dashboard/messages/inbox') ?>">
-                                            <span class="glyphicon glyphicon-envelope"></span>
+                                            <span class="fa-solid fa-envelope"></span>
                                             <?php __('Inbox'); ?>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="<?php _u('admin/dashboard/messages/stared') ?>">
-                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="fa-solid fa-star"></span>
                                             <?php __('Stared'); ?>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="<?php _u('admin/dashboard/messages/outbox') ?>">
-                                            <span class="glyphicon glyphicon-send"></span>
+                                            <span class="fa-solid fa-send"></span>
                                             <?php __('Outbox'); ?>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="<?php _u('admin/dashboard/messages/trash') ?>">
-                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <span class="fa-solid fa-trash"></span>
                                             <?php __('Trash'); ?>
                                         </a>
                                     </li>
@@ -78,15 +78,15 @@
                                     ));
                                     ?>    
                                 </div>
-                                <div class="panel-footer text-right">
+                                <div class="card-footer text-right">
                                     <input type="hidden" name="author" value="<?php echo user::id(); ?>" />
                                     <input type="hidden" name="return" value="<?php _u('admin/dashboard/forward_message/' . $message->id); ?>" />
                                     <a class="btn btn-default" href="<?php _u('admin/dashboard/messages'); ?>">
-                                        <i class="fa fa-arrow-circle-left"></i>
+                                        <i class="fa-solid fa-arrow-circle-left"></i>
                                         <?php __('Cancel'); ?>
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-send"></i>
+                                        <i class="fa-solid fa-send"></i>
                                         <?php __('Send'); ?>
                                     </button>
                                     <?php echo form_close(); ?>

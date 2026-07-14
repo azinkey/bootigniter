@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-md-4 text-right">
                     <?php echo form_open('admin/dashboard', array('id' => 'refreshChart')); ?>
-                        <div class="col-xs-8">
+                        <div class="col-8">
                             <?php
                             echo form_dropdown('duration', array(
                                 '' => lang('Select Visits'), 
@@ -22,9 +22,9 @@
                                 ), $duration, 'class="form-control" id="sessionMatrix" ');
                             ?>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-4">
                             <button type="submit" class="btn btn-primary">
-                                <i class="glyphicon glyphicon-refresh"></i>
+                                <i class="fa-solid fa-refresh"></i>
                             </button>
                         </div>
                         <div class="clearfix"></div>

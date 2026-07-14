@@ -21,10 +21,9 @@
  * @subpackage  Controllers
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
-class Administrator extends CI_Controller {
+class Administrator extends BaseController {
 
     public function __construct() {
 
@@ -58,7 +57,7 @@ class Administrator extends CI_Controller {
             AZ::redirect('admin/dashboard');
         }
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
         if ($this->_validate() == FALSE) {
             $this->index();
@@ -97,11 +96,11 @@ class Administrator extends CI_Controller {
      */
     private function _validate() {
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['username', 'Username', 'required');
+        $this->validation->setRules(['password', 'Password', 'required');
 
-        return $this->form_validation->run();
+        return $this->validation->run();
     }
 
 }

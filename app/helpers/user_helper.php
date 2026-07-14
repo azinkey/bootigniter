@@ -21,7 +21,7 @@
  * @subpackage  USer
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
+defined('APPPATH') || exit('No direct script access allowed'); //
     exit('No direct script access allowed');
 
 /**
@@ -39,19 +39,17 @@ if (!function_exists('current_username')) {
             return false;
         }
 
-        $CI = & get_instance();
-
-        if (!$username = $CI->session->userdata('username')) {
+                if (!$username = service('session')->userdata('username')) {
 
             $username = $CI->db
                             ->select('username')
                             ->get_where('users', array('id' => user::id()))->row('username');
             if (!empty($username)) {
-                $CI->session->set_userdata('username', $username);
+                service('session')->set_userdata('username', $username);
             }
         }
 
-        return $CI->session->userdata('username');
+        return service('session')->userdata('username');
     }
 
 }
@@ -71,9 +69,7 @@ if (!function_exists('current_user_name')) {
             return false;
         }
 
-        $CI = & get_instance();
-
-        $name = $CI->db
+                $name = $CI->db
                         ->select('name')
                         ->get_where('users', array('id' => user::id()))->row('name');
         return $name;
@@ -96,8 +92,7 @@ if (!function_exists('access_A')) {
             return array();
         }
         $array = array();
-        $CI = & get_instance();
-        $accessObj = $CI->user->getAccesses();
+                $accessObj = user->getAccesses();
         krsort($accessObj);
         if (count($accessObj)) {
             foreach ($accessObj as $access) {
@@ -128,8 +123,7 @@ if (!function_exists('user_groups_A')) {
     function user_groups_A($show_guest = false) {
 
         $array = array();
-        $CI = & get_instance();
-        $groupObj = $CI->user->getUserGroups();
+                $groupObj = user->getUserGroups();
 
         krsort($groupObj);
         if (count($groupObj)) {
@@ -192,9 +186,7 @@ if (!function_exists('check_permission')) {
             $access_id = user::access_id();
         }
 
-        $CI = & get_instance();
-
-        $check = $CI->db
+                $check = $CI->db
                         ->get_where('access', array(
                             'access_id' => $access_id,
                             'controller' => $controller,
@@ -234,9 +226,7 @@ if (!function_exists('have_permission')) {
             return FALSE;
         }
 
-        $CI = & get_instance();
-
-        $check = $CI->db
+                $check = $CI->db
                         ->get_where('access', array(
                             'access_id' => $access_id,
                             'controller' => $controller,

@@ -5,47 +5,44 @@
 
     <div class="container-fluid top-container">
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 brand">
-                    <?php _a('', AZ::setting('site_name') , ' class="logo-brand" ') ?>
-                </div>
-                <div class="col-xs-6">                    
-                    <div role="navigation" class="navbar navbar-default">
-
-                        <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-                            <span class="sr-only">Toggle</span>
-                            
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-
-                        <div class="navbar-collapse collapse">
-                            <?php echo menu(); ?>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-xs-1 pull-right">     
-                    <?php AZ::block('account/profile-menu'); ?>
-                </div>
-                <div class="col-xs-2 pull-right">
-                        <ul class="language-switcher navbar-right">
-                            <a href="javascript:void(0);" class="dropdown-toggle text-center" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-globe"></span>
-                                <small class="hidden-xs"><?php __(language_name()); ?></small>
-                                <b class="caret"></b></a>
-                            <ul class="dropdown-menu dropdown-menu-right ">
-                                <?php echo language_flags(); ?>
-                            </ul>
-                        </ul>
-                </div>
+            <nav class="navbar navbar-expand-md navbar-light bg-white">
                 
-            </div>
+                <!-- Brand -->
+                <div class="navbar-brand">
+                    <?php _a('', AZ::setting('site_name'), 'class="logo-brand"') ?>
+                </div>
+
+                <!-- Mobile toggler -->
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Nav items -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <?php echo menu(); ?>
+                </div>
+
+                <!-- Language switcher -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa-solid fa-globe"></i>
+                            <small class="d-none d-sm-inline"><?php __(language_name()); ?></small>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <?php echo language_flags(); ?>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <?php AZ::block('account/profile-menu'); ?>
+                    </li>
+                </ul>
+
+            </nav>
         </div>
     </div>
-
-
 
     <?php AZ::block('header/carousel'); ?>
 

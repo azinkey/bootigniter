@@ -21,7 +21,7 @@
  * @subpackage  Form
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
+defined('APPPATH') || exit('No direct script access allowed'); //
     exit('No direct script access allowed');
 
 /**
@@ -81,8 +81,7 @@ if (!function_exists('form_value')) {
             $value = $obj->{$label};
         }
 
-        $CI = & get_instance();
-        $post = $CI->input->post();
+                $post = input->post();
         if (isset($post[$label])) {
             $value = $post[$label];
         }
@@ -353,8 +352,7 @@ if (!function_exists('field_boolen')) {
 if (!function_exists('field_checkbox')) {
 
     function field_checkbox($field_id) {
-        $ci = & get_instance();
-        $rows = $ci->db->get_where('content_field_options', array('field_id' => $field_id))->result();
+                $rows = db_connect()->get_where('content_field_options', array('field_id' => $field_id))->result();
 
         $html = NULL;
 
@@ -384,8 +382,7 @@ if (!function_exists('field_checkbox')) {
 if (!function_exists('field_radio')) {
 
     function field_radio($field_id) {
-        $ci = & get_instance();
-        $rows = $ci->db->get_where('content_field_options', array('field_id' => $field_id))->result();
+                $rows = db_connect()->get_where('content_field_options', array('field_id' => $field_id))->result();
 
         $html = NULL;
 
@@ -451,12 +448,10 @@ if (!function_exists('field_text_option')) {
     function field_text_option($field_id = "", $setting = false) {
         $default_value = NULL;
         if (!empty($field_id)) {
-            $ci = & get_instance();
-
-            if ($setting) {
-                $default_value = $ci->db->get_where('settings', array('id' => (int) $field_id))->row('default_value');
+                        if ($setting) {
+                $default_value = db_connect()->get_where('settings', array('id' => (int) $field_id))->row('default_value');
             } else {
-                $default_value = $ci->db->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'text'))->row('default_value');
+                $default_value = db_connect()->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'text'))->row('default_value');
             }
             $default_value = (empty($default_value)) ? NULL : $default_value;
         }
@@ -491,11 +486,10 @@ if (!function_exists('field_textarea_option')) {
     function field_textarea_option($field_id = "", $setting = false) {
         $default_value = NULL;
         if (!empty($field_id)) {
-            $ci = & get_instance();
-            if ($setting) {
-                $default_value = $ci->db->get_where('settings', array('id' => (int) $field_id))->row('default_value');
+                        if ($setting) {
+                $default_value = db_connect()->get_where('settings', array('id' => (int) $field_id))->row('default_value');
             } else {
-                $default_value = $ci->db->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'textarea'))->row('default_value');
+                $default_value = db_connect()->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'textarea'))->row('default_value');
             }
             $default_value = (empty($default_value)) ? NULL : $default_value;
         }
@@ -530,11 +524,10 @@ if (!function_exists('field_editor_option')) {
     function field_editor_option($field_id = "", $setting = false) {
         $default_value = NULL;
         if (!empty($field_id)) {
-            $ci = & get_instance();
-            if ($setting) {
-                $default_value = $ci->db->get_where('settings', array('id' => (int) $field_id))->row('default_value');
+                        if ($setting) {
+                $default_value = db_connect()->get_where('settings', array('id' => (int) $field_id))->row('default_value');
             } else {
-                $default_value = $ci->db->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'editor'))->row('default_value');
+                $default_value = db_connect()->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'editor'))->row('default_value');
             }
             $default_value = (empty($default_value)) ? NULL : $default_value;
         }
@@ -571,10 +564,8 @@ if (!function_exists('field_select_option')) {
         $option_rows = NULL;
         $default_value = NULL;
         if (!empty($field_id)) {
-            $ci = & get_instance();
-
-            if ($setting) {
-                $settingRow = $ci->db->get_where('settings', array('id' => (int) $field_id))->row();
+                        if ($setting) {
+                $settingRow = db_connect()->get_where('settings', array('id' => (int) $field_id))->row();
 
                 if (!empty($settingRow->options)) {
                     $settingOptions = unserialize($settingRow->options);
@@ -614,8 +605,8 @@ if (!function_exists('field_select_option')) {
                     }
                 }
             } else {
-                $rows = $ci->db->get_where('content_field_options', array('field_id' => (int) $field_id))->result();
-                $default_value = $ci->db->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'select'))->row('default_value');
+                $rows = db_connect()->get_where('content_field_options', array('field_id' => (int) $field_id))->result();
+                $default_value = db_connect()->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'select'))->row('default_value');
                 $default_value = (empty($default_value)) ? NULL : $default_value;
                 if (count($rows)) {
                     $i = 0;
@@ -734,10 +725,8 @@ if (!function_exists('field_boolen_option')) {
         $option_rows = NULL;
         $default_value = NULL;
         if (!empty($field_id)) {
-            $ci = & get_instance();
-
-            if ($setting) {
-                $settingRow = $ci->db->get_where('settings', array('id' => (int) $field_id))->row();
+                        if ($setting) {
+                $settingRow = db_connect()->get_where('settings', array('id' => (int) $field_id))->row();
 
                 if (!empty($settingRow->options)) {
                     $settingOptions = unserialize($settingRow->options);
@@ -767,8 +756,8 @@ if (!function_exists('field_boolen_option')) {
                     }
                 }
             } else {
-                $rows = $ci->db->get_where('content_field_options', array('field_id' => (int) $field_id))->result();
-                $default_value = $ci->db->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'boolen'))->row('default_value');
+                $rows = db_connect()->get_where('content_field_options', array('field_id' => (int) $field_id))->result();
+                $default_value = db_connect()->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'boolen'))->row('default_value');
 
                 $default_value = (empty($default_value) && $default_value != 0) ? NULL : $default_value;
 
@@ -889,9 +878,8 @@ if (!function_exists('field_checkbox_option')) {
         $option_rows = NULL;
         $default_value = NULL;
         if (!empty($field_id)) {
-            $ci = & get_instance();
-            $rows = $ci->db->get_where('content_field_options', array('field_id' => (int) $field_id))->result();
-            $default_value = $ci->db->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'checkbox'))->row('default_value');
+                        $rows = db_connect()->get_where('content_field_options', array('field_id' => (int) $field_id))->result();
+            $default_value = db_connect()->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'checkbox'))->row('default_value');
             $default_value = (empty($default_value)) ? NULL : $default_value;
             if (count($rows)) {
                 $i = 0;
@@ -1005,9 +993,8 @@ if (!function_exists('field_radio_option')) {
         $option_rows = NULL;
         $default_value = NULL;
         if (!empty($field_id)) {
-            $ci = & get_instance();
-            $rows = $ci->db->get_where('content_field_options', array('field_id' => (int) $field_id))->result();
-            $default_value = $ci->db->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'radio'))->row('default_value');
+                        $rows = db_connect()->get_where('content_field_options', array('field_id' => (int) $field_id))->result();
+            $default_value = db_connect()->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'radio'))->row('default_value');
             $default_value = (empty($default_value)) ? NULL : $default_value;
             if (count($rows)) {
                 $i = 0;
@@ -1118,11 +1105,10 @@ if (!function_exists('field_date_option')) {
     function field_date_option($field_id = "", $setting = false) {
         $default_value = NULL;
         if (!empty($field_id)) {
-            $ci = & get_instance();
-            if ($setting) {
-                $default_value = $ci->db->get_where('settings', array('id' => (int) $field_id))->row('default_value');
+                        if ($setting) {
+                $default_value = db_connect()->get_where('settings', array('id' => (int) $field_id))->row('default_value');
             } else {
-                $default_value = $ci->db->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'text'))->row('default_value');
+                $default_value = db_connect()->get_where('content_fields', array('id' => (int) $field_id, 'type' => 'text'))->row('default_value');
             }
             $default_value = (empty($default_value)) ? NULL : $default_value;
         }

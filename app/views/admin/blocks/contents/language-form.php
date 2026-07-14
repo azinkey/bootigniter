@@ -4,19 +4,19 @@
 
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <span class="fa fa-fw fa-language"></span>
+                        <span class="fa-solid fa-fw fa-language"></span>
                         <?php echo isset($language->name) ? $language->name : lang('New Language'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a href="<?php _u('admin/contents/languages'); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveLanguageForm">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -30,8 +30,8 @@
             <?php
             echo form_open('admin/contents/save_language', array('id' => 'saveLanguageForm'));
             ?>
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card panel-default">
+                <div class="card-body">
                     <div class="field-row">
                         <?php
                         echo form_label(lang('Name'), 'name');
@@ -82,15 +82,15 @@
                     </div>
 
                 </div>
-                <div class="panel-footer text-right">
+                <div class="card-footer text-right">
                     <?php echo (isset($language->id)) ? form_hidden('id', $language->id) : ''; ?>
                     <a href="<?php _u('admin/contents/languages'); ?>" class="btn btn-default btn-sm">
-                        <i class="fa fa-arrow-circle-left"></i>
+                        <i class="fa-solid fa-arrow-circle-left"></i>
                         <?php __('Cancel'); ?>
                     </a>
 
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
+                        <i class="fa-solid fa-save"></i>
                         <?php __('Save'); ?>
                     </button>
                 </div>

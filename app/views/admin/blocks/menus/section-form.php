@@ -1,7 +1,7 @@
 
 <?php echo form_open('admin/settings/save_section', array('id' => 'saveSection')); ?>
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="fieldModalLabel">
         <?php echo isset($section->title) ? $section->title : lang('New Tab Section'); ?>
 
@@ -30,12 +30,12 @@
 </div>
 <div class="modal-footer">
     <?php echo (isset($section->id)) ? form_hidden('id', $section->id) : ''; ?>
-    <button type="button" class="btn btn-default" data-dismiss="modal">
-        <i class="fa fa-arrow-circle-left"></i>
+    <button type="button" class="btn btn-default" data-bs-dismiss="modal">
+        <i class="fa-solid fa-arrow-circle-left"></i>
         <?php __('Cancel'); ?>
     </button>
     <button type="submit" class="btn btn-primary">
-        <i class="fa fa-save"></i>
+        <i class="fa-solid fa-save"></i>
         <?php __('Save'); ?>
     </button>
 </div>

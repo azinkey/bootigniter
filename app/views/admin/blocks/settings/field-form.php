@@ -4,19 +4,19 @@
 
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <span class="fa fa-ellipsis-h fa-fw"></span>
+                        <span class="fa-solid fa-ellipsis-h fa-fw"></span>
                         <?php echo isset($setting->key) ? key_label($setting->key) : lang('New Field'); ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a href="<?php _u('admin/settings'); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveSetting">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -29,8 +29,8 @@
 
             <?php echo form_open('admin/settings/save_setting', array('id' => 'saveSetting')); ?>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card panel-default">
+                <div class="card-body">
 
 
                     <div class="field-row">
@@ -71,23 +71,23 @@
                     </div>
                     <hr />
                     <div class="field-row" class="">
-                        <h4 class="panel-title cp" id="optionToggle" data-toggle="#settingFieldOptionsWrapper">
-                            <i class="fa fa-list-ul"></i> <?php __('Options'); ?>
+                        <h4 class="card-title cp" id="optionToggle" data-bs-toggle="#settingFieldOptionsWrapper">
+                            <i class="fa-solid fa-list-ul"></i> <?php __('Options'); ?>
                         </h4>
                         <br />
-                        <div id="settingFieldOptionsWrapper" class="panel-body" data-field="<?php echo (isset($setting->id)) ? $setting->id : ''; ?>">
+                        <div id="settingFieldOptionsWrapper" class="card-body" data-field="<?php echo (isset($setting->id)) ? $setting->id : ''; ?>">
                             <?php echo field_options((isset($setting->type)) ? $setting->type : 'text', (isset($setting->id)) ? $setting->id : '', true); ?>
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer text-right">
+                <div class="card-footer text-right">
                     <?php echo (isset($setting->id)) ? form_hidden('id', $setting->id) : ''; ?>
                     <a href="<?php _u('admin/settings'); ?>" class="btn btn-default btn-sm">
-                        <i class="fa fa-arrow-circle-left"></i>
+                        <i class="fa-solid fa-arrow-circle-left"></i>
                         <?php __('Cancel'); ?>
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
+                        <i class="fa-solid fa-save"></i>
                         <?php __('Save'); ?>
                     </button>
                 </div>

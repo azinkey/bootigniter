@@ -1,14 +1,14 @@
 <div class="row-fluid">
     <div>
         <?php
-        echo form_open('account/authenicate', array('role' => 'form', 'class' => 'panel'));
+        echo form_open('account/authenicate', array('role' => 'form', 'class' => 'card'));
         ?>
-        <div class="panel-body">
+        <div class="card-body">
 
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="fa-solid fa-user"></span>
                     </span>
                     <?php
                     $username = array(
@@ -26,7 +26,7 @@
                 <br />
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-lock"></span>
+                        <span class="fa-solid fa-lock"></span>
                     </span>
                     <?php
                     $password = array(
@@ -44,7 +44,7 @@
                 <div class="form-stack has-icon">
                     <button class="btn btn-lg btn-danger btn-block" type="submit">
                         <?php __('Login') ?>
-                        <span class="glyphicon glyphicon-log-in"></span>
+                        <span class="fa-solid fa-log-in"></span>
                     </button>
 
                 </div>

@@ -4,8 +4,6 @@
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <meta name="site_url" content="<?php _u(''); ?>">
@@ -17,8 +15,10 @@
 		<link rel="icon" href="<?= skin_url(); ?>images/favicon.ico" type="image/x-icon">
 		<link rel="apple-touch-icon-precomposed" href="<?= skin_url(); ?>images/apple-touch-icon.png" sizes="144x79">
 
-        <link rel="stylesheet"  href="<?= skin_url(); ?>css/bootstrap.min.css"  />
-        <link rel="stylesheet"  href="<?= skin_url(); ?>css/style.css"  />
+        <!-- Bootstrap 5.3.8 -->
+        <link rel="stylesheet" href="<?= skin_url(); ?>css/bootstrap.min.css" />
+        <!-- BootIgniter Front Skin -->
+        <link rel="stylesheet" href="<?= skin_url(); ?>css/style.css" />
         
         <?php
         if (isset($styles)) {
@@ -26,14 +26,14 @@
         }
         ?>
 
-        <script src="<?= skin_url(); ?>scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
-        <script src="<?= skin_url(); ?>scripts/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jQuery 3.7.1 -->
+        <script src="<?= skin_url(); ?>scripts/jquery-3.7.1.min.js"></script>
+        <!-- Bootstrap 5.3.8 Bundle -->
+        <script src="<?= skin_url(); ?>scripts/bootstrap.bundle.min.js"></script>
         <?php
-        
         if (isset($scripts)) {
             echo load_scripts($scripts);
         }
-        
         ?>
         
         <title> <?php echo page_title((isset($page_title)) ? $page_title : AZ::setting('global_meta_title')); ?> </title>

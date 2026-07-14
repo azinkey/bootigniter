@@ -5,23 +5,23 @@
 
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <i class="fa fa-gears"></i>
+                        <i class="fa-solid fa-gears"></i>
                         <?php __('Settings') ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
 
                         <?php if (have_permission('settings/save')) : ?>
 
                             <button type="button" id="saveSettingsButton" class="click-submit btn-primary btn-sm btn" data-form="#saveSettingsForm" title="<?php __('Save Settings') ?>">
-                                <i class="fa fa-refresh"></i>
+                                <i class="fa-solid fa-refresh"></i>
                             </button>
                         <?php endif; ?>
                         <?php if (have_permission('settings/save_setting') || have_permission('settings/save_group') || have_permission('settings/save_section')) : ?>
-                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">^</span>
                             </button>
@@ -29,7 +29,7 @@
                                 <?php if (have_permission('settings/save_setting')) : ?>
                                     <li>
                                         <a href="<?php _u('admin/settings/edit_setting') ?>" class="">
-                                            <i class="fa fa-ellipsis-h fa-fw"></i>
+                                            <i class="fa-solid fa-ellipsis-h fa-fw"></i>
                                             <?php __('New Field') ?>
 
                                         </a>
@@ -38,7 +38,7 @@
                                 <?php if (have_permission('settings/save_group')) : ?>
                                     <li>
                                         <a href="<?php _u('admin/settings/edit_group') ?>" class="">
-                                            <i class="fa fa-fw fa-folder-open "></i>
+                                            <i class="fa-solid fa-fw fa-folder-open "></i>
                                             <?php __('New Group') ?>
                                         </a>
                                     </li>
@@ -46,7 +46,7 @@
                                 <?php if (have_permission('settings/save_section')) : ?>
                                     <li>
                                         <a href="<?php _u('admin/settings/edit_section') ?>" class="">
-                                            <i class="fa fa-fw fa-gear"></i>
+                                            <i class="fa-solid fa-fw fa-gear"></i>
                                             <?php __('New Section') ?>
                                         </a>
                                     </li>
@@ -100,9 +100,9 @@
 
                             <?php if (have_permission('settings/edit_section') || have_permission('settings/remove_section')) : ?>
 
-                                <div class="hidden-xs btn-group pull-right m5 <?php echo $btnClass; ?>">
+                                <div class="d-none d-sm-block btn-group float-end m5 <?php echo $btnClass; ?>">
 
-                                    <button data-toggle="dropdown" class="btn btn-sm <?php echo $btnClass; ?> dropdown-toggle" type="button">
+                                    <button data-bs-toggle="dropdown" class="btn btn-sm <?php echo $btnClass; ?> dropdown-toggle" type="button">
                                         <span class="caret"></span>
                                         <span class="sr-only">^</span>
                                     </button>
@@ -111,17 +111,17 @@
                                             <li>
 
                                                 <a href="<?php _u('admin/settings/edit_section/' . $sid) ?>">
-                                                    <span class="glyphicon glyphicon-edit"></span>
-                                                    <span class="hidden-xs"><?php __('Edit'); ?></span>
+                                                    <span class="fa-solid fa-edit"></span>
+                                                    <span class="d-none d-sm-block"><?php __('Edit'); ?></span>
                                                 </a>
                                             </li>
                                         <?php endif; ?>
                                         <?php if (have_permission('settings/remove_section')) : ?>
                                             <li>
 
-                                                <a href="<?php _u('admin/settings/remove_section/' . $sid) ?>" data-target="#modal" class="remove-box">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                    <span class="hidden-xs"><?php __('Remove'); ?></span>
+                                                <a href="<?php _u('admin/settings/remove_section/' . $sid) ?>" data-bs-target="#modal" class="remove-box">
+                                                    <span class="fa-solid fa-trash"></span>
+                                                    <span class="d-none d-sm-block"><?php __('Remove'); ?></span>
                                                 </a>
 
                                             </li>
@@ -146,16 +146,16 @@
                         <h4 class="underline"><?php __($active_section->title); ?>
                             <?php if (have_permission('settings/edit_section') || have_permission('settings/remove_section')) : ?>
 
-                                <div class="dropdown pull-right visible-xs">
-                                    <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                        <span class="glyphicon glyphicon-pencil"></span>
+                                <div class="dropdown float-end d-block d-sm-none">
+                                    <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                        <span class="fa-solid fa-pencil"></span>
                                     </a>
                                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
                                         <?php if (have_permission('settings/edit_section')) : ?>
                                             <li>
 
-                                                <a href="<?php _u('admin/settings/edit_section/' . $sid) ?>" data-target="#editSettingsSectionModel" class="">
-                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                <a href="<?php _u('admin/settings/edit_section/' . $sid) ?>" data-bs-target="#editSettingsSectionModel" class="">
+                                                    <span class="fa-solid fa-edit"></span>
                                                     <?php __('Edit'); ?>
                                                 </a>
                                             </li>
@@ -163,8 +163,8 @@
                                         <?php if (have_permission('settings/remove_section')) : ?>
                                             <li>
 
-                                                <a href="<?php _u('admin/settings/remove_section/' . $sid) ?>" data-target="#modal" class="remove-box">
-                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                <a href="<?php _u('admin/settings/remove_section/' . $sid) ?>" data-bs-target="#modal" class="remove-box">
+                                                    <span class="fa-solid fa-trash"></span>
                                                     <?php __('Remove'); ?>
                                                 </a>
 
@@ -187,36 +187,36 @@
                                 <?php
                                 foreach ($configGroups as $group) {
                                     ?>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                    <div class="card panel-default">
+                                        <div class="card-header">
                                             <div class="row-fluid">
 
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed pull-left" data-toggle="collapse" data-parent="#accordion" href="#group<?php echo $group->id; ?>">
-                                                        <span class="glyphicon pull-left hidden-xs"></span>
+                                                <h4 class="card-title">
+                                                    <a class="collapsed float-start" data-bs-toggle="collapse" data-parent="#accordion" href="#group<?php echo $group->id; ?>">
+                                                        <span class="float-start d-none d-sm-block"></span>
                                                         <?php echo $group->title; ?>
 
                                                     </a>
 
                                                     <?php if (have_permission('settings/edit_section') || have_permission('settings/remove_section')) : ?>
 
-                                                        <div class="dropdown pull-right">
-                                                            <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                                                <span class="glyphicon glyphicon-pencil"></span>
+                                                        <div class="dropdown float-end">
+                                                            <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                                                <span class="fa-solid fa-pencil"></span>
                                                             </a>
                                                             <ul role="menu" class="dropdown-menu dropdown-menu-right">
                                                                 <?php if (have_permission('settings/edit_group')) : ?>
                                                                     <li>
-                                                                        <a href="<?php _u('admin/settings/edit_group/' . $group->id) ?>" data-target="#editSettingsGroupModel" class="">
-                                                                            <span class="glyphicon glyphicon-edit"></span>
+                                                                        <a href="<?php _u('admin/settings/edit_group/' . $group->id) ?>" data-bs-target="#editSettingsGroupModel" class="">
+                                                                            <span class="fa-solid fa-edit"></span>
                                                                             <?php __('Edit'); ?>
                                                                         </a>
                                                                     </li>
                                                                 <?php endif; ?>
                                                                 <?php if (have_permission('settings/remove_group')) : ?>                                             
                                                                     <li>
-                                                                        <a href="<?php _u('admin/settings/remove_group/' . $group->id) ?>" data-target="#modal" class="remove-box">
-                                                                            <span class="glyphicon glyphicon-trash"></span>
+                                                                        <a href="<?php _u('admin/settings/remove_group/' . $group->id) ?>" data-bs-target="#modal" class="remove-box">
+                                                                            <span class="fa-solid fa-trash"></span>
                                                                             <?php __('Remove'); ?>
                                                                         </a>
 
@@ -237,7 +237,7 @@
 
                                     
                                     <div id="group<?php echo $group->id; ?>" class="panel-collapse collapse">
-                                        <div class="panel-body">
+                                        <div class="card-body">
                                             <?php
                                             $configurations = get_settings($group->id);
                                             
@@ -255,23 +255,23 @@
 
                                                     <div class="col-md-8">
                                                         <div class="row-fluid">
-                                                            <div class="col-xs-10 p0">
+                                                            <div class="col-10 p0">
                                                                 <?php echo setting_field_render($configuration->id); ?>
 
                                                             </div>
-                                                            <div class="col-xs-2 text-right pull-right p0">
+                                                            <div class="col-2 text-right float-end p0">
                                                                 <?php if (have_permission('settings/edit_setting') || have_permission('settings/remove_setting')) : ?>
 
-                                                                    <div class="dropdown pull-right text-left">
-                                                                        <a data-toggle="dropdown" class="dropdown-toggle cp">
-                                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                                    <div class="dropdown float-end text-left">
+                                                                        <a data-bs-toggle="dropdown" class="dropdown-toggle cp">
+                                                                            <span class="fa-solid fa-pencil"></span>
                                                                         </a>
                                                                         <ul role="menu" class="dropdown-menu dropdown-menu-right">
                                                                             <?php if (have_permission('settings/edit_setting')) : ?>
                                                                                 <li>
 
-                                                                                    <a href="<?php _u('admin/settings/edit_setting/' . $configuration->id) ?>" data-target="#editSettingsFieldModel" class="">
-                                                                                        <span class="glyphicon glyphicon-edit"></span>
+                                                                                    <a href="<?php _u('admin/settings/edit_setting/' . $configuration->id) ?>" data-bs-target="#editSettingsFieldModel" class="">
+                                                                                        <span class="fa-solid fa-edit"></span>
                                                                                         <?php __('Edit'); ?>
                                                                                     </a>
                                                                                 </li>
@@ -280,7 +280,7 @@
                                                                                 <li>
 
                                                                                     <a href="<?php _u('admin/settings/remove_setting/' . $configuration->id) ?>" class="remove-box">
-                                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                                        <span class="fa-solid fa-trash"></span>
                                                                                         <?php __('Remove'); ?>
                                                                                     </a>
                                                                                 </li>

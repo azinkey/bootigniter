@@ -21,10 +21,9 @@
  * @subpackage  Controllers
  * @author		AZinkey
  */
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('APPPATH') || exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Dashboard extends BaseController {
 
     public function __construct() {
 
@@ -57,7 +56,7 @@ class Dashboard extends CI_Controller {
         $activities = $this->message->getActivities();
         $messages = $this->message->getMessages('*', array('messages.trash' => 0, 'messages.receiver' => user::id()), 0, 10);
         
-        $post = $this->input->post();
+        $post = $this->request->getPost();
         $interval = (isset($post['duration']) && !empty($post['duration'])) 
                 ? $post['duration'] : '1 DAY'; // Default Interval for Visist
         $track_all_visitor = 0;
@@ -239,7 +238,7 @@ class Dashboard extends CI_Controller {
     public function search_messages($keyword = '', $message_id = 0, $offset = 0) {
 
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
         if (!isset($post['keyword'])) {
             return false;
         }
@@ -330,18 +329,18 @@ class Dashboard extends CI_Controller {
      */
     public function send_message() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
         if (!$post || !count($post)) {
             return FALSE;
         }
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('users[]', lang('User'), 'trim|required');
-        $this->form_validation->set_rules('subject', lang('Subject'), 'trim|required');
-        $this->form_validation->set_rules('body', lang('Message'), 'trim|required');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['users[]', lang('User'), 'trim|required');
+        $this->validation->setRules(['subject', lang('Subject'), 'trim|required');
+        $this->validation->setRules(['body', lang('Message'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
             $return_url = (isset($post['return']) && !empty($post['return'])) ? $post['return'] : 'admin/dashboard/write_message/' . $post['message_id'];
             AZ::redirectError($return_url, validation_errors());
             return false;
@@ -377,16 +376,16 @@ class Dashboard extends CI_Controller {
      */
     public function save_label() {
 
-        $post = $this->input->post();
+        $post = $this->request->getPost();
 
         if (!$post || !count($post)) {
             return FALSE;
         }
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('label', lang('Label Name'), 'trim|required');
+        $this->validation = \Config\Services::validation();
+        $this->validation->setRules(['label', lang('Label Name'), 'trim|required');
 
-        if (!$this->form_validation->run()) {
+        if (!$this->validation->run()) {
             AZ::redirectError('admin/dashboard/messages/' . $post['mode'], validation_errors());
             return false;
         }
@@ -485,7 +484,7 @@ class Dashboard extends CI_Controller {
      */
     public function load_activity_json() {
         AZ::helper('date');
-        $offset = $this->input->post('offset');
+        $offset = $this->request->getPost('offset');
         $activities = $this->message->getActivities('*', array(), $offset, 5);
         $posts = array();
         if (count($activities)) {

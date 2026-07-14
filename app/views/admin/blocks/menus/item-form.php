@@ -4,19 +4,19 @@
 
         <div class="page-header page-header-block">
             <div class="row-fluid">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <h4 class="title">
-                        <span class="glyphicon glyphicon-link"></span>
+                        <span class="fa-solid fa-link"></span>
                         <?php echo (isset($item->title)) ? $item->title : __('New Menu Item', true); ?>
                     </h4>
                 </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
+                <div class="col-5">
+                    <div class="btn-group float-end">
                         <a href="<?php _u('admin/menus/index/' . $menu_id); ?>" class="btn btn-default btn-sm">
-                            <i class="fa fa-arrow-circle-left"></i>
+                            <i class="fa-solid fa-arrow-circle-left"></i>
                         </a>
                         <button type="button" class="btn btn-primary  btn-sm click-submit" data-form="#saveMenuItem">
-                            <i class="fa fa-save"></i>
+                            <i class="fa-solid fa-save"></i>
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -28,8 +28,8 @@
         <div class="row-fluid">
 
             <?php echo form_open('admin/menus/save_item', array('id' => 'saveMenuItem')); ?>
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card panel-default">
+                <div class="card-body">
                     <div class="modal-body">
 
                         <div class="field-row">
@@ -119,15 +119,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer text-right">
+                <div class="card-footer text-right">
                     <?php echo (isset($item->id)) ? form_hidden('id', $item->id) : ''; ?>
                     <?php echo (isset($menu_id)) ? form_hidden('menu_id', $menu_id) : ''; ?>
                     <a href="<?php _u('admin/menus/index/' . $menu_id); ?>" class="btn btn-default btn-sm">
-                        <i class="fa fa-arrow-circle-left"></i>
+                        <i class="fa-solid fa-arrow-circle-left"></i>
                         <?php __('Cancel'); ?>
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
+                        <i class="fa-solid fa-save"></i>
                         <?php __('Save'); ?>
                     </button>
                 </div>
